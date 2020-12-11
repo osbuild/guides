@@ -17,7 +17,7 @@ But be careful here, if you are using [IAM Roles](https://docs.aws.amazon.com/IA
 
 Once everything is configured, you can trigger a compose as usual with additional image name and cloud provider profile:
 ```
-$ sudo composer-cli --json compose start base-image-with-tmux ami IMAGE_KEY aws-config.toml
+$ sudo composer-cli compose start base-image-with-tmux ami IMAGE_KEY aws-config.toml
 ```
 where IMAGE_KEY will be the name of your VM Image once it is uploaded to EC2.
 

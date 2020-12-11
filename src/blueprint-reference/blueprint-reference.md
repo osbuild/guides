@@ -192,3 +192,63 @@ The service names are systemd service units. You may specify any systemd unit fi
 enabled = ["sshd", "cockpit.socket", "httpd"]
 disabled = ["postfix", "telnetd"]
 ```
+
+## Example Blueprint
+
+This example blueprint will install the tmux, git, and vim-enhanced packages. It will set the root ssh key, add the widget and admin users as well as a students group:
+
+```toml
+name = "example-custom-base"
+description = "A base system with customizations"
+version = "0.0.1"
+
+[[packages]]
+name = "tmux"
+version = "*"
+
+[[packages]]
+name = "git"
+version = "*"
+
+[[packages]]
+name = "vim-enhanced"
+version = "*"
+
+[customizations]
+hostname = "custombase"
+
+[[customizations.sshkey]]
+user = "root"
+key = "A SSH KEY FOR ROOT"
+
+[[customizations.user]]
+name = "widget"
+description = "Widget process user account"
+home = "/srv/widget/"
+shell = "/usr/bin/false"
+groups = ["dialout", "users"]
+
+[[customizations.user]]
+name = "admin"
+description = "Widget admin account"
+password = "$6$CHO2$3rN8eviE2t50lmVyBYihTgVRHcaecmeCk31LeOUleVK/R/aeWVHVZDi26zAH.o0ywBKH9Tc0/wm7sW/q39uyd1"
+home = "/srv/widget/"
+shell = "/usr/bin/bash"
+groups = ["widget", "users", "students"]
+uid = 1200
+
+[[customizations.user]]
+name = "plain"
+password = "simple plain password"
+
+[[customizations.user]]
+name = "bart"
+key = "SSH KEY FOR BART"
+groups = ["students"]
+
+[[customizations.group]]
+name = "widget"
+
+[[customizations.group]]
+name = "students"
+```
