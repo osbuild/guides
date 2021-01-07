@@ -1,6 +1,8 @@
 # Basic concepts
 
-osbuild-composer works with a concept of "blueprints". A blueprint is a description of the final image and its customizations. A customization can be an additional RPM package, enabled service, or custom kernel command line parameter.
+osbuild-composer works with a concept of **blueprints**. A blueprint is a description of the final **image** and its **customizations**. A **customization** can be an additional RPM package, enabled service, or custom kernel command line parameter. An **image** is defined by its blueprint and **image type**, which is for example qcow2 (QEMU Copy On Write disk image) or AMI (Amazon Machine Image).
+
+Finally, osbuild-composer also supports **upload targets** which are cloud providers where an image can be stored right after it is built. Currently supported providers are [AWS](https://aws.amazon.com/) and [Azure](https://azure.microsoft.com/).
 
 ## Example blueprint
 
