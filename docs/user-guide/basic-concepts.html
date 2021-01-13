@@ -164,7 +164,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#basic-concepts" id="basic-concepts">Basic concepts</a></h1>
-<p>osbuild-composer works with a concept of <strong>blueprints</strong>. A blueprint is a description of the final <strong>image</strong> and its <strong>customizations</strong>. A <strong>customization</strong> can be an additional RPM package, enabled service, or custom kernel command line parameter. An <strong>image</strong> is defined by its blueprint and <strong>image type</strong>, which is for example qcow2 (QEMU Copy On Write disk image) or AMI (Amazon Machine Image).</p>
+<p>osbuild-composer works with a concept of <strong>blueprints</strong>. A blueprint is a description of the final <strong>image</strong> and its <strong>customizations</strong>. A <strong>customization</strong> can be an additional RPM package, enabled service, custom kernel command line parameter, and many other (see Blueprint reference). An <strong>image</strong> is defined by its blueprint and <strong>image type</strong>, which is for example qcow2 (QEMU Copy On Write disk image) or AMI (Amazon Machine Image).</p>
 <p>Finally, osbuild-composer also supports <strong>upload targets</strong> which are cloud providers where an image can be stored right after it is built. Currently supported providers are <a href="https://aws.amazon.com/">AWS</a> and <a href="https://azure.microsoft.com/">Azure</a>.</p>
 <h2><a class="header" href="#example-blueprint" id="example-blueprint">Example blueprint</a></h2>
 <pre><code class="language-toml">name = &quot;base-image-with-tmux&quot;
