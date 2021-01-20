@@ -31,11 +31,11 @@ jobs:
     - name: Render osbuild-composer guide
       working-directory: sources/osbuild-composer
       run: |
-        mdbook build -d ../rendered/docs/
+        mdbook build -d ../../rendered/docs/
     - name: Render cloud-dot-redhat guide
       working-directory: sources/cloud-dot-redhat
       run: |
-        mdbook build -d ../rendered/docs/cloud-dot-redhat
+        mdbook build -d ../../rendered/docs/cloud-dot-redhat/
     - name: Publish the rendered
       working-directory: rendered
       run: |
