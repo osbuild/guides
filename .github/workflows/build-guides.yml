@@ -29,7 +29,7 @@ jobs:
         ref: gh-pages
     - run: ls -la; ls -la sources; ls -la rendered
     - name: Render the sources
-      working-directory: sources
+      working-directory: sources/osbuild-composer
       run: |
         mdbook build -d ../rendered/docs/
     - name: Publish the rendered
