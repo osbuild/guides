@@ -166,11 +166,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#using-image-builder-in-staging-environment-from-command-line" id="using-image-builder-in-staging-environment-from-command-line">Using Image Builder in staging environment from command line</a></h1>
-<p>Image Builder is an instance of an upstream image-builder project. You can find the code and report issues here: https://github.com/osbuild/image-builder . It provides a REST API, which is accessible using the squid.corp.redhat.com HTTP proxy server.</p>
-<p>All you need to access the service is the “curl” tool which is available on any operating system. You will also need to know your Red Hat username and password (which one?)</p>
-<p><em>(TODO: How is it possible that it did not exist for Tom and why does he have such a funny username?).</em></p>
-<p>To display the available API endpoints and all the JSON objects you can use invoke this command:</p>
-<pre><code>curl --user &quot;username@redhat.com:password&quot; \
+<p>Image Builder is an instance of an upstream image-builder project. You can find the code and report issues here: <a href="https://github.com/osbuild/image-builder">https://github.com/osbuild/image-builder</a> . It provides a REST API, which is accessible using the squid.corp.redhat.com HTTP proxy server.</p>
+<p>All you need to access the service is the “curl” tool which is available on any operating system and a user account in staging environment.</p>
+<h2><a class="header" href="#create-account-in-stage-environment" id="create-account-in-stage-environment">Create account in stage environment</a></h2>
+<p>Start here:<a href="http://account-manager-stage.app.eng.rdu2.redhat.com/#create">http://account-manager-stage.app.eng.rdu2.redhat.com/#create</a></p>
+<p>and:</p>
+<ul>
+<li>Fill in a username which is <strong>not</strong> your kerberos name, for example <code>image-builder-&lt;nickname&gt;</code>.</li>
+<li>Create new password which is <strong>not</strong> your kerberos password.</li>
+<li>Assign yourself these SKUs (something like a subscription): <code>MCT3475, MCT3718, RH0105260, RH00003</code></li>
+<li>Check that you are creating the account in &quot;Stage&quot; environment</li>
+<li>Click &quot;Create&quot;</li>
+</ul>
+<p>Now using your new account name and password, you can display the available API endpoints like this:</p>
+<pre><code>curl --user &quot;username:password&quot; \
         --proxy http://squid.corp.redhat.com:3128 \
         https://cloud.stage.redhat.com/api/image-builder/v1/openapi.json
 </code></pre>
@@ -181,10 +190,11 @@
 <li>URL of the staging instance of image builder</li>
 </ul>
 <p><em>Tip: If you want nice formatting of the JSON object, use the “jq” tool):</em></p>
-<pre><code>curl --user &quot;username@redhat.com:password&quot; \
+<pre><code>curl --user &quot;username:password&quot; \
         --proxy http://squid.corp.redhat.com:3128 \
         https://cloud.stage.redhat.com/api/image-builder/v1/openapi.json | jq .
 </code></pre>
+<h2><a class="header" href="#creating-and-monitoring-a-compose" id="creating-and-monitoring-a-compose">Creating and monitoring a compose</a></h2>
 <p>There are two main API endpoints related to starting and monitoring a compose:</p>
 <ol>
 <li>HTTP POST /v1/compose</li>
@@ -214,7 +224,7 @@
 <p>Save the file as “image-builder-request.json”.</p>
 <p>Given the JSON file above, Image Builder will create a RHEL 8 AMI image for x86_64 architecture and upload it to AWC EC2. It will then share the AMI with the specified account.</p>
 <p>Now trigger a new compose:</p>
-<pre><code>curl --user &quot;username@redhat.com:password&quot; \
+<pre><code>curl --user &quot;username:password&quot; \
         --proxy http://squid.corp.redhat.com:3128 \
         -d &quot;@image-builder-request.json&quot; -X POST \
         -H &quot;Content-Type: application/json&quot; \
@@ -228,7 +238,7 @@
 <li>HTTP header “Content-Type” (-H)</li>
 <li>The output contains id of the newly created compose which you can use to monitor it:</li>
 </ul>
-<pre><code>curl --user &quot;username@redhat.com:password&quot; \
+<pre><code>curl --user &quot;username:password&quot; \
         --proxy http://squid.corp.redhat.com:3128 \
         -H &quot;Content-Type: application/json&quot; \
         https://cloud.stage.redhat.com/api/image-builder/v1/composes/cb13b6e6-d24e-4417-a4f4-547f410609e1
