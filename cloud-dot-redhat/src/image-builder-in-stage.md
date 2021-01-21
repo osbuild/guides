@@ -1,14 +1,23 @@
 # Using Image Builder in staging environment from command line
 
-Image Builder is an instance of an upstream image-builder project. You can find the code and report issues here: https://github.com/osbuild/image-builder . It provides a REST API, which is accessible using the squid.corp.redhat.com HTTP proxy server.
+Image Builder is an instance of an upstream image-builder project. You can find the code and report issues here: [https://github.com/osbuild/image-builder](https://github.com/osbuild/image-builder) . It provides a REST API, which is accessible using the squid.corp.redhat.com HTTP proxy server.
 
-All you need to access the service is the “curl” tool which is available on any operating system. You will also need to know your Red Hat username and password (which one?)
+All you need to access the service is the “curl” tool which is available on any operating system and a user account in staging environment.
 
-*(TODO: How is it possible that it did not exist for Tom and why does he have such a funny username?).*
+## Create account in stage environment
 
-To display the available API endpoints and all the JSON objects you can use invoke this command:
+Start here:[http://account-manager-stage.app.eng.rdu2.redhat.com/#create](http://account-manager-stage.app.eng.rdu2.redhat.com/#create)
+
+and:
+ * Fill in a username which is **not** your kerberos name, for example `image-builder-<nickname>`.
+ * Create new password which is **not** your kerberos password.
+ * Assign yourself these SKUs (something like a subscription): `MCT3475, MCT3718, RH0105260, RH00003`
+ * Check that you are creating the account in "Stage" environment
+ * Click "Create"
+
+Now using your new account name and password, you can display the available API endpoints like this:
 ```
-curl --user "username@redhat.com:password" \
+curl --user "username:password" \
         --proxy http://squid.corp.redhat.com:3128 \
         https://cloud.stage.redhat.com/api/image-builder/v1/openapi.json
 ```
@@ -20,10 +29,12 @@ The command contains:
 
 *Tip: If you want nice formatting of the JSON object, use the “jq” tool):*
 ```
-curl --user "username@redhat.com:password" \
+curl --user "username:password" \
         --proxy http://squid.corp.redhat.com:3128 \
         https://cloud.stage.redhat.com/api/image-builder/v1/openapi.json | jq .
 ```
+
+## Creating and monitoring a compose
 
 There are two main API endpoints related to starting and monitoring a compose:
  1. HTTP POST /v1/compose
@@ -58,7 +69,7 @@ Given the JSON file above, Image Builder will create a RHEL 8 AMI image for x86\
 
 Now trigger a new compose:
 ```
-curl --user "username@redhat.com:password" \
+curl --user "username:password" \
         --proxy http://squid.corp.redhat.com:3128 \
         -d "@image-builder-request.json" -X POST \
         -H "Content-Type: application/json" \
@@ -72,7 +83,7 @@ The command specifies:
  * HTTP header “Content-Type” (-H)
  * The output contains id of the newly created compose which you can use to monitor it:
 ```
-curl --user "username@redhat.com:password" \
+curl --user "username:password" \
         --proxy http://squid.corp.redhat.com:3128 \
         -H "Content-Type: application/json" \
         https://cloud.stage.redhat.com/api/image-builder/v1/composes/cb13b6e6-d24e-4417-a4f4-547f410609e1
