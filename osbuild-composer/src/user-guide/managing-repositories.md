@@ -1,12 +1,12 @@
 # Managing repositories
 
-`osbuild-composer` does not inherit the system repositories located in `/etc/yum.repos.d/`. Instead it reads custom repositories from `/etc/osbuild-composer/repositories`. The configuration files here are not in the usual "repo" format, they are simple JSON files.
+`osbuild-composer` does not inherit the system repositories located in `/etc/yum.repos.d/`. Instead, it reads custom repositories from `/etc/osbuild-composer/repositories`. The configuration files in this directory are not in the usual "repo" format. Instead, they are simple `JSON` files.
 
 To set your own repositories, first create the directory:
 ```
 $ sudo mkdir -p /etc/osbuild-composer/repositories
 ```
-Then create a JSON file with this structure:
+Then, create a JSON file with the following structure:
 ```json
 {
     "<ARCH>": [
@@ -22,7 +22,7 @@ Then create a JSON file with this structure:
     ]
 }
 ```
-Specify only one of: `metalink`, `mirrorlist`, or `baseurl`. The remaining fields are optional.
+Specify only one value for the following attributes: `metalink`, `mirrorlist`, or `baseurl`. The remaining fields are optional.
 
 For example:
 ```json
