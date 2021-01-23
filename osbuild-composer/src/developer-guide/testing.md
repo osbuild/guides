@@ -4,7 +4,7 @@ Let me start with a quote:
 
 > As the team obsessed with immutable test dependencies, how could we use ..
 
-*One osbuild developer in one PR fixing one more piece of intfrastructure which could still change.*
+*One osbuild developer in one PR fixing one more piece of infrastructure which could still change.*
 
 TODO: what do we test in each repo
 
@@ -18,7 +18,7 @@ There is pretty heavy mocking in the osbuild-composer codebase.
 
 HTTP API is unit-tested without any network communication (there is no socket), only the HTTP request/responses are tested.
 
-### Intergration tests
+### Integration tests
 
 These test cases live under `test/cases` and each of them is a standalone script. Some of them invoke additional binaries which live under `cmd` if not specified otherwise.
 
@@ -52,11 +52,11 @@ These test cases live under `test/cases` and each of them is a standalone script
    
    3. `osbuild-dnf-json-tests` - These make sure the interface to dnf still works
       
-      * This binary will execute `dnf-json` multiple times and it will also run multiple `dnf` depsolving tasks in parallel. It is possible that it will require high amount of RAM.
+      * This binary will execute `dnf-json` multiple times and it will also run multiple `dnf` depsolving tasks in parallel. It is possible that it will require a high amount of RAM.
       
       * *My guess would be at least 2GB memory for a VM running this test.*
    
-   4. `osbuild-auth-tests` - Make sure the TLS certificate authetication works as expected for the koji api and worker api sockets.
+   4. `osbuild-auth-tests` - Make sure the TLS certificate authentication works as expected for the koji api and worker api sockets.
       
       * A certificate authority is created for these tests and the files are stored in `/etc/osbuild-composer-test/ca`
       * The certificates live in the standard configuration directory: `/etc/osbuild-composer`
@@ -89,7 +89,7 @@ These test cases live under `test/cases` and each of them is a standalone script
 
 ### Leaking resources
 
-The cloud-cleaner binary was created to clean up all artifacts (like images, but also registred AMIs, security groups, etc.) that could be left behind. Not all executables in our CI have proper error handling and clean up code and what is even worse, if Jenkins fails and takes down all running jobs, it is possible that the clean-up code will not run even if it is implemented.
+The cloud-cleaner binary was created to clean up all artifacts (like images, but also registered AMIs, security groups, etc.) that could be left behind. Not all executables in our CI have proper error handling and clean up code and what is even worse, if Jenkins fails and takes down all running jobs, it is possible that the clean-up code will not run even if it is implemented.
 
 **Possibly leaking resources:**
 
@@ -97,7 +97,7 @@ The cloud-cleaner binary was created to clean up all artifacts (like images, but
    
    * Image uploaded to EC2
 
-2. `aws.sh`test case:
+2. `aws.sh` test case:
    
    * Image uploaded to EC2
    

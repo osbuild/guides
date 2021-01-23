@@ -198,7 +198,7 @@ Both are optional, if they are not used leave them out or set them to an empty l
 
 This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. For example, `ami` image type requires `sshd`, `chronyd`, and `cloud-init` services. Without them, the image will not boot. Blueprint services do not replace this services, but add them to the list of services already present in the templates, if any. 
 
-The service names are systemd service units. You may specify any systemd unit file accepted by systemctl enable eg. cockpit.socket:
+The service names are systemd service units. You may specify any systemd unit file accepted by systemctl enable, for example, cockpit.socket:
 
 ```toml
 [customizations.services]
