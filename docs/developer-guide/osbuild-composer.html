@@ -164,16 +164,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#osbuild-composer" id="osbuild-composer">osbuild-composer</a></h1>
-<p>It is a web service for building OS images. The core of osbuild-composer, which is common to all APIs, is osbuild manifests generation a job queuing. If an operating system is to be supported by osbuild-composer, it needs the manifest generation code in <code>internal/distro</code>. So far we only focus on RPM based distributions (Fedora and RHEL). The queuing mechanism is under heavy development at the moment.</p>
+<p>It is a web service for building OS images. The core of <code>osbuild-composer</code>, which is common to all APIs, is osbuild manifests generation a job queuing. If an operating system is to be supported by <code>osbuild-composer</code>, it needs the manifest generation code in <code>internal/distro</code> directory. So far, we only focus on RPM based distributions, such as Fedora and RHEL. The queuing mechanism is under heavy development at the moment.</p>
 <h2><a class="header" href="#interfacing-with-dnf-package-manager" id="interfacing-with-dnf-package-manager">Interfacing with dnf package manager</a></h2>
-<p>We use our custom wrapper for <code>dnf</code> which we call simply <code>dnf-json</code> because its interface goes like this:</p>
+<p>We use our custom wrapper for <code>dnf</code>, which we call simply <code>dnf-json</code>, because its interface goes like this:</p>
 <ul>
 <li>Stdin - takes  a JSON object</li>
 <li>Stdout - returns a JSON object</li>
 <li>Return code is used <strong>only</strong> for <code>dnf-json</code> internal errors, not for errors in the operation specified on the input. Those errors are reported in the returned JSON object.</li>
 </ul>
 <h2><a class="header" href="#local-api---weldr" id="local-api---weldr">Local API - Weldr</a></h2>
-<p>This API comes from Lorax-composer project. Osbuild-composer was created as a drop-in replacement for Lorax which influenced many design decisions. It uses Unix-Domain socket so it is meant for local usage only. There are two clients:</p>
+<p>This API comes from the <code>Lorax-composer project</code>. <code>osbuild-composer</code> was created as a drop-in replacement for Lorax which influenced many design decisions. It uses Unix-Domain socket, so it is meant for local usage only. There are two clients:</p>
 <ul>
 <li>composer-cli</li>
 <li>cockpit-composer (branded as Image Builder in the Cockpit console)</li>

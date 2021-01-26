@@ -164,7 +164,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#uploading-an-image-to-aws" id="uploading-an-image-to-aws">Uploading an image to AWS</a></h1>
-<p>osbuild-composer provides the users with a convenient way to upload images directly to AWS right after the image is built. In order to use this feature, you will need one additional configuration file for the cloud provider, in this case AWS:</p>
+<p><code>osbuild-composer</code> provides the users with a convenient way to upload images directly to AWS right after the image is built. To use this feature, you need one additional configuration file for the cloud provider. In this example, the cloud provider is AWS:</p>
 <pre><code class="language-toml">provider = &quot;aws&quot;
 
 [settings]
@@ -174,11 +174,11 @@ bucket = &quot;AWS_BUCKET&quot;
 region = &quot;AWS_REGION&quot;
 key = &quot;IMAGE_KEY&quot;
 </code></pre>
-<p>But be careful here, if you are using <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html">IAM Roles</a>, which you should according to the AWS documentation, you need a specifid policy that will allow VM import from the S3 bucket to EC2. See the <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html">AWS documentation here</a>.</p>
+<p>But be careful here, if you are using <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html">IAM Roles</a>, which is the recommendation, according to the AWS documentation, you need a specific policy that will allow VM import from the S3 bucket to EC2. See the <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html">AWS documentation</a> for more details.</p>
 <p>Once everything is configured, you can trigger a compose as usual with additional image name and cloud provider profile:</p>
 <pre><code>$ sudo composer-cli compose start base-image-with-tmux ami IMAGE_KEY aws-config.toml
 </code></pre>
-<p>where IMAGE_KEY will be the name of your VM Image once it is uploaded to EC2.</p>
+<p>where IMAGE_KEY will be the name of your VM Image, once it is uploaded to EC2.</p>
 
                     </main>
 

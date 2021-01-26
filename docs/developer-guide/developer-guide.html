@@ -164,10 +164,10 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#developer-guide" id="developer-guide">Developer guide</a></h1>
-<p>In this section, you will find description of the source code in osbuild organization.</p>
-<p>This scheme describes how separate components communicate with each other:
+<p>In this section, you will find a description of the source code in <code>osbuild</code> organization.</p>
+<p>The following scheme describes how separate components communicate with each other:
 <img src="osbuild-composer.svg" alt="" /></p>
-<p>In the very basic use case where osbuild-composer is running locally, the &quot;pool of workers&quot; also lives on the user's host machine. The osbuild-composer and osbuild-worker processes are spawned by systemd. We don't support any other means of spawning these processes as they rely on systemd to open sockets, create state directories etc. osbuild-worker additionally spawns osbuild as a subprocess to create the image itself. The whole image building machinery is spawned from a user process (e.g. composer-cli).</p>
+<p>In the very basic use case where <code>osbuild-composer</code> is running locally, the &quot;pool of workers&quot; also lives on the user's host machine. The <code>osbuild-composer</code> and <code>osbuild-worker</code> processes are spawned by systemd. We don't support any other means of spawning these processes, as they rely on systemd to open sockets, create state directories etc. Additionally, <code>osbuild-worker</code> spawns osbuild as a subprocess to create the image itself. The whole image building machinery is spawned from a user process, for example, <code>composer-cli</code>.</p>
 
                     </main>
 

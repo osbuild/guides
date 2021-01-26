@@ -164,7 +164,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#blueprint-reference" id="blueprint-reference">Blueprint reference</a></h1>
-<p>Blueprints are simple text files in <a href="https://toml.io/en/">TOML format</a> that describe which packages, and what versions, to install into the image. They can also define a limited set of customizations to make to the final image.</p>
+<p>Blueprints are simple text files in <a href="https://toml.io/en/">TOML format</a> that describe which packages to install into the image, allowing to specify the packages version. They can also define a limited set of customizations to make to the final image.</p>
 <p>A basic blueprint looks like this:</p>
 <pre><code class="language-toml">name = &quot;base&quot;
 description = &quot;A base system with bash&quot;
@@ -174,14 +174,17 @@ version = &quot;0.0.1&quot;
 name = &quot;bash&quot;
 version = &quot;4.4.*&quot;
 </code></pre>
-<p>The name field is the name of the blueprint. It can contain spaces, but they will be converted to - when it is written to disk. It should be short and descriptive.</p>
-<p>description can be a longer description of the blueprint, it is only used for display purposes.</p>
-<p>version is a semver compatible version number. If a new blueprint is uploaded with the same version the server will automatically bump the PATCH level of the version. If the version doesn't match it will be used as is. eg. Uploading a blueprint with version set to 0.1.0 when the existing blueprint version is 0.0.1 will result in the new blueprint being stored as version 0.1.0.</p>
+<p>Where:</p>
+<ul>
+<li><code>name</code> field is the name of the blueprint. It can contain spaces, but they will be converted to <code>-</code> when it is written to disk. It should be short and descriptive.</li>
+<li><code>description</code> can be a longer description of the blueprint, it is only used for display purposes.</li>
+<li><code>version</code> is a semver compatible version number. If a new blueprint is uploaded with the same version the server will automatically bump the PATCH level of the version. If the version doesn't match it will be used as is, for example, uploading a blueprint with version set to 0.1.0 when the existing blueprint version is 0.0.1 will result in the new blueprint being stored as version 0.1.0.</li>
+</ul>
 <h2><a class="header" href="#packages-and-modules" id="packages-and-modules">Packages and modules</a></h2>
 <p><code>[[packages]]</code> and <code>[[modules]]</code> entries describe the package names and matching version glob to be installed into the image.</p>
-<p>The names must match the names exactly, and the versions can be an exact match or a filesystem-like glob of the version using <code>*</code> wildcards and <code>?</code> character matching.</p>
-<p><em>Currently there are no differences between packages and modules in osbuild-composer. Both are treated like an rpm package dependency.</em></p>
-<p>For example, to install <code>tmux-2.9a</code> and <code>openssh-server-8.*</code>, you would add this to your blueprint:</p>
+<p>The package names must match the names exactly, and the versions can be an exact match or a filesystem-like glob of the version using <code>*</code> wildcards and <code>?</code> character matching.</p>
+<p><em>Currently there are no differences between packages and modules in <code>osbuild-composer</code>. Both are treated like an rpm package dependency.</em></p>
+<p>For example, to install <code>tmux-2.9a</code> and <code>openssh-server-8.*</code> packages, add this to your blueprint:</p>
 <pre><code class="language-toml">[[packages]]
 name = &quot;tmux&quot;
 version = &quot;2.9a&quot;
@@ -192,20 +195,20 @@ version = &quot;8.*&quot;
 </code></pre>
 <h2><a class="header" href="#groups" id="groups">Groups</a></h2>
 <p>The <code>[[groups]]</code> entries describe a group of packages to be installed into the image. Package groups are defined in the repository metadata. Each group has a descriptive name used primarily for display in user interfaces and an ID more commonly used in kickstart files. Here, the ID is the expected way of listing a group.</p>
-<p>Groups have three different ways of categorizing their packages: mandatory, default, and optional. For purposes of blueprints, mandatory and default packages will be installed. There is no mechanism for selecting optional packages.</p>
-<p>For example, if you want to install the anaconda-tools group you would add this to your blueprint:</p>
+<p>Groups have three different ways of categorizing their packages: mandatory, default, and optional. For purposes of blueprints, just mandatory and default packages will be installed. There is no mechanism for selecting optional packages.</p>
+<p>For example, if you want to install the <code>anaconda-tools</code> group, add the following to your blueprint:</p>
 <pre><code class="language-toml">[[groups]]
 name=&quot;anaconda-tools&quot;
 </code></pre>
 <p>groups is a TOML list, so each group needs to be listed separately, like packages but with no version number.</p>
 <h2><a class="header" href="#customizations" id="customizations">Customizations</a></h2>
-<p>The <code>[customizations]</code> section can be used to configure the <strong>hostname</strong> of the final image. eg.:</p>
+<p>The <code>[customizations]</code> section can be used to configure the <strong>hostname</strong> of the final image. for example:</p>
 <pre><code class="language-toml">[customizations]
 hostname = &quot;baseimage&quot;
 </code></pre>
-<p>This is optional and may be left out to use the defaults.</p>
-<h3><a class="header" href="#kernel-commandline-arguments" id="kernel-commandline-arguments">Kernel commandline arguments</a></h3>
-<p>This allows you to append arguments to the bootloader's kernel commandline.</p>
+<p>This is optional and can be left out to use the defaults.</p>
+<h3><a class="header" href="#kernel-command-line-arguments" id="kernel-command-line-arguments">Kernel command-line arguments</a></h3>
+<p>This allows you to append arguments to the bootloader's kernel command line.</p>
 <p>For example:</p>
 <pre><code class="language-toml">[customizations.kernel]
 append = &quot;nosmt=force&quot;
@@ -219,7 +222,7 @@ key = &quot;PUBLIC SSH KEY&quot;
 <p>The key will be added to the user's <code>authorized_keys</code> file.</p>
 <p><em>Warning: <code>key</code> expects the entire content of <code>~/.ssh/id_rsa.pub</code></em></p>
 <h3><a class="header" href="#additional-user" id="additional-user">Additional user</a></h3>
-<p>Add a user to the image, and/or set their ssh key. All fields for this section are optional except for the name, here is a complete example:</p>
+<p>Add a user to the image, and/or set their ssh key. All fields for this section are optional except for the name. The following is a complete example:</p>
 <pre><code class="language-toml">[[customizations.user]]
 name = &quot;admin&quot;
 description = &quot;Administrator account&quot;
@@ -245,26 +248,33 @@ gid = 1130
 timezone = &quot;US/Eastern&quot;
 ntpservers = [&quot;0.north-america.pool.ntp.org&quot;, &quot;1.north-america.pool.ntp.org&quot;]
 </code></pre>
-<p>The values supported by timezone can be listed by running <code>timedatectl list-timezones</code>.</p>
-<p>If no timezone is setup the system will default to using UTC. The ntp servers are also optional and will default to using the distribution defaults which are fine for most uses.</p>
-<p>In some image types there are already NTP servers setup, eg. Google cloud image, and they cannot be overridden because they are required to boot in the selected environment. But the timezone will be updated to the one selected in the blueprint.</p>
+<p>The values supported by timezone can be listed by running the command:</p>
+<pre><code>$ timedatectl list-timezones
+</code></pre>
+<p>If no timezone is setup, the system will default to using UTC. The NTP servers are also optional and will default to using the distribution defaults, which are suitable for most uses.</p>
+<p>Some image types have already NTP servers setup, for example, Google cloud image, and they cannot be overridden, because they are required to boot in the selected environment. But the timezone will be updated to the one selected in the blueprint.</p>
 <h3><a class="header" href="#locale" id="locale">Locale</a></h3>
 <p>Customize the locale settings for the system:</p>
 <pre><code class="language-toml">[customizations.locale]
 languages = [&quot;en_US.UTF-8&quot;]
 keyboard = &quot;us&quot;
 </code></pre>
-<p>The values supported by languages can be listed by running <code>localectl list-locales</code> from the command line.</p>
-<p>The values supported by keyboard can be listed by running <code>localectl list-keymaps</code>from the command line.</p>
-<p>Multiple languages can be added. The first one becomes the primary, and the others are added as secondary. One or the other of languages or keyboard must be included (or both) in the section.</p>
+<p>The values supported by languages can be listed by running can be listed by running the command:</p>
+<pre><code>$ localectl list-locales 
+
+</code></pre>
+<p>The values supported by keyboard can be listed by running the command:</p>
+<pre><code> $ localectl list-keymaps`
+</code></pre>
+<p>Multiple languages can be added. The first one becomes the primary, and the others are added as secondary. You must include one or more languages or keyboards in the section.</p>
 <h3><a class="header" href="#firewall" id="firewall">Firewall</a></h3>
-<p>By default the firewall blocks all access except for services that enable their ports explicitly, like sshd. This command can be used to open other ports or services. Ports are configured using the port:protocol format:</p>
+<p>By default the firewall blocks all access, except for services that enable their ports explicitly, like sshd. The following command can be used to open other ports or services. Ports are configured using the <code>port:protocol</code> format:</p>
 <pre><code class="language-toml">[customizations.firewall]
 ports = [&quot;22:tcp&quot;, &quot;80:tcp&quot;, &quot;imap:tcp&quot;, &quot;53:tcp&quot;, &quot;53:udp&quot;]
 </code></pre>
-<p>Numeric ports, or their names from /etc/services can be used in the ports enabled/disabled lists.</p>
-<p>The blueprint settings extend any existing settings in the image templates, so if sshd is already enabled it will extend the list of ports with the ones listed by the blueprint.</p>
-<p>If the distribution uses firewalld you can specify services listed by <code>firewall-cmd --get-services</code> in a customizations.firewall.services section:</p>
+<p>Numeric ports, or their names from <code>/etc/services</code> can be used in the ports enabled/disabled lists.</p>
+<p>The blueprint settings extend any existing settings in the image templates. Thus, if sshd is already enabled, it will extend the list of ports with those already listed by the blueprint.</p>
+<p>If the distribution uses firewalld, you can specify services listed by <code>firewall-cmd --get-services</code> in a customizations.firewall.services section:</p>
 <pre><code class="language-toml">[customizations.firewall.services]
 enabled = [&quot;ftp&quot;, &quot;ntp&quot;, &quot;dhcp&quot;]
 disabled = [&quot;telnet&quot;]
@@ -273,14 +283,19 @@ disabled = [&quot;telnet&quot;]
 <p>Both are optional, if they are not used leave them out or set them to an empty list <code>[]</code>. If you only want the default firewall setup this section can be omitted from the blueprint.</p>
 <p><em>NOTE: The Google and OpenStack templates explicitly disable the firewall for their environment. This cannot be overridden by the blueprint.</em></p>
 <h3><a class="header" href="#systemd-services" id="systemd-services">Systemd services</a></h3>
-<p>This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. eg. ami requires sshd, chronyd, and cloud-init. Without them the image will not boot. Blueprint services are added to, not replacing, the list already in the templates, if any.</p>
-<p>The service names are systemd service units. You may specify any systemd unit file accepted by systemctl enable eg. cockpit.socket:</p>
+<p>This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. For example, <code>ami</code> image type requires <code>sshd</code>, <code>chronyd</code>, and <code>cloud-init</code> services. Without them, the image will not boot. Blueprint services do not replace this services, but add them to the list of services already present in the templates, if any. </p>
+<p>The service names are systemd service units. You may specify any systemd unit file accepted by systemctl enable, for example, cockpit.socket:</p>
 <pre><code class="language-toml">[customizations.services]
 enabled = [&quot;sshd&quot;, &quot;cockpit.socket&quot;, &quot;httpd&quot;]
 disabled = [&quot;postfix&quot;, &quot;telnetd&quot;]
 </code></pre>
 <h2><a class="header" href="#example-blueprint" id="example-blueprint">Example Blueprint</a></h2>
-<p>This example blueprint will install the tmux, git, and vim-enhanced packages. It will set the root ssh key, add the widget and admin users as well as a students group:</p>
+<p>The following blueprint example will:</p>
+<ul>
+<li>install the <code>tmux</code>, <code>git</code>, and <code>vim-enhanced</code> packages</li>
+<li>set the root ssh key</li>
+<li>add the groups: widget, admin users and students</li>
+</ul>
 <pre><code class="language-toml">name = &quot;example-custom-base&quot;
 description = &quot;A base system with customizations&quot;
 version = &quot;0.0.1&quot;

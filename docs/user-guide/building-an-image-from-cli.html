@@ -164,8 +164,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#building-an-image" id="building-an-image">Building an image</a></h1>
-<p>An image is specified with a blueprint and an image type. It will use the same distribution version (e.g. Fedora 33) and architecture (e.g. aarch64) as the host system.</p>
-<p>Start by choosing the blueprint and image type you would like to build:</p>
+<p>An image is specified by a blueprint and an image type. It will use the same distribution version (e.g. Fedora 33) and architecture (e.g. aarch64) as the host system.</p>
+<p>To build a customized image, start by choosing the blueprint and image type you would like to build. To do so, run the following commands:</p>
 <pre><code>$ sudo composer-cli blueprints list
 $ sudo composer-cli compose types
 </code></pre>
@@ -173,7 +173,7 @@ $ sudo composer-cli compose types
 <pre><code>$ composer-cli compose start base-image-with-tmux qcow2
 Compose ab71b61a-b3c4-434f-b214-1e16527766ff added to the queue
 </code></pre>
-<p>As you can see, the compose has a UUID assigned which you can use to monitor the progress:</p>
+<p>Note that the compose is assigned with a Universally Unique Identifier (UUID), that you can use to monitor the image build progress:</p>
 <pre><code>$ composer-cli compose info ab71b61a-b3c4-434f-b214-1e16527766ff
 ab71b61a-b3c4-434f-b214-1e16527766ff RUNNING  base-image-with-tmux 0.0.1 qcow2            2147483648
 Packages:
@@ -181,7 +181,7 @@ Packages:
 Modules:
 Dependencies:
 </code></pre>
-<p>And as you can see, the compose is in a &quot;RUNNING&quot; state. Once the compose reaches the &quot;FINISHED&quot; state, you can download the result by invoking:</p>
+<p>At this time, the compose is in a &quot;RUNNING&quot; state. Once the compose reaches the &quot;FINISHED&quot; state, you can download the resulting image by running the following command:</p>
 <pre><code>$ sudo composer-cli compose results ab71b61a-b3c4-434f-b214-1e16527766ff
 ab71b61a-b3c4-434f-b214-1e16527766ff.tar: 455.18 MB
 $ fd
@@ -194,7 +194,7 @@ ab71b61a-b3c4-434f-b214-1e16527766ff.tar
 logs
 logs/osbuild.log
 </code></pre>
-<p>As you can see in the example output above, the resulting tarball contains not only the qcow2 image, but also a JSON file, which is the osbuild manifest (see the developer guide for explanation), and a directory with logs.</p>
+<p>From the example output above, the resulting tarball contains not only the <code>qcow2</code> image, but also a <code>JSON</code> file, which is the osbuild manifest (see the <a href="https://www.osbuild.org/guides/developer-guide/developer-guide.html#developer-guide">Developer guide</a> for more details), and a directory with logs.</p>
 <p>For more options, see the <code>help</code> text for <code>composer-cli</code>:</p>
 <pre><code>$ sudo composer-cli compose help
 </code></pre>
@@ -209,7 +209,7 @@ logs/osbuild.log
                 -net user,hostfwd=tcp::2223-:22 \
                 ab71b61a-b3c4-434f-b214-1e16527766ff-disk.qcow2 
 </code></pre>
-<p>Keep in mind that you need to specify a way to access the machine in the blueprint. For example by creating a user with known password, setting an SSH key, or enabling cloud-init and using cloud-init ISO file.</p>
+<p>Be aware that you must specify a way to access the machine in the blueprint. For example, you can create a user with known password, set an SSH key, or enable <code>cloud-init</code> to use a <code>cloud-init</code> ISO file.</p>
 
                     </main>
 

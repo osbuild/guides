@@ -164,26 +164,26 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#installation" id="installation">Installation</a></h1>
-<p>To get started with osbuild-composer locally, you can install the CLI interface or the Web UI, which is part of Cockpit project. </p>
+<p>To get started with <code>osbuild-composer</code> on your local machine, you can install the CLI interface or the Web UI, which is part of Cockpit project. </p>
 <h2><a class="header" href="#cli-interface" id="cli-interface">CLI interface</a></h2>
-<p>For CLI only, invoke this command to install necessary packages:</p>
+<p>For CLI only, run the following command to install necessary packages:</p>
 <pre><code>$ sudo dnf install osbuild-composer composer-cli
 </code></pre>
-<p>And this command to enable the service:</p>
+<p>To enable the service, run this command:</p>
 <pre><code>$ sudo systemctl enable --now osbuild-composer.socket
 </code></pre>
-<p>Verify that the installation works by invoking <code>composer-cli</code>:</p>
+<p>Verify that the installation works by running <code>composer-cli</code>:</p>
 <pre><code>$ sudo composer-cli status show
 </code></pre>
-<p>If you prefer to invoke this command without sudo, add your user to the <code>weldr</code> group:</p>
+<p>If you prefer to run this command without sudo privileges, add your user to the <code>weldr</code> group:</p>
 <pre><code>$ sudo usermod -a -G weldr &lt;user&gt;
 $ newgrp weldr
 </code></pre>
 <h2><a class="header" href="#web-ui" id="web-ui">Web UI</a></h2>
-<p>If you prefer the Web UI, known as an Image Builder, install this package:</p>
+<p>If you prefer the Web UI interface, known as an Image Builder, install the following package:</p>
 <pre><code>$ sudo dnf install cockpit-composer
 </code></pre>
-<p>and enable cockpit and osbuild-composer services:</p>
+<p>and enable <code>cockpit</code> and <code>osbuild-composer</code> services:</p>
 <pre><code>$ sudo systemctl enable --now osbuild-composer.socket
 $ sudo systemctl enable --now cockpit
 </code></pre>

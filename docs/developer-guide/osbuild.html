@@ -164,14 +164,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#osbuild" id="osbuild">osbuild</a></h1>
-<p>A CLI tool for building OS images. It takes manifest as an imput and produces an image as an output. The manifest consists of:</p>
+<p>A CLI tool for building OS images. It takes manifest as an input and produces an image as an output. The manifest consists of:</p>
 <ul>
 <li>sources section</li>
 <li>pipeline</li>
 </ul>
-<p>In our usual use-case (tied to Fedora and RHEL, not applicable to other non-RPM distros) the sources section contains an <code>org.osbuild.files</code> section which is a list of RPMs described by their name, hash, and URL for downloading. We do not support metalink at the moment.</p>
-<p><em>This section is very often source of build failures, because we can only include a single link and RPM repos are often flaky. Furthermore we set a timeout for the <code>curl</code> download because we want the build to timeout eventually in case the RPMs are unavailable, but it sometimes fails on slow Internet connection as well.</em></p>
-<p>The pipeline consists of a series of stages and ends with an assembler. A stage is our unit of filesystem tree modification and it is implemented as a standalone executable. We have, for instance, stage for installing RPM packages, adding a user, enabling systemd service, or setting a timezone.</p>
+<p>In our usual use-case, that is tied to Fedora and RHEL, not applicable to other non-RPM distros, the sources section contains an <code>org.osbuild.files</code> section, which is a list of RPMs described by their name, hash, and URL for downloading. We do not support metalink at the moment.</p>
+<p><em>This section is, very often, a source of build failures. This happens because we can only include a single link and RPM repos are often instable. Furthermore, we need to set a timeout for the <code>curl</code> download, because we want the build to timeout eventually in case the RPMs are unavailable, but it sometimes fails on slow Internet connection as well.</em></p>
+<p>The pipeline consists of a series of stages and ends with an assembler. A stage is our unit of filesystem tree modification and it is implemented as a standalone executable. For example, we have a stage for installing RPM packages, adding a user, enabling systemd service, or setting a timezone.</p>
 <p>The difference between a stage and an assembler is that the former takes a read-write filesystem-tree and performs a certain modification to it, whereas the latter takes a read-only filesystem tree and produces an output artifact.</p>
 <p>The pipeline contains one more &quot;nested&quot; pipeline, which does not have an assembler. It is called a &quot;build&quot; pipeline.</p>
 <h2><a class="header" href="#high-level-goals" id="high-level-goals">High level goals</a></h2>
@@ -179,14 +179,14 @@
 <li>reproducibility</li>
 <li>extensibility</li>
 </ol>
-<p>The ideal case for building images would be that given the same input manifest the output image would always be the same no matter what machine was used for building it. Where &quot;the same&quot; is defined as a binary equivalent. The world of IT is, of course, not ideal therefore we define <strong>reproducibility</strong> as a functional equivalence (that is the image behaves the same when built on different machines) and we limit the set of build machines only to those running the same distribution, in the same version, and on the same architecture. That means if you want to build Fedora 33 aarch64 image, you need Fedora 33 aarch64 machine.</p>
-<p><em>It is possible to run RHEL pipeline on Fedora, for example, but we do not test it and therefore we can't promise it will produce correct result.</em></p>
+<p>The ideal case for building images would be that, given the same input manifest, the output image would always be the same no matter what machine was used for building it. Where &quot;the same&quot; is defined as a binary equivalent. The world of IT is, of course, not ideal therefore we define <strong>reproducibility</strong> as a functional equivalence (that is the image behaves the same when built on different machines) and we limit the set of build machines only to those running the same distribution, in the same version, and on the same architecture. That means if you want to build a Fedora 33 aarch64 image, you need a Fedora 33 aarch64 machine.</p>
+<p><em>It is possible to run a RHEL pipeline on Fedora, for example, but we do not test it and therefore we can't promise it will produce the correct result.</em></p>
 <p>The advantage of the stage/assembler model is that any user can <strong>extend</strong> the tool with their own stage or assembler.</p>
 <h2><a class="header" href="#how-it-all-works-together" id="how-it-all-works-together">How it all works together</a></h2>
-<p>explain downloading sources, creating build fs tree, container, caching, the problem with reflink, bwrap etc.</p>
-<h2><a class="header" href="#bootstraping-the-build-environment" id="bootstraping-the-build-environment">Bootstraping the build environment</a></h2>
-<p>The &quot;build&quot; pipeline was introduced to improve reproducibility. Ideally given a build pipeline one would always get the same filesystem tree. But in order to create the first filesystem tree you need some tools so where go you get them from? Of course from the host operating system. The problem with doing this is that the host can affect the final result.</p>
-<p><em>We've already had this issue many times because most of the usual CLI tool were not created with reproducibility in mind.</em></p>
+<p>Explain downloading sources, creating build fs tree, container, caching, the problem with reflink, bwrap etc.</p>
+<h2><a class="header" href="#bootstrapping-the-build-environment" id="bootstrapping-the-build-environment">Bootstrapping the build environment</a></h2>
+<p>The &quot;build&quot; pipeline was introduced to improve reproducibility. Ideally, given a build pipeline, one would always get the same filesystem tree. But, to create the first filesystem tree, you need some tools. So, where go you get them from? Of course from the host operating system (OS). The problem with getting tools from the host OS this is that the host can affect the final result.</p>
+<p><em>We've already had this issue many times, because most of the usual CLI tools were not created with reproducibility in mind.</em></p>
 <h2><a class="header" href="#the-struggle-with-grub" id="the-struggle-with-grub">The struggle with GRUB</a></h2>
 <p>The standard tooling for creating GRUB does not fit to our stage/assembler concept because it wants to modify the filesystem tree and create the resulting artifact at the same time. As a result we have our own reimplementation of these tools.</p>
 

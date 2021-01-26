@@ -168,14 +168,14 @@
 <blockquote>
 <p>As the team obsessed with immutable test dependencies, how could we use ..</p>
 </blockquote>
-<p><em>One osbuild developer in one PR fixing one more piece of intfrastructure which could still change.</em></p>
+<p><em>One osbuild developer in one PR fixing one more piece of infrastructure which could still change.</em></p>
 <p>TODO: what do we test in each repo</p>
 <p>TODO: rpmci, rpmrepo</p>
 <h2><a class="header" href="#osbuild-composer" id="osbuild-composer">osbuild-composer</a></h2>
 <h3><a class="header" href="#unit-tests" id="unit-tests">Unit tests</a></h3>
 <p>There is pretty heavy mocking in the osbuild-composer codebase.</p>
 <p>HTTP API is unit-tested without any network communication (there is no socket), only the HTTP request/responses are tested.</p>
-<h3><a class="header" href="#intergration-tests" id="intergration-tests">Intergration tests</a></h3>
+<h3><a class="header" href="#integration-tests" id="integration-tests">Integration tests</a></h3>
 <p>These test cases live under <code>test/cases</code> and each of them is a standalone script. Some of them invoke additional binaries which live under <code>cmd</code> if not specified otherwise.</p>
 <ol>
 <li>
@@ -221,7 +221,7 @@
 <p><code>osbuild-dnf-json-tests</code> - These make sure the interface to dnf still works</p>
 <ul>
 <li>
-<p>This binary will execute <code>dnf-json</code> multiple times and it will also run multiple <code>dnf</code> depsolving tasks in parallel. It is possible that it will require high amount of RAM.</p>
+<p>This binary will execute <code>dnf-json</code> multiple times and it will also run multiple <code>dnf</code> depsolving tasks in parallel. It is possible that it will require a high amount of RAM.</p>
 </li>
 <li>
 <p><em>My guess would be at least 2GB memory for a VM running this test.</em></p>
@@ -229,7 +229,7 @@
 </ul>
 </li>
 <li>
-<p><code>osbuild-auth-tests</code> - Make sure the TLS certificate authetication works as expected for the koji api and worker api sockets.</p>
+<p><code>osbuild-auth-tests</code> - Make sure the TLS certificate authentication works as expected for the koji api and worker api sockets.</p>
 <ul>
 <li>A certificate authority is created for these tests and the files are stored in <code>/etc/osbuild-composer-test/ca</code></li>
 <li>The certificates live in the standard configuration directory: <code>/etc/osbuild-composer</code></li>
@@ -270,7 +270,7 @@ The &quot;test cases&quot; are defined in <code>test/cases/manifests</code> and 
 </li>
 </ol>
 <h3><a class="header" href="#leaking-resources" id="leaking-resources">Leaking resources</a></h3>
-<p>The cloud-cleaner binary was created to clean up all artifacts (like images, but also registred AMIs, security groups, etc.) that could be left behind. Not all executables in our CI have proper error handling and clean up code and what is even worse, if Jenkins fails and takes down all running jobs, it is possible that the clean-up code will not run even if it is implemented.</p>
+<p>The cloud-cleaner binary was created to clean up all artifacts (like images, but also registered AMIs, security groups, etc.) that could be left behind. Not all executables in our CI have proper error handling and clean up code and what is even worse, if Jenkins fails and takes down all running jobs, it is possible that the clean-up code will not run even if it is implemented.</p>
 <p><strong>Possibly leaking resources:</strong></p>
 <ol>
 <li>
@@ -280,7 +280,7 @@ The &quot;test cases&quot; are defined in <code>test/cases/manifests</code> and 
 </ul>
 </li>
 <li>
-<p><code>aws.sh</code>test case:</p>
+<p><code>aws.sh</code> test case:</p>
 <ul>
 <li>
 <p>Image uploaded to EC2</p>

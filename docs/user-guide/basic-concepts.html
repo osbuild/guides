@@ -164,8 +164,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#basic-concepts" id="basic-concepts">Basic concepts</a></h1>
-<p>osbuild-composer works with a concept of <strong>blueprints</strong>. A blueprint is a description of the final <strong>image</strong> and its <strong>customizations</strong>. A <strong>customization</strong> can be an additional RPM package, enabled service, custom kernel command line parameter, and many other (see Blueprint reference). An <strong>image</strong> is defined by its blueprint and <strong>image type</strong>, which is for example qcow2 (QEMU Copy On Write disk image) or AMI (Amazon Machine Image).</p>
-<p>Finally, osbuild-composer also supports <strong>upload targets</strong> which are cloud providers where an image can be stored right after it is built. Currently supported providers are <a href="https://aws.amazon.com/">AWS</a> and <a href="https://azure.microsoft.com/">Azure</a>.</p>
+<p><code>osbuild-composer</code> works with a concept of <strong>blueprints</strong>. A blueprint is a description of the final <strong>image</strong> and its <strong>customizations</strong>. A <strong>customization</strong> can be:</p>
+<ul>
+<li>an additional RPM package</li>
+<li>enabled service</li>
+<li>custom kernel command line parameter, and many others. See <a href="https://www.osbuild.org/guides/blueprint-reference/blueprint-reference.html#blueprint-reference">Blueprint</a> reference for more details. </li>
+</ul>
+<p>An <strong>image</strong> is defined by its blueprint and <strong>image type</strong>, which is for example <code>qcow2</code> (QEMU Copy On Write disk image) or <code>AMI</code> (Amazon Machine Image).</p>
+<p>Finally, <code>osbuild-composer</code> also supports <strong>upload targets</strong>, which are cloud providers where an image can be stored after it is built. Currently supported cloud providers are <a href="https://aws.amazon.com/">AWS</a> and <a href="https://azure.microsoft.com/">Azure</a>.</p>
 <h2><a class="header" href="#example-blueprint" id="example-blueprint">Example blueprint</a></h2>
 <pre><code class="language-toml">name = &quot;base-image-with-tmux&quot;
 description = &quot;A base system with tmux&quot;
@@ -177,13 +183,15 @@ version = &quot;*&quot;
 </code></pre>
 <p>The blueprint is in <a href="https://toml.io/en/">TOML format</a>.</p>
 <h2><a class="header" href="#blueprints-management-using-composer-cli" id="blueprints-management-using-composer-cli">Blueprints management using composer-cli</a></h2>
-<p>osbuild-composer provides a storage for blueprints. To store a blueprint file <code>blueprint.toml</code> run this command:</p>
+<p><code>osbuild-composer</code> provides a storage for blueprints. To store a <code>blueprint.toml</code> blueprint file, run this command:</p>
 <pre><code>$ composer-cli blueprints push blueprint.toml
 </code></pre>
-<p>To verify that the blueprint is available, list all currently stored blueprints and display the one which you have just added:</p>
+<p>To verify that the blueprint is available, list all currently stored blueprints:</p>
 <pre><code>$ composer-cli blueprints list
 base-image-with-tmux
-$ sudo composer-cli blueprints show base-image-with-tmux
+</code></pre>
+<p>To display the blueprint you have just added, run the command:</p>
+<pre><code>$ sudo composer-cli blueprints show base-image-with-tmux
 name = &quot;base-image-with-tmux&quot;
 description = &quot;A base system with tmux&quot;
 version = &quot;0.0.1&quot;
@@ -195,7 +203,7 @@ name = &quot;tmux&quot;
 version = &quot;*&quot;
 </code></pre>
 <h2><a class="header" href="#image-types" id="image-types">Image types</a></h2>
-<p>osbuild-composer supports various types of output images. To see all supported types run:</p>
+<p><code>osbuild-composer</code> supports various types of output images. To see all supported types, run this command:</p>
 <pre><code>$ composer-cli compose types
 </code></pre>
 

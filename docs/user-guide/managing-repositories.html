@@ -164,11 +164,11 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#managing-repositories" id="managing-repositories">Managing repositories</a></h1>
-<p><code>osbuild-composer</code> does not inherit the system repositories located in <code>/etc/yum.repos.d/</code>. Instead it reads custom repositories from <code>/etc/osbuild-composer/repositories</code>. The configuration files here are not in the usual &quot;repo&quot; format, they are simple JSON files.</p>
+<p><code>osbuild-composer</code> does not inherit the system repositories located in <code>/etc/yum.repos.d/</code>. Instead, it reads custom repositories from <code>/etc/osbuild-composer/repositories</code>. The configuration files in this directory are not in the usual &quot;repo&quot; format. Instead, they are simple <code>JSON</code> files.</p>
 <p>To set your own repositories, first create the directory:</p>
 <pre><code>$ sudo mkdir -p /etc/osbuild-composer/repositories
 </code></pre>
-<p>Then create a JSON file with this structure:</p>
+<p>Then, create a JSON file with the following structure:</p>
 <pre><code class="language-json">{
     &quot;&lt;ARCH&gt;&quot;: [
         {
@@ -183,7 +183,7 @@
     ]
 }
 </code></pre>
-<p>Specify only one of: <code>metalink</code>, <code>mirrorlist</code>, or <code>baseurl</code>. The remaining fields are optional.</p>
+<p>Specify only one value for the following attributes: <code>metalink</code>, <code>mirrorlist</code>, or <code>baseurl</code>. The remaining fields are optional.</p>
 <p>For example:</p>
 <pre><code class="language-json">{
     &quot;x86_64&quot;: [
