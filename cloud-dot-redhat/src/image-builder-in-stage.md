@@ -90,6 +90,6 @@ curl --user "username:password" \
 {"status":"running"}
 ```
 
-Once the status is “success”, you can go to your AWS account and check the list of available AMIs.
+Once the status is “success”, you can go to your AWS account and check the list of available AMIs. The AMI will appear in `us-east-1`.
 
-*(TODO: we need a way to identify the AMI)*
+*(TODO: we need a way to identify the AMI and region)*
