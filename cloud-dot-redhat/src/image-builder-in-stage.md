@@ -1,6 +1,6 @@
 # Using Image Builder in staging environment from command line
 
-Note: The staging environment requires access to the Red Hat VPN, so is only accessible to Red Hat employees at the moment.
+Note: The staging environment requires access to the Red Hat VPN, so is only accessible to Red Hat employees. This is the first step in our deployement and the production environment will be available to select outside users soon!
 
 Image Builder is an instance of an upstream image-builder project. You can find the code and report issues here: [https://github.com/osbuild/image-builder](https://github.com/osbuild/image-builder) . It provides a REST API, which is accessible using the squid.corp.redhat.com HTTP proxy server.
 
