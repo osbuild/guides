@@ -11,3 +11,4 @@
   - [OSBuild](./developer-guide/osbuild.md)
   - [osbuild-composer](./developer-guide/osbuild-composer.md)
   - [Testing strategy](./developer-guide/testing.md)
+  - [Glossary](./developer-guide/glossary.md)
