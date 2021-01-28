@@ -164,11 +164,21 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#managing-repositories" id="managing-repositories">Managing repositories</a></h1>
-<p><code>osbuild-composer</code> does not inherit the system repositories located in <code>/etc/yum.repos.d/</code>. Instead, it reads custom repositories from <code>/etc/osbuild-composer/repositories</code>. The configuration files in this directory are not in the usual &quot;repo&quot; format. Instead, they are simple <code>JSON</code> files.</p>
-<p>To set your own repositories, first create the directory:</p>
+<p><code>osbuild-composer</code> does not inherit the system repositories located in <code>/etc/yum.repos.d/</code>. Instead, it has its own set of official repositories defined in <code>/usr/share/osbuild-composer/repositories</code>. To use custom repositories, define overrides in <code>/etc/osbuild-composer/repositories</code>. This directory is meant for user defined repositories and the files located here take precedence over those in <code>/usr</code>. </p>
+<p>The configuration files are not in the usual &quot;repo&quot; format. Instead, they are simple <code>JSON</code> files.</p>
+<p><em>Important note: osbuild-composer can only create images for the distribution and architecture it is running on. For example, if you are running Fedora 33 on x86_64, osbuild-composer will create all images as Fedora 33 for x86_64. Building other distributions and architectures except for the host is not supported.</em></p>
+<h2><a class="header" href="#defining-custom-repositories" id="defining-custom-repositories">Defining custom repositories</a></h2>
+<p>To set your own repositories, create this directory if it does not exist already:</p>
 <pre><code>$ sudo mkdir -p /etc/osbuild-composer/repositories
 </code></pre>
-<p>Then, create a JSON file with the following structure:</p>
+<p>Based on the system you are running (see <code>/etc/os-release</code> if you are not sure), determine the name of a new JSON file:</p>
+<ul>
+<li>Fedora 32 - <code>fedora-32.json</code></li>
+<li>Fedora 33 - <code>fedora-33.json</code></li>
+<li>Already released RHEL 8 - <code>rhel-8.json</code></li>
+<li>Pre-release RHEL 8.4 - <code>rhel-84.json</code></li>
+</ul>
+<p>Then, create the JSON file with the following structure:</p>
 <pre><code class="language-json">{
     &quot;&lt;ARCH&gt;&quot;: [
         {
@@ -184,7 +194,7 @@
 }
 </code></pre>
 <p>Specify only one value for the following attributes: <code>metalink</code>, <code>mirrorlist</code>, or <code>baseurl</code>. The remaining fields are optional.</p>
-<p>For example:</p>
+<p>For example, assuming that the host OS is Fedora 33 running on x86_64, create <code>/etc/osbuild-composer/repositories/fedora-33.json</code> with this content:</p>
 <pre><code class="language-json">{
     &quot;x86_64&quot;: [
         {
