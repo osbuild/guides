@@ -1,12 +1,28 @@
 # Managing repositories
 
-`osbuild-composer` does not inherit the system repositories located in `/etc/yum.repos.d/`. Instead, it reads custom repositories from `/etc/osbuild-composer/repositories`. The configuration files in this directory are not in the usual "repo" format. Instead, they are simple `JSON` files.
+`osbuild-composer` does not inherit the system repositories located in `/etc/yum.repos.d/`. Instead, it has its own set of official repositories defined in `/usr/share/osbuild-composer/repositories`. To use custom repositories, define overrides in `/etc/osbuild-composer/repositories`. This directory is meant for user defined repositories and the files located here take precedence over those in `/usr`. 
 
-To set your own repositories, first create the directory:
+The configuration files are not in the usual "repo" format. Instead, they are simple `JSON` files.
+
+*Important note: osbuild-composer can only create images for the distribution and architecture it is running on. For example, if you are running Fedora 33 on x86_64, osbuild-composer will create all images as Fedora 33 for x86_64. Building other distributions and architectures except for the host is not supported.*
+
+## Defining custom repositories 
+
+To set your own repositories, create this directory if it does not exist already:
+
 ```
 $ sudo mkdir -p /etc/osbuild-composer/repositories
 ```
-Then, create a JSON file with the following structure:
+
+Based on the system you are running (see `/etc/os-release` if you are not sure), determine the name of a new JSON file:
+
+* Fedora 32 - `fedora-32.json`
+* Fedora 33 - `fedora-33.json`
+* Already released RHEL 8 - `rhel-8.json`
+* Pre-release RHEL 8.4 - `rhel-84.json`
+
+Then, create the JSON file with the following structure:
+
 ```json
 {
     "<ARCH>": [
@@ -24,7 +40,7 @@ Then, create a JSON file with the following structure:
 ```
 Specify only one value for the following attributes: `metalink`, `mirrorlist`, or `baseurl`. The remaining fields are optional.
 
-For example:
+For example, assuming that the host OS is Fedora 33 running on x86_64, create `/etc/osbuild-composer/repositories/fedora-33.json` with this content:
 ```json
 {
     "x86_64": [
