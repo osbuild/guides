@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Building an image from the command line - OSBuild guides</title>
+        <title>Glossary - OSBuild guides</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="../user-guide/building-an-image-from-cli.html" class="active"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="../user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li></ol></li><li class="chapter-item expanded "><a href="../blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="../developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/osbuild.html"><strong aria-hidden="true">3.1.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.2.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="../developer-guide/testing.html"><strong aria-hidden="true">3.3.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="../developer-guide/glossary.html"><strong aria-hidden="true">3.4.</strong> Glossary</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="../user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="../user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li></ol></li><li class="chapter-item expanded "><a href="../blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="../developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/osbuild.html"><strong aria-hidden="true">3.1.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.2.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="../developer-guide/testing.html"><strong aria-hidden="true">3.3.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="../developer-guide/glossary.html" class="active"><strong aria-hidden="true">3.4.</strong> Glossary</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,68 +163,32 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#building-an-image" id="building-an-image">Building an image</a></h1>
-<p>An image is specified by a blueprint and an image type. It will use the same distribution version (e.g. Fedora 33) and architecture (e.g. aarch64) as the host system.</p>
-<p>To build a customized image, start by choosing the blueprint and image type you would like to build. To do so, run the following commands:</p>
-<pre><code>$ sudo composer-cli blueprints list
-$ sudo composer-cli compose types
-</code></pre>
-<p>and trigger a compose (example using the blueprint from the previous section):</p>
-<pre><code>$ composer-cli compose start base-image-with-tmux qcow2
-Compose ab71b61a-b3c4-434f-b214-1e16527766ff added to the queue
-</code></pre>
-<p>Note that the compose is assigned with a Universally Unique Identifier (UUID), that you can use to monitor the image build progress:</p>
-<pre><code>$ composer-cli compose info ab71b61a-b3c4-434f-b214-1e16527766ff
-ab71b61a-b3c4-434f-b214-1e16527766ff RUNNING  base-image-with-tmux 0.0.1 qcow2            2147483648
-Packages:
-    tmux-*
-Modules:
-Dependencies:
-</code></pre>
-<p>At this time, the compose is in a &quot;RUNNING&quot; state. Once the compose reaches the &quot;FINISHED&quot; state, you can download the resulting image by running the following command:</p>
-<pre><code>$ sudo composer-cli compose results ab71b61a-b3c4-434f-b214-1e16527766ff
-ab71b61a-b3c4-434f-b214-1e16527766ff.tar: 455.18 MB
-$ fd
-ab71b61a-b3c4-434f-b214-1e16527766ff.tar
-$ tar xf ab71b61a-b3c4-434f-b214-1e16527766ff.tar
-$ fd 
-ab71b61a-b3c4-434f-b214-1e16527766ff-disk.qcow2
-ab71b61a-b3c4-434f-b214-1e16527766ff.json
-ab71b61a-b3c4-434f-b214-1e16527766ff.tar
-logs
-logs/osbuild.log
-</code></pre>
-<p>From the example output above, the resulting tarball contains not only the <code>qcow2</code> image, but also a <code>JSON</code> file, which is the osbuild manifest (see the <a href="https://www.osbuild.org/guides/developer-guide/developer-guide.html#developer-guide">Developer guide</a> for more details), and a directory with logs.</p>
-<p>For more options, see the <code>help</code> text for <code>composer-cli</code>:</p>
-<pre><code>$ sudo composer-cli compose help
-</code></pre>
-<h4><a class="header" href="#tip-booting-the-image-with-qemu" id="tip-booting-the-image-with-qemu">Tip: Booting the image with qemu</a></h4>
-<p>If you want to quickly run the resulting image, you can use <code>qemu</code>:</p>
-<pre><code>$ qemu-system-x86_64 \
-                -enable-kvm \
-                -m 3000 \
-                -snapshot \
-                -cpu host \
-                -net nic,model=virtio \
-                -net user,hostfwd=tcp::2223-:22 \
-                ab71b61a-b3c4-434f-b214-1e16527766ff-disk.qcow2 
-</code></pre>
-<p>Be aware that you must specify a way to access the machine in the blueprint. For example, you can create a user with known password, set an SSH key, or enable <code>cloud-init</code> to use a <code>cloud-init</code> ISO file.</p>
+                        <h1><a class="header" href="#glossary" id="glossary">Glossary</a></h1>
+<table><thead><tr><th>Term</th><th>Explanation</th></tr></thead><tbody>
+<tr><td>AMI</td><td>Amazon Machine Image (image type)</td></tr>
+<tr><td>Blueprint</td><td>Definition of customizations in the image</td></tr>
+<tr><td>Compose</td><td>Request from the user. osbuild-composer running the Weldr API can only create one image at a time, so one compose maps directly to one image build. It can map to multiple image builds when used with other API, such as the Koji API.</td></tr>
+<tr><td>Composer API</td><td>HTTP API meant as publicly accessible (over TCP). It was created specifically for osbuild-composer and does not support some Weldr features like blueprint management, but adds new features like building different distros and architectures.</td></tr>
+<tr><td>Image Build</td><td>One request from osbuild-composer to osbuild-worker. Its result is a single image.</td></tr>
+<tr><td>Image Type</td><td>Image file format usually associated with a specific use case. For example: AMI for AWS, qcow2 for OpenStack, etc.</td></tr>
+<tr><td>Manifest</td><td>Input for the osbuild tool. It should be a precise definition of an image. See https://www.osbuild.org/man/osbuild-manifest.5 for more information.</td></tr>
+<tr><td>osbuild</td><td>Low-level tool for building images. Not meant for end-user usage.</td></tr>
+<tr><td>osbuild-composer</td><td>HTTP service for building OS images.</td></tr>
+<tr><td>OSTree</td><td>Base technology for immutable OS images: Fedora IoT and RHEL Edge</td></tr>
+<tr><td>Repository overrides</td><td>osbuild-composer uses its own set of repository definitions. In case a user wants to use custom repositories, &quot;overrides&quot; can be created in /etc/osbuild-composer</td></tr>
+<tr><td>Weldr API</td><td>Local HTTP API used for communication between composer-cli/cockpit-composer and osbuild-composer. It comes from the lorax-composer project.</td></tr>
+</tbody></table>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../user-guide/basic-concepts.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../developer-guide/testing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="../user-guide/uploading-to-aws.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -234,15 +198,11 @@ logs/osbuild.log
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="../user-guide/basic-concepts.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../developer-guide/testing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a rel="next" href="../user-guide/uploading-to-aws.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 
