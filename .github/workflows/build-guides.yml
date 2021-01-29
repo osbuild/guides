@@ -45,3 +45,45 @@ jobs:
         git commit -m "Render website" || echo "No changes"
         git push origin gh-pages
 
+on: [pull_request]
+
+jobs:
+  import:
+    name: Import the guides
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup mdBook
+      uses: peaceiris/actions-mdbook@v1
+      with:
+        mdbook-version: 'latest'
+    - name: Configure git
+      run: |
+        git config --global user.name "Automation"
+        git config --global user.email "automation@osbuild.org"
+    - name: Clone local repository
+      uses: actions/checkout@v2
+      with:
+        path: sources
+    - name: Clone local repository
+      uses: actions/checkout@v2
+      with:
+        path: rendered
+        ref: gh-pages
+    - run: ls -la; ls -la sources; ls -la rendered
+    - name: Render osbuild-composer guide
+      working-directory: sources/osbuild-composer
+      run: |
+        mdbook build -d ../../rendered/docs/pr-${{ github.event.number }}/
+    - name: Render cloud-dot-redhat guide
+      working-directory: sources/cloud-dot-redhat
+      run: |
+        mdbook build -d ../../rendered/docs/pr-${{ github.event.number }}/cloud-dot-redhat/
+    - name: Publish the rendered
+      working-directory: rendered
+      run: |
+        pwd
+        ls -la
+        git add .
+        git commit -m "Render website" || echo "No changes"
+        git push origin gh-pages
+
