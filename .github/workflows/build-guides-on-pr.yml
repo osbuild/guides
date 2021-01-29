@@ -1,9 +1,6 @@
-name: Build guides
+name: Build guides on Pull Request
 
-on:
-  push:
-    branches:
-    - main
+on: [pull_request]
 
 jobs:
   import:
@@ -31,11 +28,11 @@ jobs:
     - name: Render osbuild-composer guide
       working-directory: sources/osbuild-composer
       run: |
-        mdbook build -d ../../rendered/docs/
+        mdbook build -d ../../rendered/docs/pr-${{ github.event.number }}/
     - name: Render cloud-dot-redhat guide
       working-directory: sources/cloud-dot-redhat
       run: |
-        mdbook build -d ../../rendered/docs/cloud-dot-redhat/
+        mdbook build -d ../../rendered/docs/pr-${{ github.event.number }}/cloud-dot-redhat/
     - name: Publish the rendered
       working-directory: rendered
       run: |
@@ -44,3 +41,4 @@ jobs:
         git add .
         git commit -m "Render website" || echo "No changes"
         git push origin gh-pages
+
