@@ -1,8 +1,8 @@
-🚧 Work in progress
+# Guides for projects related to OSBuild
 
-Book format:
- * The book uses simple markdown files, which are rendered using mdBook: https://github.com/rust-lang/mdBook/.
- * To render the book locally run in one of the directories:
+Notes on the format:
+ * The guides use simple markdown files, which are rendered using mdBook: https://github.com/rust-lang/mdBook/.
+ * To render the guides locally run in one of the directories:
 ```
 $ mdbook serve
 ```
