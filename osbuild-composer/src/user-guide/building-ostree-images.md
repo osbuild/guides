@@ -37,7 +37,7 @@ The result will look like this:
 
 ## Building an OSTree commit
 
-Start by creating a blueprint for your commit. Using your favorite text editor, `vi`, to create a file named `fishy.toml` with this content:
+Start by creating a blueprint for your commit. Using your favorite text editor, `vi`, create a file named `fishy.toml` with this content:
 
 ```toml
 name = "fishy-commit"
