@@ -3,10 +3,8 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title></title>
+        <title>Using the graphical interface Image Builder in the stage environment - Image Builder in cloud.redhat.com guide</title>
         
-        
-        <base href="/">
         
 
 
@@ -97,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li></ol></li><li class="chapter-item expanded "><a href="blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer-guide/osbuild.html"><strong aria-hidden="true">3.1.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.2.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="developer-guide/testing.html"><strong aria-hidden="true">3.3.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="developer-guide/glossary.html"><strong aria-hidden="true">3.4.</strong> Glossary</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="image-builder-in-stage.html"><strong aria-hidden="true">1.</strong> Using Image Builder in the stage environment</a></li><li class="chapter-item expanded "><a href="image-builder-in-stage-gui.html" class="active"><strong aria-hidden="true">2.</strong> Using the graphical interface Image Builder in the stage environment</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -129,7 +127,7 @@
                         
                     </div>
 
-                    <h1 class="menu-title">OSBuild guides</h1>
+                    <h1 class="menu-title">Image Builder in cloud.redhat.com guide</h1>
 
                     <div class="right-buttons">
                         
@@ -165,13 +163,82 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#document-not-found-404" id="document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <h1><a class="header" href="#using-image-builder-in-staging-environment-from-the-graphical-interface-gui" id="using-image-builder-in-staging-environment-from-the-graphical-interface-gui">Using Image Builder in staging environment from the graphical interface (GUI)</a></h1>
+<p>Note: The staging environment requires access to the Red Hat VPN, so is only accessible to Red Hat employees. This is the first step in our deployment and the production environment will be available to select outside users soon!</p>
+<p>Image Builder is an instance of an upstream image-builder project. You can find the code and report issues here: [https://github.com/osbuild/image-builder] (https://github.com/osbuild/image-builder) . It provides a REST API, which is accessible using the squid.corp.redhat.com HTTP proxy server.</p>
+<p>To access the service, you need to create an account to access the stage environment.</p>
+<h2><a class="header" href="#create-account-in-stage-environment" id="create-account-in-stage-environment">Create account in stage environment</a></h2>
+<ol>
+<li>
+<p>Access <a href="http://account-manager-stage.app.eng.rdu2.redhat.com/#create">Ethel</a>.</p>
+</li>
+<li>
+<p>Insert a username which is <strong>not</strong> your kerberos name, for example <code>image-builder-&lt;username&gt;</code>.</p>
+</li>
+<li>
+<p>Insert a password which is <strong>not</strong> your kerberos password.</p>
+</li>
+<li>
+<p>Assign a SKUs, for example, <code>MCT3475, MCT3718, RH0105260, RH00003</code>. <a href="https://access.redhat.com/management/subscriptions">See <code>Subscription Inventory</code> for more details</a>.</p>
+</li>
+<li>
+<p>Select the option &quot;Stage&quot; from the dropdown menu, to grant access to the &quot;Stage&quot; environment.</p>
+</li>
+<li>
+<p>Click &quot;Create&quot;.</p>
+</li>
+</ol>
+<p>The account is now sucessfully created.</p>
+<h2><a class="header" href="#accessing-the-stage-environment-on-the-graphical-interface-gui" id="accessing-the-stage-environment-on-the-graphical-interface-gui">Accessing the stage environment on the graphical interface (GUI)</a></h2>
+<p>Now using your new account name and password, you can display the available API endpoints like this:</p>
+<ol>
+<li>
+<p>Access the <a href="https://cloud.stage.redhat.com/beta/insights/image-builder/landing">Stage Beta</a>.</p>
+</li>
+<li>
+<p>Login with the credentials you created for the stage environment. See previous section for more details.</p>
+</li>
+</ol>
+<p>You are now able to create and monitor your composes.</p>
+<h2><a class="header" href="#creating-and-monitoring-a-compose-using-the-graphical-interface-gui" id="creating-and-monitoring-a-compose-using-the-graphical-interface-gui">Creating and monitoring a compose using the graphical interface (GUI)</a></h2>
+<p>On the <a href="https://cloud.stage.redhat.com/beta/insights/image-builder/landing">Stage Beta</a>, perform the follow steps:</p>
+<ol>
+<li>
+<p>Click <strong>Create Image</strong>. A <code>Create a new image</code> dialog window opens.</p>
+</li>
+<li>
+<p>On the <code>Image output</code> step, choose: </p>
+</li>
+</ol>
+<ul>
+<li>Select the image release.</li>
+<li>Select the Target environment: <code>Amazon Web Services</code>. environment.
+Click <strong>Next</strong>.</li>
+</ul>
+<ol start="3">
+<li>
+<p>On the <code>Upload to AWS</code> step, enter your AWS account ID. 
+You can find your AWS account ID by accessing the option <a href="https://console.aws.amazon.com/billing/home?#/account">My account</a>. Click <strong>Next</strong>.</p>
+</li>
+<li>
+<p>On the <code>Registration</code> step,  you have the option to embed an activation key and register systems on first boot or register later. Select the option that better suits you. Click <strong>Next</strong>.</p>
+</li>
+<li>
+<p>On the <code>Review</code> step , review the information and click <strong>Create</strong>.</p>
+</li>
+</ol>
+<p>Image Builder as a Service creates a RHEL 8 AMI image for the <code>x86\_64</code> architecture and uploads it to AWS EC2. It will then share the AMI with the specified account.</p>
+<p>NOTE: The image build, upload and cloud registration processes take a few minutes to complete.</p>
+<p>Once the status is “Success”, access your AWS account and check the list of available AMIs images. The AMI is available in the <code>us-east-1</code> region.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="image-builder-in-stage.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
                         
 
                         
@@ -182,6 +249,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="image-builder-in-stage.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
                 
 
                 
