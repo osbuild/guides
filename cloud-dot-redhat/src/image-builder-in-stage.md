@@ -1,10 +1,10 @@
 # Using Image Builder in staging environment from command line
 
-Note: The staging environment requires access to the Red Hat VPN, so is only accessible to Red Hat employees. This is the first step in our deployement and the production environment will be available to select outside users soon!
+Note: The staging environment requires access to the Red Hat VPN, so is only accessible to Red Hat employees. This is the first step in our deployment and the production environment will be available to select outside users soon!
 
 Image Builder is an instance of an upstream image-builder project. You can find the code and report issues here: [https://github.com/osbuild/image-builder](https://github.com/osbuild/image-builder) . It provides a REST API, which is accessible using the squid.corp.redhat.com HTTP proxy server.
 
-All you need to access the service is the “curl” tool which is available on any operating system and a user account in staging environment.
+All you need to access the service is the “curl” tool which is available on any operating system and a user account in the staging environment.
 
 ## Create account in stage environment
 
@@ -12,7 +12,7 @@ Start here:[http://account-manager-stage.app.eng.rdu2.redhat.com/#create](http:/
 
 and:
  * Fill in a username which is **not** your kerberos name, for example `image-builder-<nickname>`.
- * Create new password which is **not** your kerberos password.
+ * Create a new password which is **not** your kerberos password.
  * Assign yourself these SKUs (something like a subscription): `MCT3475, MCT3718, RH0105260, RH00003`
  * Check that you are creating the account in "Stage" environment
  * Click "Create"
@@ -67,7 +67,7 @@ If you want to start a new compose, you need to create a JSON file containing a 
 
 Save the file as “image-builder-request.json”.
 
-Given the JSON file above, Image Builder will create a RHEL 8 AMI image for x86\_64 architecture and upload it to AWC EC2. It will then share the AMI with the specified account.
+Given the JSON file above, Image Builder will create a RHEL 8 AMI image for x86\_64 architecture and upload it to AWS EC2. It will then share the AMI with the specified account.
 
 Now trigger a new compose:
 ```
