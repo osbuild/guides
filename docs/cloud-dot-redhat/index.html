@@ -164,15 +164,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#using-image-builder-in-staging-environment-from-command-line" id="using-image-builder-in-staging-environment-from-command-line">Using Image Builder in staging environment from command line</a></h1>
-<p>Note: The staging environment requires access to the Red Hat VPN, so is only accessible to Red Hat employees. This is the first step in our deployement and the production environment will be available to select outside users soon!</p>
+<p>Note: The staging environment requires access to the Red Hat VPN, so is only accessible to Red Hat employees. This is the first step in our deployment and the production environment will be available to select outside users soon!</p>
 <p>Image Builder is an instance of an upstream image-builder project. You can find the code and report issues here: <a href="https://github.com/osbuild/image-builder">https://github.com/osbuild/image-builder</a> . It provides a REST API, which is accessible using the squid.corp.redhat.com HTTP proxy server.</p>
-<p>All you need to access the service is the “curl” tool which is available on any operating system and a user account in staging environment.</p>
+<p>All you need to access the service is the “curl” tool which is available on any operating system and a user account in the staging environment.</p>
 <h2><a class="header" href="#create-account-in-stage-environment" id="create-account-in-stage-environment">Create account in stage environment</a></h2>
 <p>Start here:<a href="http://account-manager-stage.app.eng.rdu2.redhat.com/#create">http://account-manager-stage.app.eng.rdu2.redhat.com/#create</a></p>
 <p>and:</p>
 <ul>
 <li>Fill in a username which is <strong>not</strong> your kerberos name, for example <code>image-builder-&lt;nickname&gt;</code>.</li>
-<li>Create new password which is <strong>not</strong> your kerberos password.</li>
+<li>Create a new password which is <strong>not</strong> your kerberos password.</li>
 <li>Assign yourself these SKUs (something like a subscription): <code>MCT3475, MCT3718, RH0105260, RH00003</code></li>
 <li>Check that you are creating the account in &quot;Stage&quot; environment</li>
 <li>Click &quot;Create&quot;</li>
@@ -221,7 +221,7 @@
 }
 </code></pre>
 <p>Save the file as “image-builder-request.json”.</p>
-<p>Given the JSON file above, Image Builder will create a RHEL 8 AMI image for x86_64 architecture and upload it to AWC EC2. It will then share the AMI with the specified account.</p>
+<p>Given the JSON file above, Image Builder will create a RHEL 8 AMI image for x86_64 architecture and upload it to AWS EC2. It will then share the AMI with the specified account.</p>
 <p>Now trigger a new compose:</p>
 <pre><code>curl --user &quot;username:password&quot; \
         --proxy http://squid.corp.redhat.com:3128 \
