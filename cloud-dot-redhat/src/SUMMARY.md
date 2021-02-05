@@ -1,5 +1,5 @@
 # Summary
 
-- [Using Image Builder in the stage environment](./image-builder-in-stage.md)
+- [Using Image Builder in the stage environment](./stage/image-builder-api.md)
 
-- [Using the graphical interface Image Builder in the stage environment](./image-builder-in-stage-gui.md)
+- [Using the graphical interface Image Builder in the stage environment](./stage/image-builder-gui.md)
