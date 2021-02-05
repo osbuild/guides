@@ -1,22 +1,22 @@
-# Using Image Builder in staging environment from the graphical interface (GUI)
+# Using Image Builder in production environment from the graphical interface (GUI)
 
-To access the service, you need to [create an account](./image-builder-access.md) to access the stage environment, and configure your browser to use [a proxy](http://hdn.corp.redhat.com/proxy.pac) on the Red Hat VPN.
+To access the service, you need [an account](./image-builder-access.md).
 
 ## Testing access
 
-You can display the available API endpoints here: [https://cloud.stage.redhat.com/beta/docs/api/image-builder](https://cloud.stage.redhat.com/beta/docs/api/image-builder).
+You can display the available API endpoints here: [https://cloud.redhat.com/beta/docs/api/image-builder](https://cloud.redhat.com/beta/docs/api/image-builder).
 
-## Accessing the stage environment on the graphical interface (GUI)
+## Accessing the production environment on the graphical interface (GUI)
 
-1. Access the [Stage Beta](https://cloud.stage.redhat.com/beta/insights/image-builder/landing).
+1. Access the [Beta](https://cloud.stage.redhat.com/beta/insights/image-builder/landing).
 
-2. Login with the credentials you created for the stage environment. See previous section for more details.
+2. Login with your credentials.
 
 You are now able to create and monitor your composes.
 
 ## Creating and monitoring a compose using the graphical interface (GUI)
 
-On the [Stage Beta](https://cloud.stage.redhat.com/beta/insights/image-builder/landing), perform the follow steps:
+On the [Beta](https://cloud.stage.redhat.com/beta/insights/image-builder/landing), perform the follow steps:
 
 1. Click **Create Image**. A `Create a new image` dialog window opens.
 
