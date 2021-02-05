@@ -1,23 +1,10 @@
 # Using Image Builder in staging environment from command line
 
-Note: The staging environment requires access to the Red Hat VPN, so is only accessible to Red Hat employees. This is the first step in our deployment and the production environment will be available to select outside users soon!
+All you need to access the service is the “curl” tool which is available on any operating system and [a user account in staging environment](./image-builder-access.md). The staging REST API is accessible using the squid.corp.redhat.com HTTP proxy server on the Red Hat VPN.
 
-Image Builder is an instance of an upstream image-builder project. You can find the code and report issues here: [https://github.com/osbuild/image-builder](https://github.com/osbuild/image-builder) . It provides a REST API, which is accessible using the squid.corp.redhat.com HTTP proxy server.
+## Testing access
 
-All you need to access the service is the “curl” tool which is available on any operating system and a user account in the staging environment.
-
-## Create account in stage environment
-
-Start here:[http://account-manager-stage.app.eng.rdu2.redhat.com/#create](http://account-manager-stage.app.eng.rdu2.redhat.com/#create)
-
-and:
- * Fill in a username which is **not** your kerberos name, for example `image-builder-<nickname>`.
- * Create a new password which is **not** your kerberos password.
- * Assign yourself these SKUs (something like a subscription): `MCT3475, MCT3718, RH0105260, RH00003`
- * Check that you are creating the account in "Stage" environment
- * Click "Create"
-
-Now using your new account name and password, you can display the available API endpoints like this:
+Using your staging account name and password, you can display the available API endpoints like this:
 ```
 curl --user "username:password" \
         --proxy http://squid.corp.redhat.com:3128 \
