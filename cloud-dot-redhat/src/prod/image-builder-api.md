@@ -66,11 +66,12 @@ The command specifies:
  * JSON body of the message (-d)
  * HTTP POST method (-X)
  * HTTP header “Content-Type” (-H)
- * The output contains id of the newly created compose which you can use to monitor it:
+
+The output contains id of the newly created compose which you can use to monitor it:
 ```
 curl -H "Authorization: Bearer $token" \
         -H "Content-Type: application/json" \
-        https://cloud.stage.redhat.com/api/image-builder/v1/composes/cb13b6e6-d24e-4417-a4f4-547f410609e1
+        https://cloud.redhat.com/api/image-builder/v1/composes/cb13b6e6-d24e-4417-a4f4-547f410609e1
 {"status":"running"}
 ```
 

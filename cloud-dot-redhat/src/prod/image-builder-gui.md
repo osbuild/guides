@@ -8,7 +8,7 @@ You can display the available API endpoints here: [https://cloud.redhat.com/beta
 
 ## Accessing the production environment on the graphical interface (GUI)
 
-1. Access the [Beta](https://cloud.stage.redhat.com/beta/insights/image-builder/landing).
+1. Access the [Beta](https://cloud.redhat.com/beta/insights/image-builder/landing).
 
 2. Login with your credentials.
 
@@ -16,7 +16,7 @@ You are now able to create and monitor your composes.
 
 ## Creating and monitoring a compose using the graphical interface (GUI)
 
-On the [Beta](https://cloud.stage.redhat.com/beta/insights/image-builder/landing), perform the follow steps:
+On the [Beta](https://cloud.redhat.com/beta/insights/image-builder/landing), perform the follow steps:
 
 1. Click **Create Image**. A `Create a new image` dialog window opens.
 
