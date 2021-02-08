@@ -3,10 +3,8 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title></title>
+        <title>Staging - Image Builder in cloud.redhat.com guide</title>
         
-        
-        <base href="/">
         
 
 
@@ -20,28 +18,28 @@
         <meta name="theme-color" content="#ffffff" />
 
         
-        <link rel="icon" href="favicon.svg">
+        <link rel="icon" href="../favicon.svg">
         
         
-        <link rel="shortcut icon" href="favicon.png">
+        <link rel="shortcut icon" href="../favicon.png">
         
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
         
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="stylesheet" href="../css/print.css" media="print">
         
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
         
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
         
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -51,7 +49,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -97,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="image-builder.html">Introduction to Image Builder</a></li><li class="chapter-item expanded "><a href="prod/image-builder-access.html"><strong aria-hidden="true">1.</strong> Production</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="prod/image-builder-api.html"><strong aria-hidden="true">1.1.</strong> Using Image Builder in the production environment</a></li><li class="chapter-item expanded "><a href="prod/image-builder-gui.html"><strong aria-hidden="true">1.2.</strong> Using the graphical interface Image Builder in the production environment</a></li></ol></li><li class="chapter-item expanded "><a href="stage/image-builder-access.html"><strong aria-hidden="true">2.</strong> Staging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="stage/image-builder-api.html"><strong aria-hidden="true">2.1.</strong> Using Image Builder in the stage environment</a></li><li class="chapter-item expanded "><a href="stage/image-builder-gui.html"><strong aria-hidden="true">2.2.</strong> Using the graphical interface Image Builder in the stage environment</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../image-builder.html">Introduction to Image Builder</a></li><li class="chapter-item expanded "><a href="../prod/image-builder-access.html"><strong aria-hidden="true">1.</strong> Production</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../prod/image-builder-api.html"><strong aria-hidden="true">1.1.</strong> Using Image Builder in the production environment</a></li><li class="chapter-item expanded "><a href="../prod/image-builder-gui.html"><strong aria-hidden="true">1.2.</strong> Using the graphical interface Image Builder in the production environment</a></li></ol></li><li class="chapter-item expanded "><a href="../stage/image-builder-access.html" class="active"><strong aria-hidden="true">2.</strong> Staging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../stage/image-builder-api.html"><strong aria-hidden="true">2.1.</strong> Using Image Builder in the stage environment</a></li><li class="chapter-item expanded "><a href="../stage/image-builder-gui.html"><strong aria-hidden="true">2.2.</strong> Using the graphical interface Image Builder in the stage environment</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -133,7 +131,7 @@
 
                     <div class="right-buttons">
                         
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                         
@@ -165,15 +163,44 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#document-not-found-404" id="document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <h1><a class="header" href="#create-account-in-the-staging-environment" id="create-account-in-the-staging-environment">Create account in the staging environment</a></h1>
+<p>Note: The staging environment requires access to the Red Hat VPN, so is only accessible to Red Hat employees.</p>
+<ol>
+<li>
+<p>Access <a href="http://account-manager-stage.app.eng.rdu2.redhat.com/#create">Ethel</a>.</p>
+</li>
+<li>
+<p>Insert a username which is <strong>not</strong> your kerberos name, for example <code>image-builder-&lt;username&gt;</code>.</p>
+</li>
+<li>
+<p>Insert a password which is <strong>not</strong> your kerberos password.</p>
+</li>
+<li>
+<p>Assign a SKUs, for example, <code>MCT3475, MCT3718, RH0105260, RH00003</code>. <a href="https://access.redhat.com/management/subscriptions">See <code>Subscription Inventory</code> for more details</a>.</p>
+</li>
+<li>
+<p>Select the option &quot;Stage&quot; from the dropdown menu, to grant access to the &quot;Stage&quot; environment.</p>
+</li>
+<li>
+<p>Click &quot;Create&quot;.</p>
+</li>
+</ol>
+<p>The account is now sucessfully created.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="../prod/image-builder-gui.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
+                        
+                            <a rel="next" href="../stage/image-builder-api.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -183,7 +210,15 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a rel="prev" href="../prod/image-builder-gui.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
+                
+                    <a rel="next" href="../stage/image-builder-api.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
@@ -204,14 +239,14 @@
         
 
         
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
         
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
         

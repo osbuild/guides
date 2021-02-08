@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Using Image Builder in the stage environment - Image Builder in cloud.redhat.com guide</title>
+        <title>Using Image Builder in the production environment - Image Builder in cloud.redhat.com guide</title>
         
         
 
@@ -18,28 +18,28 @@
         <meta name="theme-color" content="#ffffff" />
 
         
-        <link rel="icon" href="favicon.svg">
+        <link rel="icon" href="../favicon.svg">
         
         
-        <link rel="shortcut icon" href="favicon.png">
+        <link rel="shortcut icon" href="../favicon.png">
         
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
         
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="stylesheet" href="../css/print.css" media="print">
         
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
         
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
         
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -49,7 +49,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="image-builder-in-stage.html" class="active"><strong aria-hidden="true">1.</strong> Using Image Builder in the stage environment</a></li><li class="chapter-item expanded "><a href="image-builder-in-stage-gui.html"><strong aria-hidden="true">2.</strong> Using the graphical interface Image Builder in the stage environment</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../image-builder.html">Introduction to Image Builder</a></li><li class="chapter-item expanded "><a href="../prod/image-builder-access.html"><strong aria-hidden="true">1.</strong> Production</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../prod/image-builder-api.html" class="active"><strong aria-hidden="true">1.1.</strong> Using Image Builder in the production environment</a></li><li class="chapter-item expanded "><a href="../prod/image-builder-gui.html"><strong aria-hidden="true">1.2.</strong> Using the graphical interface Image Builder in the production environment</a></li></ol></li><li class="chapter-item expanded "><a href="../stage/image-builder-access.html"><strong aria-hidden="true">2.</strong> Staging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../stage/image-builder-api.html"><strong aria-hidden="true">2.1.</strong> Using Image Builder in the stage environment</a></li><li class="chapter-item expanded "><a href="../stage/image-builder-gui.html"><strong aria-hidden="true">2.2.</strong> Using the graphical interface Image Builder in the stage environment</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -131,7 +131,7 @@
 
                     <div class="right-buttons">
                         
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                         
@@ -163,35 +163,18 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#using-image-builder-in-staging-environment-from-command-line" id="using-image-builder-in-staging-environment-from-command-line">Using Image Builder in staging environment from command line</a></h1>
-<p>Note: The staging environment requires access to the Red Hat VPN, so is only accessible to Red Hat employees. This is the first step in our deployment and the production environment will be available to select outside users soon!</p>
-<p>Image Builder is an instance of an upstream image-builder project. You can find the code and report issues here: <a href="https://github.com/osbuild/image-builder">https://github.com/osbuild/image-builder</a> . It provides a REST API, which is accessible using the squid.corp.redhat.com HTTP proxy server.</p>
-<p>All you need to access the service is the “curl” tool which is available on any operating system and a user account in the staging environment.</p>
-<h2><a class="header" href="#create-account-in-stage-environment" id="create-account-in-stage-environment">Create account in stage environment</a></h2>
-<p>Start here:<a href="http://account-manager-stage.app.eng.rdu2.redhat.com/#create">http://account-manager-stage.app.eng.rdu2.redhat.com/#create</a></p>
-<p>and:</p>
-<ul>
-<li>Fill in a username which is <strong>not</strong> your kerberos name, for example <code>image-builder-&lt;nickname&gt;</code>.</li>
-<li>Create a new password which is <strong>not</strong> your kerberos password.</li>
-<li>Assign yourself these SKUs (something like a subscription): <code>MCT3475, MCT3718, RH0105260, RH00003</code></li>
-<li>Check that you are creating the account in &quot;Stage&quot; environment</li>
-<li>Click &quot;Create&quot;</li>
-</ul>
-<p>Now using your new account name and password, you can display the available API endpoints like this:</p>
-<pre><code>curl --user &quot;username:password&quot; \
-        --proxy http://squid.corp.redhat.com:3128 \
-        https://cloud.stage.redhat.com/api/image-builder/v1/openapi.json
+                        <h1><a class="header" href="#using-image-builder-in-production-environment-from-command-line" id="using-image-builder-in-production-environment-from-command-line">Using Image Builder in production environment from command line</a></h1>
+<p>All you need to access the service is the “curl” tool which is available on any operating system and <a href="./image-builder-access.html">an appropriately privileged user account</a>.</p>
+<h2><a class="header" href="#oauth2-token" id="oauth2-token">OAuth2 Token</a></h2>
+<p>Following the <a href="https://access.redhat.com/articles/3626371">instructions</a>, obtain an OAuth2 access token, fom now on referred to as <code>$token</code>.</p>
+<h2><a class="header" href="#testing-access" id="testing-access">Testing access</a></h2>
+<p>Using your access token, you can display the available API endpoints like this:</p>
+<pre><code>curl -H &quot;Authorization: Bearer $token&quot; \
+        https://cloud.redhat.com/api/image-builder/v1/openapi.json
 </code></pre>
-<p>The command contains:</p>
-<ul>
-<li>Your credentials after the <code>--user</code> CLI flag</li>
-<li>URL of the HTTP proxy server after the <code>--proxy</code> flag</li>
-<li>URL of the staging instance of image builder</li>
-</ul>
 <p><em>Tip: If you want nice formatting of the JSON object, use the “jq” tool):</em></p>
-<pre><code>curl --user &quot;username:password&quot; \
-        --proxy http://squid.corp.redhat.com:3128 \
-        https://cloud.stage.redhat.com/api/image-builder/v1/openapi.json | jq .
+<pre><code>curl -H &quot;Authorization: Bearer $token&quot; \
+        https://cloud.redhat.com/api/image-builder/v1/openapi.json | jq .
 </code></pre>
 <h2><a class="header" href="#creating-and-monitoring-a-compose" id="creating-and-monitoring-a-compose">Creating and monitoring a compose</a></h2>
 <p>There are two main API endpoints related to starting and monitoring a compose:</p>
@@ -223,11 +206,10 @@
 <p>Save the file as “image-builder-request.json”.</p>
 <p>Given the JSON file above, Image Builder will create a RHEL 8 AMI image for x86_64 architecture and upload it to AWS EC2. It will then share the AMI with the specified account.</p>
 <p>Now trigger a new compose:</p>
-<pre><code>curl --user &quot;username:password&quot; \
-        --proxy http://squid.corp.redhat.com:3128 \
+<pre><code>curl -H &quot;Authorization: Bearer $token&quot; \
         -d &quot;@image-builder-request.json&quot; -X POST \
         -H &quot;Content-Type: application/json&quot; \
-        https://cloud.stage.redhat.com/api/image-builder/v1/compose
+        https://cloud.redhat.com/api/image-builder/v1/compose
 {&quot;id&quot;:&quot;cb13b6e6-d24e-4417-a4f4-547f410609e1&quot;}
 </code></pre>
 <p>The command specifies:</p>
@@ -237,8 +219,7 @@
 <li>HTTP header “Content-Type” (-H)</li>
 <li>The output contains id of the newly created compose which you can use to monitor it:</li>
 </ul>
-<pre><code>curl --user &quot;username:password&quot; \
-        --proxy http://squid.corp.redhat.com:3128 \
+<pre><code>curl -H &quot;Authorization: Bearer $token&quot; \
         -H &quot;Content-Type: application/json&quot; \
         https://cloud.stage.redhat.com/api/image-builder/v1/composes/cb13b6e6-d24e-4417-a4f4-547f410609e1
 {&quot;status&quot;:&quot;running&quot;}
@@ -251,9 +232,13 @@
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="../prod/image-builder-access.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
                         
-                            <a rel="next" href="image-builder-in-stage-gui.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../prod/image-builder-gui.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -265,9 +250,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a rel="prev" href="../prod/image-builder-access.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
                 
-                    <a rel="next" href="image-builder-in-stage-gui.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../prod/image-builder-gui.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -290,14 +279,14 @@
         
 
         
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
         
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
         

@@ -3,10 +3,8 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title></title>
+        <title>Using the graphical interface Image Builder in the production environment - Image Builder in cloud.redhat.com guide</title>
         
-        
-        <base href="/">
         
 
 
@@ -20,28 +18,28 @@
         <meta name="theme-color" content="#ffffff" />
 
         
-        <link rel="icon" href="favicon.svg">
+        <link rel="icon" href="../favicon.svg">
         
         
-        <link rel="shortcut icon" href="favicon.png">
+        <link rel="shortcut icon" href="../favicon.png">
         
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
         
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="stylesheet" href="../css/print.css" media="print">
         
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
         
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
         
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -51,7 +49,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -97,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="image-builder.html">Introduction to Image Builder</a></li><li class="chapter-item expanded "><a href="prod/image-builder-access.html"><strong aria-hidden="true">1.</strong> Production</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="prod/image-builder-api.html"><strong aria-hidden="true">1.1.</strong> Using Image Builder in the production environment</a></li><li class="chapter-item expanded "><a href="prod/image-builder-gui.html"><strong aria-hidden="true">1.2.</strong> Using the graphical interface Image Builder in the production environment</a></li></ol></li><li class="chapter-item expanded "><a href="stage/image-builder-access.html"><strong aria-hidden="true">2.</strong> Staging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="stage/image-builder-api.html"><strong aria-hidden="true">2.1.</strong> Using Image Builder in the stage environment</a></li><li class="chapter-item expanded "><a href="stage/image-builder-gui.html"><strong aria-hidden="true">2.2.</strong> Using the graphical interface Image Builder in the stage environment</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../image-builder.html">Introduction to Image Builder</a></li><li class="chapter-item expanded "><a href="../prod/image-builder-access.html"><strong aria-hidden="true">1.</strong> Production</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../prod/image-builder-api.html"><strong aria-hidden="true">1.1.</strong> Using Image Builder in the production environment</a></li><li class="chapter-item expanded "><a href="../prod/image-builder-gui.html" class="active"><strong aria-hidden="true">1.2.</strong> Using the graphical interface Image Builder in the production environment</a></li></ol></li><li class="chapter-item expanded "><a href="../stage/image-builder-access.html"><strong aria-hidden="true">2.</strong> Staging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../stage/image-builder-api.html"><strong aria-hidden="true">2.1.</strong> Using Image Builder in the stage environment</a></li><li class="chapter-item expanded "><a href="../stage/image-builder-gui.html"><strong aria-hidden="true">2.2.</strong> Using the graphical interface Image Builder in the stage environment</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -133,7 +131,7 @@
 
                     <div class="right-buttons">
                         
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                         
@@ -165,15 +163,65 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#document-not-found-404" id="document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <h1><a class="header" href="#using-image-builder-in-production-environment-from-the-graphical-interface-gui" id="using-image-builder-in-production-environment-from-the-graphical-interface-gui">Using Image Builder in production environment from the graphical interface (GUI)</a></h1>
+<p>To access the service, you need <a href="./image-builder-access.html">an account</a>.</p>
+<h2><a class="header" href="#testing-access" id="testing-access">Testing access</a></h2>
+<p>You can display the available API endpoints here: <a href="https://cloud.redhat.com/beta/docs/api/image-builder">https://cloud.redhat.com/beta/docs/api/image-builder</a>.</p>
+<h2><a class="header" href="#accessing-the-production-environment-on-the-graphical-interface-gui" id="accessing-the-production-environment-on-the-graphical-interface-gui">Accessing the production environment on the graphical interface (GUI)</a></h2>
+<ol>
+<li>
+<p>Access the <a href="https://cloud.stage.redhat.com/beta/insights/image-builder/landing">Beta</a>.</p>
+</li>
+<li>
+<p>Login with your credentials.</p>
+</li>
+</ol>
+<p>You are now able to create and monitor your composes.</p>
+<h2><a class="header" href="#creating-and-monitoring-a-compose-using-the-graphical-interface-gui" id="creating-and-monitoring-a-compose-using-the-graphical-interface-gui">Creating and monitoring a compose using the graphical interface (GUI)</a></h2>
+<p>On the <a href="https://cloud.stage.redhat.com/beta/insights/image-builder/landing">Beta</a>, perform the follow steps:</p>
+<ol>
+<li>
+<p>Click <strong>Create Image</strong>. A <code>Create a new image</code> dialog window opens.</p>
+</li>
+<li>
+<p>On the <code>Image output</code> step, choose: </p>
+</li>
+</ol>
+<ul>
+<li>Select the image release.</li>
+<li>Select the Target environment: <code>Amazon Web Services</code>. environment.
+Click <strong>Next</strong>.</li>
+</ul>
+<ol start="3">
+<li>
+<p>On the <code>Upload to AWS</code> step, enter your AWS account ID. 
+You can find your AWS account ID by accessing the option <a href="https://console.aws.amazon.com/billing/home?#/account">My account</a>. Click <strong>Next</strong>.</p>
+</li>
+<li>
+<p>On the <code>Registration</code> step,  you have the option to embed an activation key and register systems on first boot or register later. Select the option that better suits you. Click <strong>Next</strong>.</p>
+</li>
+<li>
+<p>On the <code>Review</code> step , review the information and click <strong>Create</strong>.</p>
+</li>
+</ol>
+<p>Image Builder as a Service creates a RHEL 8 AMI image for the <code>x86\_64</code> architecture and uploads it to AWS EC2. It will then share the AMI with the specified account.</p>
+<p>NOTE: The image build, upload and cloud registration processes take a few minutes to complete.</p>
+<p>Once the status is “Success”, access your AWS account and check the list of available AMIs images. The AMI is available in the <code>us-east-1</code> region.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="../prod/image-builder-api.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
+                        
+                            <a rel="next" href="../stage/image-builder-access.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -183,7 +231,15 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a rel="prev" href="../prod/image-builder-api.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
+                
+                    <a rel="next" href="../stage/image-builder-access.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
@@ -204,14 +260,14 @@
         
 
         
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
         
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
         
