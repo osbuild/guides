@@ -4,7 +4,7 @@ All you need to access the service is the “curl” tool which is available on 
 
 ## OAuth2 Token
 
-Following the [instructions](https://access.redhat.com/articles/3626371), obtain an OAuth2 access token, fom now on referred to as `$token`.
+Following the [instructions](https://access.redhat.com/articles/3626371), obtain an OAuth2 access token, from now on referred to as `$token`.
 
 ## Testing access
 
