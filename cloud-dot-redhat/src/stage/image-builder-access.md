@@ -14,4 +14,4 @@ Note: The staging environment requires access to the Red Hat VPN, so is only acc
 
 6. Click "Create".
 
-The account is now sucessfully created.
+The account is now successfully created.
