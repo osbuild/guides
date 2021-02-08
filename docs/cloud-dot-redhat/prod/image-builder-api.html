@@ -217,11 +217,11 @@
 <li>JSON body of the message (-d)</li>
 <li>HTTP POST method (-X)</li>
 <li>HTTP header “Content-Type” (-H)</li>
-<li>The output contains id of the newly created compose which you can use to monitor it:</li>
 </ul>
+<p>The output contains id of the newly created compose which you can use to monitor it:</p>
 <pre><code>curl -H &quot;Authorization: Bearer $token&quot; \
         -H &quot;Content-Type: application/json&quot; \
-        https://cloud.stage.redhat.com/api/image-builder/v1/composes/cb13b6e6-d24e-4417-a4f4-547f410609e1
+        https://cloud.redhat.com/api/image-builder/v1/composes/cb13b6e6-d24e-4417-a4f4-547f410609e1
 {&quot;status&quot;:&quot;running&quot;}
 </code></pre>
 <p>Once the status is “success”, you can go to your AWS account and check the list of available AMIs. The AMI will appear in <code>us-east-1</code>.</p>
