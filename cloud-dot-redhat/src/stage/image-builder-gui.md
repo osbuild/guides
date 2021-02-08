@@ -32,7 +32,7 @@ You can find your AWS account ID by accessing the option [My account](https://co
 
 5. On the `Review` step , review the information and click **Create**.
 
-Image Builder as a Service creates a RHEL 8 AMI image for the `x86\_64` architecture and uploads it to AWS EC2. It will then share the AMI with the specified account.
+Image Builder as a Service creates a RHEL 8 AMI image for the x86\_64 architecture and uploads it to AWS EC2. It will then share the AMI with the specified account.
 
 NOTE: The image build, upload and cloud registration processes take a few minutes to complete.
 
