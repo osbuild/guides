@@ -11,5 +11,6 @@
 - [Developer guide](./developer-guide/developer-guide.md)
   - [OSBuild](./developer-guide/osbuild.md)
   - [osbuild-composer](./developer-guide/osbuild-composer.md)
+  - [Latest RPM builds](./developer-guide/latest-rpm-builds.md)
   - [Testing strategy](./developer-guide/testing.md)
   - [Glossary](./developer-guide/glossary.md)
