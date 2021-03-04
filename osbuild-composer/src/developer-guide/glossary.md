@@ -4,7 +4,7 @@
 | -------------------- | ------------------------------------------------------------ |
 | AMI                  | Amazon Machine Image (image type)                            |
 | Blueprint            | Definition of customizations in the image                    |
-| Compose              | Request from the user. osbuild-composer running the Weldr API can only create one image at a time, so one compose maps directly to one image build. It can map to multiple image builds when used with other API, such as the Koji API. |
+| Compose              | Request from the user. The high level idea is that images in a single compose are the same, but for different platforms, such as Azure or AWS. In practise they are slightly different because every cloud platform requires different package set and system configuration. osbuild-composer running the Weldr API can only create one image at a time, so one compose maps directly to one image build. It can map to multiple image builds when used with other API, such as the Koji API. |
 | Composer API         | HTTP API meant as publicly accessible (over TCP). It was created specifically for osbuild-composer and does not support some Weldr features like blueprint management, but adds new features like building different distros and architectures. |
 | Image Build          | One request from osbuild-composer to osbuild-worker. Its result is a single image. |
 | Image Type           | Image file format usually associated with a specific use case. For example: AMI for AWS, qcow2 for OpenStack, etc. |
