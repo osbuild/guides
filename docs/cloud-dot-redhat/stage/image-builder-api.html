@@ -163,9 +163,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#using-image-builder-in-staging-environment-from-command-line" id="using-image-builder-in-staging-environment-from-command-line">Using Image Builder in staging environment from command line</a></h1>
+                        <h1 id="using-image-builder-in-staging-environment-from-command-line"><a class="header" href="#using-image-builder-in-staging-environment-from-command-line">Using Image Builder in staging environment from command line</a></h1>
 <p>All you need to access the service is the “curl” tool which is available on any operating system and <a href="./image-builder-access.html">a user account in staging environment</a>. The staging REST API is accessible using the squid.corp.redhat.com HTTP proxy server on the Red Hat VPN.</p>
-<h2><a class="header" href="#testing-access" id="testing-access">Testing access</a></h2>
+<h2 id="testing-access"><a class="header" href="#testing-access">Testing access</a></h2>
 <p>Using your staging account name and password, you can display the available API endpoints like this:</p>
 <pre><code>curl --user &quot;username:password&quot; \
         --proxy http://squid.corp.redhat.com:3128 \
@@ -182,7 +182,7 @@
         --proxy http://squid.corp.redhat.com:3128 \
         https://cloud.stage.redhat.com/api/image-builder/v1/openapi.json | jq .
 </code></pre>
-<h2><a class="header" href="#creating-and-monitoring-a-compose" id="creating-and-monitoring-a-compose">Creating and monitoring a compose</a></h2>
+<h2 id="creating-and-monitoring-a-compose"><a class="header" href="#creating-and-monitoring-a-compose">Creating and monitoring a compose</a></h2>
 <p>There are two main API endpoints related to starting and monitoring a compose:</p>
 <ol>
 <li>HTTP POST /v1/compose</li>

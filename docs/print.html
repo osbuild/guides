@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li></ol></li><li class="chapter-item expanded "><a href="blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer-guide/osbuild.html"><strong aria-hidden="true">3.1.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.2.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="developer-guide/testing.html"><strong aria-hidden="true">3.3.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="developer-guide/glossary.html"><strong aria-hidden="true">3.4.</strong> Glossary</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li></ol></li><li class="chapter-item expanded "><a href="blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer-guide/osbuild.html"><strong aria-hidden="true">3.1.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.2.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">3.3.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="developer-guide/testing.html"><strong aria-hidden="true">3.4.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="developer-guide/glossary.html"><strong aria-hidden="true">3.5.</strong> Glossary</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -165,12 +165,12 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#user-guide-for-osbuild-composer" id="user-guide-for-osbuild-composer">User guide for osbuild-composer</a></h1>
+                        <h1 id="user-guide-for-osbuild-composer"><a class="header" href="#user-guide-for-osbuild-composer">User guide for osbuild-composer</a></h1>
 <p><code>osbuild-composer</code> is a service for building customized operating system images (currently only Fedora and RHEL). These images can be used with various virtualization software such as <a href="https://www.qemu.org/">QEMU</a>, <a href="https://www.virtualbox.org/">VirtualBox</a>, <a href="https://www.vmware.com/">VMWare</a> and also with cloud computing providers like <a href="https://aws.amazon.com/">AWS</a> and <a href="https://azure.microsoft.com/">Azure</a></p>
 <p>This guide contains instructions on installing <code>osbuild-composer</code> service and its basic usage.</p>
-<h1><a class="header" href="#installation" id="installation">Installation</a></h1>
+<h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
 <p>To get started with <code>osbuild-composer</code> on your local machine, you can install the CLI interface or the Web UI, which is part of Cockpit project. </p>
-<h2><a class="header" href="#cli-interface" id="cli-interface">CLI interface</a></h2>
+<h2 id="cli-interface"><a class="header" href="#cli-interface">CLI interface</a></h2>
 <p>For CLI only, run the following command to install necessary packages:</p>
 <pre><code>$ sudo dnf install osbuild-composer composer-cli
 </code></pre>
@@ -184,7 +184,7 @@
 <pre><code>$ sudo usermod -a -G weldr &lt;user&gt;
 $ newgrp weldr
 </code></pre>
-<h2><a class="header" href="#web-ui" id="web-ui">Web UI</a></h2>
+<h2 id="web-ui"><a class="header" href="#web-ui">Web UI</a></h2>
 <p>If you prefer the Web UI interface, known as an Image Builder, install the following package:</p>
 <pre><code>$ sudo dnf install cockpit-composer
 </code></pre>
@@ -192,7 +192,7 @@ $ newgrp weldr
 <pre><code>$ sudo systemctl enable --now osbuild-composer.socket
 $ sudo systemctl enable --now cockpit
 </code></pre>
-<h1><a class="header" href="#basic-concepts" id="basic-concepts">Basic concepts</a></h1>
+<h1 id="basic-concepts"><a class="header" href="#basic-concepts">Basic concepts</a></h1>
 <p><code>osbuild-composer</code> works with a concept of <strong>blueprints</strong>. A blueprint is a description of the final <strong>image</strong> and its <strong>customizations</strong>. A <strong>customization</strong> can be:</p>
 <ul>
 <li>an additional RPM package</li>
@@ -201,7 +201,7 @@ $ sudo systemctl enable --now cockpit
 </ul>
 <p>An <strong>image</strong> is defined by its blueprint and <strong>image type</strong>, which is for example <code>qcow2</code> (QEMU Copy On Write disk image) or <code>AMI</code> (Amazon Machine Image).</p>
 <p>Finally, <code>osbuild-composer</code> also supports <strong>upload targets</strong>, which are cloud providers where an image can be stored after it is built. Currently supported cloud providers are <a href="https://aws.amazon.com/">AWS</a> and <a href="https://azure.microsoft.com/">Azure</a>.</p>
-<h2><a class="header" href="#example-blueprint" id="example-blueprint">Example blueprint</a></h2>
+<h2 id="example-blueprint"><a class="header" href="#example-blueprint">Example blueprint</a></h2>
 <pre><code class="language-toml">name = &quot;base-image-with-tmux&quot;
 description = &quot;A base system with tmux&quot;
 version = &quot;0.0.1&quot;
@@ -211,7 +211,7 @@ name = &quot;tmux&quot;
 version = &quot;*&quot;
 </code></pre>
 <p>The blueprint is in <a href="https://toml.io/en/">TOML format</a>.</p>
-<h2><a class="header" href="#blueprints-management-using-composer-cli" id="blueprints-management-using-composer-cli">Blueprints management using composer-cli</a></h2>
+<h2 id="blueprints-management-using-composer-cli"><a class="header" href="#blueprints-management-using-composer-cli">Blueprints management using composer-cli</a></h2>
 <p><code>osbuild-composer</code> provides a storage for blueprints. To store a <code>blueprint.toml</code> blueprint file, run this command:</p>
 <pre><code>$ composer-cli blueprints push blueprint.toml
 </code></pre>
@@ -231,11 +231,11 @@ groups = []
 name = &quot;tmux&quot;
 version = &quot;*&quot;
 </code></pre>
-<h2><a class="header" href="#image-types" id="image-types">Image types</a></h2>
+<h2 id="image-types"><a class="header" href="#image-types">Image types</a></h2>
 <p><code>osbuild-composer</code> supports various types of output images. To see all supported types, run this command:</p>
 <pre><code>$ composer-cli compose types
 </code></pre>
-<h1><a class="header" href="#building-an-image" id="building-an-image">Building an image</a></h1>
+<h1 id="building-an-image"><a class="header" href="#building-an-image">Building an image</a></h1>
 <p>An image is specified by a blueprint and an image type. It will use the same distribution version (e.g. Fedora 33) and architecture (e.g. aarch64) as the host system.</p>
 <p>To build a customized image, start by choosing the blueprint and image type you would like to build. To do so, run the following commands:</p>
 <pre><code>$ sudo composer-cli blueprints list
@@ -270,7 +270,7 @@ logs/osbuild.log
 <p>For more options, see the <code>help</code> text for <code>composer-cli</code>:</p>
 <pre><code>$ sudo composer-cli compose help
 </code></pre>
-<h4><a class="header" href="#tip-booting-the-image-with-qemu" id="tip-booting-the-image-with-qemu">Tip: Booting the image with qemu</a></h4>
+<h4 id="tip-booting-the-image-with-qemu"><a class="header" href="#tip-booting-the-image-with-qemu">Tip: Booting the image with qemu</a></h4>
 <p>If you want to quickly run the resulting image, you can use <code>qemu</code>:</p>
 <pre><code>$ qemu-system-x86_64 \
                 -enable-kvm \
@@ -282,7 +282,7 @@ logs/osbuild.log
                 ab71b61a-b3c4-434f-b214-1e16527766ff-disk.qcow2 
 </code></pre>
 <p>Be aware that you must specify a way to access the machine in the blueprint. For example, you can create a user with known password, set an SSH key, or enable <code>cloud-init</code> to use a <code>cloud-init</code> ISO file.</p>
-<h1><a class="header" href="#uploading-an-image-to-aws" id="uploading-an-image-to-aws">Uploading an image to AWS</a></h1>
+<h1 id="uploading-an-image-to-aws"><a class="header" href="#uploading-an-image-to-aws">Uploading an image to AWS</a></h1>
 <p><code>osbuild-composer</code> provides the users with a convenient way to upload images directly to AWS right after the image is built. To use this feature, you need one additional configuration file for the cloud provider. In this example, the cloud provider is AWS:</p>
 <pre><code class="language-toml">provider = &quot;aws&quot;
 
@@ -298,11 +298,11 @@ key = &quot;IMAGE_KEY&quot;
 <pre><code>$ sudo composer-cli compose start base-image-with-tmux ami IMAGE_KEY aws-config.toml
 </code></pre>
 <p>where IMAGE_KEY will be the name of your VM Image, once it is uploaded to EC2.</p>
-<h1><a class="header" href="#managing-repositories" id="managing-repositories">Managing repositories</a></h1>
+<h1 id="managing-repositories"><a class="header" href="#managing-repositories">Managing repositories</a></h1>
 <p><code>osbuild-composer</code> does not inherit the system repositories located in <code>/etc/yum.repos.d/</code>. Instead, it has its own set of official repositories defined in <code>/usr/share/osbuild-composer/repositories</code>. To use custom repositories, define overrides in <code>/etc/osbuild-composer/repositories</code>. This directory is meant for user defined repositories and the files located here take precedence over those in <code>/usr</code>. </p>
 <p>The configuration files are not in the usual &quot;repo&quot; format. Instead, they are simple <code>JSON</code> files.</p>
 <p><em>Important note: osbuild-composer can only create images for the distribution and architecture it is running on. For example, if you are running Fedora 33 on x86_64, osbuild-composer will create all images as Fedora 33 for x86_64. Building other distributions and architectures except for the host is not supported.</em></p>
-<h2><a class="header" href="#defining-custom-repositories" id="defining-custom-repositories">Defining custom repositories</a></h2>
+<h2 id="defining-custom-repositories"><a class="header" href="#defining-custom-repositories">Defining custom repositories</a></h2>
 <p>To set your own repositories, create this directory if it does not exist already:</p>
 <pre><code>$ sudo mkdir -p /etc/osbuild-composer/repositories
 </code></pre>
@@ -341,10 +341,10 @@ key = &quot;IMAGE_KEY&quot;
     ]
 }
 </code></pre>
-<h1><a class="header" href="#building-ostree-image" id="building-ostree-image">Building OSTree image</a></h1>
+<h1 id="building-ostree-image"><a class="header" href="#building-ostree-image">Building OSTree image</a></h1>
 <p>This section contains a guide for building OSTree commits. As opposed to the &quot;traditional&quot; image types, these commits are not directly bootable so although they basically contain a full operating system, in order to boot them, they need to be deployed. This can, fox example, be done via the  Fedora installer (Anaconda).</p>
 <p>OSTree is a technology for creating immutable operating system images and it is a base for Fedora CoreOS, Fedora IoT, Fedora Silverblue, and RHEL for Edge. For more information on OSTree, see <a href="https://ostreedev.github.io/ostree/">their website</a>.</p>
-<h2><a class="header" href="#overview-of-the-intended-result" id="overview-of-the-intended-result">Overview of the intended result</a></h2>
+<h2 id="overview-of-the-intended-result"><a class="header" href="#overview-of-the-intended-result">Overview of the intended result</a></h2>
 <p>As mentioned above, osbuild-composer produces OSTree commits which are not directly bootable. The commits are inside a tarball to make their usage more convenient. In order to deploy them, you will need:</p>
 <ul>
 <li>
@@ -373,7 +373,7 @@ key = &quot;IMAGE_KEY&quot;
                            |________________________________|
 </code></pre>
 <p><em>Note: If you would like to understand what is inside the tarball, read the upstream OSTree documentation.</em></p>
-<h2><a class="header" href="#building-an-ostree-commit" id="building-an-ostree-commit">Building an OSTree commit</a></h2>
+<h2 id="building-an-ostree-commit"><a class="header" href="#building-an-ostree-commit">Building an OSTree commit</a></h2>
 <p>Start by creating a blueprint for your commit. Using your favorite text editor, <code>vi</code>, create a file named <code>fishy.toml</code> with this content:</p>
 <pre><code class="language-toml">name = &quot;fishy-commit&quot;
 description = &quot;Fishy OSTree commit&quot;
@@ -397,7 +397,7 @@ Compose 8e8014f8-4d15-441a-a26d-9ed7fc89e23a added to the queue
 <pre><code>$ composer-cli compose image 8e8014f8-4d15-441a-a26d-9ed7fc89e23a
 8e8014f8-4d15-441a-a26d-9ed7fc89e23a-commit.tar: 670.45 MB
 </code></pre>
-<h2><a class="header" href="#writing-a-kickstart-file" id="writing-a-kickstart-file">Writing a Kickstart file</a></h2>
+<h2 id="writing-a-kickstart-file"><a class="header" href="#writing-a-kickstart-file">Writing a Kickstart file</a></h2>
 <p>As mentioned above, the Kickstart file is meant for the Anaconda installer. It contains instructions on how to install the system.</p>
 <p>Create a file named <code>ostree.ks</code> with this content:</p>
 <pre><code>lang en_US.UTF-8
@@ -412,7 +412,7 @@ ostreesetup --nogpg --url=http://10.0.2.2:8000/repo/ --osname=iot --remote=iot -
 </code></pre>
 <p>For those interested in all the options, you can read <a href="https://anaconda-installer.readthedocs.io/en/latest/index.html">Anaconda’s documentation</a>.</p>
 <p>The crucial part is on the last line. Here, <code>ostreesetup</code> command is used to fetch the OSTree commit. Now for those wondering about the IP address, this tutorial uses <code>qemu</code> to boot the virtual machine and <code>10.0.2.2</code> is an address which you can use to reach the host system from the guest: <a href="https://wiki.qemu.org/Documentation/Networking#User_Networking_.28SLIRP.29">User Networking</a>.</p>
-<h2><a class="header" href="#setting-up-an-http-server" id="setting-up-an-http-server">Setting up an HTTP server</a></h2>
+<h2 id="setting-up-an-http-server"><a class="header" href="#setting-up-an-http-server">Setting up an HTTP server</a></h2>
 <p>Now that the kickstart file and OSTree commit are ready, create a container running HTTP server and serving those file. Start by creating a Dockerfile:</p>
 <pre><code class="language-dockerfile">FROM fedora:latest
 RUN dnf -y install httpd &amp;&amp; dnf clean all
@@ -433,7 +433,7 @@ ostree.ks
 <pre><code>$ podman run --rm -p 8000:80 ostree
 </code></pre>
 <p><em>Note: You might be wondering why to bother with a container when you can just use &quot;python -m http.server&quot;. The problem is that OSTree produces way too many requests and the Python HTTP server simply fails to keep up with OSTree.</em></p>
-<h2><a class="header" href="#running-a-vm-and-applying-the-ostree-commit" id="running-a-vm-and-applying-the-ostree-commit">Running a VM and applying the OSTree commit</a></h2>
+<h2 id="running-a-vm-and-applying-the-ostree-commit"><a class="header" href="#running-a-vm-and-applying-the-ostree-commit">Running a VM and applying the OSTree commit</a></h2>
 <p>Start with downloading the Netinstall image from here: <a href="https://getfedora.org/en/server/download/">https://getfedora.org/en/server/download/</a></p>
 <p>Create an empty qcow2 image. That is an image of a hard drive for the virtual machine (VM).</p>
 <pre><code>$ qemu-img create -f qcow2 disk-image.img 5G
@@ -473,7 +473,7 @@ ostree.ks
 <p>The IP address <code>10.0.2.2</code> is again used here, because the VM is running inside Qemu.</p>
 <p>Press &quot;Enter&quot;, the Anaconda GUI will show up and automatically install the OSTree commit created above.</p>
 <p>Once the system is installed and rebooted, use username &quot;core&quot; and password &quot;foobar&quot; to login. You can change the credentials in the kickstart file.</p>
-<h1><a class="header" href="#blueprint-reference" id="blueprint-reference">Blueprint reference</a></h1>
+<h1 id="blueprint-reference"><a class="header" href="#blueprint-reference">Blueprint reference</a></h1>
 <p>Blueprints are simple text files in <a href="https://toml.io/en/">TOML format</a> that describe which packages to install into the image, allowing to specify the packages version. They can also define a limited set of customizations to make to the final image.</p>
 <p>A basic blueprint looks like this:</p>
 <pre><code class="language-toml">name = &quot;base&quot;
@@ -490,7 +490,7 @@ version = &quot;4.4.*&quot;
 <li><code>description</code> can be a longer description of the blueprint, it is only used for display purposes.</li>
 <li><code>version</code> is a semver compatible version number. If a new blueprint is uploaded with the same version the server will automatically bump the PATCH level of the version. If the version doesn't match it will be used as is, for example, uploading a blueprint with version set to 0.1.0 when the existing blueprint version is 0.0.1 will result in the new blueprint being stored as version 0.1.0.</li>
 </ul>
-<h2><a class="header" href="#packages-and-modules" id="packages-and-modules">Packages and modules</a></h2>
+<h2 id="packages-and-modules"><a class="header" href="#packages-and-modules">Packages and modules</a></h2>
 <p><code>[[packages]]</code> and <code>[[modules]]</code> entries describe the package names and matching version glob to be installed into the image.</p>
 <p>The package names must match the names exactly, and the versions can be an exact match or a filesystem-like glob of the version using <code>*</code> wildcards and <code>?</code> character matching.</p>
 <p><em>Currently there are no differences between packages and modules in <code>osbuild-composer</code>. Both are treated like an rpm package dependency.</em></p>
@@ -503,7 +503,7 @@ version = &quot;2.9a&quot;
 name = &quot;openssh-server&quot;
 version = &quot;8.*&quot;
 </code></pre>
-<h2><a class="header" href="#groups" id="groups">Groups</a></h2>
+<h2 id="groups"><a class="header" href="#groups">Groups</a></h2>
 <p>The <code>[[groups]]</code> entries describe a group of packages to be installed into the image. Package groups are defined in the repository metadata. Each group has a descriptive name used primarily for display in user interfaces and an ID more commonly used in kickstart files. Here, the ID is the expected way of listing a group.</p>
 <p>Groups have three different ways of categorizing their packages: mandatory, default, and optional. For purposes of blueprints, just mandatory and default packages will be installed. There is no mechanism for selecting optional packages.</p>
 <p>For example, if you want to install the <code>anaconda-tools</code> group, add the following to your blueprint:</p>
@@ -511,19 +511,19 @@ version = &quot;8.*&quot;
 name=&quot;anaconda-tools&quot;
 </code></pre>
 <p>groups is a TOML list, so each group needs to be listed separately, like packages but with no version number.</p>
-<h2><a class="header" href="#customizations" id="customizations">Customizations</a></h2>
+<h2 id="customizations"><a class="header" href="#customizations">Customizations</a></h2>
 <p>The <code>[customizations]</code> section can be used to configure the <strong>hostname</strong> of the final image. for example:</p>
 <pre><code class="language-toml">[customizations]
 hostname = &quot;baseimage&quot;
 </code></pre>
 <p>This is optional and can be left out to use the defaults.</p>
-<h3><a class="header" href="#kernel-command-line-arguments" id="kernel-command-line-arguments">Kernel command-line arguments</a></h3>
+<h3 id="kernel-command-line-arguments"><a class="header" href="#kernel-command-line-arguments">Kernel command-line arguments</a></h3>
 <p>This allows you to append arguments to the bootloader's kernel command line.</p>
 <p>For example:</p>
 <pre><code class="language-toml">[customizations.kernel]
 append = &quot;nosmt=force&quot;
 </code></pre>
-<h3><a class="header" href="#ssh-keys" id="ssh-keys">SSH Keys</a></h3>
+<h3 id="ssh-keys"><a class="header" href="#ssh-keys">SSH Keys</a></h3>
 <p>Set an existing user's ssh key in the final image:</p>
 <pre><code class="language-toml">[[customizations.sshkey]]
 user = &quot;root&quot;
@@ -531,7 +531,7 @@ key = &quot;PUBLIC SSH KEY&quot;
 </code></pre>
 <p>The key will be added to the user's <code>authorized_keys</code> file.</p>
 <p><em>Warning: <code>key</code> expects the entire content of <code>~/.ssh/id_rsa.pub</code></em></p>
-<h3><a class="header" href="#additional-user" id="additional-user">Additional user</a></h3>
+<h3 id="additional-user"><a class="header" href="#additional-user">Additional user</a></h3>
 <p>Add a user to the image, and/or set their ssh key. All fields for this section are optional except for the name. The following is a complete example:</p>
 <pre><code class="language-toml">[[customizations.user]]
 name = &quot;admin&quot;
@@ -546,13 +546,13 @@ gid = 1200
 </code></pre>
 <p>If the password starts with $6$, $5$, or $2b$ it will be stored as an encrypted password. Otherwise it will be treated as a plain text password.</p>
 <p><em>Warning: <code>key</code> expects the entire content of <code>~/.ssh/id_rsa.pub</code></em></p>
-<h3><a class="header" href="#additional-group" id="additional-group">Additional group</a></h3>
+<h3 id="additional-group"><a class="header" href="#additional-group">Additional group</a></h3>
 <p>Add a group to the image. Name is required and GID is optional:</p>
 <pre><code class="language-toml">[[customizations.group]]
 name = &quot;widget&quot;
 gid = 1130
 </code></pre>
-<h3><a class="header" href="#timezone" id="timezone">Timezone</a></h3>
+<h3 id="timezone"><a class="header" href="#timezone">Timezone</a></h3>
 <p>Customizing the timezone and the NTP servers to use for the system:</p>
 <pre><code class="language-toml">[customizations.timezone]
 timezone = &quot;US/Eastern&quot;
@@ -563,7 +563,7 @@ ntpservers = [&quot;0.north-america.pool.ntp.org&quot;, &quot;1.north-america.po
 </code></pre>
 <p>If no timezone is setup, the system will default to using UTC. The NTP servers are also optional and will default to using the distribution defaults, which are suitable for most uses.</p>
 <p>Some image types have already NTP servers setup, for example, Google cloud image, and they cannot be overridden, because they are required to boot in the selected environment. But the timezone will be updated to the one selected in the blueprint.</p>
-<h3><a class="header" href="#locale" id="locale">Locale</a></h3>
+<h3 id="locale"><a class="header" href="#locale">Locale</a></h3>
 <p>Customize the locale settings for the system:</p>
 <pre><code class="language-toml">[customizations.locale]
 languages = [&quot;en_US.UTF-8&quot;]
@@ -577,7 +577,7 @@ keyboard = &quot;us&quot;
 <pre><code> $ localectl list-keymaps`
 </code></pre>
 <p>Multiple languages can be added. The first one becomes the primary, and the others are added as secondary. You must include one or more languages or keyboards in the section.</p>
-<h3><a class="header" href="#firewall" id="firewall">Firewall</a></h3>
+<h3 id="firewall"><a class="header" href="#firewall">Firewall</a></h3>
 <p>By default the firewall blocks all access, except for services that enable their ports explicitly, like sshd. The following command can be used to open other ports or services. Ports are configured using the <code>port:protocol</code> format:</p>
 <pre><code class="language-toml">[customizations.firewall]
 ports = [&quot;22:tcp&quot;, &quot;80:tcp&quot;, &quot;imap:tcp&quot;, &quot;53:tcp&quot;, &quot;53:udp&quot;]
@@ -592,14 +592,14 @@ disabled = [&quot;telnet&quot;]
 <p>Remember that the firewall.services are different from the names in /etc/services.</p>
 <p>Both are optional, if they are not used leave them out or set them to an empty list <code>[]</code>. If you only want the default firewall setup this section can be omitted from the blueprint.</p>
 <p><em>NOTE: The Google and OpenStack templates explicitly disable the firewall for their environment. This cannot be overridden by the blueprint.</em></p>
-<h3><a class="header" href="#systemd-services" id="systemd-services">Systemd services</a></h3>
+<h3 id="systemd-services"><a class="header" href="#systemd-services">Systemd services</a></h3>
 <p>This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. For example, <code>ami</code> image type requires <code>sshd</code>, <code>chronyd</code>, and <code>cloud-init</code> services. Without them, the image will not boot. Blueprint services do not replace this services, but add them to the list of services already present in the templates, if any. </p>
 <p>The service names are systemd service units. You may specify any systemd unit file accepted by systemctl enable, for example, cockpit.socket:</p>
 <pre><code class="language-toml">[customizations.services]
 enabled = [&quot;sshd&quot;, &quot;cockpit.socket&quot;, &quot;httpd&quot;]
 disabled = [&quot;postfix&quot;, &quot;telnetd&quot;]
 </code></pre>
-<h2><a class="header" href="#example-blueprint-1" id="example-blueprint-1">Example Blueprint</a></h2>
+<h2 id="example-blueprint-1"><a class="header" href="#example-blueprint-1">Example Blueprint</a></h2>
 <p>The following blueprint example will:</p>
 <ul>
 <li>install the <code>tmux</code>, <code>git</code>, and <code>vim-enhanced</code> packages</li>
@@ -660,12 +660,12 @@ name = &quot;widget&quot;
 [[customizations.group]]
 name = &quot;students&quot;
 </code></pre>
-<h1><a class="header" href="#developer-guide" id="developer-guide">Developer guide</a></h1>
+<h1 id="developer-guide"><a class="header" href="#developer-guide">Developer guide</a></h1>
 <p>In this section, you will find a description of the source code in <code>osbuild</code> organization.</p>
 <p>The following scheme describes how separate components communicate with each other:
 <img src="developer-guide/osbuild-composer.svg" alt="" /></p>
 <p>In the very basic use case where <code>osbuild-composer</code> is running locally, the &quot;pool of workers&quot; also lives on the user's host machine. The <code>osbuild-composer</code> and <code>osbuild-worker</code> processes are spawned by systemd. We don't support any other means of spawning these processes, as they rely on systemd to open sockets, create state directories etc. Additionally, <code>osbuild-worker</code> spawns osbuild as a subprocess to create the image itself. The whole image building machinery is spawned from a user process, for example, <code>composer-cli</code>.</p>
-<h1><a class="header" href="#osbuild" id="osbuild">osbuild</a></h1>
+<h1 id="osbuild"><a class="header" href="#osbuild">osbuild</a></h1>
 <p>A CLI tool for building OS images. It takes manifest as an input and produces an image as an output. The manifest consists of:</p>
 <ul>
 <li>sources section</li>
@@ -676,7 +676,7 @@ name = &quot;students&quot;
 <p>The pipeline consists of a series of stages and ends with an assembler. A stage is our unit of filesystem tree modification and it is implemented as a standalone executable. For example, we have a stage for installing RPM packages, adding a user, enabling systemd service, or setting a timezone.</p>
 <p>The difference between a stage and an assembler is that the former takes a read-write filesystem-tree and performs a certain modification to it, whereas the latter takes a read-only filesystem tree and produces an output artifact.</p>
 <p>The pipeline contains one more &quot;nested&quot; pipeline, which does not have an assembler. It is called a &quot;build&quot; pipeline.</p>
-<h2><a class="header" href="#high-level-goals" id="high-level-goals">High level goals</a></h2>
+<h2 id="high-level-goals"><a class="header" href="#high-level-goals">High level goals</a></h2>
 <ol>
 <li>reproducibility</li>
 <li>extensibility</li>
@@ -684,32 +684,44 @@ name = &quot;students&quot;
 <p>The ideal case for building images would be that, given the same input manifest, the output image would always be the same no matter what machine was used for building it. Where &quot;the same&quot; is defined as a binary equivalent. The world of IT is, of course, not ideal therefore we define <strong>reproducibility</strong> as a functional equivalence (that is the image behaves the same when built on different machines) and we limit the set of build machines only to those running the same distribution, in the same version, and on the same architecture. That means if you want to build a Fedora 33 aarch64 image, you need a Fedora 33 aarch64 machine.</p>
 <p><em>It is possible to run a RHEL pipeline on Fedora, for example, but we do not test it and therefore we can't promise it will produce the correct result.</em></p>
 <p>The advantage of the stage/assembler model is that any user can <strong>extend</strong> the tool with their own stage or assembler.</p>
-<h2><a class="header" href="#how-it-all-works-together" id="how-it-all-works-together">How it all works together</a></h2>
+<h2 id="how-it-all-works-together"><a class="header" href="#how-it-all-works-together">How it all works together</a></h2>
 <p>Explain downloading sources, creating build fs tree, container, caching, the problem with reflink, bwrap etc.</p>
-<h2><a class="header" href="#bootstrapping-the-build-environment" id="bootstrapping-the-build-environment">Bootstrapping the build environment</a></h2>
+<h2 id="bootstrapping-the-build-environment"><a class="header" href="#bootstrapping-the-build-environment">Bootstrapping the build environment</a></h2>
 <p>The &quot;build&quot; pipeline was introduced to improve reproducibility. Ideally, given a build pipeline, one would always get the same filesystem tree. But, to create the first filesystem tree, you need some tools. So, where go you get them from? Of course from the host operating system (OS). The problem with getting tools from the host OS this is that the host can affect the final result.</p>
 <p><em>We've already had this issue many times, because most of the usual CLI tools were not created with reproducibility in mind.</em></p>
-<h2><a class="header" href="#the-struggle-with-grub" id="the-struggle-with-grub">The struggle with GRUB</a></h2>
+<h2 id="the-struggle-with-grub"><a class="header" href="#the-struggle-with-grub">The struggle with GRUB</a></h2>
 <p>The standard tooling for creating GRUB does not fit to our stage/assembler concept because it wants to modify the filesystem tree and create the resulting artifact at the same time. As a result we have our own reimplementation of these tools.</p>
-<h1><a class="header" href="#osbuild-composer" id="osbuild-composer">osbuild-composer</a></h1>
+<h1 id="osbuild-composer"><a class="header" href="#osbuild-composer">osbuild-composer</a></h1>
 <p>It is a web service for building OS images. The core of <code>osbuild-composer</code>, which is common to all APIs, is osbuild manifests generation a job queuing. If an operating system is to be supported by <code>osbuild-composer</code>, it needs the manifest generation code in <code>internal/distro</code> directory. So far, we only focus on RPM based distributions, such as Fedora and RHEL. The queuing mechanism is under heavy development at the moment.</p>
-<h2><a class="header" href="#interfacing-with-dnf-package-manager" id="interfacing-with-dnf-package-manager">Interfacing with dnf package manager</a></h2>
+<h2 id="interfacing-with-dnf-package-manager"><a class="header" href="#interfacing-with-dnf-package-manager">Interfacing with dnf package manager</a></h2>
 <p>We use our custom wrapper for <code>dnf</code>, which we call simply <code>dnf-json</code>, because its interface goes like this:</p>
 <ul>
 <li>Stdin - takes  a JSON object</li>
 <li>Stdout - returns a JSON object</li>
 <li>Return code is used <strong>only</strong> for <code>dnf-json</code> internal errors, not for errors in the operation specified on the input. Those errors are reported in the returned JSON object.</li>
 </ul>
-<h2><a class="header" href="#local-api---weldr" id="local-api---weldr">Local API - Weldr</a></h2>
+<h2 id="local-api---weldr"><a class="header" href="#local-api---weldr">Local API - Weldr</a></h2>
 <p>This API comes from the <code>Lorax-composer project</code>. <code>osbuild-composer</code> was created as a drop-in replacement for Lorax which influenced many design decisions. It uses Unix-Domain socket, so it is meant for local usage only. There are two clients:</p>
 <ul>
 <li>composer-cli</li>
 <li>cockpit-composer (branded as Image Builder in the Cockpit console)</li>
 </ul>
 <p>Activate this API by invoking <code>systemctl start osbuild-composer.socket</code>. Systemd will create a socket at <code>/run/weldr/api.socket</code>.</p>
-<h2><a class="header" href="#remote-apis---cloud-and-koji" id="remote-apis---cloud-and-koji">Remote APIs - Cloud and Koji</a></h2>
+<h2 id="remote-apis---cloud-and-koji"><a class="header" href="#remote-apis---cloud-and-koji">Remote APIs - Cloud and Koji</a></h2>
 <p>Both are under heavy development.</p>
-<h1><a class="header" href="#testing-strategy" id="testing-strategy">Testing strategy</a></h1>
+<h1 id="latest-rpm-builds"><a class="header" href="#latest-rpm-builds">Latest RPM builds</a></h1>
+<p>While developing osbuild and osbuild composer it is convenient to download the latest RPM builds directly from upstream. The repositories in osbuild organization don't use any automation from Copr or Packit, instead the RPMs are built directly in the Jenkins CI and stored in AWS under the commit hash which allows anyone to download precisely the version built from a desired commit.</p>
+<p>The URL is specified in <code>mockbuild.sh</code> scripts in osbuild and osbuild-composer repositories:</p>
+<ul>
+<li><a href="https://github.com/osbuild/osbuild-composer/blob/f091af55d89ac9e77aa34b94e0180aacead3f32e/schutzbot/mockbuild.sh#L27">mockbuild.sh in osbuild-composer</a></li>
+<li><a href="https://github.com/osbuild/osbuild/blob/850ee4466f0e3335d4c21871a5f2549f2f571965/schutzbot/mockbuild.sh#L27">mockbuild.sh in osbuild</a></li>
+</ul>
+<p>And the final resulting URL is displayed in the Jenkins output (available only from Red Hat VPN).</p>
+<p><em>Common trap: If you click on a link to a repo, such as:</em></p>
+<p><a href="http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/">http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/</a></p>
+<p><em>you will get HTTP 403 because that's a directory and we don't allow directory listing. If you prepend known file path, such as</em> <code>repodata/repomd.xml</code> <em>you will see that the repo is there:</em></p>
+<p><a href="http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/repodata/repomd.xml">http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/repodata/repomd.xml</a></p>
+<h1 id="testing-strategy"><a class="header" href="#testing-strategy">Testing strategy</a></h1>
 <p>Let me start with a quote:</p>
 <blockquote>
 <p>As the team obsessed with immutable test dependencies, how could we use ..</p>
@@ -717,11 +729,11 @@ name = &quot;students&quot;
 <p><em>One osbuild developer in one PR fixing one more piece of infrastructure which could still change.</em></p>
 <p>TODO: what do we test in each repo</p>
 <p>TODO: rpmci, rpmrepo</p>
-<h2><a class="header" href="#osbuild-composer-1" id="osbuild-composer-1">osbuild-composer</a></h2>
-<h3><a class="header" href="#unit-tests" id="unit-tests">Unit tests</a></h3>
+<h2 id="osbuild-composer-1"><a class="header" href="#osbuild-composer-1">osbuild-composer</a></h2>
+<h3 id="unit-tests"><a class="header" href="#unit-tests">Unit tests</a></h3>
 <p>There is pretty heavy mocking in the osbuild-composer codebase.</p>
 <p>HTTP API is unit-tested without any network communication (there is no socket), only the HTTP request/responses are tested.</p>
-<h3><a class="header" href="#integration-tests" id="integration-tests">Integration tests</a></h3>
+<h3 id="integration-tests"><a class="header" href="#integration-tests">Integration tests</a></h3>
 <p>These test cases live under <code>test/cases</code> and each of them is a standalone script. Some of them invoke additional binaries which live under <code>cmd</code> if not specified otherwise.</p>
 <ol>
 <li>
@@ -815,7 +827,7 @@ The &quot;test cases&quot; are defined in <code>test/cases/manifests</code> and 
 <p>Create a qcow2 image and boot it using libvirt.</p>
 </li>
 </ol>
-<h3><a class="header" href="#leaking-resources" id="leaking-resources">Leaking resources</a></h3>
+<h3 id="leaking-resources"><a class="header" href="#leaking-resources">Leaking resources</a></h3>
 <p>The cloud-cleaner binary was created to clean up all artifacts (like images, but also registered AMIs, security groups, etc.) that could be left behind. Not all executables in our CI have proper error handling and clean up code and what is even worse, if Jenkins fails and takes down all running jobs, it is possible that the clean-up code will not run even if it is implemented.</p>
 <p><strong>Possibly leaking resources:</strong></p>
 <ol>
@@ -837,7 +849,7 @@ The &quot;test cases&quot; are defined in <code>test/cases/manifests</code> and 
 </ul>
 </li>
 </ol>
-<h1><a class="header" href="#glossary" id="glossary">Glossary</a></h1>
+<h1 id="glossary"><a class="header" href="#glossary">Glossary</a></h1>
 <table><thead><tr><th>Term</th><th>Explanation</th></tr></thead><tbody>
 <tr><td>AMI</td><td>Amazon Machine Image (image type)</td></tr>
 <tr><td>Blueprint</td><td>Definition of customizations in the image</td></tr>

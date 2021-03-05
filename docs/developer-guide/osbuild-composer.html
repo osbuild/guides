@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="../user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="../user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="../user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li></ol></li><li class="chapter-item expanded "><a href="../blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="../developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/osbuild.html"><strong aria-hidden="true">3.1.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild-composer.html" class="active"><strong aria-hidden="true">3.2.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="../developer-guide/testing.html"><strong aria-hidden="true">3.3.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="../developer-guide/glossary.html"><strong aria-hidden="true">3.4.</strong> Glossary</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="../user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="../user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="../user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li></ol></li><li class="chapter-item expanded "><a href="../blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="../developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/osbuild.html"><strong aria-hidden="true">3.1.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild-composer.html" class="active"><strong aria-hidden="true">3.2.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="../developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">3.3.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="../developer-guide/testing.html"><strong aria-hidden="true">3.4.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="../developer-guide/glossary.html"><strong aria-hidden="true">3.5.</strong> Glossary</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,23 +163,23 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#osbuild-composer" id="osbuild-composer">osbuild-composer</a></h1>
+                        <h1 id="osbuild-composer"><a class="header" href="#osbuild-composer">osbuild-composer</a></h1>
 <p>It is a web service for building OS images. The core of <code>osbuild-composer</code>, which is common to all APIs, is osbuild manifests generation a job queuing. If an operating system is to be supported by <code>osbuild-composer</code>, it needs the manifest generation code in <code>internal/distro</code> directory. So far, we only focus on RPM based distributions, such as Fedora and RHEL. The queuing mechanism is under heavy development at the moment.</p>
-<h2><a class="header" href="#interfacing-with-dnf-package-manager" id="interfacing-with-dnf-package-manager">Interfacing with dnf package manager</a></h2>
+<h2 id="interfacing-with-dnf-package-manager"><a class="header" href="#interfacing-with-dnf-package-manager">Interfacing with dnf package manager</a></h2>
 <p>We use our custom wrapper for <code>dnf</code>, which we call simply <code>dnf-json</code>, because its interface goes like this:</p>
 <ul>
 <li>Stdin - takes  a JSON object</li>
 <li>Stdout - returns a JSON object</li>
 <li>Return code is used <strong>only</strong> for <code>dnf-json</code> internal errors, not for errors in the operation specified on the input. Those errors are reported in the returned JSON object.</li>
 </ul>
-<h2><a class="header" href="#local-api---weldr" id="local-api---weldr">Local API - Weldr</a></h2>
+<h2 id="local-api---weldr"><a class="header" href="#local-api---weldr">Local API - Weldr</a></h2>
 <p>This API comes from the <code>Lorax-composer project</code>. <code>osbuild-composer</code> was created as a drop-in replacement for Lorax which influenced many design decisions. It uses Unix-Domain socket, so it is meant for local usage only. There are two clients:</p>
 <ul>
 <li>composer-cli</li>
 <li>cockpit-composer (branded as Image Builder in the Cockpit console)</li>
 </ul>
 <p>Activate this API by invoking <code>systemctl start osbuild-composer.socket</code>. Systemd will create a socket at <code>/run/weldr/api.socket</code>.</p>
-<h2><a class="header" href="#remote-apis---cloud-and-koji" id="remote-apis---cloud-and-koji">Remote APIs - Cloud and Koji</a></h2>
+<h2 id="remote-apis---cloud-and-koji"><a class="header" href="#remote-apis---cloud-and-koji">Remote APIs - Cloud and Koji</a></h2>
 <p>Both are under heavy development.</p>
 
                     </main>
@@ -193,7 +193,7 @@
                         
 
                         
-                            <a rel="next" href="../developer-guide/testing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../developer-guide/latest-rpm-builds.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -211,7 +211,7 @@
                 
 
                 
-                    <a rel="next" href="../developer-guide/testing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../developer-guide/latest-rpm-builds.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

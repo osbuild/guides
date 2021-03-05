@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../user-guide/basic-concepts.html" class="active"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="../user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="../user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="../user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li></ol></li><li class="chapter-item expanded "><a href="../blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="../developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/osbuild.html"><strong aria-hidden="true">3.1.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.2.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="../developer-guide/testing.html"><strong aria-hidden="true">3.3.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="../developer-guide/glossary.html"><strong aria-hidden="true">3.4.</strong> Glossary</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../user-guide/basic-concepts.html" class="active"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="../user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="../user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="../user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li></ol></li><li class="chapter-item expanded "><a href="../blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="../developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/osbuild.html"><strong aria-hidden="true">3.1.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.2.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="../developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">3.3.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="../developer-guide/testing.html"><strong aria-hidden="true">3.4.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="../developer-guide/glossary.html"><strong aria-hidden="true">3.5.</strong> Glossary</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#basic-concepts" id="basic-concepts">Basic concepts</a></h1>
+                        <h1 id="basic-concepts"><a class="header" href="#basic-concepts">Basic concepts</a></h1>
 <p><code>osbuild-composer</code> works with a concept of <strong>blueprints</strong>. A blueprint is a description of the final <strong>image</strong> and its <strong>customizations</strong>. A <strong>customization</strong> can be:</p>
 <ul>
 <li>an additional RPM package</li>
@@ -172,7 +172,7 @@
 </ul>
 <p>An <strong>image</strong> is defined by its blueprint and <strong>image type</strong>, which is for example <code>qcow2</code> (QEMU Copy On Write disk image) or <code>AMI</code> (Amazon Machine Image).</p>
 <p>Finally, <code>osbuild-composer</code> also supports <strong>upload targets</strong>, which are cloud providers where an image can be stored after it is built. Currently supported cloud providers are <a href="https://aws.amazon.com/">AWS</a> and <a href="https://azure.microsoft.com/">Azure</a>.</p>
-<h2><a class="header" href="#example-blueprint" id="example-blueprint">Example blueprint</a></h2>
+<h2 id="example-blueprint"><a class="header" href="#example-blueprint">Example blueprint</a></h2>
 <pre><code class="language-toml">name = &quot;base-image-with-tmux&quot;
 description = &quot;A base system with tmux&quot;
 version = &quot;0.0.1&quot;
@@ -182,7 +182,7 @@ name = &quot;tmux&quot;
 version = &quot;*&quot;
 </code></pre>
 <p>The blueprint is in <a href="https://toml.io/en/">TOML format</a>.</p>
-<h2><a class="header" href="#blueprints-management-using-composer-cli" id="blueprints-management-using-composer-cli">Blueprints management using composer-cli</a></h2>
+<h2 id="blueprints-management-using-composer-cli"><a class="header" href="#blueprints-management-using-composer-cli">Blueprints management using composer-cli</a></h2>
 <p><code>osbuild-composer</code> provides a storage for blueprints. To store a <code>blueprint.toml</code> blueprint file, run this command:</p>
 <pre><code>$ composer-cli blueprints push blueprint.toml
 </code></pre>
@@ -202,7 +202,7 @@ groups = []
 name = &quot;tmux&quot;
 version = &quot;*&quot;
 </code></pre>
-<h2><a class="header" href="#image-types" id="image-types">Image types</a></h2>
+<h2 id="image-types"><a class="header" href="#image-types">Image types</a></h2>
 <p><code>osbuild-composer</code> supports various types of output images. To see all supported types, run this command:</p>
 <pre><code>$ composer-cli compose types
 </code></pre>

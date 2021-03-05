@@ -165,17 +165,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#image-builder" id="image-builder">Image Builder</a></h1>
+                        <h1 id="image-builder"><a class="header" href="#image-builder">Image Builder</a></h1>
 <p>Image Builder is an instance of an upstream image-builder project. You can find the code and report issues here: <a href="https://github.com/osbuild/image-builder">https://github.com/osbuild/image-builder</a>.</p>
-<h1><a class="header" href="#set-up-account" id="set-up-account">Set up account</a></h1>
+<h1 id="set-up-account"><a class="header" href="#set-up-account">Set up account</a></h1>
 <p>Note: Image Builder is still in private beta, so an invitation is required to access it.</p>
 <p>You need an account at <a href="https://access.redhat.com/">https://access.redhat.com/</a> with an Insights subscription.</p>
 <p>In addition, your organization needs to be added to the private beta. Instructions for how to request access will be added in the near future.</p>
-<h1><a class="header" href="#using-image-builder-in-production-environment-from-command-line" id="using-image-builder-in-production-environment-from-command-line">Using Image Builder in production environment from command line</a></h1>
+<h1 id="using-image-builder-in-production-environment-from-command-line"><a class="header" href="#using-image-builder-in-production-environment-from-command-line">Using Image Builder in production environment from command line</a></h1>
 <p>All you need to access the service is the “curl” tool which is available on any operating system and <a href="prod/./image-builder-access.html">an appropriately privileged user account</a>.</p>
-<h2><a class="header" href="#oauth2-token" id="oauth2-token">OAuth2 Token</a></h2>
+<h2 id="oauth2-token"><a class="header" href="#oauth2-token">OAuth2 Token</a></h2>
 <p>Following the <a href="https://access.redhat.com/articles/3626371">instructions</a>, obtain an OAuth2 access token, from now on referred to as <code>$token</code>.</p>
-<h2><a class="header" href="#testing-access" id="testing-access">Testing access</a></h2>
+<h2 id="testing-access"><a class="header" href="#testing-access">Testing access</a></h2>
 <p>Using your access token, you can display the available API endpoints like this:</p>
 <pre><code>curl -H &quot;Authorization: Bearer $token&quot; \
         https://cloud.redhat.com/api/image-builder/v1/openapi.json
@@ -184,7 +184,7 @@
 <pre><code>curl -H &quot;Authorization: Bearer $token&quot; \
         https://cloud.redhat.com/api/image-builder/v1/openapi.json | jq .
 </code></pre>
-<h2><a class="header" href="#creating-and-monitoring-a-compose" id="creating-and-monitoring-a-compose">Creating and monitoring a compose</a></h2>
+<h2 id="creating-and-monitoring-a-compose"><a class="header" href="#creating-and-monitoring-a-compose">Creating and monitoring a compose</a></h2>
 <p>There are two main API endpoints related to starting and monitoring a compose:</p>
 <ol>
 <li>HTTP POST /v1/compose</li>
@@ -234,11 +234,11 @@
 </code></pre>
 <p>Once the status is “success”, you can go to your AWS account and check the list of available AMIs. The AMI will appear in <code>us-east-1</code>.</p>
 <p><em>(TODO: we need a way to identify the AMI and region)</em></p>
-<h1><a class="header" href="#using-image-builder-in-production-environment-from-the-graphical-interface-gui" id="using-image-builder-in-production-environment-from-the-graphical-interface-gui">Using Image Builder in production environment from the graphical interface (GUI)</a></h1>
+<h1 id="using-image-builder-in-production-environment-from-the-graphical-interface-gui"><a class="header" href="#using-image-builder-in-production-environment-from-the-graphical-interface-gui">Using Image Builder in production environment from the graphical interface (GUI)</a></h1>
 <p>To access the service, you need <a href="prod/./image-builder-access.html">an account</a>.</p>
-<h2><a class="header" href="#testing-access-1" id="testing-access-1">Testing access</a></h2>
+<h2 id="testing-access-1"><a class="header" href="#testing-access-1">Testing access</a></h2>
 <p>You can display the available API endpoints here: <a href="https://cloud.redhat.com/beta/docs/api/image-builder">https://cloud.redhat.com/beta/docs/api/image-builder</a>.</p>
-<h2><a class="header" href="#accessing-the-production-environment-on-the-graphical-interface-gui" id="accessing-the-production-environment-on-the-graphical-interface-gui">Accessing the production environment on the graphical interface (GUI)</a></h2>
+<h2 id="accessing-the-production-environment-on-the-graphical-interface-gui"><a class="header" href="#accessing-the-production-environment-on-the-graphical-interface-gui">Accessing the production environment on the graphical interface (GUI)</a></h2>
 <ol>
 <li>
 <p>Access the <a href="https://cloud.redhat.com/beta/insights/image-builder/landing">Beta</a>.</p>
@@ -248,7 +248,7 @@
 </li>
 </ol>
 <p>You are now able to create and monitor your composes.</p>
-<h2><a class="header" href="#creating-and-monitoring-a-compose-using-the-graphical-interface-gui" id="creating-and-monitoring-a-compose-using-the-graphical-interface-gui">Creating and monitoring a compose using the graphical interface (GUI)</a></h2>
+<h2 id="creating-and-monitoring-a-compose-using-the-graphical-interface-gui"><a class="header" href="#creating-and-monitoring-a-compose-using-the-graphical-interface-gui">Creating and monitoring a compose using the graphical interface (GUI)</a></h2>
 <p>On the <a href="https://cloud.redhat.com/beta/insights/image-builder/landing">Beta</a>, perform the follow steps:</p>
 <ol>
 <li>
@@ -278,7 +278,7 @@ You can find your AWS account ID by accessing the option <a href="https://consol
 <p>Image Builder as a Service creates a RHEL 8 AMI image for the x86_64 architecture and uploads it to AWS EC2. It will then share the AMI with the specified account.</p>
 <p>NOTE: The image build, upload and cloud registration processes take a few minutes to complete.</p>
 <p>Once the status is “Success”, access your AWS account and check the list of available AMIs images. The AMI is available in the <code>us-east-1</code> region.</p>
-<h1><a class="header" href="#create-account-in-the-staging-environment" id="create-account-in-the-staging-environment">Create account in the staging environment</a></h1>
+<h1 id="create-account-in-the-staging-environment"><a class="header" href="#create-account-in-the-staging-environment">Create account in the staging environment</a></h1>
 <p>Note: The staging environment requires access to the Red Hat VPN, so is only accessible to Red Hat employees.</p>
 <ol>
 <li>
@@ -301,9 +301,9 @@ You can find your AWS account ID by accessing the option <a href="https://consol
 </li>
 </ol>
 <p>The account is now successfully created.</p>
-<h1><a class="header" href="#using-image-builder-in-staging-environment-from-command-line" id="using-image-builder-in-staging-environment-from-command-line">Using Image Builder in staging environment from command line</a></h1>
+<h1 id="using-image-builder-in-staging-environment-from-command-line"><a class="header" href="#using-image-builder-in-staging-environment-from-command-line">Using Image Builder in staging environment from command line</a></h1>
 <p>All you need to access the service is the “curl” tool which is available on any operating system and <a href="stage/./image-builder-access.html">a user account in staging environment</a>. The staging REST API is accessible using the squid.corp.redhat.com HTTP proxy server on the Red Hat VPN.</p>
-<h2><a class="header" href="#testing-access-2" id="testing-access-2">Testing access</a></h2>
+<h2 id="testing-access-2"><a class="header" href="#testing-access-2">Testing access</a></h2>
 <p>Using your staging account name and password, you can display the available API endpoints like this:</p>
 <pre><code>curl --user &quot;username:password&quot; \
         --proxy http://squid.corp.redhat.com:3128 \
@@ -320,7 +320,7 @@ You can find your AWS account ID by accessing the option <a href="https://consol
         --proxy http://squid.corp.redhat.com:3128 \
         https://cloud.stage.redhat.com/api/image-builder/v1/openapi.json | jq .
 </code></pre>
-<h2><a class="header" href="#creating-and-monitoring-a-compose-1" id="creating-and-monitoring-a-compose-1">Creating and monitoring a compose</a></h2>
+<h2 id="creating-and-monitoring-a-compose-1"><a class="header" href="#creating-and-monitoring-a-compose-1">Creating and monitoring a compose</a></h2>
 <p>There are two main API endpoints related to starting and monitoring a compose:</p>
 <ol>
 <li>HTTP POST /v1/compose</li>
@@ -372,11 +372,11 @@ You can find your AWS account ID by accessing the option <a href="https://consol
 </code></pre>
 <p>Once the status is “success”, you can go to your AWS account and check the list of available AMIs. The AMI will appear in <code>us-east-1</code>.</p>
 <p><em>(TODO: we need a way to identify the AMI and region)</em></p>
-<h1><a class="header" href="#using-image-builder-in-staging-environment-from-the-graphical-interface-gui" id="using-image-builder-in-staging-environment-from-the-graphical-interface-gui">Using Image Builder in staging environment from the graphical interface (GUI)</a></h1>
+<h1 id="using-image-builder-in-staging-environment-from-the-graphical-interface-gui"><a class="header" href="#using-image-builder-in-staging-environment-from-the-graphical-interface-gui">Using Image Builder in staging environment from the graphical interface (GUI)</a></h1>
 <p>To access the service, you need to <a href="stage/./image-builder-access.html">create an account</a> to access the stage environment, and configure your browser to use <a href="http://hdn.corp.redhat.com/proxy.pac">a proxy</a> on the Red Hat VPN.</p>
-<h2><a class="header" href="#testing-access-3" id="testing-access-3">Testing access</a></h2>
+<h2 id="testing-access-3"><a class="header" href="#testing-access-3">Testing access</a></h2>
 <p>You can display the available API endpoints here: <a href="https://cloud.stage.redhat.com/beta/docs/api/image-builder">https://cloud.stage.redhat.com/beta/docs/api/image-builder</a>.</p>
-<h2><a class="header" href="#accessing-the-stage-environment-on-the-graphical-interface-gui" id="accessing-the-stage-environment-on-the-graphical-interface-gui">Accessing the stage environment on the graphical interface (GUI)</a></h2>
+<h2 id="accessing-the-stage-environment-on-the-graphical-interface-gui"><a class="header" href="#accessing-the-stage-environment-on-the-graphical-interface-gui">Accessing the stage environment on the graphical interface (GUI)</a></h2>
 <ol>
 <li>
 <p>Access the <a href="https://cloud.stage.redhat.com/beta/insights/image-builder/landing">Stage Beta</a>.</p>
@@ -386,7 +386,7 @@ You can find your AWS account ID by accessing the option <a href="https://consol
 </li>
 </ol>
 <p>You are now able to create and monitor your composes.</p>
-<h2><a class="header" href="#creating-and-monitoring-a-compose-using-the-graphical-interface-gui-1" id="creating-and-monitoring-a-compose-using-the-graphical-interface-gui-1">Creating and monitoring a compose using the graphical interface (GUI)</a></h2>
+<h2 id="creating-and-monitoring-a-compose-using-the-graphical-interface-gui-1"><a class="header" href="#creating-and-monitoring-a-compose-using-the-graphical-interface-gui-1">Creating and monitoring a compose using the graphical interface (GUI)</a></h2>
 <p>On the <a href="https://cloud.stage.redhat.com/beta/insights/image-builder/landing">Stage Beta</a>, perform the follow steps:</p>
 <ol>
 <li>
