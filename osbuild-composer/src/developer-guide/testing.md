@@ -12,6 +12,10 @@ TODO: rpmci, rpmrepo
 
 ## osbuild-composer
 
+This section provides a basic summary of the various types of testing done for `osbuild-composer`. Detailed information about testing can be found in [the upstream repository][tests_readme].
+
+[tests_readme]: https://github.com/osbuild/osbuild-composer/blob/main/test/README.md
+
 ### Unit tests
 
 There is pretty heavy mocking in the osbuild-composer codebase.
@@ -22,13 +26,15 @@ HTTP API is unit-tested without any network communication (there is no socket), 
 
 These test cases live under `test/cases` and each of them is a standalone script. Some of them invoke additional binaries which live under `cmd` if not specified otherwise.
 
-1. `api.sh` - test the Cloud API (running at localhost:443)
+1. `api.sh [aws|azure|gcp]` - test the Cloud API (running at localhost:443)
    
-   * Provisions osbuild-composer
+   * Provisions osbuild-composer and locally running remote worker.
    
-   * Creates a request for compose and upload to AWS
+   * Creates a request for compose and uploads the image to specified cloud provider. Currently AWS, Azure and GCP are supported.
+
+   * The uploaded image is used for a VM instance in the respective cloud environment, booted and connected to via SSH. This is currently tested only for AWS and GCP.
    
-   * **Requires AWS credentials** to work properly
+   * **Requires credentials for the respective cloud provider** to work properly.
 
 2. `aws.sh`
    
@@ -95,7 +101,7 @@ The cloud-cleaner binary was created to clean up all artifacts (like images, but
 
 1. `api.sh` test case:
    
-   * Image uploaded to EC2
+   * Image uploaded to AWS, Azure or GCP
 
 2. `aws.sh` test case:
    

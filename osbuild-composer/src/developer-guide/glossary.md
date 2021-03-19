@@ -6,6 +6,7 @@
 | Blueprint            | Definition of customizations in the image                    |
 | Compose              | Request from the user. osbuild-composer running the Weldr API can only create one image at a time, so one compose maps directly to one image build. It can map to multiple image builds when used with other API, such as the Koji API. |
 | Composer API         | HTTP API meant as publicly accessible (over TCP). It was created specifically for osbuild-composer and does not support some Weldr features like blueprint management, but adds new features like building different distros and architectures. |
+| GCP                  | Google Cloud Platform |
 | Image Build          | One request from osbuild-composer to osbuild-worker. Its result is a single image. |
 | Image Type           | Image file format usually associated with a specific use case. For example: AMI for AWS, qcow2 for OpenStack, etc. |
 | Manifest             | Input for the osbuild tool. It should be a precise definition of an image. See https://www.osbuild.org/man/osbuild-manifest.5 for more information. |
