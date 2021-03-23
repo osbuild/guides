@@ -172,6 +172,7 @@
 <p>TODO: what do we test in each repo</p>
 <p>TODO: rpmci, rpmrepo</p>
 <h2 id="osbuild-composer"><a class="header" href="#osbuild-composer">osbuild-composer</a></h2>
+<p>This section provides a basic summary of the various types of testing done for <code>osbuild-composer</code>. Detailed information about testing can be found in <a href="https://github.com/osbuild/osbuild-composer/blob/main/test/README.md">the upstream repository</a>.</p>
 <h3 id="unit-tests"><a class="header" href="#unit-tests">Unit tests</a></h3>
 <p>There is pretty heavy mocking in the osbuild-composer codebase.</p>
 <p>HTTP API is unit-tested without any network communication (there is no socket), only the HTTP request/responses are tested.</p>
@@ -179,16 +180,19 @@
 <p>These test cases live under <code>test/cases</code> and each of them is a standalone script. Some of them invoke additional binaries which live under <code>cmd</code> if not specified otherwise.</p>
 <ol>
 <li>
-<p><code>api.sh</code> - test the Cloud API (running at localhost:443)</p>
+<p><code>api.sh [aws|azure|gcp]</code> - test the Cloud API (running at localhost:443)</p>
 <ul>
 <li>
-<p>Provisions osbuild-composer</p>
+<p>Provisions osbuild-composer and locally running remote worker.</p>
 </li>
 <li>
-<p>Creates a request for compose and upload to AWS</p>
+<p>Creates a request for compose and uploads the image to specified cloud provider. Currently AWS, Azure and GCP are supported.</p>
 </li>
 <li>
-<p><strong>Requires AWS credentials</strong> to work properly</p>
+<p>The uploaded image is used for a VM instance in the respective cloud environment, booted and connected to via SSH. This is currently tested only for AWS and GCP.</p>
+</li>
+<li>
+<p><strong>Requires credentials for the respective cloud provider</strong> to work properly.</p>
 </li>
 </ul>
 </li>
@@ -276,7 +280,7 @@ The &quot;test cases&quot; are defined in <code>test/cases/manifests</code> and 
 <li>
 <p><code>api.sh</code> test case:</p>
 <ul>
-<li>Image uploaded to EC2</li>
+<li>Image uploaded to AWS, Azure or GCP</li>
 </ul>
 </li>
 <li>
