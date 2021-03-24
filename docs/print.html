@@ -710,8 +710,8 @@ name = &quot;students&quot;
 <h2 id="remote-apis---cloud-and-koji"><a class="header" href="#remote-apis---cloud-and-koji">Remote APIs - Cloud and Koji</a></h2>
 <p>Both are under heavy development.</p>
 <h1 id="latest-rpm-builds"><a class="header" href="#latest-rpm-builds">Latest RPM builds</a></h1>
-<p>While developing osbuild and osbuild composer it is convenient to download the latest RPM builds directly from upstream. The repositories in osbuild organization don't use any automation from Copr or Packit, instead the RPMs are built directly in the Jenkins CI and stored in AWS under the commit hash which allows anyone to download precisely the version built from a desired commit.</p>
-<p>The URL is specified in <code>mockbuild.sh</code> scripts in osbuild and osbuild-composer repositories:</p>
+<p>While developing osbuild and osbuild composer it is convenient to download the latest RPM builds directly from upstream. The repositories in the osbuild organization don't use any automation from Copr or Packit. Instead, the RPMs are built directly in the Jenkins CI and stored in AWS under the commit hash which allows anyone to download precisely the version built from a desired commit.</p>
+<p>The URL is specified in the <code>mockbuild.sh</code> scripts in the osbuild and osbuild-composer repositories:</p>
 <ul>
 <li><a href="https://github.com/osbuild/osbuild-composer/blob/f091af55d89ac9e77aa34b94e0180aacead3f32e/schutzbot/mockbuild.sh#L27">mockbuild.sh in osbuild-composer</a></li>
 <li><a href="https://github.com/osbuild/osbuild/blob/850ee4466f0e3335d4c21871a5f2549f2f571965/schutzbot/mockbuild.sh#L27">mockbuild.sh in osbuild</a></li>
@@ -719,7 +719,7 @@ name = &quot;students&quot;
 <p>And the final resulting URL is displayed in the Jenkins output (available only from Red Hat VPN).</p>
 <p><em>Common trap: If you click on a link to a repo, such as:</em></p>
 <p><a href="http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/">http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/</a></p>
-<p><em>you will get HTTP 403 because that's a directory and we don't allow directory listing. If you prepend known file path, such as</em> <code>repodata/repomd.xml</code> <em>you will see that the repo is there:</em></p>
+<p><em>you will get HTTP 403 because that's a directory and we don't allow directory listing. If you append a known file path, such as</em> <code>repodata/repomd.xml</code> <em>you will see that the repo is there:</em></p>
 <p><a href="http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/repodata/repomd.xml">http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/repodata/repomd.xml</a></p>
 <h1 id="testing-strategy"><a class="header" href="#testing-strategy">Testing strategy</a></h1>
 <p>Let me start with a quote:</p>
