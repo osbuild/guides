@@ -26,16 +26,71 @@ The ideal case for building images would be that, given the same input manifest,
 
 The advantage of the stage/assembler model is that any user can **extend** the tool with their own stage or assembler.
 
-## How it all works together
+## How osbuild works in practise
 
-Explain downloading sources, creating build fs tree, container, caching, the problem with reflink, bwrap etc.
+The following subsections describe how OSBuild tries to achieve the outlined high level goals.
 
-## Bootstrapping the build environment
+### Manifest versions
+
+TODO: v1 vs. v2
+
+### Components of osbuild
+
+OSBuild is designed as a set of loosely coupled or independent components. This subsection describes each of them separately so that the following section can describe how they work together.
+
+#### Object Store
+
+Object store is a directory (also a class representing it) that contains multiple filesystem trees. Each filesystem tree lives in a directory whose name represents hash of the pipeline resulting in this tree. In OSBuild, a user can specify a "checkpoint" which stores particular filesystem tree inside of the Object Store.
+
+#### Build Root
+
+It is a directory where OSBuild modules (stages and assemblers) are executed. The directory contains full operating system which is composed of multiple things:
+ * Executables and libraries needed for building the OS artifact (these are either from the host or created in a build pipeline).
+ * Directory where the resulting filesystem tree resides.
+ * Few directories bind-mounted directly from the host system (like `/dev`)
+ * API sockets for communication between the stage running inside a container and the osbuild process running outside of it (directly on the host).
+
+#### Sources
+
+Sources are artifacts that are downloaded from the Internet. For example, generic files downloaded with `curl`, or OSTree commits downloaded using `libostree`.
+
+#### Inputs
+
+Inputs are a generalization of the concept of sources, but this time an "input" can be both downloaded, as sources are, or generated using osbuild pipeline. That means one pipeline can be used as an input for another pipeline so you can have an artifact inside of an artifact (for example OSTree commit inside of a container).
+
+#### APIs
+
+OSBuild allows for bidirectional communication from the build container to the osbuild process running on the host system. It uses Unix-domain sockets and JSON-based communication (`jsoncomm`) for this purpose. Examples of available APIs:
+ * osbuild - provides basic osbuild features like passing arguments to the stage inside the build container or reporting exceptions from the stage back to the host
+ * remoteloop - helps with setting up loop devices on the host and forwarding them to the container
+ * sources - runs a source module and returns the result
+
+### What happens during simplified osbuild run
+
+This section puts the above concepts into context. It does not aim to describe all the possible code paths. To understand `osbuild` properly, you need to read the source code, but it should help you get started.
+
+During a single `osbuild` run, this is what usually happens:
+ 1. Preparation
+    1. Validate the manifest schema to make sure it is either v1 or v2 manifest
+    2. Object Store is instantiated either from an empty directory or from already existing one which might contain already cached filesystem trees.
+ 2. Processing the manifest
+    1. Download sources
+    2. Run all pipelines sequentially
+ 3. Processing a pipeline (one of N)
+    1. Check the Object Store for cached filesystem trees and start from there if it already contains parially built artifact
+ 4. Processing a module (stage or assembler)
+    1. Create a BuildRoot, which means initializing a `bwrap` container, mounting all necessary directories, and forwarding API sockets.
+    2. From the build container, use the osbuild API to get arguments and run the module
+ 5. If an assembler is present in the manifest, run it and store the resulting artifact in the output directory
+
+## Issues that do not fit into the high level goals
+
+### Bootstrapping the build environment
 
 The "build" pipeline was introduced to improve reproducibility. Ideally, given a build pipeline, one would always get the same filesystem tree. But, to create the first filesystem tree, you need some tools. So, where go you get them from? Of course from the host operating system (OS). The problem with getting tools from the host OS this is that the host can affect the final result.
 
 *We've already had this issue many times, because most of the usual CLI tools were not created with reproducibility in mind.*
 
-## The struggle with GRUB
+### The struggle with GRUB
 
 The standard tooling for creating GRUB does not fit to our stage/assembler concept because it wants to modify the filesystem tree and create the resulting artifact at the same time. As a result we have our own reimplementation of these tools.
