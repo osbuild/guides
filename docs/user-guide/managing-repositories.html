@@ -164,10 +164,27 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="managing-repositories"><a class="header" href="#managing-repositories">Managing repositories</a></h1>
-<p><code>osbuild-composer</code> does not inherit the system repositories located in <code>/etc/yum.repos.d/</code>. Instead, it has its own set of official repositories defined in <code>/usr/share/osbuild-composer/repositories</code>. To use custom repositories, define overrides in <code>/etc/osbuild-composer/repositories</code>. This directory is meant for user defined repositories and the files located here take precedence over those in <code>/usr</code>. </p>
+<p>There are two kinds of repositories used in osbuild-composer:</p>
+<ol>
+<li><strong>Custom 3rd party repositories</strong> - use these to include packages that are not available in the official Fedora or RHEL repositories.</li>
+<li><strong>Official repository overrides</strong> - use these if you want to download base system RPMs from elsewhere than the official repositories. For example if you have a custom mirror in your network. Keep in mind that this will <strong>disable the default repositories</strong>, so the mirror must contain all necessary packages!</li>
+</ol>
+<h2 id="custom-3rd-party-repositories"><a class="header" href="#custom-3rd-party-repositories">Custom 3rd party repositories</a></h2>
+<p>These are managed using <code>composer-cli</code> (see the manpage for complete reference). To add a new repository, create a <code>TOML</code> file like this:</p>
+<pre><code class="language-toml">id = &quot;k8s&quot;
+name = &quot;Kubernetes&quot;
+type = &quot;yum-baseurl&quot;
+url = &quot;https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64&quot;
+check_gpg = false
+check_ssl = false
+system = false
+</code></pre>
+<p>and add it using <code>composer-cli sources add &lt;file-name.toml&gt;</code>. Verify its presence using <code>composer-cli sources list</code> and its content using <code>composer-cli sources info &lt;id&gt;</code>.</p>
+<h2 id="official-repository-overrides"><a class="header" href="#official-repository-overrides">Official repository overrides</a></h2>
+<p><code>osbuild-composer</code> does not inherit the system repositories located in <code>/etc/yum.repos.d/</code>. Instead, it has its own set of official repositories defined in <code>/usr/share/osbuild-composer/repositories</code>. To override the official repositories, define overrides in <code>/etc/osbuild-composer/repositories</code>. This directory is meant for user defined overrides and the files located here take precedence over those in <code>/usr</code>. </p>
 <p>The configuration files are not in the usual &quot;repo&quot; format. Instead, they are simple <code>JSON</code> files.</p>
 <p><em>Important note: osbuild-composer can only create images for the distribution and architecture it is running on. For example, if you are running Fedora 33 on x86_64, osbuild-composer will create all images as Fedora 33 for x86_64. Building other distributions and architectures except for the host is not supported.</em></p>
-<h2 id="defining-custom-repositories"><a class="header" href="#defining-custom-repositories">Defining custom repositories</a></h2>
+<h3 id="defining-official-repository-overrides"><a class="header" href="#defining-official-repository-overrides">Defining official repository overrides</a></h3>
 <p>To set your own repositories, create this directory if it does not exist already:</p>
 <pre><code>$ sudo mkdir -p /etc/osbuild-composer/repositories
 </code></pre>
@@ -178,7 +195,7 @@
 <li>Already released RHEL 8 - <code>rhel-8.json</code></li>
 <li>Pre-release RHEL 8.4 - <code>rhel-84.json</code></li>
 </ul>
-<p>Then, create the JSON file with the following structure:</p>
+<p>Then, create the JSON file with the following structure (or copy the file for your distribution from <code>/usr/share/osbuild-composer/</code> and modify its content):</p>
 <pre><code class="language-json">{
     &quot;&lt;ARCH&gt;&quot;: [
         {
