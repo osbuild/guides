@@ -182,12 +182,184 @@
 <p>The ideal case for building images would be that, given the same input manifest, the output image would always be the same no matter what machine was used for building it. Where &quot;the same&quot; is defined as a binary equivalent. The world of IT is, of course, not ideal therefore we define <strong>reproducibility</strong> as a functional equivalence (that is the image behaves the same when built on different machines) and we limit the set of build machines only to those running the same distribution, in the same version, and on the same architecture. That means if you want to build a Fedora 33 aarch64 image, you need a Fedora 33 aarch64 machine.</p>
 <p><em>It is possible to run a RHEL pipeline on Fedora, for example, but we do not test it and therefore we can't promise it will produce the correct result.</em></p>
 <p>The advantage of the stage/assembler model is that any user can <strong>extend</strong> the tool with their own stage or assembler.</p>
-<h2 id="how-it-all-works-together"><a class="header" href="#how-it-all-works-together">How it all works together</a></h2>
-<p>Explain downloading sources, creating build fs tree, container, caching, the problem with reflink, bwrap etc.</p>
-<h2 id="bootstrapping-the-build-environment"><a class="header" href="#bootstrapping-the-build-environment">Bootstrapping the build environment</a></h2>
+<h2 id="how-osbuild-works-in-practise"><a class="header" href="#how-osbuild-works-in-practise">How osbuild works in practise</a></h2>
+<p>The following subsections describe how OSBuild tries to achieve the outlined high level goals.</p>
+<h3 id="manifest-versions"><a class="header" href="#manifest-versions">Manifest versions</a></h3>
+<p>OSBuild accepts two versions of manifests. Both manifests are plain JSON files. The following sections contain examples of both <em>(note that comments are not allowed in JSON, so the examples below are not actually valid JSON)</em>.</p>
+<h4 id="version-1"><a class="header" href="#version-1">Version 1</a></h4>
+<p>The version 1 manifest is built around the idea that an artifact is produced by downloading files from the Internet (e.g. RPMs), using them to build and modify a filesystem tree (using stages), and finally using a read-only version of the final filesystem tree as an input to a assembler which produces the desired artifact.</p>
+<pre><code class="language-yaml">{
+   # This version contains 2 top-level keys.
+   # First sources, these get downloaded from a network and are available
+   # in the stages.
+   &quot;sources&quot;: {},
+   # Second is a pipeline, which can optionally contain a nested &quot;build&quot;
+   # pipeline.
+   &quot;pipeline&quot;: {
+      # The build pipeline is used to create a build container that is
+      # later used for building the actual OS artifact. This is mostly
+      # to increase reproducibility and host-guest separation.
+      # Also note that this is optional.
+      &quot;build&quot;: {
+         &quot;pipeline&quot;: {
+            &quot;stages&quot;: [
+               {
+                  &quot;name&quot;: &quot;&quot;,
+                  &quot;options&quot;: {}
+               },
+               {
+                  &quot;name&quot;: &quot;&quot;,
+                  &quot;options&quot;: {}
+               }
+            ],
+            &quot;runner&quot;: &quot;&quot;
+         }
+      },
+      # The pipeline itself is a list of osbuild stages.
+      &quot;stages&quot;: [
+         {
+            &quot;name&quot;: &quot;&quot;,
+            &quot;options&quot;: {}
+         },
+         {
+            &quot;name&quot;: &quot;&quot;,
+            &quot;options&quot;: {}
+         }
+      ],
+      # And finally exactly one osbuild assembler.
+      &quot;assembler&quot;: {
+         &quot;name&quot;: &quot;&quot;,
+         &quot;options&quot;: {}
+      }
+   },
+}
+</code></pre>
+<h4 id="version-2"><a class="header" href="#version-2">Version 2</a></h4>
+<p>Version 2 is more complicated because OSBuild needed to cover additional use cases like OSTree commit inside of a OCI container. In general that is an artifact inside of another artifact. This is why it comes with multiple pipelines.</p>
+<pre><code class="language-yaml">{
+   # This version has 3 top-level keys.
+   # The first one is simply a version.
+   &quot;version&quot;: &quot;2&quot;,
+   # The second one are sources as in version 1, but keep in mind that in this
+   # version, stages take inputs instead of sources because inputs can be both
+   # downloaded from a network and produced by a pipeline in this manifest.
+   &quot;sources&quot;: {},
+   # This time the 3rd entry is a list of pipelines.
+   &quot;pipelines&quot;: [
+      {
+         # A custom name for each pipeline. &quot;build&quot; is used only as an example.
+         &quot;name&quot;: &quot;build&quot;,
+         # The runner is again optional.
+         &quot;runner&quot;: &quot;&quot;,
+         &quot;stages&quot;: [
+            {
+               # The &quot;type&quot; is same as &quot;name&quot; in v1.
+               &quot;type&quot;: &quot;&quot;,
+               # The &quot;inputs&quot; field is new in v2. You can specify what goes to
+               # the stage. Example inputs are RPMs and OSTree commits from the
+               # &quot;sources&quot; section, but also filesystem trees built by othe
+               # pipelines.
+               &quot;inputs&quot;: {},
+               &quot;options&quot;: {}
+            }
+         ]
+      },
+      {
+         # Again only example name.
+         &quot;name&quot;: &quot;build-fs-tree&quot;,
+         # But this time the pipeline can use the previous one as a build pipeline.
+         # The name:&lt;something&gt; is a reference format in OSBuild manifest v2.
+         &quot;build&quot;: &quot;name:build&quot;,
+         &quot;stages&quot;: []
+      },
+      {
+         &quot;name&quot;: &quot;do-sth-with-the-tree&quot;,
+         &quot;build&quot;: &quot;name:build&quot;,
+         &quot;stages&quot;: [
+            {
+               &quot;type&quot;: &quot;&quot;,
+               &quot;inputs&quot;: {
+                  # This is an example of how to use the filesystem tree built by
+                  # another pipeline as an input to this stage.
+                  &quot;tree&quot;: {
+                     &quot;type&quot;: &quot;org.osbuild.tree&quot;,
+                     &quot;origin&quot;: &quot;org.osbuild.pipeline&quot;,
+                     &quot;references&quot;: [
+                        # This is a reference to the name of the pipeline above.
+                        &quot;name:build-fs-tree&quot;
+                     ]
+                  }
+               },
+               &quot;options&quot;: {}
+            }
+         ]
+      },
+      {
+         # In v2 the assembler is a pipeline as well.
+         &quot;name&quot;: &quot;assembler&quot;,
+         &quot;build&quot;: &quot;name:build&quot;,
+         &quot;stages&quot;: []
+      }
+   ]
+}
+</code></pre>
+<h3 id="components-of-osbuild"><a class="header" href="#components-of-osbuild">Components of osbuild</a></h3>
+<p>OSBuild is designed as a set of loosely coupled or independent components. This subsection describes each of them separately so that the following section can describe how they work together.</p>
+<h4 id="object-store"><a class="header" href="#object-store">Object Store</a></h4>
+<p>Object store is a directory (also a class representing it) that contains multiple filesystem trees. Each filesystem tree lives in a directory whose name represents hash of the pipeline resulting in this tree. In OSBuild, a user can specify a &quot;checkpoint&quot; which stores particular filesystem tree inside of the Object Store.</p>
+<h4 id="build-root"><a class="header" href="#build-root">Build Root</a></h4>
+<p>It is a directory where OSBuild modules (stages and assemblers) are executed. The directory contains full operating system which is composed of multiple things:</p>
+<ul>
+<li>Executables and libraries needed for building the OS artifact (these are either from the host or created in a build pipeline).</li>
+<li>Directory where the resulting filesystem tree resides.</li>
+<li>Few directories bind-mounted directly from the host system (like <code>/dev</code>)</li>
+<li>API sockets for communication between the stage running inside a container and the osbuild process running outside of it (directly on the host).</li>
+</ul>
+<h4 id="sources"><a class="header" href="#sources">Sources</a></h4>
+<p>Sources are artifacts that are downloaded from the Internet. For example, generic files downloaded with <code>curl</code>, or OSTree commits downloaded using <code>libostree</code>.</p>
+<h4 id="inputs"><a class="header" href="#inputs">Inputs</a></h4>
+<p>Inputs are a generalization of the concept of sources, but this time an &quot;input&quot; can be both downloaded, as sources are, or generated using osbuild pipeline. That means one pipeline can be used as an input for another pipeline so you can have an artifact inside of an artifact (for example OSTree commit inside of a container).</p>
+<h4 id="apis"><a class="header" href="#apis">APIs</a></h4>
+<p>OSBuild allows for bidirectional communication from the build container to the osbuild process running on the host system. It uses Unix-domain sockets and JSON-based communication (<code>jsoncomm</code>) for this purpose. Examples of available APIs:</p>
+<ul>
+<li>osbuild - provides basic osbuild features like passing arguments to the stage inside the build container or reporting exceptions from the stage back to the host</li>
+<li>remoteloop - helps with setting up loop devices on the host and forwarding them to the container</li>
+<li>sources - runs a source module and returns the result</li>
+</ul>
+<h3 id="what-happens-during-simplified-osbuild-run"><a class="header" href="#what-happens-during-simplified-osbuild-run">What happens during simplified osbuild run</a></h3>
+<p>This section puts the above concepts into context. It does not aim to describe all the possible code paths. To understand <code>osbuild</code> properly, you need to read the source code, but it should help you get started.</p>
+<p>During a single <code>osbuild</code> run, this is what usually happens:</p>
+<ol>
+<li>Preparation
+<ol>
+<li>Validate the manifest schema to make sure it is either v1 or v2 manifest</li>
+<li>Object Store is instantiated either from an empty directory or from already existing one which might contain already cached filesystem trees.</li>
+</ol>
+</li>
+<li>Processing the manifest
+<ol>
+<li>Download sources</li>
+<li>Run all pipelines sequentially</li>
+</ol>
+</li>
+<li>Processing a pipeline (one of N)
+<ol>
+<li>Check the Object Store for cached filesystem trees and start from there if it already contains parially built artifact</li>
+</ol>
+</li>
+<li>Processing a module (stage or assembler)
+<ol>
+<li>Create a BuildRoot, which means initializing a <code>bwrap</code> container, mounting all necessary directories, and forwarding API sockets.</li>
+<li>From the build container, use the osbuild API to get arguments and run the module</li>
+</ol>
+</li>
+<li>If an assembler is present in the manifest, run it and store the resulting artifact in the output directory</li>
+</ol>
+<h2 id="issues-that-do-not-fit-into-the-high-level-goals"><a class="header" href="#issues-that-do-not-fit-into-the-high-level-goals">Issues that do not fit into the high level goals</a></h2>
+<h3 id="bootstrapping-the-build-environment"><a class="header" href="#bootstrapping-the-build-environment">Bootstrapping the build environment</a></h3>
 <p>The &quot;build&quot; pipeline was introduced to improve reproducibility. Ideally, given a build pipeline, one would always get the same filesystem tree. But, to create the first filesystem tree, you need some tools. So, where go you get them from? Of course from the host operating system (OS). The problem with getting tools from the host OS this is that the host can affect the final result.</p>
 <p><em>We've already had this issue many times, because most of the usual CLI tools were not created with reproducibility in mind.</em></p>
-<h2 id="the-struggle-with-grub"><a class="header" href="#the-struggle-with-grub">The struggle with GRUB</a></h2>
+<h3 id="the-struggle-with-grub"><a class="header" href="#the-struggle-with-grub">The struggle with GRUB</a></h3>
 <p>The standard tooling for creating GRUB does not fit to our stage/assembler concept because it wants to modify the filesystem tree and create the resulting artifact at the same time. As a result we have our own reimplementation of these tools.</p>
 
                     </main>
