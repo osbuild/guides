@@ -1,6 +1,6 @@
 # Building a RHEL for Edge Installer
 
-The following describes how to build a boot ISO which installs an OSTree-based system using the "RHEL for Edge Container" in combination with the "RHEL for Edge Installer" image types. The workflow has the same result as the [Building OSTree Image](building-ostree-image.md) guide with the new image types automating some of the steps.
+The following describes how to build a boot ISO which installs an OSTree-based system using the "RHEL for Edge Container" in combination with the "RHEL for Edge Installer" image types. The workflow has the same result as the [Building OSTree Image](./building-ostree-images.md) guide with the new image types automating some of the steps.
 
 ## Process overview
 
