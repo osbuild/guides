@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li></ol></li><li class="chapter-item expanded "><a href="blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer-guide/osbuild.html"><strong aria-hidden="true">3.1.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.2.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">3.3.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="developer-guide/testing.html"><strong aria-hidden="true">3.4.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="developer-guide/glossary.html"><strong aria-hidden="true">3.5.</strong> Glossary</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="user-guide/edge-container+installer.html"><strong aria-hidden="true">1.7.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><a href="blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer-guide/osbuild.html"><strong aria-hidden="true">3.1.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.2.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">3.3.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="developer-guide/testing.html"><strong aria-hidden="true">3.4.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="developer-guide/glossary.html"><strong aria-hidden="true">3.5.</strong> Glossary</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -490,6 +490,94 @@ ostree.ks
 <p>The IP address <code>10.0.2.2</code> is again used here, because the VM is running inside Qemu.</p>
 <p>Press &quot;Enter&quot;, the Anaconda GUI will show up and automatically install the OSTree commit created above.</p>
 <p>Once the system is installed and rebooted, use username &quot;core&quot; and password &quot;foobar&quot; to login. You can change the credentials in the kickstart file.</p>
+<h1 id="building-a-rhel-for-edge-installer"><a class="header" href="#building-a-rhel-for-edge-installer">Building a RHEL for Edge Installer</a></h1>
+<p>The following describes how to build a boot ISO which installs an OSTree-based system using the &quot;RHEL for Edge Container&quot; in combination with the &quot;RHEL for Edge Installer&quot; image types. The workflow has the same result as the <a href="user-guide/building-ostree-image.html">Building OSTree Image</a> guide with the new image types automating some of the steps.</p>
+<h2 id="process-overview"><a class="header" href="#process-overview">Process overview</a></h2>
+<ol>
+<li>Create and load a blueprint with customizations.</li>
+<li>Build a <code>rhel-edge-container</code> image.</li>
+<li>Load image in podman and start the container.</li>
+<li>Create and load an empty blueprint.</li>
+<li>Build a <code>rhel-edge-installer</code> image, pointing the <code>ostree-url</code> to <code>http://10.0.2.2:8080/repo/</code> and setting the <code>ostree-ref</code> to <code>rhel/edge/demo</code>.</li>
+</ol>
+<p>The <code>rhel-edge-container</code> image type creates an OSTree commit and embeds it into an OCI container with a web server. When the container is started, the web server serves the commit as an OSTree repository.</p>
+<p>The <code>rhel-edge-intaller</code> image type pulls the commit from the running container and creates an installable boot ISO with a kickstart file configured to use the embedded OSTree commit.</p>
+<h2 id="detailed-workflow"><a class="header" href="#detailed-workflow">Detailed workflow</a></h2>
+<h3 id="build-the-container-and-serve-the-commit"><a class="header" href="#build-the-container-and-serve-the-commit">Build the container and serve the commit</a></h3>
+<p>Start by creating a blueprint for the commit. The content below is an example and can be modified to fit your needs. For this guide, we will name the file <code>example.toml</code>.</p>
+<pre><code class="language-toml">name = &quot;example&quot;
+description = &quot;RHEL for Edge Installer example&quot;
+version = &quot;0.0.3&quot;
+
+[[packages]]
+name = &quot;vim-enhanced&quot;
+version = &quot;*&quot;
+
+[[packages]]
+name = &quot;tmux&quot;
+version = &quot;*&quot;
+
+[customizations]
+
+[[customizations.user]]
+name = &quot;user&quot;
+description = &quot;Example User&quot;
+password = &quot;$6$uvdfeuHQYM6kUaea$fvvzyu.Z.u89TVCB2tq8UEc52XDFGnAqCo75BX3zu8OzIbS.EKMo/Saammb151sLrdzmlESnpNEPrJ7h5b0c6/&quot;
+groups = [&quot;wheel&quot;]
+</code></pre>
+<p>Now push the blueprint to osbuild-composer using <code>composer-cli</code>:</p>
+<pre><code>$ composer-cli blueprints push example.toml
+</code></pre>
+<p>And start the container build:</p>
+<pre><code>$ composer-cli compose start-ostree --ref &quot;rhel/edge/example&quot; example rhel-edge-container
+Compose 8e8014f8-4d15-441a-a26d-9ed7fc89e23a added to the queue
+</code></pre>
+<p>The value for <code>--ref</code> can be changed but must begin with an alphanumeric character and contain only alphanumeric characters, <code>/</code>, <code>_</code>, <code>-</code>, and <code>.</code>.</p>
+<p>Monitor the build status using:</p>
+<pre><code>$ composer-cli compose status
+</code></pre>
+<p>When the compose is FINISHED, download the result:</p>
+<pre><code>$ composer-cli compose image 8e8014f8-4d15-441a-a26d-9ed7fc89e23a
+8e8014f8-4d15-441a-a26d-9ed7fc89e23a-rhel84-container.tar: 670.45 MB
+</code></pre>
+<p>Load the container into registry:</p>
+<pre><code>$ cat 8e8014f8-4d15-441a-a26d-9ed7fc89e23a-rhel84-container.tar | podman load
+Getting image source signatures
+Copying blob 82934cd3e69d done
+Copying config d11911c3dc done
+Writing manifest to image destination
+Storing signatures
+Loaded image(s): @d11911c3dc4bee46cabd52b91c87f48b8a7d450fadc8cfbeb69e2de98b413521
+</code></pre>
+<p>Tag the image for convenience and start the container:</p>
+<pre><code>$ podman tag d11911c3dc4bee46cabd52b91c87f48b8a7d450fadc8cfbeb69e2de98b413521 localhost/edge-example
+$ podman run --rm -d -p 8080:80 --name ostree-repo localhost/edge-example
+</code></pre>
+<p><em>Note: The <code>-d</code> option detaches the container and leaves it running in the background. You can also remove the option to keep the container attached to the terminal.</em></p>
+<h3 id="build-the-installer"><a class="header" href="#build-the-installer">Build the installer</a></h3>
+<p>Start by creating a simple blueprint for the installer. The blueprint must not have any customizations or packages; only a name, and optionally a version and a description. Add the content below to a file and name it <code>empty.toml</code>:</p>
+<pre><code>name = &quot;empty&quot;
+description = &quot;Empty blueprint&quot;
+version = &quot;0.0.1&quot;
+</code></pre>
+<p>The <code>rhel-edge-installer</code> image type does not support customizations or package selection, so the build will fail if any are specified.</p>
+<p>Push the blueprint:</p>
+<pre><code>$ composer-cli blueprints push empty.toml
+</code></pre>
+<p>Start the build:</p>
+<pre><code>$ composer-cli compose start-ostree --ref &quot;rhel/edge/example&quot; --url http://10.0.2.2:8000/repo/ empty rhel-edge-installer
+Compose 09d98a67-a401-4613-9a5b-b93f8a6e695f added to the queue
+</code></pre>
+<p>The <code>--ref</code> argument must match the one from the <code>rhel-edge-container</code> compose.
+The <code>--url</code> in this case is IP address of the container. This tutorial uses <code>qemu</code> to boot the virtual machine and <code>10.0.2.2</code> is an address which you can use to reach the host system from the guest: <a href="https://wiki.qemu.org/Documentation/Networking#User_Networking_.28SLIRP.29">User Networking</a>.</p>
+<p>Monitor the build status using:</p>
+<pre><code>$ composer-cli compose status
+</code></pre>
+<p>When the compose is FINISHED, download the result:</p>
+<pre><code>$ composer-cli compose image 09d98a67-a401-4613-9a5b-b93f8a6e695f
+ 09d98a67-a401-4613-9a5b-b93f8a6e695f-rhel84-boot.iso: 1422.61 MB
+</code></pre>
+<p>The downloaded image can then booted to begin the installation. If you used the blueprint in this guide, use the username &quot;user&quot; and password &quot;password42&quot; to login.</p>
 <h1 id="blueprint-reference"><a class="header" href="#blueprint-reference">Blueprint reference</a></h1>
 <p>Blueprints are simple text files in <a href="https://toml.io/en/">TOML format</a> that describe which packages to install into the image, allowing to specify the packages version. They can also define a limited set of customizations to make to the final image.</p>
 <p>A basic blueprint looks like this:</p>
