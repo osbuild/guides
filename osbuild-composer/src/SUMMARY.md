@@ -7,6 +7,7 @@
   - [Uploading an image to AWS](./user-guide/uploading-to-aws.md)
   - [Managing repositories](./user-guide/managing-repositories.md)
   - [Building OSTree image](./user-guide/building-ostree-images.md)
+  - [Building OSTree container and installer](./user-guide/edge-container+installer.md)
 - [Blueprint reference](./blueprint-reference/blueprint-reference.md)  
 - [Developer guide](./developer-guide/developer-guide.md)
   - [OSBuild](./developer-guide/osbuild.md)
