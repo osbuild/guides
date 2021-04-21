@@ -219,3 +219,43 @@ The "build" pipeline was introduced to improve reproducibility. Ideally, given a
 ### The struggle with GRUB
 
 The standard tooling for creating GRUB does not fit to our stage/assembler concept because it wants to modify the filesystem tree and create the resulting artifact at the same time. As a result we have our own reimplementation of these tools.
+
+## Running OSBuild from sources
+
+It is not strictly required to run OSBuild installed from an RPM package but if you attempt to run `osbuild` from the command line like this:
+```
+$ python3 -m osbuild
+```
+and, at the same time, you will include SELinux stage in the manifest, it will most likely fail because the `python3` executable and all stages and assemblers in the checkout are not labeled properly. To overcome this issue, create two additional files.
+
+ 1. New entrypoint which will soon have the right SELinux label, let's call it `osbuild-cli`:
+ ```python
+ #!/usr/bin/python3
+
+import sys
+
+from .osbuild.main_cli import osbuild_cli as main
+
+
+if __name__ == "__main__":
+    r = main()
+    sys.exit(r)
+ ```
+
+ 2. A script to relabel all the files that need it:
+ ```bash
+ #!/bin/bash
+
+LABEL=$(matchpathcon -n /usr/bin/osbuild)
+
+echo "osbuild label: ${LABEL}"
+
+chcon ${LABEL} osbuild-cli
+
+find . -maxdepth 2 -type f -executable -name 'org.osbuild.*' -print0 |
+    while IFS= read -r -d '' module; do
+	chcon ${LABEL} ${module}
+    done
+ ```
+
+Now run the script and use the entrypoint to execute OSBuild from git checkout.
