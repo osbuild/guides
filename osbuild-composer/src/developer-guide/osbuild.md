@@ -222,11 +222,11 @@ The standard tooling for creating GRUB does not fit to our stage/assembler conce
 
 ## Running OSBuild from sources
 
-It is not strictly required to run OSBuild installed from an RPM package but if you attempt to run `osbuild` from the command line like this:
+It is not strictly required to run OSBuild installed from an RPM package. If you attempt to run `osbuild` from the command line in combination with an SELinux stage in the manifest it will most likely fail. For example:
 ```
 $ python3 -m osbuild
 ```
-and, at the same time, you will include SELinux stage in the manifest, it will most likely fail because the `python3` executable and all stages and assemblers in the checkout are not labeled properly. To overcome this issue, create two additional files.
+The cause of error is a lack of proper labelling of the `python3` executable, all stages and assemblers. Creating two additional files resolves the problem:
 
  1. New entrypoint which will soon have the right SELinux label, let's call it `osbuild-cli`:
  ```python
