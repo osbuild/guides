@@ -361,6 +361,42 @@
 <p><em>We've already had this issue many times, because most of the usual CLI tools were not created with reproducibility in mind.</em></p>
 <h3 id="the-struggle-with-grub"><a class="header" href="#the-struggle-with-grub">The struggle with GRUB</a></h3>
 <p>The standard tooling for creating GRUB does not fit to our stage/assembler concept because it wants to modify the filesystem tree and create the resulting artifact at the same time. As a result we have our own reimplementation of these tools.</p>
+<h2 id="running-osbuild-from-sources"><a class="header" href="#running-osbuild-from-sources">Running OSBuild from sources</a></h2>
+<p>It is not strictly required to run OSBuild installed from an RPM package. If you attempt to run <code>osbuild</code> from the command line in combination with an SELinux stage in the manifest it will most likely fail. For example:</p>
+<pre><code>$ python3 -m osbuild
+</code></pre>
+<p>The cause of error is a lack of proper labelling of the <code>python3</code> executable, all stages and assemblers. Creating two additional files resolves the problem:</p>
+<ol>
+<li>New entrypoint which will soon have the right SELinux label, let's call it <code>osbuild-cli</code>:</li>
+</ol>
+<pre><code class="language-python">#!/usr/bin/python3
+
+import sys
+
+from .osbuild.main_cli import osbuild_cli as main
+
+
+if __name__ == &quot;__main__&quot;:
+   r = main()
+   sys.exit(r)
+</code></pre>
+<ol start="2">
+<li>A script to relabel all the files that need it:</li>
+</ol>
+<pre><code class="language-bash">#!/bin/bash
+
+LABEL=$(matchpathcon -n /usr/bin/osbuild)
+
+echo &quot;osbuild label: ${LABEL}&quot;
+
+chcon ${LABEL} osbuild-cli
+
+find . -maxdepth 2 -type f -executable -name 'org.osbuild.*' -print0 |
+   while IFS= read -r -d '' module; do
+   chcon ${LABEL} ${module}
+   done
+</code></pre>
+<p>Now run the script and use the entrypoint to execute OSBuild from git checkout.</p>
 
                     </main>
 
