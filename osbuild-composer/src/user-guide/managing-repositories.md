@@ -73,3 +73,21 @@ For example, assuming that the host OS is Fedora 33 running on x86_64, create `/
     ]
 }
 ```
+
+## Using repositories that require subscription
+
+`osbuild-composer` can use subscriptions from the host system if they are configured in the appropriate file in `/etc/osbuild-composer/repositories`. To enable such repository, copy the `baseurl` from `/etc/yum.repos.d/redhat.repo` and paste it into the JSON repository definition. Then allow RHSM support using `"rhsm": true` like this:
+
+```json
+{
+  "x86_64": [
+    {
+      "baseurl": "https://localhost/repo",
+      "gpgkey": "...",
+      "rhsm": true
+    }
+  ]
+}
+```
+
+`osbuild-composer` will read the `/etc/yum.repos.d/redhat.repo` file from the host system and use it as a source of subscriptions. The same subscriptions must be available on a remote worker, if used.
