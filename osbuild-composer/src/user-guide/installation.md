@@ -41,6 +41,6 @@ and enable `cockpit` and `osbuild-composer` services:
 
 ```
 $ sudo systemctl enable --now osbuild-composer.socket
-$ sudo systemctl enable --now cockpit
+$ sudo systemctl enable --now cockpit.socket
 ```
 
