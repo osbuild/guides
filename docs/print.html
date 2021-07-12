@@ -169,7 +169,7 @@ $ newgrp weldr
 </code></pre>
 <p>and enable <code>cockpit</code> and <code>osbuild-composer</code> services:</p>
 <pre><code>$ sudo systemctl enable --now osbuild-composer.socket
-$ sudo systemctl enable --now cockpit
+$ sudo systemctl enable --now cockpit.socket
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="basic-concepts"><a class="header" href="#basic-concepts">Basic concepts</a></h1>
 <p><code>osbuild-composer</code> works with a concept of <strong>blueprints</strong>. A blueprint is a description of the final <strong>image</strong> and its <strong>customizations</strong>. A <strong>customization</strong> can be:</p>
