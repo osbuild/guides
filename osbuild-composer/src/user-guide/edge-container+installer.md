@@ -2,17 +2,21 @@
 
 The following describes how to build a boot ISO which installs an OSTree-based system using the "RHEL for Edge Container" in combination with the "RHEL for Edge Installer" image types. The workflow has the same result as the [Building OSTree Image](./building-ostree-images.md) guide with the new image types automating some of the steps.
 
+Note that there are some small differences in this procedure between RHEL 8.4 and RHEL 8.5:
+- The names of the image types have changed. In 8.4, the image types were prefixed by `rhel-`. This prefix was removed in 8.5.
+- The internal port for the container has changed from 80 in RHEL 8.4 to 8080 in RHEL 8.5.
+
 ## Process overview
 
 1. Create and load a blueprint with customizations.
-2. Build a `rhel-edge-container` image.
+2. Build an `edge-container` (RHEL 8.5) or `rhel-edge-container` (RHEL 8.4) image.
 3. Load image in podman and start the container.
 4. Create and load an empty blueprint.
-5. Build a `rhel-edge-installer` image, pointing the `ostree-url` to `http://10.0.2.2:8080/repo/` and setting the `ostree-ref` to `rhel/edge/demo`.
+5. Build an `edge-installer` (RHEL 8.5) or `rhel-edge-installer` (RHEL 8.4) image, pointing the `ostree-url` to `http://10.0.2.2:8080/repo/` and setting the `ostree-ref` to `rhel/edge/demo`.
 
-The `rhel-edge-container` image type creates an OSTree commit and embeds it into an OCI container with a web server. When the container is started, the web server serves the commit as an OSTree repository.
+The `edge-container` image type creates an OSTree commit and embeds it into an OCI container with a web server. When the container is started, the web server serves the commit as an OSTree repository.
 
-The `rhel-edge-intaller` image type pulls the commit from the running container and creates an installable boot ISO with a kickstart file configured to use the embedded OSTree commit.
+The `edge-intaller` image type pulls the commit from the running container and creates an installable boot ISO with a kickstart file configured to use the embedded OSTree commit.
 
 ## Detailed workflow
 
@@ -49,10 +53,12 @@ $ composer-cli blueprints push example.toml
 
 And start the container build:
 ```
-$ composer-cli compose start-ostree --ref "rhel/edge/example" example rhel-edge-container
+$ composer-cli compose start-ostree --ref "rhel/edge/example" example edge-container
 Compose 8e8014f8-4d15-441a-a26d-9ed7fc89e23a added to the queue
 ```
 The value for `--ref` can be changed but must begin with an alphanumeric character and contain only alphanumeric characters, `/`, `_`, `-`, and `.`.
+
+*Note: In RHEL 8.4, the image type was called `rhel-edge-container`. It has been renamed to `edge-container` in 8.5 onwards.*
 
 Monitor the build status using:
 ```
@@ -76,10 +82,21 @@ Storing signatures
 Loaded image(s): @d11911c3dc4bee46cabd52b91c87f48b8a7d450fadc8cfbeb69e2de98b413521
 ```
 
-Tag the image for convenience and start the container:
+Tag the image for convenience:
 ```
 $ podman tag d11911c3dc4bee46cabd52b91c87f48b8a7d450fadc8cfbeb69e2de98b413521 localhost/edge-example
+```
+
+Start the container (note the different internal port numbers between the two versions)
+
+For RHEL 8.4:
+```
 $ podman run --rm -d -p 8080:80 --name ostree-repo localhost/edge-example
+```
+
+For RHEL 8.5+:
+```
+$ podman run --rm -d -p 8080:8080 --name ostree-repo localhost/edge-example
 ```
 
 *Note: The `-d` option detaches the container and leaves it running in the background. You can also remove the option to keep the container attached to the terminal.*
@@ -92,7 +109,7 @@ name = "empty"
 description = "Empty blueprint"
 version = "0.0.1"
 ```
-The `rhel-edge-installer` image type does not support customizations or package selection, so the build will fail if any are specified.
+The `edge-installer` image type does not support customizations or package selection, so the build will fail if any are specified.
 
 Push the blueprint:
 ```
@@ -101,9 +118,11 @@ $ composer-cli blueprints push empty.toml
 
 Start the build:
 ```
-$ composer-cli compose start-ostree --ref "rhel/edge/example" --url http://10.0.2.2:8000/repo/ empty rhel-edge-installer
+$ composer-cli compose start-ostree --ref "rhel/edge/example" --url http://10.0.2.2:8000/repo/ empty edge-installer
 Compose 09d98a67-a401-4613-9a5b-b93f8a6e695f added to the queue
 ```
+*Note: In RHEL 8.4, the image type was called `rhel-edge-installer`. It has been renamed to `edge-installer` in 8.5 onwards.*
+
 The `--ref` argument must match the one from the `rhel-edge-container` compose.
 The `--url` in this case is IP address of the container. This tutorial uses `qemu` to boot the virtual machine and `10.0.2.2` is an address which you can use to reach the host system from the guest: [User Networking](https://wiki.qemu.org/Documentation/Networking#User_Networking_.28SLIRP.29).
 
