@@ -4,6 +4,7 @@ The following describes how to build a boot ISO which installs an OSTree-based s
 
 Note that there are some small differences in this procedure between RHEL 8.4 and RHEL 8.5:
 - The names of the image types have changed. In 8.4, the image types were prefixed by `rhel-`. This prefix was removed in 8.5.
+    - The old names `rhel-edge-container` and `rhel-edge-installer` still work in RHEL 8.5 as aliases to the new names, however these names are considered deprecated and may be removed completely in future versions.
 - The internal port for the container has changed from 80 in RHEL 8.4 to 8080 in RHEL 8.5.
 
 ## Process overview
