@@ -18,6 +18,34 @@ system = false
 ```
 and add it using `composer-cli sources add <file-name.toml>`. Verify its presence using `composer-cli sources list` and its content using `composer-cli sources info <id>`.
 
+### Using sources with specific distributions
+
+A new optional field has been added to the repository source format. It is a
+list of distribution strings that the source will be used with when depsolving
+and building images.
+
+Sources with no `distros` will be used with all composes. If you want to use a
+source for a specific distro you set the `distros` list to the distro name(s)
+to use it with.
+
+eg. A source that is only used when depsolving or building fedora 32:
+
+```toml
+check_gpg = true
+check_ssl = true
+distros = ["fedora-32"]
+id = "f32-local"
+name = "local packages for fedora32"
+system = false
+type = "yum-baseurl"
+url = "http://local/repos/fedora32/projectrepo/"
+```
+
+This source will be used for any requests that specify fedora-32, eg. listing
+packages and specifying fedora-32 will include this source, but listing
+packages for the host distro will not.
+
+
 ## Official repository overrides
 
 `osbuild-composer` does not inherit the system repositories located in `/etc/yum.repos.d/`. Instead, it has its own set of official repositories defined in `/usr/share/osbuild-composer/repositories`. To override the official repositories, define overrides in `/etc/osbuild-composer/repositories`. This directory is meant for user defined overrides and the files located here take precedence over those in `/usr`. 

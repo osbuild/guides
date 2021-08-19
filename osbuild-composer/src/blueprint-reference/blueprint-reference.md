@@ -205,6 +205,31 @@ The service names are systemd service units. You may specify any systemd unit fi
 enabled = ["sshd", "cockpit.socket", "httpd"]
 disabled = ["postfix", "telnetd"]
 ```
+## Distribution selection with blueprints
+
+The blueprint now supports a new `distro` field that will be used to select the
+distribution to use when composing images, or depsolving the blueprint. If
+`distro` is left blank it will use the host distribution. If you upgrade the
+host operating system the blueprints with no `distro` set will build using the
+new os.
+
+eg. A blueprint that will always build a fedora-32 image, no matter what
+version is running on the host:
+
+```toml
+name = "tmux"
+description = "tmux image with openssh"
+version = "1.2.16"
+distro = "fedora-32"
+
+[[packages]]
+name = "tmux"
+version = "*"
+
+[[packages]]
+name = "openssh-server"
+version = "*"
+```
 
 ## Example Blueprint
 
