@@ -160,6 +160,26 @@ check_ssl = false
 system = false
 </code></pre>
 <p>and add it using <code>composer-cli sources add &lt;file-name.toml&gt;</code>. Verify its presence using <code>composer-cli sources list</code> and its content using <code>composer-cli sources info &lt;id&gt;</code>.</p>
+<h3 id="using-sources-with-specific-distributions"><a class="header" href="#using-sources-with-specific-distributions">Using sources with specific distributions</a></h3>
+<p>A new optional field has been added to the repository source format. It is a
+list of distribution strings that the source will be used with when depsolving
+and building images.</p>
+<p>Sources with no <code>distros</code> will be used with all composes. If you want to use a
+source for a specific distro you set the <code>distros</code> list to the distro name(s)
+to use it with.</p>
+<p>eg. A source that is only used when depsolving or building fedora 32:</p>
+<pre><code class="language-toml">check_gpg = true
+check_ssl = true
+distros = [&quot;fedora-32&quot;]
+id = &quot;f32-local&quot;
+name = &quot;local packages for fedora32&quot;
+system = false
+type = &quot;yum-baseurl&quot;
+url = &quot;http://local/repos/fedora32/projectrepo/&quot;
+</code></pre>
+<p>This source will be used for any requests that specify fedora-32, eg. listing
+packages and specifying fedora-32 will include this source, but listing
+packages for the host distro will not.</p>
 <h2 id="official-repository-overrides"><a class="header" href="#official-repository-overrides">Official repository overrides</a></h2>
 <p><code>osbuild-composer</code> does not inherit the system repositories located in <code>/etc/yum.repos.d/</code>. Instead, it has its own set of official repositories defined in <code>/usr/share/osbuild-composer/repositories</code>. To override the official repositories, define overrides in <code>/etc/osbuild-composer/repositories</code>. This directory is meant for user defined overrides and the files located here take precedence over those in <code>/usr</code>. </p>
 <p>The configuration files are not in the usual &quot;repo&quot; format. Instead, they are simple <code>JSON</code> files.</p>

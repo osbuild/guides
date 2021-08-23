@@ -294,6 +294,26 @@ check_ssl = false
 system = false
 </code></pre>
 <p>and add it using <code>composer-cli sources add &lt;file-name.toml&gt;</code>. Verify its presence using <code>composer-cli sources list</code> and its content using <code>composer-cli sources info &lt;id&gt;</code>.</p>
+<h3 id="using-sources-with-specific-distributions"><a class="header" href="#using-sources-with-specific-distributions">Using sources with specific distributions</a></h3>
+<p>A new optional field has been added to the repository source format. It is a
+list of distribution strings that the source will be used with when depsolving
+and building images.</p>
+<p>Sources with no <code>distros</code> will be used with all composes. If you want to use a
+source for a specific distro you set the <code>distros</code> list to the distro name(s)
+to use it with.</p>
+<p>eg. A source that is only used when depsolving or building fedora 32:</p>
+<pre><code class="language-toml">check_gpg = true
+check_ssl = true
+distros = [&quot;fedora-32&quot;]
+id = &quot;f32-local&quot;
+name = &quot;local packages for fedora32&quot;
+system = false
+type = &quot;yum-baseurl&quot;
+url = &quot;http://local/repos/fedora32/projectrepo/&quot;
+</code></pre>
+<p>This source will be used for any requests that specify fedora-32, eg. listing
+packages and specifying fedora-32 will include this source, but listing
+packages for the host distro will not.</p>
 <h2 id="official-repository-overrides"><a class="header" href="#official-repository-overrides">Official repository overrides</a></h2>
 <p><code>osbuild-composer</code> does not inherit the system repositories located in <code>/etc/yum.repos.d/</code>. Instead, it has its own set of official repositories defined in <code>/usr/share/osbuild-composer/repositories</code>. To override the official repositories, define overrides in <code>/etc/osbuild-composer/repositories</code>. This directory is meant for user defined overrides and the files located here take precedence over those in <code>/usr</code>. </p>
 <p>The configuration files are not in the usual &quot;repo&quot; format. Instead, they are simple <code>JSON</code> files.</p>
@@ -695,6 +715,27 @@ disabled = [&quot;telnet&quot;]
 <pre><code class="language-toml">[customizations.services]
 enabled = [&quot;sshd&quot;, &quot;cockpit.socket&quot;, &quot;httpd&quot;]
 disabled = [&quot;postfix&quot;, &quot;telnetd&quot;]
+</code></pre>
+<h2 id="distribution-selection-with-blueprints"><a class="header" href="#distribution-selection-with-blueprints">Distribution selection with blueprints</a></h2>
+<p>The blueprint now supports a new <code>distro</code> field that will be used to select the
+distribution to use when composing images, or depsolving the blueprint. If
+<code>distro</code> is left blank it will use the host distribution. If you upgrade the
+host operating system the blueprints with no <code>distro</code> set will build using the
+new os.</p>
+<p>eg. A blueprint that will always build a fedora-32 image, no matter what
+version is running on the host:</p>
+<pre><code class="language-toml">name = &quot;tmux&quot;
+description = &quot;tmux image with openssh&quot;
+version = &quot;1.2.16&quot;
+distro = &quot;fedora-32&quot;
+
+[[packages]]
+name = &quot;tmux&quot;
+version = &quot;*&quot;
+
+[[packages]]
+name = &quot;openssh-server&quot;
+version = &quot;*&quot;
 </code></pre>
 <h2 id="example-blueprint-1"><a class="header" href="#example-blueprint-1">Example Blueprint</a></h2>
 <p>The following blueprint example will:</p>

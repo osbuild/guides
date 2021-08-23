@@ -269,6 +269,27 @@ disabled = [&quot;telnet&quot;]
 enabled = [&quot;sshd&quot;, &quot;cockpit.socket&quot;, &quot;httpd&quot;]
 disabled = [&quot;postfix&quot;, &quot;telnetd&quot;]
 </code></pre>
+<h2 id="distribution-selection-with-blueprints"><a class="header" href="#distribution-selection-with-blueprints">Distribution selection with blueprints</a></h2>
+<p>The blueprint now supports a new <code>distro</code> field that will be used to select the
+distribution to use when composing images, or depsolving the blueprint. If
+<code>distro</code> is left blank it will use the host distribution. If you upgrade the
+host operating system the blueprints with no <code>distro</code> set will build using the
+new os.</p>
+<p>eg. A blueprint that will always build a fedora-32 image, no matter what
+version is running on the host:</p>
+<pre><code class="language-toml">name = &quot;tmux&quot;
+description = &quot;tmux image with openssh&quot;
+version = &quot;1.2.16&quot;
+distro = &quot;fedora-32&quot;
+
+[[packages]]
+name = &quot;tmux&quot;
+version = &quot;*&quot;
+
+[[packages]]
+name = &quot;openssh-server&quot;
+version = &quot;*&quot;
+</code></pre>
 <h2 id="example-blueprint"><a class="header" href="#example-blueprint">Example Blueprint</a></h2>
 <p>The following blueprint example will:</p>
 <ul>
