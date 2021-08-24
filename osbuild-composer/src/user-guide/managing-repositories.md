@@ -66,8 +66,8 @@ Based on the system you are running (see `/etc/os-release` if you are not sure),
 
 * Fedora 32 - `fedora-32.json`
 * Fedora 33 - `fedora-33.json`
-* Already released RHEL 8 - `rhel-8.json`
-* Pre-release RHEL 8.4 - `rhel-84.json`
+* RHEL 8.4 - `rhel-84.json`
+* RHEL 9.0 - `rhel-90.json`
 
 Then, create the JSON file with the following structure (or copy the file for your distribution from `/usr/share/osbuild-composer/` and modify its content):
 
