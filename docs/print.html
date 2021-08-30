@@ -737,6 +737,22 @@ version = &quot;*&quot;
 name = &quot;openssh-server&quot;
 version = &quot;*&quot;
 </code></pre>
+<h3 id="filesystem-support"><a class="header" href="#filesystem-support">Filesystem Support</a></h3>
+<p>The blueprints can be extended to provide filesytem support. Currently the <code>mountpoint</code> and minimum partition <code>size</code> can be set. Custom mountpoints are currently only supported for <code>RHEL 8.5</code> &amp; <code>RHEL 9.0</code>. For other distributions, only the <code>root</code> partition is supported, the size argument being an alias for the image size. </p>
+<pre><code class="language-toml">[[customizations.filesystem]]
+mountpoint = &quot;/var&quot;
+size = 2147483648
+</code></pre>
+<p>In addition to the root mountpoint, <code>/</code>, the following <code>mountpoints</code> and their sub-directories are supported:</p>
+<ul>
+<li><code>/var</code></li>
+<li><code>/home</code></li>
+<li><code>/opt</code></li>
+<li><code>/srv</code></li>
+<li><code>/usr</code></li>
+<li><code>/app</code></li>
+<li><code>/data</code></li>
+</ul>
 <h2 id="example-blueprint-1"><a class="header" href="#example-blueprint-1">Example Blueprint</a></h2>
 <p>The following blueprint example will:</p>
 <ul>
@@ -797,6 +813,10 @@ name = &quot;widget&quot;
 
 [[customizations.group]]
 name = &quot;students&quot;
+
+[[customizations.filesystem]]
+mountpoint = &quot;/&quot;
+size = 2147483648
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="developer-guide"><a class="header" href="#developer-guide">Developer guide</a></h1>
 <p>In this section, you will find a description of the source code in <code>osbuild</code> organization.</p>
