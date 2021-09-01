@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Latest RPM builds - OSBuild guides</title>
+        <title>Workflow - OSBuild guides</title>
                 
 
         <!-- Custom HTML head -->
@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="../user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="../user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="../user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="../user-guide/edge-container+installer.html"><strong aria-hidden="true">1.7.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><a href="../blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="../developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/workflow.html"><strong aria-hidden="true">3.1.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="../developer-guide/code-style.html"><strong aria-hidden="true">3.2.</strong> Code style</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild.html"><strong aria-hidden="true">3.3.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.4.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="../developer-guide/latest-rpm-builds.html" class="active"><strong aria-hidden="true">3.5.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="../developer-guide/testing.html"><strong aria-hidden="true">3.6.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="../developer-guide/glossary.html"><strong aria-hidden="true">3.7.</strong> Glossary</a></li></ol></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="../user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="../user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="../user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="../user-guide/edge-container+installer.html"><strong aria-hidden="true">1.7.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><a href="../blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="../developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/workflow.html" class="active"><strong aria-hidden="true">3.1.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="../developer-guide/code-style.html"><strong aria-hidden="true">3.2.</strong> Code style</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild.html"><strong aria-hidden="true">3.3.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.4.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="../developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">3.5.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="../developer-guide/testing.html"><strong aria-hidden="true">3.6.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="../developer-guide/glossary.html"><strong aria-hidden="true">3.7.</strong> Glossary</a></li></ol></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -143,28 +143,49 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="latest-rpm-builds"><a class="header" href="#latest-rpm-builds">Latest RPM builds</a></h1>
-<p>While developing osbuild and osbuild composer it is convenient to download the latest RPM builds directly from upstream. The repositories in the osbuild organization don't use any automation from Copr or Packit. Instead, the RPMs are built directly in the Jenkins CI and stored in AWS under the commit hash which allows anyone to download precisely the version built from a desired commit.</p>
-<p>The URL is specified in the <code>mockbuild.sh</code> scripts in the osbuild and osbuild-composer repositories:</p>
-<ul>
-<li><a href="https://github.com/osbuild/osbuild-composer/blob/f091af55d89ac9e77aa34b94e0180aacead3f32e/schutzbot/mockbuild.sh#L27">mockbuild.sh in osbuild-composer</a></li>
-<li><a href="https://github.com/osbuild/osbuild/blob/850ee4466f0e3335d4c21871a5f2549f2f571965/schutzbot/mockbuild.sh#L27">mockbuild.sh in osbuild</a></li>
-</ul>
-<p>And the final resulting URL is displayed in the Jenkins output (available only from Red Hat VPN).</p>
-<p><em>Common trap: If you click on a link to a repo, such as:</em></p>
-<p><a href="http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/">http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/</a></p>
-<p><em>you will get HTTP 403 because that's a directory and we don't allow directory listing. If you append a known file path, such as</em> <code>repodata/repomd.xml</code> <em>you will see that the repo is there:</em></p>
-<p><a href="http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/repodata/repomd.xml">http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/repodata/repomd.xml</a></p>
+                        <h1 id="workflow"><a class="header" href="#workflow">Workflow</a></h1>
+<h2 id="adding-news"><a class="header" href="#adding-news">Adding news</a></h2>
+<p>When adding a new feature to a project which should be included in the release notes, or used for
+announcements, please add it under <code>docs/news</code> in the form of a short markdown document.</p>
+<p>Bug fixes, test changes, etc... should not be announced there.</p>
+<h2 id="git-workflow"><a class="header" href="#git-workflow">Git Workflow</a></h2>
+<h3 id="commits"><a class="header" href="#commits">Commits</a></h3>
+<p>Commits should be easy to read.</p>
+<p>The commit message should explain clearly what it's trying to do and why. The following format is
+common but not required:</p>
+<pre><code>&lt;module&gt;: Topic of the commit
+
+Body of the commit, describing the changes in more detail.
+</code></pre>
+<p>The <code>&lt;module&gt;</code> should point to the area of the codebase (for instance <code>tests</code> or <code>tools</code>). The topic
+should summarize what the commit is doing.</p>
+<p>GitHub truncates the first line if it's longer than 65 characters, which is something to keep in
+mind as well.</p>
+<p>A <code>Fixes #issue-number</code> can be added to automatically link and close a related issue if it exists.</p>
+<h3 id="pull-requests"><a class="header" href="#pull-requests">Pull requests</a></h3>
+<p>A pull request should be one or more commits which form a coherent unit, it can be
+rebased/rewritten/force-pushed until it's fit for merging.</p>
+<p>Pull requests are usually opened against the main branch. They should be opened from a developer's
+own fork to avoid a lot of random branches on the origin.</p>
+<p>Each pull request should be reviewed, and the CI should pass.</p>
+<p>A pull request can be marked as draft, if it shouldn't be reviewed yet. But once it's ready, do not
+hesitate to add reviewers. If you're unsure who to add as a reviewer, ask in the irc channel
+(#osbuild on Libera Chat).</p>
+<p>Once a pull request is ready to be merged, it should be merged via the <code>Rebase and merge</code> or <code>Squash and merge</code> option. This avoids merge commits on the main branch.</p>
+<h3 id="branches"><a class="header" href="#branches">Branches</a></h3>
+<p>Force-pushing to, or rebasing the main branch (or other release branches) is not allowed. Avoid
+directly pushing (fast-forward) to those branches as well. Commits can always be reverted by opening
+a new pull request.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                                                    <a rel="prev" href="../developer-guide/osbuild-composer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                                    <a rel="prev" href="../developer-guide/developer-guide.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
-                                                    <a rel="next" href="../developer-guide/testing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                                    <a rel="next" href="../developer-guide/code-style.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -174,11 +195,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                                    <a rel="prev" href="../developer-guide/osbuild-composer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                    <a rel="prev" href="../developer-guide/developer-guide.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
-                                    <a rel="next" href="../developer-guide/testing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                    <a rel="next" href="../developer-guide/code-style.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                             </nav>

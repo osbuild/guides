@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="user-guide/edge-container+installer.html"><strong aria-hidden="true">1.7.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><a href="blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer-guide/osbuild.html"><strong aria-hidden="true">3.1.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.2.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">3.3.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="developer-guide/testing.html"><strong aria-hidden="true">3.4.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="developer-guide/glossary.html"><strong aria-hidden="true">3.5.</strong> Glossary</a></li></ol></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="user-guide/edge-container+installer.html"><strong aria-hidden="true">1.7.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><a href="blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer-guide/workflow.html"><strong aria-hidden="true">3.1.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="developer-guide/code-style.html"><strong aria-hidden="true">3.2.</strong> Code style</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild.html"><strong aria-hidden="true">3.3.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.4.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">3.5.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="developer-guide/testing.html"><strong aria-hidden="true">3.6.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="developer-guide/glossary.html"><strong aria-hidden="true">3.7.</strong> Glossary</a></li></ol></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -823,6 +823,64 @@ size = 2147483648
 <p>The following scheme describes how separate components communicate with each other:
 <img src="developer-guide/osbuild-composer.svg" alt="" /></p>
 <p>In the very basic use case where <code>osbuild-composer</code> is running locally, the &quot;pool of workers&quot; also lives on the user's host machine. The <code>osbuild-composer</code> and <code>osbuild-worker</code> processes are spawned by systemd. We don't support any other means of spawning these processes, as they rely on systemd to open sockets, create state directories etc. Additionally, <code>osbuild-worker</code> spawns osbuild as a subprocess to create the image itself. The whole image building machinery is spawned from a user process, for example, <code>composer-cli</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="workflow"><a class="header" href="#workflow">Workflow</a></h1>
+<h2 id="adding-news"><a class="header" href="#adding-news">Adding news</a></h2>
+<p>When adding a new feature to a project which should be included in the release notes, or used for
+announcements, please add it under <code>docs/news</code> in the form of a short markdown document.</p>
+<p>Bug fixes, test changes, etc... should not be announced there.</p>
+<h2 id="git-workflow"><a class="header" href="#git-workflow">Git Workflow</a></h2>
+<h3 id="commits"><a class="header" href="#commits">Commits</a></h3>
+<p>Commits should be easy to read.</p>
+<p>The commit message should explain clearly what it's trying to do and why. The following format is
+common but not required:</p>
+<pre><code>&lt;module&gt;: Topic of the commit
+
+Body of the commit, describing the changes in more detail.
+</code></pre>
+<p>The <code>&lt;module&gt;</code> should point to the area of the codebase (for instance <code>tests</code> or <code>tools</code>). The topic
+should summarize what the commit is doing.</p>
+<p>GitHub truncates the first line if it's longer than 65 characters, which is something to keep in
+mind as well.</p>
+<p>A <code>Fixes #issue-number</code> can be added to automatically link and close a related issue if it exists.</p>
+<h3 id="pull-requests"><a class="header" href="#pull-requests">Pull requests</a></h3>
+<p>A pull request should be one or more commits which form a coherent unit, it can be
+rebased/rewritten/force-pushed until it's fit for merging.</p>
+<p>Pull requests are usually opened against the main branch. They should be opened from a developer's
+own fork to avoid a lot of random branches on the origin.</p>
+<p>Each pull request should be reviewed, and the CI should pass.</p>
+<p>A pull request can be marked as draft, if it shouldn't be reviewed yet. But once it's ready, do not
+hesitate to add reviewers. If you're unsure who to add as a reviewer, ask in the irc channel
+(#osbuild on Libera Chat).</p>
+<p>Once a pull request is ready to be merged, it should be merged via the <code>Rebase and merge</code> or <code>Squash and merge</code> option. This avoids merge commits on the main branch.</p>
+<h3 id="branches"><a class="header" href="#branches">Branches</a></h3>
+<p>Force-pushing to, or rebasing the main branch (or other release branches) is not allowed. Avoid
+directly pushing (fast-forward) to those branches as well. Commits can always be reverted by opening
+a new pull request.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="code-style-guidelines"><a class="header" href="#code-style-guidelines">Code style guidelines</a></h1>
+<p>This depends a little bit on the project and the language. Most of our projects have linters
+available, so do make use of those.</p>
+<p>If unsure on how to format a specific statement, try to look for examples in the code.</p>
+<h2 id="general"><a class="header" href="#general">General</a></h2>
+<ul>
+<li>
+<p>No trailing whitespace</p>
+</li>
+<li>
+<p>Avoid really long lines where possible (&gt;120 characters)</p>
+</li>
+<li>
+<p>Single newline at the end of each file</p>
+</li>
+</ul>
+<h3 id="golang"><a class="header" href="#golang">Golang</a></h3>
+<p>This is easy, simply use <a href="https://blog.golang.org/gofmt">Gofmt</a>.</p>
+<h3 id="python"><a class="header" href="#python">Python</a></h3>
+<p>Python code should follow <a href="https://www.python.org/dev/peps/pep-0008/">the PEP 8 style guide</a>.</p>
+<h3 id="shell"><a class="header" href="#shell">Shell</a></h3>
+<p><a href="https://www.shellcheck.net/">ShellCheck</a> is used to lint shell code.</p>
+<h3 id="javascript"><a class="header" href="#javascript">Javascript</a></h3>
+<p>Projects like <a href="https://github.com/osbuild/cockpit-composer/">Cockpit Composer</a> use eslint to enforce
+style.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="osbuild"><a class="header" href="#osbuild">osbuild</a></h1>
 <p>A CLI tool for building OS images. It takes manifest as an input and produces an image as an output. The manifest consists of:</p>
 <ul>
