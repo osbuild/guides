@@ -52,8 +52,6 @@ packages for the host distro will not.
 
 The configuration files are not in the usual "repo" format. Instead, they are simple `JSON` files.
 
-*Important note: osbuild-composer can only create images for the distribution and architecture it is running on. For example, if you are running Fedora 33 on x86_64, osbuild-composer will create all images as Fedora 33 for x86_64. Building other distributions and architectures except for the host is not supported.*
-
 ### Defining official repository overrides
 
 To set your own repositories, create this directory if it does not exist already:
