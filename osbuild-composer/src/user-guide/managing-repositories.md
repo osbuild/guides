@@ -60,14 +60,14 @@ To set your own repositories, create this directory if it does not exist already
 $ sudo mkdir -p /etc/osbuild-composer/repositories
 ```
 
-Based on the system you are running (see `/etc/os-release` if you are not sure), determine the name of a new JSON file:
+Based on the system, you want to build an image for, determine the name of a new JSON file:
 
 * Fedora 32 - `fedora-32.json`
 * Fedora 33 - `fedora-33.json`
 * RHEL 8.4 - `rhel-84.json`
 * RHEL 9.0 - `rhel-90.json`
 
-Then, create the JSON file with the following structure (or copy the file for your distribution from `/usr/share/osbuild-composer/` and modify its content):
+Then, create the JSON file with the following structure (or copy the file from `/usr/share/osbuild-composer/` and modify its content):
 
 ```json
 {
@@ -86,7 +86,7 @@ Then, create the JSON file with the following structure (or copy the file for yo
 ```
 Specify only one value for the following attributes: `metalink`, `mirrorlist`, or `baseurl`. The remaining fields are optional.
 
-For example, assuming that the host OS is Fedora 33 running on x86_64, create `/etc/osbuild-composer/repositories/fedora-33.json` with this content:
+For example, a repository for building a Fedora 33 image running on x86_64, create `/etc/osbuild-composer/repositories/fedora-33.json` with this content:
 ```json
 {
     "x86_64": [
