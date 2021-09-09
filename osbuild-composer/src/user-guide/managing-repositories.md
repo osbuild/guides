@@ -84,7 +84,7 @@ Then, create the JSON file with the following structure (or copy the file from `
     ]
 }
 ```
-Specify only one value for the following attributes: `metalink`, `mirrorlist`, or `baseurl`. The remaining fields are optional.
+Specify only one of the following attributes: `metalink`, `mirrorlist`, or `baseurl`. All the remaining fields like `gpgkey`, `metadata_expire`, etc. are optional.
 
 For example, a repository for building a Fedora 33 image running on x86_64, create `/etc/osbuild-composer/repositories/fedora-33.json` with this content:
 ```json
