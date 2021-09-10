@@ -28,14 +28,13 @@ A `Fixes #issue-number` can be added to automatically link and close a related i
 A pull request should be one or more commits which form a coherent unit, it can be
 rebased/rewritten/force-pushed until it's fit for merging.
 
-Pull requests are usually opened against the main branch. They should be opened from a developer's
-own fork to avoid a lot of random branches on the origin.
+How the PR developed, and the iterations it went through, should not be visible in the git
+history. The end result counts: a certain amount of commits, each one forming a logical unit of
+changes. Avoid 'fix-up' commits which tweak previous commits in the PR.
+
+Pull requests should be opened from a developer's own fork to avoid random branches on the origin.
 
 Each pull request should be reviewed, and the CI should pass.
-
-A pull request can be marked as draft, if it shouldn't be reviewed yet. But once it's ready, do not
-hesitate to add reviewers. If you're unsure who to add as a reviewer, ask in the irc channel
-(#osbuild on Libera Chat).
 
 Once a pull request is ready to be merged, it should be merged via the `Rebase and merge` or `Squash
 and merge` option. This avoids merge commits on the main branch.
