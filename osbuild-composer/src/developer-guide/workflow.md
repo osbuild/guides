@@ -32,8 +32,9 @@ A `Fixes #issue-number` can be added to automatically link and close a related i
 
 ### Pull requests
 
-A pull request should be one or more commits which form a coherent unit, it can be
-rebased/rewritten/force-pushed until it's fit for merging.
+A pull request should be one or more commits which are fit for rebase-and-merging on main, it can be
+rebased/rewritten/force-pushed until it's fit for merging. The development process and history of
+the PR should not be visible in the commits, the end result counts.
 
 Pull requests are usually opened against the main branch. They should be opened from a developer's
 own fork to avoid a lot of random branches on the origin.
