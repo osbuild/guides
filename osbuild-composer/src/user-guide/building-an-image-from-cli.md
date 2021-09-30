@@ -1,6 +1,37 @@
-# Building an image
+# Creating images with the CLI interface
 
-An image is specified by a blueprint and an image type. It will use the same distribution version (e.g. Fedora 33) and architecture (e.g. aarch64) as the host system.
+An image is specified by a blueprint and an image type. Unless you specify otherwise, it will use the same distribution and version (e.g. Fedora 33) as the host system. The architecture will always be the same as the one on the host.
+
+## Blueprints management using composer-cli
+
+`osbuild-composer` provides a storage for blueprints. To store a `blueprint.toml` blueprint file, run this command:
+
+```
+$ composer-cli blueprints push blueprint.toml
+```
+
+To verify that the blueprint is available, list all currently stored blueprints:
+
+```
+$ composer-cli blueprints list
+base-image-with-tmux
+```
+To display the blueprint you have just added, run the command:
+
+```
+$ sudo composer-cli blueprints show base-image-with-tmux
+name = "base-image-with-tmux"
+description = "A base system with tmux"
+version = "0.0.1"
+modules = []
+groups = []
+
+[[packages]]
+name = "tmux"
+version = "*"
+```
+
+## Building an image using composer-cli
 
 To build a customized image, start by choosing the blueprint and image type you would like to build. To do so, run the following commands:
 
