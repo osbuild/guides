@@ -23,35 +23,6 @@ version = "*"
 
 The blueprint is in [TOML format](https://toml.io/en/).
 
-## Blueprints management using composer-cli
-
-`osbuild-composer` provides a storage for blueprints. To store a `blueprint.toml` blueprint file, run this command:
-
-```
-$ composer-cli blueprints push blueprint.toml
-```
-
-To verify that the blueprint is available, list all currently stored blueprints:
-
-```
-$ composer-cli blueprints list
-base-image-with-tmux
-```
-To display the blueprint you have just added, run the command:
-
-```
-$ sudo composer-cli blueprints show base-image-with-tmux
-name = "base-image-with-tmux"
-description = "A base system with tmux"
-version = "0.0.1"
-modules = []
-groups = []
-
-[[packages]]
-name = "tmux"
-version = "*"
-```
-
 ## Image types
 
 `osbuild-composer` supports various types of output images. To see all supported types, run this command:
