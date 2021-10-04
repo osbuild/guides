@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="user-guide/basic-concepts.html"><strong aria-hidden="true">1.2.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Building an image from the command line</a></li><li class="chapter-item expanded "><a href="user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="user-guide/managing-repositories.html"><strong aria-hidden="true">1.5.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="user-guide/building-ostree-images.html"><strong aria-hidden="true">1.6.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="user-guide/edge-container+installer.html"><strong aria-hidden="true">1.7.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><a href="blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer-guide/workflow.html"><strong aria-hidden="true">3.1.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="developer-guide/code-style.html"><strong aria-hidden="true">3.2.</strong> Code style</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild.html"><strong aria-hidden="true">3.3.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.4.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">3.5.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="developer-guide/testing.html"><strong aria-hidden="true">3.6.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="developer-guide/releasing.html"><strong aria-hidden="true">3.7.</strong> Releasing</a></li><li class="chapter-item expanded "><a href="developer-guide/glossary.html"><strong aria-hidden="true">3.8.</strong> Glossary</a></li></ol></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/osbuild-composer-description.html"><strong aria-hidden="true">1.1.</strong> osbuild-composer description</a></li><li class="chapter-item expanded "><a href="user-guide/installation.html"><strong aria-hidden="true">1.2.</strong> Installation and configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/managing-repositories.html"><strong aria-hidden="true">1.2.1.</strong> Managing repositories</a></li></ol></li><li class="chapter-item expanded "><a href="user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Creating images with the CLI interface</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/building-ostree-images.html"><strong aria-hidden="true">1.3.1.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="user-guide/edge-container+installer.html"><strong aria-hidden="true">1.3.2.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.4.</strong> Uploading cloud images</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.1.</strong> Uploading an image to AWS</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer-guide/workflow.html"><strong aria-hidden="true">3.1.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="developer-guide/code-style.html"><strong aria-hidden="true">3.2.</strong> Code style</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild.html"><strong aria-hidden="true">3.3.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.4.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">3.5.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="developer-guide/testing.html"><strong aria-hidden="true">3.6.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="developer-guide/releasing.html"><strong aria-hidden="true">3.7.</strong> Releasing</a></li><li class="chapter-item expanded "><a href="developer-guide/glossary.html"><strong aria-hidden="true">3.8.</strong> Glossary</a></li></ol></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -147,6 +147,29 @@
                         <h1 id="user-guide-for-osbuild-composer"><a class="header" href="#user-guide-for-osbuild-composer">User guide for osbuild-composer</a></h1>
 <p><code>osbuild-composer</code> is a service for building customized operating system images (currently only Fedora and RHEL). These images can be used with various virtualization software such as <a href="https://www.qemu.org/">QEMU</a>, <a href="https://www.virtualbox.org/">VirtualBox</a>, <a href="https://www.vmware.com/">VMWare</a> and also with cloud computing providers like <a href="https://aws.amazon.com/">AWS</a>, <a href="https://azure.microsoft.com/">Azure</a> or <a href="https://cloud.google.com/">GCP</a>.</p>
 <p>This guide contains instructions on installing <code>osbuild-composer</code> service and its basic usage.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="basic-concepts"><a class="header" href="#basic-concepts">Basic concepts</a></h1>
+<p><code>osbuild-composer</code> works with a concept of <strong>blueprints</strong>. A blueprint is a description of the final <strong>image</strong> and its <strong>customizations</strong>. A <strong>customization</strong> can be:</p>
+<ul>
+<li>an additional RPM package</li>
+<li>enabled service</li>
+<li>custom kernel command line parameter, and many others. See <a href="https://www.osbuild.org/guides/blueprint-reference/blueprint-reference.html#blueprint-reference">Blueprint</a> reference for more details. </li>
+</ul>
+<p>An <strong>image</strong> is defined by its blueprint and <strong>image type</strong>, which is for example <code>qcow2</code> (QEMU Copy On Write disk image) or <code>AMI</code> (Amazon Machine Image).</p>
+<p>Finally, <code>osbuild-composer</code> also supports <strong>upload targets</strong>, which are cloud providers where an image can be stored after it is built. Currently supported cloud providers are <a href="https://aws.amazon.com/">AWS</a> and <a href="https://azure.microsoft.com/">Azure</a>.</p>
+<h2 id="example-blueprint"><a class="header" href="#example-blueprint">Example blueprint</a></h2>
+<pre><code class="language-toml">name = &quot;base-image-with-tmux&quot;
+description = &quot;A base system with tmux&quot;
+version = &quot;0.0.1&quot;
+
+[[packages]]
+name = &quot;tmux&quot;
+version = &quot;*&quot;
+</code></pre>
+<p>The blueprint is in <a href="https://toml.io/en/">TOML format</a>.</p>
+<h2 id="image-types"><a class="header" href="#image-types">Image types</a></h2>
+<p><code>osbuild-composer</code> supports various types of output images. To see all supported types, run this command:</p>
+<pre><code>$ composer-cli compose types
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
 <p>To get started with <code>osbuild-composer</code> on your local machine, you can install the CLI interface or the Web UI, which is part of Cockpit project. </p>
 <h2 id="cli-interface"><a class="header" href="#cli-interface">CLI interface</a></h2>
@@ -171,112 +194,6 @@ $ newgrp weldr
 <pre><code>$ sudo systemctl enable --now osbuild-composer.socket
 $ sudo systemctl enable --now cockpit.socket
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="basic-concepts"><a class="header" href="#basic-concepts">Basic concepts</a></h1>
-<p><code>osbuild-composer</code> works with a concept of <strong>blueprints</strong>. A blueprint is a description of the final <strong>image</strong> and its <strong>customizations</strong>. A <strong>customization</strong> can be:</p>
-<ul>
-<li>an additional RPM package</li>
-<li>enabled service</li>
-<li>custom kernel command line parameter, and many others. See <a href="https://www.osbuild.org/guides/blueprint-reference/blueprint-reference.html#blueprint-reference">Blueprint</a> reference for more details. </li>
-</ul>
-<p>An <strong>image</strong> is defined by its blueprint and <strong>image type</strong>, which is for example <code>qcow2</code> (QEMU Copy On Write disk image) or <code>AMI</code> (Amazon Machine Image).</p>
-<p>Finally, <code>osbuild-composer</code> also supports <strong>upload targets</strong>, which are cloud providers where an image can be stored after it is built. Currently supported cloud providers are <a href="https://aws.amazon.com/">AWS</a> and <a href="https://azure.microsoft.com/">Azure</a>.</p>
-<h2 id="example-blueprint"><a class="header" href="#example-blueprint">Example blueprint</a></h2>
-<pre><code class="language-toml">name = &quot;base-image-with-tmux&quot;
-description = &quot;A base system with tmux&quot;
-version = &quot;0.0.1&quot;
-
-[[packages]]
-name = &quot;tmux&quot;
-version = &quot;*&quot;
-</code></pre>
-<p>The blueprint is in <a href="https://toml.io/en/">TOML format</a>.</p>
-<h2 id="blueprints-management-using-composer-cli"><a class="header" href="#blueprints-management-using-composer-cli">Blueprints management using composer-cli</a></h2>
-<p><code>osbuild-composer</code> provides a storage for blueprints. To store a <code>blueprint.toml</code> blueprint file, run this command:</p>
-<pre><code>$ composer-cli blueprints push blueprint.toml
-</code></pre>
-<p>To verify that the blueprint is available, list all currently stored blueprints:</p>
-<pre><code>$ composer-cli blueprints list
-base-image-with-tmux
-</code></pre>
-<p>To display the blueprint you have just added, run the command:</p>
-<pre><code>$ sudo composer-cli blueprints show base-image-with-tmux
-name = &quot;base-image-with-tmux&quot;
-description = &quot;A base system with tmux&quot;
-version = &quot;0.0.1&quot;
-modules = []
-groups = []
-
-[[packages]]
-name = &quot;tmux&quot;
-version = &quot;*&quot;
-</code></pre>
-<h2 id="image-types"><a class="header" href="#image-types">Image types</a></h2>
-<p><code>osbuild-composer</code> supports various types of output images. To see all supported types, run this command:</p>
-<pre><code>$ composer-cli compose types
-</code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="building-an-image"><a class="header" href="#building-an-image">Building an image</a></h1>
-<p>An image is specified by a blueprint and an image type. It will use the same distribution version (e.g. Fedora 33) and architecture (e.g. aarch64) as the host system.</p>
-<p>To build a customized image, start by choosing the blueprint and image type you would like to build. To do so, run the following commands:</p>
-<pre><code>$ sudo composer-cli blueprints list
-$ sudo composer-cli compose types
-</code></pre>
-<p>and trigger a compose (example using the blueprint from the previous section):</p>
-<pre><code>$ composer-cli compose start base-image-with-tmux qcow2
-Compose ab71b61a-b3c4-434f-b214-1e16527766ff added to the queue
-</code></pre>
-<p>Note that the compose is assigned with a Universally Unique Identifier (UUID), that you can use to monitor the image build progress:</p>
-<pre><code>$ composer-cli compose info ab71b61a-b3c4-434f-b214-1e16527766ff
-ab71b61a-b3c4-434f-b214-1e16527766ff RUNNING  base-image-with-tmux 0.0.1 qcow2            2147483648
-Packages:
-    tmux-*
-Modules:
-Dependencies:
-</code></pre>
-<p>At this time, the compose is in a &quot;RUNNING&quot; state. Once the compose reaches the &quot;FINISHED&quot; state, you can download the resulting image by running the following command:</p>
-<pre><code>$ sudo composer-cli compose results ab71b61a-b3c4-434f-b214-1e16527766ff
-ab71b61a-b3c4-434f-b214-1e16527766ff.tar: 455.18 MB
-$ fd
-ab71b61a-b3c4-434f-b214-1e16527766ff.tar
-$ tar xf ab71b61a-b3c4-434f-b214-1e16527766ff.tar
-$ fd 
-ab71b61a-b3c4-434f-b214-1e16527766ff-disk.qcow2
-ab71b61a-b3c4-434f-b214-1e16527766ff.json
-ab71b61a-b3c4-434f-b214-1e16527766ff.tar
-logs
-logs/osbuild.log
-</code></pre>
-<p>From the example output above, the resulting tarball contains not only the <code>qcow2</code> image, but also a <code>JSON</code> file, which is the osbuild manifest (see the <a href="https://www.osbuild.org/guides/developer-guide/developer-guide.html#developer-guide">Developer guide</a> for more details), and a directory with logs.</p>
-<p>For more options, see the <code>help</code> text for <code>composer-cli</code>:</p>
-<pre><code>$ sudo composer-cli compose help
-</code></pre>
-<h4 id="tip-booting-the-image-with-qemu"><a class="header" href="#tip-booting-the-image-with-qemu">Tip: Booting the image with qemu</a></h4>
-<p>If you want to quickly run the resulting image, you can use <code>qemu</code>:</p>
-<pre><code>$ qemu-system-x86_64 \
-                -enable-kvm \
-                -m 3000 \
-                -snapshot \
-                -cpu host \
-                -net nic,model=virtio \
-                -net user,hostfwd=tcp::2223-:22 \
-                ab71b61a-b3c4-434f-b214-1e16527766ff-disk.qcow2 
-</code></pre>
-<p>Be aware that you must specify a way to access the machine in the blueprint. For example, you can create a user with known password, set an SSH key, or enable <code>cloud-init</code> to use a <code>cloud-init</code> ISO file.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="uploading-an-image-to-aws"><a class="header" href="#uploading-an-image-to-aws">Uploading an image to AWS</a></h1>
-<p><code>osbuild-composer</code> provides the users with a convenient way to upload images directly to AWS right after the image is built. To use this feature, you need one additional configuration file for the cloud provider. In this example, the cloud provider is AWS:</p>
-<pre><code class="language-toml">provider = &quot;aws&quot;
-
-[settings]
-accessKeyID = &quot;AWS_ACCESS_KEY_ID&quot;
-secretAccessKey = &quot;AWS_SECRET_ACCESS_KEY&quot;
-bucket = &quot;AWS_BUCKET&quot;
-region = &quot;AWS_REGION&quot;
-key = &quot;IMAGE_KEY&quot;
-</code></pre>
-<p>But be careful here, if you are using <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html">IAM Roles</a>, which is the recommendation, according to the AWS documentation, you need a specific policy that will allow VM import from the S3 bucket to EC2. See the <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html">AWS documentation</a> for more details.</p>
-<p>Once everything is configured, you can trigger a compose as usual with additional image name and cloud provider profile:</p>
-<pre><code>$ sudo composer-cli compose start base-image-with-tmux ami IMAGE_KEY aws-config.toml
-</code></pre>
-<p>where IMAGE_KEY will be the name of your VM Image, once it is uploaded to EC2.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="managing-repositories"><a class="header" href="#managing-repositories">Managing repositories</a></h1>
 <p>There are two kinds of repositories used in osbuild-composer:</p>
 <ol>
@@ -369,6 +286,74 @@ packages for the host distro will not.</p>
 }
 </code></pre>
 <p><code>osbuild-composer</code> will read the <code>/etc/yum.repos.d/redhat.repo</code> file from the host system and use it as a source of subscriptions. The same subscriptions must be available on a remote worker, if used.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="creating-images-with-the-cli-interface"><a class="header" href="#creating-images-with-the-cli-interface">Creating images with the CLI interface</a></h1>
+<p>An image is specified by a blueprint and an image type. Unless you specify otherwise, it will use the same distribution and version (e.g. Fedora 33) as the host system. The architecture will always be the same as the one on the host.</p>
+<h2 id="blueprints-management-using-composer-cli"><a class="header" href="#blueprints-management-using-composer-cli">Blueprints management using composer-cli</a></h2>
+<p><code>osbuild-composer</code> provides a storage for blueprints. To store a <code>blueprint.toml</code> blueprint file, run this command:</p>
+<pre><code>$ composer-cli blueprints push blueprint.toml
+</code></pre>
+<p>To verify that the blueprint is available, list all currently stored blueprints:</p>
+<pre><code>$ composer-cli blueprints list
+base-image-with-tmux
+</code></pre>
+<p>To display the blueprint you have just added, run the command:</p>
+<pre><code>$ sudo composer-cli blueprints show base-image-with-tmux
+name = &quot;base-image-with-tmux&quot;
+description = &quot;A base system with tmux&quot;
+version = &quot;0.0.1&quot;
+modules = []
+groups = []
+
+[[packages]]
+name = &quot;tmux&quot;
+version = &quot;*&quot;
+</code></pre>
+<h2 id="building-an-image-using-composer-cli"><a class="header" href="#building-an-image-using-composer-cli">Building an image using composer-cli</a></h2>
+<p>To build a customized image, start by choosing the blueprint and image type you would like to build. To do so, run the following commands:</p>
+<pre><code>$ sudo composer-cli blueprints list
+$ sudo composer-cli compose types
+</code></pre>
+<p>and trigger a compose (example using the blueprint from the previous section):</p>
+<pre><code>$ composer-cli compose start base-image-with-tmux qcow2
+Compose ab71b61a-b3c4-434f-b214-1e16527766ff added to the queue
+</code></pre>
+<p>Note that the compose is assigned with a Universally Unique Identifier (UUID), that you can use to monitor the image build progress:</p>
+<pre><code>$ composer-cli compose info ab71b61a-b3c4-434f-b214-1e16527766ff
+ab71b61a-b3c4-434f-b214-1e16527766ff RUNNING  base-image-with-tmux 0.0.1 qcow2            2147483648
+Packages:
+    tmux-*
+Modules:
+Dependencies:
+</code></pre>
+<p>At this time, the compose is in a &quot;RUNNING&quot; state. Once the compose reaches the &quot;FINISHED&quot; state, you can download the resulting image by running the following command:</p>
+<pre><code>$ sudo composer-cli compose results ab71b61a-b3c4-434f-b214-1e16527766ff
+ab71b61a-b3c4-434f-b214-1e16527766ff.tar: 455.18 MB
+$ fd
+ab71b61a-b3c4-434f-b214-1e16527766ff.tar
+$ tar xf ab71b61a-b3c4-434f-b214-1e16527766ff.tar
+$ fd 
+ab71b61a-b3c4-434f-b214-1e16527766ff-disk.qcow2
+ab71b61a-b3c4-434f-b214-1e16527766ff.json
+ab71b61a-b3c4-434f-b214-1e16527766ff.tar
+logs
+logs/osbuild.log
+</code></pre>
+<p>From the example output above, the resulting tarball contains not only the <code>qcow2</code> image, but also a <code>JSON</code> file, which is the osbuild manifest (see the <a href="https://www.osbuild.org/guides/developer-guide/developer-guide.html#developer-guide">Developer guide</a> for more details), and a directory with logs.</p>
+<p>For more options, see the <code>help</code> text for <code>composer-cli</code>:</p>
+<pre><code>$ sudo composer-cli compose help
+</code></pre>
+<h4 id="tip-booting-the-image-with-qemu"><a class="header" href="#tip-booting-the-image-with-qemu">Tip: Booting the image with qemu</a></h4>
+<p>If you want to quickly run the resulting image, you can use <code>qemu</code>:</p>
+<pre><code>$ qemu-system-x86_64 \
+                -enable-kvm \
+                -m 3000 \
+                -snapshot \
+                -cpu host \
+                -net nic,model=virtio \
+                -net user,hostfwd=tcp::2223-:22 \
+                ab71b61a-b3c4-434f-b214-1e16527766ff-disk.qcow2 
+</code></pre>
+<p>Be aware that you must specify a way to access the machine in the blueprint. For example, you can create a user with known password, set an SSH key, or enable <code>cloud-init</code> to use a <code>cloud-init</code> ISO file.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="building-ostree-image"><a class="header" href="#building-ostree-image">Building OSTree image</a></h1>
 <p>This section contains a guide for building OSTree commits. As opposed to the &quot;traditional&quot; image types, these commits are not directly bootable so although they basically contain a full operating system, in order to boot them, they need to be deployed. This can, for example, be done via the  Fedora installer (Anaconda).</p>
 <p>OSTree is a technology for creating immutable operating system images and it is a base for Fedora CoreOS, Fedora IoT, Fedora Silverblue, and RHEL for Edge. For more information on OSTree, see <a href="https://ostreedev.github.io/ostree/">their website</a>.</p>
@@ -589,6 +574,22 @@ The <code>--url</code> in this case is IP address of the container. This tutoria
  09d98a67-a401-4613-9a5b-b93f8a6e695f-rhel84-boot.iso: 1422.61 MB
 </code></pre>
 <p>The downloaded image can then booted to begin the installation. If you used the blueprint in this guide, use the username &quot;user&quot; and password &quot;password42&quot; to login.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="uploading-an-image-to-aws"><a class="header" href="#uploading-an-image-to-aws">Uploading an image to AWS</a></h1>
+<p><code>osbuild-composer</code> provides the users with a convenient way to upload images directly to AWS right after the image is built. To use this feature, you need one additional configuration file for the cloud provider. In this example, the cloud provider is AWS:</p>
+<pre><code class="language-toml">provider = &quot;aws&quot;
+
+[settings]
+accessKeyID = &quot;AWS_ACCESS_KEY_ID&quot;
+secretAccessKey = &quot;AWS_SECRET_ACCESS_KEY&quot;
+bucket = &quot;AWS_BUCKET&quot;
+region = &quot;AWS_REGION&quot;
+key = &quot;IMAGE_KEY&quot;
+</code></pre>
+<p>But be careful here, if you are using <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html">IAM Roles</a>, which is the recommendation, according to the AWS documentation, you need a specific policy that will allow VM import from the S3 bucket to EC2. See the <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html">AWS documentation</a> for more details.</p>
+<p>Once everything is configured, you can trigger a compose as usual with additional image name and cloud provider profile:</p>
+<pre><code>$ sudo composer-cli compose start base-image-with-tmux ami IMAGE_KEY aws-config.toml
+</code></pre>
+<p>where IMAGE_KEY will be the name of your VM Image, once it is uploaded to EC2.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="blueprint-reference"><a class="header" href="#blueprint-reference">Blueprint reference</a></h1>
 <p>Blueprints are simple text files in <a href="https://toml.io/en/">TOML format</a> that describe which packages to install into the image, allowing to specify the packages version. They can also define a limited set of customizations to make to the final image.</p>
 <p>A basic blueprint looks like this:</p>
