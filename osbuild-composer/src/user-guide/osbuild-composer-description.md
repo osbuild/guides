@@ -7,7 +7,7 @@
 
 An **image** is defined by its blueprint and **image type**, which is for example `qcow2` (QEMU Copy On Write disk image) or `AMI` (Amazon Machine Image).
 
-Finally, `osbuild-composer` also supports **upload targets**, which are cloud providers where an image can be stored after it is built. Currently supported cloud providers are [AWS](https://aws.amazon.com/) and [Azure](https://azure.microsoft.com/).
+Finally, `osbuild-composer` also supports **upload targets**, which are cloud providers where an image can be stored after it is built. See the [Uploading cloud images](./uploading-to-cloud.md) section for more details.
 
 ## Example blueprint
 
