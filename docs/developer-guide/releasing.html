@@ -141,11 +141,15 @@
 <h2 id="upstream-release"><a class="header" href="#upstream-release">Upstream release</a></h2>
 <p>Navigate to your local repository in your terminal and call the <code>release.py</code> script. It will interactively take you through the following steps:</p>
 <ol>
-<li>Create a release branch</li>
-<li>Gather all changes in the <code>NEWS.md</code> file and bump the version in <code>osbuild.spec</code> or <code>osbuild-composer.spec</code> (and potentially <code>setup.py</code>)</li>
-<li>Push your changes to your fork and create a pull request</li>
-<li>Create a signed tag for the release</li>
-<li>Create a release on GitHub</li>
+<li>Gather all pull request titles merged to <code>main</code> since the latest release tag</li>
+<li>Create a draft of the next release tag</li>
+<li>Push your signed git tag to <code>main</code></li>
+</ol>
+<p>From here on a <a href="https://github.com/osbuild/release-action">GitHub composite action</a> will take over and</p>
+<ol>
+<li>Create a GitHub release based on the tag (version and message)</li>
+<li>Bump the version in <code>osbuild.spec</code> or <code>osbuild-composer.spec</code> (and potentially <code>setup.py</code>)</li>
+<li>Commit and push this change to <code>main</code> so the version is already reflecting the next release</li>
 </ol>
 <h2 id="fedora-release"><a class="header" href="#fedora-release">Fedora release</a></h2>
 <p>We use packit (see <code>.packit.yml</code> in the osbuild or osbuild-composer repository respectively or the <a href="https://packit.dev/docs/">official packit documentation</a>) to automatically create pull requests against all Fedora releases based on our upstream releases.</p>
