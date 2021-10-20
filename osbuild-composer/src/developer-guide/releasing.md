@@ -10,11 +10,15 @@ Go to the [maintainer-tools repository][maintainer-tools], clone the repository 
 
 Navigate to your local repository in your terminal and call the `release.py` script. It will interactively take you through the following steps:
 
-1. Create a release branch
-2. Gather all changes in the `NEWS.md` file and bump the version in `osbuild.spec` or `osbuild-composer.spec` (and potentially `setup.py`)
-3. Push your changes to your fork and create a pull request
-4. Create a signed tag for the release
-5. Create a release on GitHub
+1. Gather all pull request titles merged to `main` since the latest release tag
+2. Create a draft of the next release tag
+3. Push your signed git tag to `main`
+
+From here on a [GitHub composite action][github-action] will take over and
+
+1. Create a GitHub release based on the tag (version and message)
+2. Bump the version in `osbuild.spec` or `osbuild-composer.spec` (and potentially `setup.py`)
+3. Commit and push this change to `main` so the version is already reflecting the next release
 
 ## Fedora release
 
@@ -42,6 +46,7 @@ The last of releasing a new version is to create a new post on osbuild.org. Just
 [fedora-distgit]: https://src.fedoraproject.org/rpms/osbuild
 [centos-distgit]: https://gitlab.com/redhat/centos-stream/rpms/osbuild
 [maintainer-tools]: https://github.com/osbuild/maintainer-tools
+[github-action]: https://github.com/osbuild/release-action
 [packit-dev]: https://packit.dev/docs/
 [src-fedora]: https://src.fedoraproject.org/rpms/osbuild/pull-requests
 [new-fedora-packager]: https://fedoraproject.org/wiki/Join_the_package_collection_maintainers
