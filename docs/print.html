@@ -585,7 +585,8 @@ The <code>--url</code> in this case is IP address of the container. This tutoria
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uploading-cloud-images"><a class="header" href="#uploading-cloud-images">Uploading cloud images</a></h1>
 <p><code>osbuild-composer</code> can upload images to a cloud provider right after they are built. The configuration is slightly different for each cloud provider. See individual subsections of this documentation.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uploading-an-image-to-aws"><a class="header" href="#uploading-an-image-to-aws">Uploading an image to AWS</a></h1>
-<p><code>osbuild-composer</code> provides the users with a convenient way to upload images directly to AWS right after the image is built. To use this feature, you need one additional configuration file for the cloud provider. In this example, the cloud provider is AWS:</p>
+<p><code>osbuild-composer</code> provides the users with a convenient way to upload images directly to AWS right after the image is built. Before you can use this feature, you have to define <code>vmimport</code> IAM role in your AWS account. See <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-role">VM Import/Export Requirements</a> in AWS documentation.</p>
+<p>Now, you are ready to upload your first image to AWS. Using a text editor of your choice, create a configuration file with the following content: </p>
 <pre><code class="language-toml">provider = &quot;aws&quot;
 
 [settings]
@@ -593,13 +594,21 @@ accessKeyID = &quot;AWS_ACCESS_KEY_ID&quot;
 secretAccessKey = &quot;AWS_SECRET_ACCESS_KEY&quot;
 bucket = &quot;AWS_BUCKET&quot;
 region = &quot;AWS_REGION&quot;
-key = &quot;IMAGE_KEY&quot;
+key = &quot;OBJECT_KEY&quot;
 </code></pre>
-<p>But be careful here, if you are using <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html">IAM Roles</a>, which is the recommendation, according to the AWS documentation, you need a specific policy that will allow VM import from the S3 bucket to EC2. See the <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html">AWS documentation</a> for more details.</p>
+<p>There are several considerations when filling values in this file:</p>
+<ul>
+<li><code>AWS_BUCKET</code> must be in the <code>AWS_REGION</code></li>
+<li>The <code>vmimport</code> role must have read access to the <code>AWS_BUCKET</code></li>
+<li><code>OBJECT_KEY</code> is the name of an intermediate S3 object. It must not exist before the upload, and it will be deleted when the process is done.</li>
+</ul>
+<blockquote>
+<p>If your authentication method requires you to also specify a session token, you can put it in the <code>settings</code> section of the configuration file in a field named <code>sessionToken</code>.</p>
+</blockquote>
 <p>Once everything is configured, you can trigger a compose as usual with additional image name and cloud provider profile:</p>
 <pre><code>$ sudo composer-cli compose start base-image-with-tmux ami IMAGE_KEY aws-config.toml
 </code></pre>
-<p>where IMAGE_KEY will be the name of your VM Image, once it is uploaded to EC2.</p>
+<p>where IMAGE_KEY will be the name of your new AMI, once it is uploaded to EC2.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="blueprint-reference"><a class="header" href="#blueprint-reference">Blueprint reference</a></h1>
 <p>Blueprints are simple text files in <a href="https://toml.io/en/">TOML format</a> that describe which packages to install into the image, allowing to specify the packages version. They can also define a limited set of customizations to make to the final image.</p>
 <p>A basic blueprint looks like this:</p>
