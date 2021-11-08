@@ -1299,8 +1299,8 @@ The &quot;test cases&quot; are defined in <code>test/cases/manifests</code> and 
 </ol>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="releasing"><a class="header" href="#releasing">Releasing</a></h1>
 <p>This guide describes the process of releasing osbuild and osbuild-composer to <a href="https://github.com/osbuild/osbuild">upstream</a>, into <a href="https://src.fedoraproject.org/rpms/osbuild">Fedora</a> and <a href="https://gitlab.com/redhat/centos-stream/rpms/osbuild">CentOS Stream</a>.</p>
-<h2 id="clone-the-release-helper"><a class="header" href="#clone-the-release-helper">Clone the release helper</a></h2>
-<p>Go to the <a href="https://github.com/osbuild/maintainer-tools">maintainer-tools repository</a>, clone the repository and run <code>pip install -r requirements.txt</code> in order to get all the dependencies to be able to execute the <code>release.py</code> script.</p>
+<h2 id="clone-the-release-helpers"><a class="header" href="#clone-the-release-helpers">Clone the release helpers</a></h2>
+<p>Go to the <a href="https://github.com/osbuild/maintainer-tools">maintainer-tools repository</a>, clone the repository and run <code>pip install -r requirements.txt</code> in order to get all the dependencies to be able to execute the <code>release.py</code> and <code>update-distgit.py</code> scripts.</p>
 <h2 id="upstream-release"><a class="header" href="#upstream-release">Upstream release</a></h2>
 <p>Navigate to your local repository in your terminal and call the <code>release.py</code> script. It will interactively take you through the following steps:</p>
 <ol>
@@ -1315,17 +1315,27 @@ The &quot;test cases&quot; are defined in <code>test/cases/manifests</code> and 
 <li>Commit and push this change to <code>main</code> so the version is already reflecting the next release</li>
 </ol>
 <h2 id="fedora-release"><a class="header" href="#fedora-release">Fedora release</a></h2>
-<p>We use packit (see <code>.packit.yml</code> in the osbuild or osbuild-composer repository respectively or the <a href="https://packit.dev/docs/">official packit documentation</a>) to automatically create pull requests against all Fedora releases based on our upstream releases.</p>
-<p>Hence all you need to do is to navigate to <a href="https://src.fedoraproject.org/rpms/osbuild/pull-requests">Fedora package sources</a> once your release commit is merged to <code>main</code> and processed by GitHub Actions and merge the pull request. Please note that in order to merge the new release into the active Fedora releases, you need to be <a href="https://fedoraproject.org/wiki/Join_the_package_collection_maintainers">a Fedora packager</a> and have commit rights for <a href="https://src.fedoraproject.org/rpms/osbuild">the repository</a>.</p>
-<p>Next continue with the <code>release.py</code> script:</p>
+<p>We use packit (see <code>.packit.yml</code> in the osbuild or osbuild-composer repository respectively or the <a href="https://packit.dev/docs/">official packit documentation</a>) to automatically push new releases directly to <a href="https://src.fedoraproject.org/rpms/osbuild">Fedora's dist-git</a>.</p>
+<p>Then our fedora-bot takes over and performs the remaining steps:</p>
 <ol>
 <li>Get a kerberos ticket by running <code>kinit $USER@FEDORAPROJECT.ORG</code></li>
-<li>Call <code>packit build</code> from your local repository</li>
-<li>Check <a href="https://koji.fedoraproject.org/koji/packageinfo?packageID=29756">osbuild koji</a> or <a href="https://koji.fedoraproject.org/koji/packageinfo?packageID=31032">osbuild-composer</a> for the successful build of your release</li>
+<li>Call <code>fedpkg build</code> to schedule Koji builds for each active Fedora release (or: dist-git branch)</li>
+<li>Update <a href="https://bodhi.fedoraproject.org/">Bodhi</a> with the latest release</li>
 </ol>
 <h2 id="centos-stream-9-release"><a class="header" href="#centos-stream-9-release">CentOS Stream 9 release</a></h2>
-<p>There's a wonderful guide on this topic in the section 5 of RHEL Developer Guide. <code>update-distgit.py</code> from the <a href="https://github.com/osbuild/osbuild-composer/blob/main/tools/update-distgit.py">osbuild-composer repository</a> can also save you some time here. The only differences from Fedora are that <code>--pkgtool centos</code> and <code>--release c9s</code> flags need to be used.</p>
-<p>At the time of writing this document, gating tests are not run in CentOS dist-git. You also have to simultaneously open a PR in RHEL dist-git to verify that the test suite passes. Close this PR once the PR in CentOS dist-git is merged.</p>
+<p>Make sure you have all the required tools installed (<code>centpkg</code>,<code>rhelpkg</code>).</p>
+<ol>
+<li>Run <code>centpkg clone $project</code> to get the latest <code>c9s</code> branch (or a simple <code>git pull</code> if you already have a local copy)</li>
+<li>Run <code>update-distgit.py</code> and set at least the upstream release version <code>--version $version</code> and the packaging tool <code>--pkgtool centpkg</code></li>
+<li>If you don't have a fork already on gitlab.com yet, run <code>centpkg fork</code></li>
+<li>Push the release commit to your fork on gitlab.com and create a merge request</li>
+<li>Cherry-pick the same commit and push it to your fork on OSCI's pagure</li>
+<li>Create a pull request on OSCI's pagure</li>
+<li>Wait for the tests to finish, check both your pull request and the OSCI Dashboard for gating test results</li>
+<li>If all gating tests are green (or: okay/waivable) proceed with closing your PR on src.osci</li>
+<li>Merge your PR on gitlab.com</li>
+</ol>
+<p>The automation will take care of the rest, i.e. syncing to RHEL9's dist-git and updating errata.</p>
 <h2 id="spreading-the-word-on-osbuildorg"><a class="header" href="#spreading-the-word-on-osbuildorg">Spreading the word on osbuild.org</a></h2>
 <p>The last of releasing a new version is to create a new post on osbuild.org. Just open a PR in <a href="https://github.com/osbuild/osbuild.github.io">osbuild/osbuild.github.io</a>. You can find a lot of inspiration in existing release posts.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="glossary"><a class="header" href="#glossary">Glossary</a></h1>
