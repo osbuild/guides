@@ -1304,9 +1304,16 @@ The &quot;test cases&quot; are defined in <code>test/cases/manifests</code> and 
 <h2 id="upstream-release"><a class="header" href="#upstream-release">Upstream release</a></h2>
 <p>Navigate to your local repository in your terminal and call the <code>release.py</code> script. It will interactively take you through the following steps:</p>
 <ol>
-<li>Gather all pull request titles merged to <code>main</code> since the latest release tag</li>
-<li>Create a draft of the next release tag</li>
-<li>Push your signed git tag to <code>main</code></li>
+<li>
+<p>Gather all pull request titles merged to <code>main</code> since the latest release tag</p>
+</li>
+<li>
+<p>Create a draft of the next release tag</p>
+<p>While writing the commit message, keep in mind that it needs to conform to both Markdown and git commit message formats, have a look at the commit message for one of the <a href="https://github.com/osbuild/osbuild-composer/tags">recent releases</a> to get a clear idea how it should look like.</p>
+</li>
+<li>
+<p>Push your signed git tag to <code>main</code></p>
+</li>
 </ol>
 <p>From here on a <a href="https://github.com/osbuild/release-action">GitHub composite action</a> will take over and</p>
 <ol>
