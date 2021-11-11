@@ -12,6 +12,8 @@ Navigate to your local repository in your terminal and call the `release.py` scr
 
 1. Gather all pull request titles merged to `main` since the latest release tag
 2. Create a draft of the next release tag
+
+    While writing the commit message, keep in mind that it needs to conform to both Markdown and git commit message formats, have a look at the commit message for one of the [recent releases][recent-releases] to get a clear idea how it should look like.
 3. Push your signed git tag to `main`
 
 From here on a [GitHub composite action][github-action] will take over and
@@ -59,3 +61,4 @@ The last of releasing a new version is to create a new post on osbuild.org. Just
 [osbuild/osbuild.github.io]: https://github.com/osbuild/osbuild.github.io
 [koji]: https://koji.fedoraproject.org
 [bodhi]: https://bodhi.fedoraproject.org/
+[recent-releases]: https://github.com/osbuild/osbuild-composer/tags
