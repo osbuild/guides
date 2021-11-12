@@ -34,17 +34,21 @@ Then our fedora-bot takes over and performs the remaining steps:
 
 ## CentOS Stream 9 release
 
-Make sure you have all the required tools installed (`centpkg`,`rhelpkg`).
+Then our centos-bot takes over and performs the following steps:
 
-1. Run `centpkg clone $project` to get the latest `c9s` branch (or a simple `git pull` if you already have a local copy)
-2. Run `update-distgit.py` and set at least the upstream release version `--version $version` and the packaging tool `--pkgtool centpkg`
-3. If you don't have a fork already on gitlab.com yet, run `centpkg fork`
-4. Push the release commit to your fork on gitlab.com and create a merge request
-5. Cherry-pick the same commit and push it to your fork on OSCI's pagure
+1. Check if there is a more recent release in Fedora rawhide than in CentOS Stream 9
+2. Update dist-git in schutzbot's respective fork with the latest release
+3. Propose a merge request against the main repository
+
+The remaining manual steps are (make sure you have all the required tools installed, i.e. `centpkg`,`rhelpkg`):
+
+1. Go to the merge request, open the Pipeline tab and click "Run pipeline" (schutzbot is an external contributor, so CI is blocked by default)
+2. Clone dist-git and call `centpkg build` to schedule an official build and start the gating tests
+3. Cherry-pick the commit created by schutzbot and push it to OSCI's pagure
 6. Create a pull request on OSCI's pagure
 7. Wait for the tests to finish, check both your pull request and the OSCI Dashboard for gating test results
-8. If all gating tests are green (or: okay/waivable) proceed with closing your PR on src.osci
-9. Merge your PR on gitlab.com
+8. If all tests are green (or: okay/waivable) proceed with closing your PR on OSCI's pagure
+9. Merge schutzbot's merge request on gitlab.com
 
 The automation will take care of the rest, i.e. syncing to RHEL9's dist-git and updating errata.
 
