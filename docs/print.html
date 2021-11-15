@@ -1330,17 +1330,21 @@ The &quot;test cases&quot; are defined in <code>test/cases/manifests</code> and 
 <li>Update <a href="https://bodhi.fedoraproject.org/">Bodhi</a> with the latest release</li>
 </ol>
 <h2 id="centos-stream-9-release"><a class="header" href="#centos-stream-9-release">CentOS Stream 9 release</a></h2>
-<p>Make sure you have all the required tools installed (<code>centpkg</code>,<code>rhelpkg</code>).</p>
+<p>Then our centos-bot takes over and performs the following steps:</p>
 <ol>
-<li>Run <code>centpkg clone $project</code> to get the latest <code>c9s</code> branch (or a simple <code>git pull</code> if you already have a local copy)</li>
-<li>Run <code>update-distgit.py</code> and set at least the upstream release version <code>--version $version</code> and the packaging tool <code>--pkgtool centpkg</code></li>
-<li>If you don't have a fork already on gitlab.com yet, run <code>centpkg fork</code></li>
-<li>Push the release commit to your fork on gitlab.com and create a merge request</li>
-<li>Cherry-pick the same commit and push it to your fork on OSCI's pagure</li>
+<li>Check if there is a more recent release in Fedora rawhide than in CentOS Stream 9</li>
+<li>Update dist-git in schutzbot's respective fork with the latest release</li>
+<li>Propose a merge request against the main repository</li>
+</ol>
+<p>The remaining manual steps are (make sure you have all the required tools installed, i.e. <code>centpkg</code>,<code>rhelpkg</code>):</p>
+<ol>
+<li>Go to the merge request, open the Pipeline tab and click &quot;Run pipeline&quot; (schutzbot is an external contributor, so CI is blocked by default)</li>
+<li>Clone dist-git and call <code>centpkg build</code> to schedule an official build and start the gating tests</li>
+<li>Cherry-pick the commit created by schutzbot and push it to OSCI's pagure</li>
 <li>Create a pull request on OSCI's pagure</li>
 <li>Wait for the tests to finish, check both your pull request and the OSCI Dashboard for gating test results</li>
-<li>If all gating tests are green (or: okay/waivable) proceed with closing your PR on src.osci</li>
-<li>Merge your PR on gitlab.com</li>
+<li>If all tests are green (or: okay/waivable) proceed with closing your PR on OSCI's pagure</li>
+<li>Merge schutzbot's merge request on gitlab.com</li>
 </ol>
 <p>The automation will take care of the rest, i.e. syncing to RHEL9's dist-git and updating errata.</p>
 <h2 id="spreading-the-word-on-osbuildorg"><a class="header" href="#spreading-the-word-on-osbuildorg">Spreading the word on osbuild.org</a></h2>
