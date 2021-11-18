@@ -40,17 +40,23 @@ Then our centos-bot takes over and performs the following steps:
 2. Update dist-git in schutzbot's respective fork with the latest release
 3. Propose a merge request against the main repository
 
-The remaining manual steps are (make sure you have all the required tools installed, i.e. `centpkg`,`rhelpkg`):
+The following steps are manual and not part of the centos-bot automation. Before starting these steps, make sure you have
+the required tools installed, i.e. `centpkg`,`rhelpkg` (see the developer guide prerequisites) for more details). Additionally, you can view the centos-bot Dockerfile for reference.  
+The remaining steps are listed in more detail below:
 
 1. Go to the merge request, open the Pipeline tab and click "Run pipeline" (schutzbot is an external contributor, so CI is blocked by default)
-2. Clone dist-git and call `centpkg build` to schedule an official build and start the gating tests
+2. Fork the OSCI pagure repo
 3. Cherry-pick the commit created by schutzbot and push it to OSCI's pagure
-6. Create a pull request on OSCI's pagure
-7. Wait for the tests to finish, check both your pull request and the OSCI Dashboard for gating test results
-8. If all tests are green (or: okay/waivable) proceed with closing your PR on OSCI's pagure
-9. Merge schutzbot's merge request on gitlab.com
+4. Download the tarball of the release and run `rhpkg new-sources <path-to-tarball>` (this will upload the tarball to the lookaside cache)
+5. Create a pull request on OSCI's pagure
+6. Wait for the tests to finish, check both your pull request and the OSCI Dashboard for gating test results
+7. If all tests are green (or: okay/waivable) proceed with closing your PR on OSCI's pagure
+8. Merge schutzbot's merge request on gitlab.com
+9. Run `centpkg clone $project` to get the latest `c9s` branch (or a simple `git pull` if you already have a local copy)
+10. Lastly, run `centpkg build` from the `c9s` branch of the project
 
 The automation will take care of the rest, i.e. syncing to RHEL9's dist-git and updating errata.
+
 
 ## Spreading the word on osbuild.org
 
