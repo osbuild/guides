@@ -173,15 +173,20 @@
 <li>Update dist-git in schutzbot's respective fork with the latest release</li>
 <li>Propose a merge request against the main repository</li>
 </ol>
-<p>The remaining manual steps are (make sure you have all the required tools installed, i.e. <code>centpkg</code>,<code>rhelpkg</code>):</p>
+<p>The following steps are manual and not part of the centos-bot automation. Before starting these steps, make sure you have
+the required tools installed, i.e. <code>centpkg</code>,<code>rhelpkg</code> (see the developer guide prerequisites for more details). Additionally, you can view the centos-bot Dockerfile for reference.<br />
+The remaining steps are listed in more detail below:</p>
 <ol>
 <li>Go to the merge request, open the Pipeline tab and click &quot;Run pipeline&quot; (schutzbot is an external contributor, so CI is blocked by default)</li>
-<li>Clone dist-git and call <code>centpkg build</code> to schedule an official build and start the gating tests</li>
+<li>Fork the OSCI pagure repo</li>
 <li>Cherry-pick the commit created by schutzbot and push it to OSCI's pagure</li>
+<li>Download the tarball of the release and run <code>rhpkg new-sources &lt;path-to-tarball&gt;</code> (this will upload the tarball to the lookaside cache)</li>
 <li>Create a pull request on OSCI's pagure</li>
 <li>Wait for the tests to finish, check both your pull request and the OSCI Dashboard for gating test results</li>
 <li>If all tests are green (or: okay/waivable) proceed with closing your PR on OSCI's pagure</li>
 <li>Merge schutzbot's merge request on gitlab.com</li>
+<li>Run <code>centpkg clone $project</code> to get the latest <code>c9s</code> branch (or a simple <code>git pull</code> if you already have a local copy)</li>
+<li>Lastly, run <code>centpkg build</code> from the <code>c9s</code> branch of the project</li>
 </ol>
 <p>The automation will take care of the rest, i.e. syncing to RHEL9's dist-git and updating errata.</p>
 <h2 id="spreading-the-word-on-osbuildorg"><a class="header" href="#spreading-the-word-on-osbuildorg">Spreading the word on osbuild.org</a></h2>
