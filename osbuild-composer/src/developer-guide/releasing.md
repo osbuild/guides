@@ -41,7 +41,7 @@ Then our centos-bot takes over and performs the following steps:
 3. Propose a merge request against the main repository
 
 The following steps are manual and not part of the centos-bot automation. Before starting these steps, make sure you have
-the required tools installed, i.e. `centpkg`,`rhelpkg` (see the developer guide prerequisites) for more details). Additionally, you can view the centos-bot Dockerfile for reference.  
+the required tools installed, i.e. `centpkg`,`rhelpkg` (see the developer guide prerequisites for more details). Additionally, you can view the centos-bot Dockerfile for reference.  
 The remaining steps are listed in more detail below:
 
 1. Go to the merge request, open the Pipeline tab and click "Run pipeline" (schutzbot is an external contributor, so CI is blocked by default)
