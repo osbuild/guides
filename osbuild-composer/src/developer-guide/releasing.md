@@ -26,7 +26,7 @@ From here on a [GitHub composite action][github-action] will take over and
 
 We use packit (see `.packit.yml` in the osbuild or osbuild-composer repository respectively or the [official packit documentation][packit-dev]) to automatically push new releases directly to [Fedora's dist-git][fedora-distgit].
 
-Then our fedora-bot takes over and performs the remaining steps:
+Then our [fedora-bot][fedora-bot] takes over and performs the remaining steps:
 
 1. Get a kerberos ticket by running `kinit $USER@FEDORAPROJECT.ORG`
 2. Call `fedpkg build` to schedule Koji builds for each active Fedora release (or: dist-git branch)
@@ -71,4 +71,5 @@ The last of releasing a new version is to create a new post on osbuild.org. Just
 [osbuild/osbuild.github.io]: https://github.com/osbuild/osbuild.github.io
 [koji]: https://koji.fedoraproject.org
 [bodhi]: https://bodhi.fedoraproject.org/
+[fedora-bot]: https://github.com/osbuild/fedora-bot
 [recent-releases]: https://github.com/osbuild/osbuild-composer/tags
