@@ -1323,7 +1323,7 @@ The &quot;test cases&quot; are defined in <code>test/cases/manifests</code> and 
 </ol>
 <h2 id="fedora-release"><a class="header" href="#fedora-release">Fedora release</a></h2>
 <p>We use packit (see <code>.packit.yml</code> in the osbuild or osbuild-composer repository respectively or the <a href="https://packit.dev/docs/">official packit documentation</a>) to automatically push new releases directly to <a href="https://src.fedoraproject.org/rpms/osbuild">Fedora's dist-git</a>.</p>
-<p>Then our fedora-bot takes over and performs the remaining steps:</p>
+<p>Then our <a href="https://github.com/osbuild/fedora-bot">fedora-bot</a> takes over and performs the remaining steps:</p>
 <ol>
 <li>Get a kerberos ticket by running <code>kinit $USER@FEDORAPROJECT.ORG</code></li>
 <li>Call <code>fedpkg build</code> to schedule Koji builds for each active Fedora release (or: dist-git branch)</li>
