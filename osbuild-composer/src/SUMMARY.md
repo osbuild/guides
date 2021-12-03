@@ -9,6 +9,7 @@
     - [Building OSTree container and installer](./user-guide/edge-container+installer.md)
   - [Uploading cloud images](./user-guide/uploading-to-cloud.md)
     - [Uploading an image to AWS](./user-guide/uploading-to-aws.md)
+    - [Uploading an image to Microsoft Azure](./user-guide/uploading-to-azure.md)
 - [Blueprint reference](./blueprint-reference/blueprint-reference.md)
 - [Developer guide](./developer-guide/developer-guide.md)
   - [Workflow](./developer-guide/workflow.md)
