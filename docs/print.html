@@ -667,7 +667,7 @@ user = &quot;root&quot;
 key = &quot;PUBLIC SSH KEY&quot;
 </code></pre>
 <p>The key will be added to the user's <code>authorized_keys</code> file.</p>
-<p><em>Warning: <code>key</code> expects the entire content of <code>~/.ssh/id_rsa.pub</code></em></p>
+<p><em>Warning: <code>key</code> expects the entire content of the public key file, traditionally <code>~/.ssh/id_rsa.pub</code> but any algorithm supported by the OS is valid</em></p>
 <h3 id="additional-user"><a class="header" href="#additional-user">Additional user</a></h3>
 <p>Add a user to the image, and/or set their ssh key. All fields for this section are optional except for the name. The following is a complete example:</p>
 <pre><code class="language-toml">[[customizations.user]]
