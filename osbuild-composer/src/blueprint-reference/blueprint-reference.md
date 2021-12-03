@@ -87,7 +87,7 @@ key = "PUBLIC SSH KEY"
 ```
 The key will be added to the user's `authorized_keys` file.
 
-*Warning: `key` expects the entire content of `~/.ssh/id_rsa.pub`*
+*Warning: `key` expects the entire content of the public key file, traditionally `~/.ssh/id_rsa.pub` but any algorithm supported by the OS is valid*
 
 ### Additional user
 
