@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/osbuild-composer-description.html"><strong aria-hidden="true">1.1.</strong> osbuild-composer description</a></li><li class="chapter-item expanded "><a href="user-guide/installation.html"><strong aria-hidden="true">1.2.</strong> Installation and configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/managing-repositories.html"><strong aria-hidden="true">1.2.1.</strong> Managing repositories</a></li></ol></li><li class="chapter-item expanded "><a href="user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Creating images with the CLI interface</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/building-ostree-images.html"><strong aria-hidden="true">1.3.1.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="user-guide/edge-container+installer.html"><strong aria-hidden="true">1.3.2.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><a href="user-guide/uploading-to-cloud.html"><strong aria-hidden="true">1.4.</strong> Uploading cloud images</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.1.</strong> Uploading an image to AWS</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer-guide/workflow.html"><strong aria-hidden="true">3.1.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="developer-guide/code-style.html"><strong aria-hidden="true">3.2.</strong> Code style</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild.html"><strong aria-hidden="true">3.3.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.4.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">3.5.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="developer-guide/testing.html"><strong aria-hidden="true">3.6.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="developer-guide/releasing.html"><strong aria-hidden="true">3.7.</strong> Releasing</a></li><li class="chapter-item expanded "><a href="developer-guide/glossary.html"><strong aria-hidden="true">3.8.</strong> Glossary</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/osbuild-composer-description.html"><strong aria-hidden="true">1.1.</strong> osbuild-composer description</a></li><li class="chapter-item expanded "><a href="user-guide/installation.html"><strong aria-hidden="true">1.2.</strong> Installation and configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/managing-repositories.html"><strong aria-hidden="true">1.2.1.</strong> Managing repositories</a></li></ol></li><li class="chapter-item expanded "><a href="user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Creating images with the CLI interface</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/building-ostree-images.html"><strong aria-hidden="true">1.3.1.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="user-guide/edge-container+installer.html"><strong aria-hidden="true">1.3.2.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><a href="user-guide/uploading-to-cloud.html"><strong aria-hidden="true">1.4.</strong> Uploading cloud images</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.1.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="user-guide/uploading-to-azure.html"><strong aria-hidden="true">1.4.2.</strong> Uploading an image to Microsoft Azure</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="developer-guide/developer-guide.html"><strong aria-hidden="true">3.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer-guide/workflow.html"><strong aria-hidden="true">3.1.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="developer-guide/code-style.html"><strong aria-hidden="true">3.2.</strong> Code style</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild.html"><strong aria-hidden="true">3.3.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="developer-guide/osbuild-composer.html"><strong aria-hidden="true">3.4.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">3.5.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="developer-guide/testing.html"><strong aria-hidden="true">3.6.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="developer-guide/releasing.html"><strong aria-hidden="true">3.7.</strong> Releasing</a></li><li class="chapter-item expanded "><a href="developer-guide/glossary.html"><strong aria-hidden="true">3.8.</strong> Glossary</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -610,6 +610,46 @@ key = &quot;OBJECT_KEY&quot;
 <pre><code>$ sudo composer-cli compose start base-image-with-tmux ami IMAGE_KEY aws-config.toml
 </code></pre>
 <p>where IMAGE_KEY will be the name of your new AMI, once it is uploaded to EC2.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="uploading-an-image-to-microsoft-azure"><a class="header" href="#uploading-an-image-to-microsoft-azure">Uploading an image to Microsoft Azure</a></h1>
+<p><code>osbuild-composer</code> builds images and delivers them to <a href="https://azure.microsoft.com/en-us/">Microsoft Azure</a>
+automatically. These images are ready to use with <a href="https://azure.microsoft.com/en-us/services/virtual-machines/">virtual machines</a> in the
+Azure cloud.</p>
+<h2 id="initial-setup"><a class="header" href="#initial-setup">Initial setup</a></h2>
+<p>Before you can upload images to Azure with <code>osbuild-composer</code>, your account
+needs some initial setup. Be sure to complete these steps</p>
+<ul>
+<li>Create a resource group</li>
+<li>Create a storage account inside the resource group</li>
+<li>Create a storage container within the storage account</li>
+<li>Gather your access keys</li>
+</ul>
+<p>For a detailed walkthrough on each step within the Azure portal, review the
+<a href="https://www.redhat.com/en/blog/build-rhel-images-azure-image-builder">Build RHEL images for Azure with Image Builder</a> post on the Red Hat Blog.</p>
+<p>Make a note of the following items during the setup so you can provide them to
+<code>osbuild-composer</code> during the build process:</p>
+<ul>
+<li>the name of your storage account</li>
+<li>the name of the storage container inside your storage account</li>
+<li>the access key for your storage account</li>
+</ul>
+<h2 id="deploy"><a class="header" href="#deploy">Deploy</a></h2>
+<p>Push a blueprint containing your image configuration and create a new file
+called <code>azure.toml</code> that contains the information about your Azure storage
+account:</p>
+<pre><code class="language-toml">provider = &quot;azure&quot;
+
+[settings]
+storageAccount = &quot;your storage account name&quot;
+storageAccessKey = &quot;storage access key you copied in the Azure portal&quot;
+container = &quot;your storage container name&quot;
+</code></pre>
+<p>Build and deploy the image to Azure:</p>
+<pre><code class="language-shell">composer-cli compose start my_blueprint vhd my_image_key azure.toml
+</code></pre>
+<p>In this example <code>my_blueprint</code> is the name of the blueprint containing your
+image configuration. Replace <code>my_image_key</code> with the preferred image name you
+want to see in Azure. This is the name that appears inside your storage
+container.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="blueprint-reference"><a class="header" href="#blueprint-reference">Blueprint reference</a></h1>
 <p>Blueprints are simple text files in <a href="https://toml.io/en/">TOML format</a> that describe which packages to install into the image, allowing to specify the packages version. They can also define a limited set of customizations to make to the final image.</p>
 <p>A basic blueprint looks like this:</p>
