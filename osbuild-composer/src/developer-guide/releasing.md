@@ -6,6 +6,14 @@ This guide describes the process of releasing osbuild and osbuild-composer to [u
 
 Go to the [maintainer-tools repository][maintainer-tools], clone the repository and run `pip install -r requirements.txt` in order to get all the dependencies to be able to execute the `release.py` and `update-distgit.py` scripts.
 
+It's also advised to set a GitHub personal access token, otherwise you might run into API usage quotas. Go to [Personal access tokens][github-token] on GitHub and create a new token with scope `public_repo`. Now, create a new packit user configuration at `~/.config/packit.yaml` and paste there the following content:
+
+```
+authentication:
+  github.com:
+    token: [YOUR_GITHUB_PERSONAL_ACCESS_TOKEN]
+```
+
 ## Upstream release
 
 Navigate to your local repository in your terminal and call the `release.py` script. It will interactively take you through the following steps:
@@ -66,6 +74,7 @@ The last of releasing a new version is to create a new post on osbuild.org. Just
 [fedora-distgit]: https://src.fedoraproject.org/rpms/osbuild
 [centos-distgit]: https://gitlab.com/redhat/centos-stream/rpms/osbuild
 [maintainer-tools]: https://github.com/osbuild/maintainer-tools
+[github-token]: https://github.com/settings/tokens
 [github-action]: https://github.com/osbuild/release-action
 [packit-dev]: https://packit.dev/docs/
 [osbuild/osbuild.github.io]: https://github.com/osbuild/osbuild.github.io
