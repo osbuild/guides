@@ -138,6 +138,11 @@
 <p>This guide describes the process of releasing osbuild and osbuild-composer to <a href="https://github.com/osbuild/osbuild">upstream</a>, into <a href="https://src.fedoraproject.org/rpms/osbuild">Fedora</a> and <a href="https://gitlab.com/redhat/centos-stream/rpms/osbuild">CentOS Stream</a>.</p>
 <h2 id="clone-the-release-helpers"><a class="header" href="#clone-the-release-helpers">Clone the release helpers</a></h2>
 <p>Go to the <a href="https://github.com/osbuild/maintainer-tools">maintainer-tools repository</a>, clone the repository and run <code>pip install -r requirements.txt</code> in order to get all the dependencies to be able to execute the <code>release.py</code> and <code>update-distgit.py</code> scripts.</p>
+<p>It's also advised to set a GitHub personal access token, otherwise you might run into API usage quotas. Go to <a href="https://github.com/settings/tokens">Personal access tokens</a> on GitHub and create a new token with scope <code>public_repo</code>. Now, create a new packit user configuration at <code>~/.config/packit.yaml</code> and paste there the following content:</p>
+<pre><code>authentication:
+  github.com:
+    token: [YOUR_GITHUB_PERSONAL_ACCESS_TOKEN]
+</code></pre>
 <h2 id="upstream-release"><a class="header" href="#upstream-release">Upstream release</a></h2>
 <p>Navigate to your local repository in your terminal and call the <code>release.py</code> script. It will interactively take you through the following steps:</p>
 <ol>
