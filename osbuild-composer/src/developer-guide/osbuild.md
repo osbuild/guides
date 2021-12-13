@@ -259,3 +259,49 @@ find . -maxdepth 2 -type f -executable -name 'org.osbuild.*' -print0 |
  ```
 
 Now run the script and use the entrypoint to execute OSBuild from git checkout.
+
+## Stage development
+
+### Stage unit testing
+
+To update a stage unit test, modify appropriate `test/data/stages/<stage_suffix>/b.mpp.json`.
+
+Regenerate testing manifests:
+
+```shell
+make test-data
+```
+
+You can run `osbuild` stage test only for a specific stage:
+
+```shell
+sudo python3 -m pytest test/run/test_stages.py -k test_<stage_suffix>
+```
+
+Based on the result of the unit test adjust `test/data/stages/<stage_suffix>/diff.json`
+
+### Inspecting filesystem tree modified by the stage using unit test manifest
+
+```shell
+# needed only first time
+mkdir -p store/
+mkdir -p output/
+
+rm -rf rpmbuild
+make rpm
+sudo dnf install -y rpmbuild/RPMS/noarch/*.rpm
+sudo rm -rf store/*
+
+# This command assumes that the latest pipeline stage, which you want to inspect has index "1".
+# If this is not true, adjust the index in the `jq .pipeline.stages[1].id`
+STAGE_ID=$(osbuild --inspect test/data/stages/<stage_suffix>/b.json | jq .pipeline.stages[1].id | tr -d '"')
+sudo osbuild --store store/ --checkpoint "$STAGE_ID" --export "$STAGE_ID" --output-directory output/ test/data/stages/<stage_suffix>/b.json
+```
+
+The modified filesystem tree will be located in **store/objects/<stage_id>/**
+
+### Special case - the stage requires additional dependency
+
+If the additional dependency is not present int the **build** pipeline of the stage test manifest, you'll have to fix it. Modify the appropriate manifest imported in the **build** pipeline of the `b.mpp.json` file. This may be e.g. the `f34-build.json` present in `test/data/manifests/`. Modify it's "mpp" version, e.g. `test/data/manifests/f34-build.mpp.json` and run `make test-data` in the git checkout root.
+
+osbuild CI runs unit tests inside a special `osbuild-ci` container. If the stage imports a 3rd party Python module, then you will have to make sure, that this Python module is present in the container image. Adding the dependency to the **build** pipeline will cover only the case when stages are tested, but not other types of unit testing. In order to extend the `osbuild-ci` image, you need to submit a Pull Request against the [OSBuild Containers](https://github.com/osbuild/containers) repository.
