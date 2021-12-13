@@ -368,6 +368,35 @@ find . -maxdepth 2 -type f -executable -name 'org.osbuild.*' -print0 |
    done
 </code></pre>
 <p>Now run the script and use the entrypoint to execute OSBuild from git checkout.</p>
+<h2 id="stage-development"><a class="header" href="#stage-development">Stage development</a></h2>
+<h3 id="stage-unit-testing"><a class="header" href="#stage-unit-testing">Stage unit testing</a></h3>
+<p>To update a stage unit test, modify appropriate <code>test/data/stages/&lt;stage_suffix&gt;/b.mpp.json</code>.</p>
+<p>Regenerate testing manifests:</p>
+<pre><code class="language-shell">make test-data
+</code></pre>
+<p>You can run <code>osbuild</code> stage test only for a specific stage:</p>
+<pre><code class="language-shell">sudo python3 -m pytest test/run/test_stages.py -k test_&lt;stage_suffix&gt;
+</code></pre>
+<p>Based on the result of the unit test adjust <code>test/data/stages/&lt;stage_suffix&gt;/diff.json</code></p>
+<h3 id="inspecting-filesystem-tree-modified-by-the-stage-using-unit-test-manifest"><a class="header" href="#inspecting-filesystem-tree-modified-by-the-stage-using-unit-test-manifest">Inspecting filesystem tree modified by the stage using unit test manifest</a></h3>
+<pre><code class="language-shell"># needed only first time
+mkdir -p store/
+mkdir -p output/
+
+rm -rf rpmbuild
+make rpm
+sudo dnf install -y rpmbuild/RPMS/noarch/*.rpm
+sudo rm -rf store/*
+
+# This command assumes that the latest pipeline stage, which you want to inspect has index &quot;1&quot;.
+# If this is not true, adjust the index in the `jq .pipeline.stages[1].id`
+STAGE_ID=$(osbuild --inspect test/data/stages/&lt;stage_suffix&gt;/b.json | jq .pipeline.stages[1].id | tr -d '&quot;')
+sudo osbuild --store store/ --checkpoint &quot;$STAGE_ID&quot; --export &quot;$STAGE_ID&quot; --output-directory output/ test/data/stages/&lt;stage_suffix&gt;/b.json
+</code></pre>
+<p>The modified filesystem tree will be located in <strong>store/objects/&lt;stage_id&gt;/</strong></p>
+<h3 id="special-case---the-stage-requires-additional-dependency"><a class="header" href="#special-case---the-stage-requires-additional-dependency">Special case - the stage requires additional dependency</a></h3>
+<p>If the additional dependency is not present int the <strong>build</strong> pipeline of the stage test manifest, you'll have to fix it. Modify the appropriate manifest imported in the <strong>build</strong> pipeline of the <code>b.mpp.json</code> file. This may be e.g. the <code>f34-build.json</code> present in <code>test/data/manifests/</code>. Modify it's &quot;mpp&quot; version, e.g. <code>test/data/manifests/f34-build.mpp.json</code> and run <code>make test-data</code> in the git checkout root.</p>
+<p>osbuild CI runs unit tests inside a special <code>osbuild-ci</code> container. If the stage imports a 3rd party Python module, then you will have to make sure, that this Python module is present in the container image. Adding the dependency to the <strong>build</strong> pipeline will cover only the case when stages are tested, but not other types of unit testing. In order to extend the <code>osbuild-ci</code> image, you need to submit a Pull Request against the <a href="https://github.com/osbuild/containers">OSBuild Containers</a> repository.</p>
 
                     </main>
 
