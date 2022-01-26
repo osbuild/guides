@@ -5,3 +5,5 @@
 This guide contains instructions on installing `osbuild-composer` service and its basic usage.
 
 If you want to fix a typo, or even contribute new content, the sources for this webpage are hosted in [osbuild/guides GitHub repository](https://github.com/osbuild/guides/).
+
+For Red Hatters, the internal guides can be found [here](https://osbuild.pages.redhat.com/internal-guides/).
