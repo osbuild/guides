@@ -16,6 +16,10 @@ authentication:
 
 ## Upstream release
 
+Note: [Upstream releases are done automatically][upstream-release] on a fortnightly alternating schedule, meaning one week we release osbuild and then the next week we release osbuild-composer.
+
+### Manual upstream release
+
 Navigate to your local repository in your terminal and call the `release.py` script. It will interactively take you through the following steps:
 
 1. Gather all pull request titles merged to `main` since the latest release tag
@@ -60,3 +64,4 @@ The last of releasing a new version is to create a new post on osbuild.org. Just
 [bodhi]: https://bodhi.fedoraproject.org/
 [fedora-bot]: https://github.com/osbuild/fedora-bot
 [recent-releases]: https://github.com/osbuild/osbuild-composer/tags
+[upstream-release]: https://github.com/osbuild/release-action/tree/create-tag
