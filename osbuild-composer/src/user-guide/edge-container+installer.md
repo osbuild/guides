@@ -119,7 +119,7 @@ $ composer-cli blueprints push empty.toml
 
 Start the build:
 ```
-$ composer-cli compose start-ostree --ref "rhel/edge/example" --url http://10.0.2.2:8000/repo/ empty edge-installer
+$ composer-cli compose start-ostree --ref "rhel/edge/example" --url http://10.0.2.2:8080/repo/ empty edge-installer
 Compose 09d98a67-a401-4613-9a5b-b93f8a6e695f added to the queue
 ```
 *Note: In RHEL 8.4, the image type was called `rhel-edge-installer`. It has been renamed to `edge-installer` in 8.5 onwards.*
