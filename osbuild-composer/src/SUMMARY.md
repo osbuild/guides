@@ -10,6 +10,7 @@
   - [Uploading cloud images](./user-guide/uploading-to-cloud.md)
     - [Uploading an image to AWS](./user-guide/uploading-to-aws.md)
     - [Uploading an image to AWS S3](./user-guide/uploading-to-aws-s3.md)
+    - [Uploading an image to GCP](./user-guide/uploading-to-gcp.md)
     - [uploading an image to Generic S3](./user-guide/uploading-to-generic-s3.md)
     - [Uploading an image to Microsoft Azure](./user-guide/uploading-to-azure.md)
     - [Uploading an image to OCI](./user-guide/uploading-to-oci.md)
