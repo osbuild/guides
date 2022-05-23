@@ -18,6 +18,7 @@ key = "OBJECT_KEY"
 
 There are several considerations when filling values in this file:
 - `AWS_REGION` must still be set (e.g. to us-east-1) even if it has no meaning in your S3 server
+- If your server is using HTTPS with a certificate signed by your own CA, you can either pass the CA bundle by setting the field `ca_bundle`, pointing it to the CA's public certificate, or skip SSL verification by setting `skip_ssl_verification` to `true`
 
 Once everything is configured, you can trigger a compose as usual with additional image name and cloud provider profile:
 ```
