@@ -1,12 +1,5 @@
 # Workflow
 
-## Adding news
-
-When adding a new feature to a project which should be included in the release notes, or used for
-announcements, please add it under `docs/news` in the form of a short markdown document.
-
-Bug fixes, test changes, etc... should not be announced there.
-
 ## Git Workflow
 
 ### Commits
