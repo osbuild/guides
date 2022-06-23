@@ -1019,10 +1019,6 @@ size = 2147483648
 <img src="developer-guide/osbuild-composer.svg" alt="" /></p>
 <p>In the very basic use case where <code>osbuild-composer</code> is running locally, the &quot;pool of workers&quot; also lives on the user's host machine. The <code>osbuild-composer</code> and <code>osbuild-worker</code> processes are spawned by systemd. We don't support any other means of spawning these processes, as they rely on systemd to open sockets, create state directories etc. Additionally, <code>osbuild-worker</code> spawns osbuild as a subprocess to create the image itself. The whole image building machinery is spawned from a user process, for example, <code>composer-cli</code>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="workflow"><a class="header" href="#workflow">Workflow</a></h1>
-<h2 id="adding-news"><a class="header" href="#adding-news">Adding news</a></h2>
-<p>When adding a new feature to a project which should be included in the release notes, or used for
-announcements, please add it under <code>docs/news</code> in the form of a short markdown document.</p>
-<p>Bug fixes, test changes, etc... should not be announced there.</p>
 <h2 id="git-workflow"><a class="header" href="#git-workflow">Git Workflow</a></h2>
 <h3 id="commits"><a class="header" href="#commits">Commits</a></h3>
 <p>Commits should be easy to read.</p>
