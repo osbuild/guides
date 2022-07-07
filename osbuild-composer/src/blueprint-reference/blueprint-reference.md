@@ -272,6 +272,20 @@ In addition to the root mountpoint, `/`, the following `mountpoints` and their s
 - `/app`
 - `/data`
 
+### OpenSCAP Support
+
+From `RHEL8.7` & `RHEL-9.1` support has been added for `OpenSCAP` build-time remediation. The blueprints accept two fields:
+- the `datastream` path to the remediation instructions
+- the `profile_id` of the desired security profile
+
+Please see [the OpenSCAP page]('../user-guide/oscap-remediation.md') for the list of available security profiles.
+
+```toml
+[customizations.oscap]
+datastream = "/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml"
+profile_id = "xccdf_org.ssgproject.content_profile_cis"
+```
+
 ## Example Blueprint
 
 The following blueprint example will:
@@ -337,4 +351,8 @@ name = "students"
 [[customizations.filesystem]]
 mountpoint = "/"
 size = 2147483648
+
+[customizations.oscap]
+datastream = "/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml"
+profile_id = "xccdf_org.ssgproject.content_profile_cis"
 ```
