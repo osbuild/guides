@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Latest RPM builds - OSBuild guides</title>
+        <title>Image Builder service architecture - OSBuild guides</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/osbuild-composer-description.html"><strong aria-hidden="true">1.1.</strong> osbuild-composer description</a></li><li class="chapter-item expanded "><a href="../user-guide/installation.html"><strong aria-hidden="true">1.2.</strong> Installation and configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/managing-repositories.html"><strong aria-hidden="true">1.2.1.</strong> Managing repositories</a></li></ol></li><li class="chapter-item expanded "><a href="../user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Creating images with the CLI interface</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/building-ostree-images.html"><strong aria-hidden="true">1.3.1.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="../user-guide/edge-container+installer.html"><strong aria-hidden="true">1.3.2.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-cloud.html"><strong aria-hidden="true">1.4.</strong> Uploading cloud images</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.1.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws-s3.html"><strong aria-hidden="true">1.4.2.</strong> Uploading an image to AWS S3</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-gcp.html"><strong aria-hidden="true">1.4.3.</strong> Uploading an image to GCP</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-generic-s3.html"><strong aria-hidden="true">1.4.4.</strong> uploading an image to Generic S3</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-azure.html"><strong aria-hidden="true">1.4.5.</strong> Uploading an image to Microsoft Azure</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-oci.html"><strong aria-hidden="true">1.4.6.</strong> Uploading an image to OCI</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="../image-builder-service/architecture.html"><strong aria-hidden="true">3.</strong> Image Builder service architecture</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-crc.html"><strong aria-hidden="true">3.1.</strong> Backend</a></li><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-composer.html"><strong aria-hidden="true">3.2.</strong> Composer</a></li><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-workers.html"><strong aria-hidden="true">3.3.</strong> Workers</a></li></ol></li><li class="chapter-item expanded "><a href="../developer-guide/developer-guide.html"><strong aria-hidden="true">4.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/workflow.html"><strong aria-hidden="true">4.1.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="../developer-guide/code-style.html"><strong aria-hidden="true">4.2.</strong> Code style</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild.html"><strong aria-hidden="true">4.3.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild-composer.html"><strong aria-hidden="true">4.4.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="../developer-guide/latest-rpm-builds.html" class="active"><strong aria-hidden="true">4.5.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="../developer-guide/testing.html"><strong aria-hidden="true">4.6.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="../developer-guide/releasing.html"><strong aria-hidden="true">4.7.</strong> Releasing</a></li><li class="chapter-item expanded "><a href="../developer-guide/glossary.html"><strong aria-hidden="true">4.8.</strong> Glossary</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/osbuild-composer-description.html"><strong aria-hidden="true">1.1.</strong> osbuild-composer description</a></li><li class="chapter-item expanded "><a href="../user-guide/installation.html"><strong aria-hidden="true">1.2.</strong> Installation and configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/managing-repositories.html"><strong aria-hidden="true">1.2.1.</strong> Managing repositories</a></li></ol></li><li class="chapter-item expanded "><a href="../user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Creating images with the CLI interface</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/building-ostree-images.html"><strong aria-hidden="true">1.3.1.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="../user-guide/edge-container+installer.html"><strong aria-hidden="true">1.3.2.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-cloud.html"><strong aria-hidden="true">1.4.</strong> Uploading cloud images</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.1.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws-s3.html"><strong aria-hidden="true">1.4.2.</strong> Uploading an image to AWS S3</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-gcp.html"><strong aria-hidden="true">1.4.3.</strong> Uploading an image to GCP</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-generic-s3.html"><strong aria-hidden="true">1.4.4.</strong> uploading an image to Generic S3</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-azure.html"><strong aria-hidden="true">1.4.5.</strong> Uploading an image to Microsoft Azure</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-oci.html"><strong aria-hidden="true">1.4.6.</strong> Uploading an image to OCI</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="../image-builder-service/architecture.html" class="active"><strong aria-hidden="true">3.</strong> Image Builder service architecture</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-crc.html"><strong aria-hidden="true">3.1.</strong> Backend</a></li><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-composer.html"><strong aria-hidden="true">3.2.</strong> Composer</a></li><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-workers.html"><strong aria-hidden="true">3.3.</strong> Workers</a></li></ol></li><li class="chapter-item expanded "><a href="../developer-guide/developer-guide.html"><strong aria-hidden="true">4.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/workflow.html"><strong aria-hidden="true">4.1.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="../developer-guide/code-style.html"><strong aria-hidden="true">4.2.</strong> Code style</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild.html"><strong aria-hidden="true">4.3.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild-composer.html"><strong aria-hidden="true">4.4.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="../developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">4.5.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="../developer-guide/testing.html"><strong aria-hidden="true">4.6.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="../developer-guide/releasing.html"><strong aria-hidden="true">4.7.</strong> Releasing</a></li><li class="chapter-item expanded "><a href="../developer-guide/glossary.html"><strong aria-hidden="true">4.8.</strong> Glossary</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,27 +134,74 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="latest-rpm-builds"><a class="header" href="#latest-rpm-builds">Latest RPM builds</a></h1>
-<p>While developing osbuild and osbuild composer it is convenient to download the latest RPM builds directly from upstream. The repositories in the osbuild organization don't use any automation from Copr or Packit. Instead, the RPMs are built directly in the Jenkins CI and stored in AWS under the commit hash which allows anyone to download precisely the version built from a desired commit.</p>
-<p>The URL is specified in the <code>mockbuild.sh</code> scripts in the osbuild and osbuild-composer repositories:</p>
-<ul>
-<li><a href="https://github.com/osbuild/osbuild-composer/blob/f091af55d89ac9e77aa34b94e0180aacead3f32e/schutzbot/mockbuild.sh#L27">mockbuild.sh in osbuild-composer</a></li>
-<li><a href="https://github.com/osbuild/osbuild/blob/850ee4466f0e3335d4c21871a5f2549f2f571965/schutzbot/mockbuild.sh#L27">mockbuild.sh in osbuild</a></li>
-</ul>
-<p>And the final resulting URL is displayed in the Jenkins output (available only from Red Hat VPN).</p>
-<p><em>Common trap: If you click on a link to a repo, such as:</em></p>
-<p><a href="http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/">http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/</a></p>
-<p><em>you will get HTTP 403 because that's a directory and we don't allow directory listing. If you append a known file path, such as</em> <code>repodata/repomd.xml</code> <em>you will see that the repo is there:</em></p>
-<p><a href="http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/repodata/repomd.xml">http://osbuild-composer-repos.s3-website.us-east-2.amazonaws.com/osbuild-composer/rhel-8.4/x86_64/6b67ca34caf0ff9d31fabb398f50533c1e41c847/repodata/repomd.xml</a></p>
+                        <h2 id="current-architecture"><a class="header" href="#current-architecture">Current architecture</a></h2>
+<p>This diagram shows the overall architecture, and each sub-section goes into details about the three main
+components, which are run as independent services.</p>
+<pre><code class="language-plantuml">@startuml
+
+skinparam defaultTextAlignment center
+
+!define SPRITESURL https://raw.githubusercontent.com/plantuml-stdlib/gilbarbara-plantuml-sprites/v1.0/sprites
+!includeurl SPRITESURL/openshift.puml
+
+!include &lt;aws/common&gt;
+!include &lt;aws/Compute/AmazonEC2/AmazonEC2&gt;
+!include &lt;aws/Compute/AmazonEC2/instances/instances&gt;
+!include &lt;aws/Database/AmazonRDS/AmazonRDS.puml&gt;
+!include &lt;aws/Database/AmazonRDS/PostgreSQLinstance/PostgreSQLinstance&gt;
+
+skinparam linetype ortho
+
+actor actor
+
+component &quot;&lt;$openshift&gt;\napi.openshift.com&quot; as oc {
+    rectangle &quot;image-builder-composer&quot;
+
+}
+
+component &quot;&lt;$openshift&gt;\nconsole.redhat.com&quot; as crc {
+    rectangle &quot;image-builder-crc&quot;
+
+}
+
+AMAZONEC2(ec2) {
+    INSTANCES(workerfleet, worker fleet)
+}
+
+AMAZONRDS(ibdb) {
+    POSTGRESQLINSTANCE(db1, image-builder-db\ninsights account)
+}
+
+AMAZONRDS(composerdb) {
+    POSTGRESQLINSTANCE(db2, composer-db\nappsre account)
+}
+
+actor -right-&gt; [image-builder-crc]: **A**
+[image-builder-crc] -down-&gt; db1
+[image-builder-composer] -down-&gt; db2
+[image-builder-crc] -right-&gt; [image-builder-composer]: **B**
+workerfleet -&gt; [image-builder-composer]: **C**
+
+legend right
+A. User connection to the UI under crc/insights/image-builder, using RH SSO for auth.
+B. ib-crc connects to composer to queue/query images, using RH SSO for auth.
+C. The workers connect to composer to request jobs and post results.
+endlegend
+
+@enduml
+</code></pre>
+<p>The metadata defining the service for App-Interface is kept upstream and open as templates for both the <a href="https://github.com/osbuild/osbuild-composer/blob/main/templates/composer.yml">osbuild-composer</a> and <a href="https://github.com/osbuild/image-builder/blob/main/templates/image-builder.yml">image-builder components</a>.
+The tooling to operate the service is to large parts open source and publicly accessible, e.g. qontract in the form of <a href="https://github.com/app-sre/qontract-server">qontract-server</a>, <a href="https://github.com/app-sre/qontract-reconcile">qontract-reconcile</a>.
+The architecture documents in this section comply with the AppSRE contract.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../developer-guide/osbuild-composer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../blueprint-reference/blueprint-reference.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../developer-guide/testing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../image-builder-service/image-builder-crc.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -163,10 +210,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../developer-guide/osbuild-composer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../blueprint-reference/blueprint-reference.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../developer-guide/testing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../image-builder-service/image-builder-crc.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
