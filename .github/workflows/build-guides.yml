@@ -1,6 +1,7 @@
 name: Build guides
 
 on:
+  pull_request:
   push:
     branches:
     - main
@@ -31,8 +32,12 @@ jobs:
     - name: Render osbuild-composer guide
       working-directory: sources/osbuild-composer
       run: |
+        sudo apt update && sudo apt install -y librust-openssl-dev cargo graphviz plantuml
+        cargo install mdbook-plantuml
+        export PATH=$PATH:$HOME/.cargo/bin
         mdbook build -d ../../rendered/docs/
-    - name: Publish the rendered
+    - name: Publish the rendered guide
+      if: ${{ github.ref == 'ref/heads/main' }}
       working-directory: rendered
       run: |
         pwd
