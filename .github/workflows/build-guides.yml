@@ -37,7 +37,7 @@ jobs:
         export PATH=$PATH:$HOME/.cargo/bin
         mdbook build -d ../../rendered/docs/
     - name: Publish the rendered guide
-      if: ${{ github.ref == 'ref/heads/main' }}
+      if: ${{ github.ref == 'refs/heads/main' }}
       working-directory: rendered
       run: |
         pwd
