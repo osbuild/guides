@@ -137,59 +137,7 @@
                         <h2 id="current-architecture"><a class="header" href="#current-architecture">Current architecture</a></h2>
 <p>This diagram shows the overall architecture, and each sub-section goes into details about the three main
 components, which are run as independent services.</p>
-<pre><code class="language-plantuml">@startuml
-
-skinparam defaultTextAlignment center
-
-!define SPRITESURL https://raw.githubusercontent.com/plantuml-stdlib/gilbarbara-plantuml-sprites/v1.0/sprites
-!includeurl SPRITESURL/openshift.puml
-
-!include &lt;aws/common&gt;
-!include &lt;aws/Compute/AmazonEC2/AmazonEC2&gt;
-!include &lt;aws/Compute/AmazonEC2/instances/instances&gt;
-!include &lt;aws/Database/AmazonRDS/AmazonRDS.puml&gt;
-!include &lt;aws/Database/AmazonRDS/PostgreSQLinstance/PostgreSQLinstance&gt;
-
-skinparam linetype ortho
-
-actor actor
-
-component &quot;&lt;$openshift&gt;\napi.openshift.com&quot; as oc {
-    rectangle &quot;image-builder-composer&quot;
-
-}
-
-component &quot;&lt;$openshift&gt;\nconsole.redhat.com&quot; as crc {
-    rectangle &quot;image-builder-crc&quot;
-
-}
-
-AMAZONEC2(ec2) {
-    INSTANCES(workerfleet, worker fleet)
-}
-
-AMAZONRDS(ibdb) {
-    POSTGRESQLINSTANCE(db1, image-builder-db\ninsights account)
-}
-
-AMAZONRDS(composerdb) {
-    POSTGRESQLINSTANCE(db2, composer-db\nappsre account)
-}
-
-actor -right-&gt; [image-builder-crc]: **A**
-[image-builder-crc] -down-&gt; db1
-[image-builder-composer] -down-&gt; db2
-[image-builder-crc] -right-&gt; [image-builder-composer]: **B**
-workerfleet -&gt; [image-builder-composer]: **C**
-
-legend right
-A. User connection to the UI under crc/insights/image-builder, using RH SSO for auth.
-B. ib-crc connects to composer to queue/query images, using RH SSO for auth.
-C. The workers connect to composer to request jobs and post results.
-endlegend
-
-@enduml
-</code></pre>
+<p><img src="../mdbook-plantuml-img/a1e997e9178fc2e9e87a70f6298a63261bb2590b.svg" alt="" /></p>
 <p>The metadata defining the service for App-Interface is kept upstream and open as templates for both the <a href="https://github.com/osbuild/osbuild-composer/blob/main/templates/composer.yml">osbuild-composer</a> and <a href="https://github.com/osbuild/image-builder/blob/main/templates/image-builder.yml">image-builder components</a>.
 The tooling to operate the service is to large parts open source and publicly accessible, e.g. qontract in the form of <a href="https://github.com/app-sre/qontract-server">qontract-server</a>, <a href="https://github.com/app-sre/qontract-reconcile">qontract-reconcile</a>.
 The architecture documents in this section comply with the AppSRE contract.</p>
