@@ -39,6 +39,24 @@ name = "openssh-server"
 version = "8.*"
 ```
 
+## Containers
+
+`[[containers]]` entries describe the container images to be embedded into the image.
+The `source` field is required and is a reference to a container image at a registry.
+A tag or digest can be specified. If none is given the `latest` tag is used. The name
+to be used locally can be selected via the `name` field. Transport layer security can
+be controlled via the optional `tls-verify` boolean field. The default is `true`.
+The container is pulled during the image build and stored in the image at the default
+local container storage location that is appropriate for the image type, so that all
+support container-tools like `podman` and `cri-o` will be able to work with it.
+The embedded containers are not started.
+
+To embed the latest fedora container from http://quay.io, add this to your blueprint:
+```toml
+[[containers]]
+source = "quay.io/fedora/fedora:latest"
+```
+
 ## Groups
 
 The `[[groups]]` entries describe a group of packages to be installed into the image. Package groups are defined in the repository metadata. Each group has a descriptive name used primarily for display in user interfaces and an ID more commonly used in kickstart files. Here, the ID is the expected way of listing a group.
