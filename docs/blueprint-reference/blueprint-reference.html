@@ -164,6 +164,20 @@ version = &quot;2.9a&quot;
 name = &quot;openssh-server&quot;
 version = &quot;8.*&quot;
 </code></pre>
+<h2 id="containers"><a class="header" href="#containers">Containers</a></h2>
+<p><code>[[containers]]</code> entries describe the container images to be embedded into the image.
+The <code>source</code> field is required and is a reference to a container image at a registry.
+A tag or digest can be specified. If none is given the <code>latest</code> tag is used. The name
+to be used locally can be selected via the <code>name</code> field. Transport layer security can
+be controlled via the optional <code>tls-verify</code> boolean field. The default is <code>true</code>.
+The container is pulled during the image build and stored in the image at the default
+local container storage location that is appropriate for the image type, so that all
+support container-tools like <code>podman</code> and <code>cri-o</code> will be able to work with it.
+The embedded containers are not started.</p>
+<p>To embed the latest fedora container from http://quay.io, add this to your blueprint:</p>
+<pre><code class="language-toml">[[containers]]
+source = &quot;quay.io/fedora/fedora:latest&quot;
+</code></pre>
 <h2 id="groups"><a class="header" href="#groups">Groups</a></h2>
 <p>The <code>[[groups]]</code> entries describe a group of packages to be installed into the image. Package groups are defined in the repository metadata. Each group has a descriptive name used primarily for display in user interfaces and an ID more commonly used in kickstart files. Here, the ID is the expected way of listing a group.</p>
 <p>Groups have three different ways of categorizing their packages: mandatory, default, and optional. For purposes of blueprints, just mandatory and default packages will be installed. There is no mechanism for selecting optional packages.</p>
