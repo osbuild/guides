@@ -4,6 +4,7 @@
   - [osbuild-composer description](./user-guide/osbuild-composer-description.md)
   - [Installation and configuration](./user-guide/installation.md)
     - [Managing repositories](./user-guide/managing-repositories.md)
+	- [Container registry credentials](./user-guide/container-auth.md)
   - [Creating images with the CLI interface](./user-guide/building-an-image-from-cli.md)
     - [Building OSTree image](./user-guide/building-ostree-images.md)
     - [Building OSTree container and installer](./user-guide/edge-container+installer.md)

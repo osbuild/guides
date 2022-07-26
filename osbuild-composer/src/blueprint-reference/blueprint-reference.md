@@ -57,6 +57,10 @@ To embed the latest fedora container from http://quay.io, add this to your bluep
 source = "quay.io/fedora/fedora:latest"
 ```
 
+To access protected container resources a `containers-auth.json(5)` file can be used,
+see [Container registry credentials](../user-guide/container-auth.md).
+
+
 ## Groups
 
 The `[[groups]]` entries describe a group of packages to be installed into the image. Package groups are defined in the repository metadata. Each group has a descriptive name used primarily for display in user interfaces and an ID more commonly used in kickstart files. Here, the ID is the expected way of listing a group.
