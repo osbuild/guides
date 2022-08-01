@@ -137,16 +137,16 @@
                         <h1 id="container-registry-credentials"><a class="header" href="#container-registry-credentials">Container registry credentials</a></h1>
 <p>All communication with container registries is done by the <code>osbuild-worker</code>
 service. It can be configured via the <code>/etc/osbuild-worker/osbuild-worker.toml</code>
-configuration file. It is read only once at on service start, so the service
+configuration file. It is read only once at service start, so the service
 needs to be restarted after making any changes.</p>
 <p>The configuration file has a <code>containers</code> section with an <code>auth_file_path</code>
-field that is a string referring to a path of a<code>containers-auth.json(5)</code> file
+field that is a string referring to a path of a <code>containers-auth.json(5)</code> file
 to be used for accessing protected resources. An example configuration could
 look like this:</p>
 <pre><code class="language-Toml">[containers]
 auth_file_path = &quot;/etc/osbuild-worker/containers-auth.json&quot;
 </code></pre>
-<p>For detail information about the format of the authorization file itself,
+<p>For detailed information on the format of the authorization file itself,
 refer to the corresponding man page: <code>man 5 containers-auth.json</code>.</p>
 
                     </main>
