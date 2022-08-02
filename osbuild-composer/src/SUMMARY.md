@@ -16,6 +16,7 @@
     - [Uploading an image to Microsoft Azure](./user-guide/uploading-to-azure.md)
     - [Uploading an image to OCI](./user-guide/uploading-to-oci.md)
   - [Uploading container images](./user-guide/uploading-to-registry.md)
+  - [OpenSCAP image remediation](./user-guide/oscap-remediation.md)
 - [Blueprint reference](./blueprint-reference/blueprint-reference.md)
 - [Image Builder service architecture](./image-builder-service/architecture.md)
   - [Backend](./image-builder-service/image-builder-crc.md)
