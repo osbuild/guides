@@ -25,7 +25,14 @@
   - [Configuration](./user-guide/osbuild-composer/configuration.md)
     - [Managing repositories](./user-guide/osbuild-composer/managing-repositories.md)
 - [weldr-client](./user-guide/weldr-client/weldr-client.md)
+  - [Concepts](./user-guide/weldr-client/concepts.md)
+  - [Installation](./user-guide/weldr-client/installation.md)
+  - [Usage](./user-guide/weldr-client/usage.md)
 - [cockpit-composer](./user-guide/cockpit-composer/cockpit-composer.md)
+  - [Concepts](./user-guide/cockpit-composer/concepts.md)
+  - [Installation](./user-guide/cockpit-composer/installation.md)
+  - [Usage](./user-guide/cockpit-composer/usage.md)
+
 
 # Developer Guide
 
