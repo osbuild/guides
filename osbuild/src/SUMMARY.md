@@ -32,7 +32,10 @@
   - [Concepts](./user-guide/cockpit-composer/concepts.md)
   - [Installation](./user-guide/cockpit-composer/installation.md)
   - [Usage](./user-guide/cockpit-composer/usage.md)
-
+- [image-builder](./user-guide/image-builder/image-builder.md)
+  - [Concepts](./user-guide/image-builder/concepts.md)
+  - [Installation](./user-guide/image-builder/installation.md)
+  - [Usage](./user-guide/image-builder/usage.md)
 
 # Developer Guide
 
