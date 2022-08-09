@@ -10,17 +10,7 @@ systems in a reliable fashion, isolating image creation from your host
 operating system and producing a reliable and well-defined image ready to be
 deployed where it is needed.
 
-## Why `osbuild`?
-
-If you're building operating systems `osbuild` is for you. Building images
-historically involved a bunch of complicated shell scripts.
-
-With `osbuild` you can write a small TOML file to define your image and all
-its customizations, you can then build your image in a variety of formats to
-suit your own infrastructure needs or directly upload to the cloud of your
-choosing to deploy new machines.
-
-## A project, program, or service?
+### A project, program, or service?
 
 All of the above! `osbuild` itself is a project that contains separate programs to fulfill
 all tasks related to building operating system images. The separate programs
@@ -34,6 +24,17 @@ As a reference or quick summary:
 * [weldr-client](/user-guide/weldr-client/index.md): command line interface.
 * [cockpit-composer](/user-guide/cockpit-composer/index.md): self hosted web interface.
 * [image-builder](/user-guide/image-builder/index.md): RedHat provided web interface and APIs.
+
+## Why `osbuild`?
+
+If you're building operating systems `osbuild` is for you. Building images
+historically involved a bunch of complicated shell scripts.
+
+With `osbuild` you can write a small TOML file to define your image and all
+its customizations, you can then build your image in a variety of formats to
+suit your own infrastructure needs or directly upload to the cloud of your
+choosing to deploy new machines.
+
 
 ## Who is working on `osbuild`?
 
