@@ -152,12 +152,11 @@ mind as well.</p>
 <h3 id="pull-requests"><a class="header" href="#pull-requests">Pull requests</a></h3>
 <p>A pull request should be one or more commits which form a coherent unit, it can be
 rebased/rewritten/force-pushed until it's fit for merging.</p>
-<p>Pull requests are usually opened against the main branch. They should be opened from a developer's
-own fork to avoid a lot of random branches on the origin.</p>
+<p>How the PR developed, and the iterations it went through, should not be visible in the git
+history. The end result counts: a certain amount of commits, each one forming a logical unit of
+changes. Avoid 'fix-up' commits which tweak previous commits in the PR.</p>
+<p>Pull requests should be opened from a developer's own fork to avoid random branches on the origin.</p>
 <p>Each pull request should be reviewed, and the CI should pass.</p>
-<p>A pull request can be marked as draft, if it shouldn't be reviewed yet. But once it's ready, do not
-hesitate to add reviewers. If you're unsure who to add as a reviewer, ask in the irc channel
-(#osbuild on Libera Chat).</p>
 <p>Once a pull request is ready to be merged, it should be merged via the <code>Rebase and merge</code> or <code>Squash and merge</code> option. This avoids merge commits on the main branch.</p>
 <h3 id="branches"><a class="header" href="#branches">Branches</a></h3>
 <p>Force-pushing to, or rebasing the main branch (or other release branches) is not allowed. Avoid
