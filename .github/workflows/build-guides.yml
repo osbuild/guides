@@ -45,3 +45,9 @@ jobs:
         git add .
         git commit -m "Render website" || echo "No changes"
         git push origin gh-pages
+    - name: upload build result
+      if: ${{ github.ref != 'refs/heads/main' }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: build result
+        path: ./rendered/docs/
