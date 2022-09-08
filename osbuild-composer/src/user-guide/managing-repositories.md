@@ -1,12 +1,14 @@
 # Managing repositories
 
 There are two kinds of repositories used in osbuild-composer:
+
  1. **Custom 3rd party repositories** - use these to include packages that are not available in the official Fedora or RHEL repositories.
  2. **Official repository overrides** - use these if you want to download base system RPMs from elsewhere than the official repositories. For example if you have a custom mirror in your network. Keep in mind that this will **disable the default repositories**, so the mirror must contain all necessary packages!
 
 ## Custom 3rd party repositories
 
 These are managed using `composer-cli` (see the manpage for complete reference). To add a new repository, create a `TOML` file like this:
+
 ```toml
 id = "k8s"
 name = "Kubernetes"
@@ -16,6 +18,7 @@ check_gpg = false
 check_ssl = false
 system = false
 ```
+
 and add it using `composer-cli sources add <file-name.toml>`. Verify its presence using `composer-cli sources list` and its content using `composer-cli sources info <id>`.
 
 ### Using sources with specific distributions
@@ -45,10 +48,9 @@ This source will be used for any requests that specify fedora-32, eg. listing
 packages and specifying fedora-32 will include this source, but listing
 packages for the host distro will not.
 
-
 ## Official repository overrides
 
-`osbuild-composer` does not inherit the system repositories located in `/etc/yum.repos.d/`. Instead, it has its own set of official repositories defined in `/usr/share/osbuild-composer/repositories`. To override the official repositories, define overrides in `/etc/osbuild-composer/repositories`. This directory is meant for user defined overrides and the files located here take precedence over those in `/usr`. 
+`osbuild-composer` does not inherit the system repositories located in `/etc/yum.repos.d/`. Instead, it has its own set of official repositories defined in `/usr/share/osbuild-composer/repositories`. To override the official repositories, define overrides in `/etc/osbuild-composer/repositories`. This directory is meant for user defined overrides and the files located here take precedence over those in `/usr`.
 
 The configuration files are not in the usual "repo" format. Instead, they are simple `JSON` files.
 
@@ -56,7 +58,7 @@ The configuration files are not in the usual "repo" format. Instead, they are si
 
 To set your own repositories, create this directory if it does not exist already:
 
-```
+```bash
 $ sudo mkdir -p /etc/osbuild-composer/repositories
 ```
 
@@ -84,9 +86,11 @@ Then, create the JSON file with the following structure (or copy the file from `
     ]
 }
 ```
+
 Specify only one of the following attributes: `metalink`, `mirrorlist`, or `baseurl`. All the remaining fields like `gpgkey`, `metadata_expire`, etc. are optional.
 
 For example, for building a Fedora 33 image running on x86_64, create `/etc/osbuild-composer/repositories/fedora-33.json` with this content:
+
 ```json
 {
     "x86_64": [
@@ -99,6 +103,8 @@ For example, for building a Fedora 33 image running on x86_64, create `/etc/osbu
     ]
 }
 ```
+
+After you have created repository overrides in `/etc/osbuild-composer/repositories`, you must restart the `osbuild-composer` service in order for the overrides to take effect.
 
 ## Using repositories that require subscription
 
