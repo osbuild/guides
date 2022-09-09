@@ -9,6 +9,7 @@ on:
 jobs:
   import:
     name: Import the guides
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
     - name: Setup mdBook
@@ -51,3 +52,10 @@ jobs:
       with:
         name: build result
         path: ./rendered/docs/
+    - name: comment link to artifact
+      if: ${{ github.ref != 'refs/heads/main' }}
+      uses: mshick/add-pr-comment@v1
+      with:
+        message: |
+          Link to download the build results: https://nightly.link/osbuild/guides/actions/runs/${{ github.run_id }}/build%20result.zip
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
