@@ -16,12 +16,14 @@ We use our custom wrapper for `dnf`, which we call simply `dnf-json`, because it
 
 This API comes from the `Lorax-composer project`. `osbuild-composer` was created as a drop-in replacement for Lorax which influenced many design decisions. It uses Unix-Domain socket, so it is meant for local usage only. There are two clients:
 
-* composer-cli
-* cockpit-composer (branded as Image Builder in the Cockpit console)
+* composer-cli / [weldr-client](https://github.com/osbuild/weldr-client)
+* [cockpit-composer](https://github.com/osbuild/cockpit-composer) (branded as Image Builder in the Cockpit console)
 
 Activate this API by invoking `systemctl start osbuild-composer.socket`. Systemd will create a socket at `/run/weldr/api.socket`.
 
-## Remote APIs - Cloud and Koji
+## Remote API - Cloud API
 
-Both are under heavy development.
+This is the `/api/image-builder-composer/v2/` API endpoint. There are currently two clients, which are integrating with `osbuild-composer` using this API:
 
+* [image-builder](https://github.com/osbuild/image-builder), described in more detail in the [Image Builder service architecture](./image-builder-service/architecture.md) document.
+* [koji-osbuild](https://github.com/osbuild/koji-osbuild) plugin, which integrates `osbuild-composer` with the [Koji](https://koji.build/) build system.
