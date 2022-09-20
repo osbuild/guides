@@ -12,6 +12,14 @@ other side of the job queue, where jobs can be dequeued to be executed and their
 
 The actual jobs are executed by `workers`, which is outside the scope of this document.
 
+## Multitenancy
+
+`osbuild-composer` deployments in both [api.openshift.com](https://api.openshift.com/) and [api.stage.openshift.com](https://api.stage.openshift.com/) have support for running builds for multiple tenants. Jobs created by a tenant can be picked only by workers belonging to the same tenant.
+
+The tenant of an API request is currently determined from the JWT token that the API caller used. Specifically, the implementation extracts the tenant ID from `rh-org-id` or `account_id` fields. This is defined in [the deployment template](https://github.com/osbuild/osbuild-composer/blob/de72b36dddfc703d76d79479dde7b92f0a78e924/templates/composer.yml#L261).
+
+Internally in `osbuild-composer`, the tenant ID is prefixed with `org-` and saved to the jobqueue as a `channel`, see [composer's source code](https://github.com/osbuild/osbuild-composer/blob/de72b36dddfc703d76d79479dde7b92f0a78e924/pkg/jobqueue/jobqueue.go#L35).
+
 ## Technology Stack
 The service is written in Golang, and the list of dependencies can be found in
 [go.mod](https://github.com/osbuild/osbuild-composer/blob/main/go.mod).
