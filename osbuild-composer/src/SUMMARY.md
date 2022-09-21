@@ -22,6 +22,7 @@
   - [Backend](./image-builder-service/image-builder-crc.md)
   - [Composer](./image-builder-service/image-builder-composer.md)
   - [Workers](./image-builder-service/image-builder-workers.md)
+  - [Koji integration](./image-builder-service/image-builder-koji.md)
 - [Developer guide](./developer-guide/developer-guide.md)
   - [Workflow](./developer-guide/workflow.md)
   - [Code style](./developer-guide/code-style.md)
