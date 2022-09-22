@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Koji integration - OSBuild guides</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../user-guide/user-guide.html"><strong aria-hidden="true">1.</strong> User guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/osbuild-composer-description.html"><strong aria-hidden="true">1.1.</strong> osbuild-composer description</a></li><li class="chapter-item expanded "><a href="../user-guide/installation.html"><strong aria-hidden="true">1.2.</strong> Installation and configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/managing-repositories.html"><strong aria-hidden="true">1.2.1.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="../user-guide/container-auth.html"><strong aria-hidden="true">1.2.2.</strong> Container registry credentials</a></li></ol></li><li class="chapter-item expanded "><a href="../user-guide/building-an-image-from-cli.html"><strong aria-hidden="true">1.3.</strong> Creating images with the CLI interface</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/building-ostree-images.html"><strong aria-hidden="true">1.3.1.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="../user-guide/edge-container+installer.html"><strong aria-hidden="true">1.3.2.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-cloud.html"><strong aria-hidden="true">1.4.</strong> Uploading cloud images</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws.html"><strong aria-hidden="true">1.4.1.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-aws-s3.html"><strong aria-hidden="true">1.4.2.</strong> Uploading an image to AWS S3</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-gcp.html"><strong aria-hidden="true">1.4.3.</strong> Uploading an image to GCP</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-generic-s3.html"><strong aria-hidden="true">1.4.4.</strong> uploading an image to Generic S3</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-azure.html"><strong aria-hidden="true">1.4.5.</strong> Uploading an image to Microsoft Azure</a></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-oci.html"><strong aria-hidden="true">1.4.6.</strong> Uploading an image to OCI</a></li></ol></li><li class="chapter-item expanded "><a href="../user-guide/uploading-to-registry.html"><strong aria-hidden="true">1.5.</strong> Uploading container images</a></li><li class="chapter-item expanded "><a href="../user-guide/oscap-remediation.html"><strong aria-hidden="true">1.6.</strong> OpenSCAP image remediation</a></li></ol></li><li class="chapter-item expanded "><a href="../blueprint-reference/blueprint-reference.html"><strong aria-hidden="true">2.</strong> Blueprint reference</a></li><li class="chapter-item expanded "><a href="../image-builder-service/architecture.html"><strong aria-hidden="true">3.</strong> Image Builder service architecture</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-crc.html"><strong aria-hidden="true">3.1.</strong> Backend</a></li><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-composer.html"><strong aria-hidden="true">3.2.</strong> Composer</a></li><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-workers.html"><strong aria-hidden="true">3.3.</strong> Workers</a></li><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-koji.html" class="active"><strong aria-hidden="true">3.4.</strong> Koji integration</a></li></ol></li><li class="chapter-item expanded "><a href="../developer-guide/developer-guide.html"><strong aria-hidden="true">4.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/workflow.html"><strong aria-hidden="true">4.1.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="../developer-guide/code-style.html"><strong aria-hidden="true">4.2.</strong> Code style</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild.html"><strong aria-hidden="true">4.3.</strong> OSBuild</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild-composer.html"><strong aria-hidden="true">4.4.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="../developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">4.5.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="../developer-guide/testing.html"><strong aria-hidden="true">4.6.</strong> Testing strategy</a></li><li class="chapter-item expanded "><a href="../developer-guide/releasing.html"><strong aria-hidden="true">4.7.</strong> Releasing</a></li><li class="chapter-item expanded "><a href="../developer-guide/glossary.html"><strong aria-hidden="true">4.8.</strong> Glossary</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">OSBuild guides</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="image-builder-koji-integration"><a class="header" href="#image-builder-koji-integration">Image Builder Koji integration</a></h1>
+<p>This document describes how various instances of the <a href="https://koji.build/">Koji</a> build system can and do integrate with the Image Builder service.</p>
+<h2 id="architecture"><a class="header" href="#architecture">Architecture</a></h2>
+<p><code>osbuild-composer</code> can integrate with a <code>Koji</code> instance as an external Content Generator using the <a href="https://github.com/osbuild/koji-osbuild">koji-osbuild</a> plugin. The overview of the integration is described in the <a href="https://github.com/osbuild/koji-osbuild/blob/main/README.md">koji-osbuild project README</a>.</p>
+<p>In short, a <code>Koji</code> instance integrates directly with <code>osbuild-composer</code> API, usually as a separate tenant with a dedicated set of workers.</p>
+<h2 id="technology-stack"><a class="header" href="#technology-stack">Technology Stack</a></h2>
+<p>The <a href="https://github.com/osbuild/koji-osbuild">koji-osbuild</a> plugin is implemented in Python, and the list of dependencies can be found in the <a href="https://github.com/osbuild/koji-osbuild/blob/main/koji-osbuild.spec">SPEC file</a>.</p>
+<h2 id="building-images-via-koji-integration"><a class="header" href="#building-images-via-koji-integration">Building images via Koji integration</a></h2>
+<p>The <code>koji-osbuild</code> plugin allows one to submit image builds via the Koji Hub API using the <code>osbuildImage</code> task. The accepted arguments schema of the <code>osbuildImage</code> task is described <a href="https://github.com/osbuild/koji-osbuild/blob/cc3e621754d99b3f2a4fcb85bb207bf76a0970ea/plugins/hub/osbuild.py#L12-L225">in the plugin implementation</a>. The <code>koji-osbuild</code> plugin processes the request and submits a new compose request using the <code>osbuild-composer</code> Cloud API. The plugin always sets the <a href="https://github.com/osbuild/osbuild-composer/blob/434362e81ed996e6353360c3311090ae1cbe73a6/internal/cloudapi/v2/openapi.v2.yml#L736-L737"><code>koji</code> property</a> in the compose request, signaling to <code>osbuild-composer</code> that the request is coming from a <code>Koji</code> plugin.</p>
+<p>Images built as part of a compose requests submitted via the <code>Koji</code> plugin are always implicitly uploaded to the respective <code>Koji</code> instance. Since <strong>version 10</strong> of the <code>koji-osbuild</code> plugin, images can be uploaded directly to the appropriate cloud environment, in addition to being uploaded to <code>Koji</code>. More details are below in the <a href="#cloud-upload">Cloud upload</a> section.</p>
+<p>The <code>koji-osbuild</code> plugin also supports specifying all image customizations supported by the <code>osbuild-composer</code> Cloud API.</p>
+<p>There are currently two easy ways how to trigger the <code>osbuildImage</code> tasks in Koji:</p>
+<ul>
+<li><code>koji-cli</code> - the command line client for interacting with <code>Koji</code>. The prerequisite is to install the <code>koji-osbuild-cli</code> plugin. For more information, run <code>koji osbuild-image --help</code>.</li>
+<li><a href="https://pagure.io/pungi">Pungi</a> - a distribution compose tool. <code>Pungi</code> interacts directly with the <code>Koji</code> Hub API and is able to submit <code>osbuildImage</code> tasks as part of a distribution compose. The details of how to configure <code>Pungi</code> to trigger image builds are described in the <a href="https://docs.pagure.org/pungi/configuration.html#osbuild-composer-for-building-images">project documentation</a>.</li>
+</ul>
+<h3 id="cloud-upload"><a class="header" href="#cloud-upload">Cloud upload</a></h3>
+<h4 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h4>
+<ul>
+<li><code>koji-osbuild</code> version &gt;= 10</li>
+<li><code>osbuild-composer</code> version &gt;= 58</li>
+</ul>
+<h4 id="details"><a class="header" href="#details">Details</a></h4>
+<p>Images built via the <code>Koji</code> integration can be automatically uploaded to the appropriate cloud environment, in addition to the <code>Koji</code> instance. In order for this to happen, one must provide <em>upload_options</em> when using the <code>osbuildImage</code> task and the integrated <code>osbuild-composer</code> instance must be configured appropriately to be able to upload to the respective cloud environments.</p>
+<p>Currently supported <em>upload_options</em> are:</p>
+<ul>
+<li>AWS EC2</li>
+<li>AWS S3</li>
+<li>Azure (as an image)</li>
+<li>GCP</li>
+<li>Container registry</li>
+</ul>
+<p>Please note, that each image type can be uploaded only to its respective cloud target, represented by <em>upload_options</em> (e.g. the <code>ami</code> image can be uploaded only to <code>AWS EC2</code>, <code>gce</code> image can be uploaded only to <code>GCP</code>, etc.).</p>
+<p>The allowed <em>upload_options</em> schema is defined in the <a href="https://github.com/osbuild/koji-osbuild/blob/cc3e621754d99b3f2a4fcb85bb207bf76a0970ea/plugins/hub/osbuild.py#L110-L118"><code>koji-osbuild</code> Hub plugin</a> and currently matches the <a href="https://github.com/osbuild/osbuild-composer/blob/434362e81ed996e6353360c3311090ae1cbe73a6/internal/cloudapi/v2/openapi.v2.yml#L809-L815"><code>osbuild-composer</code> Cloud API <code>UploadOptions</code></a>.</p>
+<p>If the compose request contains multiple image requests (meaning that multiple images will be built), the provided <em>upload_options</em> will be used as is for all images (with all its consequences).</p>
+<p>All the necessary data to locate the image in the cloud is attached by the <code>koji-osbuild</code> plugin to the image build task in <code>Koji</code> as <code>compose-status.json</code> file. Below is an example of such file:</p>
+<pre><code class="language-json">{
+    &quot;image_statuses&quot;: [
+        {
+            &quot;status&quot;: &quot;success&quot;,
+            &quot;upload_status&quot;: {
+                &quot;options&quot;: {
+                    &quot;ami&quot;: &quot;ami-02e34403c421dfc17&quot;,
+                    &quot;region&quot;: &quot;us-east-1&quot;
+                },
+                &quot;status&quot;: &quot;success&quot;,
+                &quot;type&quot;: &quot;aws&quot;
+            }
+        }
+    ],
+    &quot;koji_build_id&quot;: 1,
+    &quot;koji_task_id&quot;: null,
+    &quot;status&quot;: &quot;success&quot;
+}
+</code></pre>
+<h4 id="cloud-upload-via-koji-cli"><a class="header" href="#cloud-upload-via-koji-cli">Cloud upload via <code>koji-cli</code></a></h4>
+<p>In order to upload images to the cloud when using <code>koji-cli</code>, one must first create a JSON file with the appropriate <em>upload_options</em>.</p>
+<p>Example <code>gcp_upload_options.json</code>:</p>
+<pre><code class="language-json">{
+    &quot;region&quot;: &quot;eu&quot;,
+    &quot;bucket&quot;: &quot;my-bucket&quot;,
+    &quot;share_with_accounts&quot;: [&quot;alice@example.org&quot;]
+}
+</code></pre>
+<p>Then add the <code>--upload-options=gcp_upload_options.json</code> argument to the command line when calling <code>koji</code> CLI.</p>
+<h4 id="cloud-upload-via-pungi"><a class="header" href="#cloud-upload-via-pungi">Cloud upload via <code>Pungi</code></a></h4>
+<p>In order to upload images to the cloud, when using <code>Pungi</code> to trigger image builds, one must specify the <code>upload_options</code> option in the configuration dictionary as described in the <a href="https://docs.pagure.org/pungi/configuration.html#osbuild-composer-for-building-images">project documentation</a>.</p>
+<p>Please note that the support for cloud upload has been merged to the <code>Pungi</code> project after the <strong>4.3.6</strong> release. Therefore, if you want to take advantage of this feature, make sure to use version higher than <strong>4.3.6</strong>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../image-builder-service/image-builder-workers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../developer-guide/developer-guide.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../image-builder-service/image-builder-workers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../developer-guide/developer-guide.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
