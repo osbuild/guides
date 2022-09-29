@@ -271,6 +271,7 @@ In addition to the root mountpoint, `/`, the following `mountpoints` and their s
 - `/usr`
 - `/app`
 - `/data`
+- `/tmp`
 
 ### OpenSCAP Support
 
