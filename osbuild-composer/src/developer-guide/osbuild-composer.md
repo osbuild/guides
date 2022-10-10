@@ -25,5 +25,5 @@ Activate this API by invoking `systemctl start osbuild-composer.socket`. Systemd
 
 This is the `/api/image-builder-composer/v2/` API endpoint. There are currently two clients, which are integrating with `osbuild-composer` using this API:
 
-* [image-builder](https://github.com/osbuild/image-builder), described in more detail in the [Image Builder service architecture](./image-builder-service/architecture.md) document.
+* [image-builder](https://github.com/osbuild/image-builder), described in more detail in the [Image Builder service architecture](../image-builder-service/architecture.md) document.
 * [koji-osbuild](https://github.com/osbuild/koji-osbuild) plugin, which integrates `osbuild-composer` with the [Koji](https://koji.build/) build system.
