@@ -282,7 +282,7 @@ From `RHEL8.7` & `RHEL-9.1` support has been added for `OpenSCAP` build-time rem
 Please see [the OpenSCAP page]('../user-guide/oscap-remediation.md') for the list of available security profiles.
 
 ```toml
-[customizations.oscap]
+[customizations.openscap]
 datastream = "/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml"
 profile_id = "xccdf_org.ssgproject.content_profile_cis"
 ```
@@ -353,7 +353,7 @@ name = "students"
 mountpoint = "/"
 size = 2147483648
 
-[customizations.oscap]
+[customizations.openscap]
 datastream = "/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml"
 profile_id = "xccdf_org.ssgproject.content_profile_cis"
 ```
