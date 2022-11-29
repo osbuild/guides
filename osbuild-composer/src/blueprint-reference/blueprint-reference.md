@@ -154,6 +154,7 @@ In the customizations we determine what goes into the image that's not in the de
 - [Files and Directories](#files-and-directories)
   - [Directories](#directories)
   - [Files](#files)
+- [Ignition](#ignition)
 - [Repositories](#repositories)
 - [Filesystems](#filesystems)
 - [OpenSCAP](#openscap)
@@ -412,6 +413,30 @@ data = "Hello world!"
 - `data` is the plain text contents of the file. If not specified, the default is an empty file.
 
 Note that the `data` property can be specified in any of the ways supported by TOML. Some of them require escaping certain characters and others don't. Please refer to the [TOML specification](https://toml.io/en/v1.0.0#string) for more details.
+
+### Ignition
+
+The `customizations.ignition` section allows users to provide [Ignition](https://coreos.github.io/ignition/) configuration files to be used in `edge-raw-image` and `edge-simplified-installer` images. Check the RHEL for Edge (`r4e`) [butane](https://coreos.github.io/butane/specs/) specification for a description of the supported configuration options.
+
+The blueprint configuration can be done *either* by embedding an Ignition configuration file into the image (only available for `edge-simplified-installer`), or providing a provisioning URL that will be fetched at first boot.
+
+#### `ignition.embedded` configuration
+
+```toml
+[customizations.ignition.embedded]
+config = "eyJpZ25pdGlvbiI6eyJ2ZXJzaW9uIjoiMy4zLjAifSwicGFzc3dkIjp7InVzZXJzIjpbeyJncm91cHMiOlsid2hlZWwiXSwibmFtZSI6ImNvcmUiLCJwYXNzd29yZEhhc2giOiIkNiRqZnVObk85dDFCdjdOLjdrJEhxUnhxMmJsdFIzek15QUhqc1N6YmU3dUJIWEVyTzFZdnFwaTZsamNJMDZkUUJrZldYWFpDdUUubUpja2xQVHdhQTlyL3hwSmlFZFdEcXR4bGU3aDgxIn1dfX0="
+```
+
+Add a `base64` encoded Ignition configuration in the `config` field. This Ignition configuration will be included in the `edge-simplified-installer` image.
+
+#### `ignition.firstboot` configuration
+
+```toml
+[customizations.ignition.firstboot]
+url = "http://some-server/configuration.ig"
+```
+
+Add a URL pointing to the Ignition configuration that will be fetched during the first boot in the `url` field. Available for both `edge-simplified-installer` and `edge-raw-image`.
 
 ### Repositories
 
