@@ -20,11 +20,11 @@ jobs:
         git config --global user.name "Automation"
         git config --global user.email "automation@osbuild.org"
     - name: Clone local repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         path: sources
     - name: Clone local repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         path: rendered
         ref: gh-pages
