@@ -27,7 +27,8 @@ component "<$openshift>\napi.openshift.com" as oc {
 }
 
 component "<$openshift>\nconsole.redhat.com" as crc {
-    rectangle "image-builder-crc"
+    rectangle "image-builder-frontend"
+    rectangle "image-builder-backend"
 
 }
 
@@ -43,15 +44,16 @@ AMAZONRDS(composerdb) {
     POSTGRESQLINSTANCE(db2, composer-db\nappsre account)
 }
 
-actor -right-> [image-builder-crc]: **A**
-[image-builder-crc] -down-> db1
+actor -right-> [image-builder-frontend]: **A**
+[image-builder-frontend] -right-> [image-builder-backend]
+[image-builder-backend] -down-> db1
 [image-builder-composer] -down-> db2
-[image-builder-crc] -right-> [image-builder-composer]: **B**
+[image-builder-backend] -right-> [image-builder-composer]: **B**
 workerfleet -> [image-builder-composer]: **C**
 
 legend right
-A. User connection to the UI under crc/insights/image-builder, using RH SSO for auth.
-B. ib-crc connects to composer to queue/query images, using RH SSO for auth.
+A. User connection to image builder's frontend under crc/insights/image-builder, using RH SSO for auth.
+B. Image builder's backend connects to composer to queue/query images, using RH SSO for auth.
 C. The workers connect to composer to request jobs and post results.
 endlegend
 
