@@ -48,6 +48,106 @@ This source will be used for any requests that specify fedora-32, eg. listing
 packages and specifying fedora-32 will include this source, but listing
 packages for the host distro will not.
 
+### Verifying Repository Metadata with GPG
+
+In addition to checking the GPG signature on rpm packages, DNF can check that
+repository metadata has been signed with a GPG key. You can setup such a
+repository yourself by signing your `repomd.xml` file after you have run
+`createrepo_c` on your repository. For example:
+
+```bash
+cd repo/
+createrepo_c .
+cd repodata/
+gpg -u YOUR-GPG-KEY-EMAIL --yes --detach-sign --armor repomd.xml
+```
+
+In order to check this signature you need to tell osbuild-composer what gpg key
+to use to do the check.  Set `check_repogpg = true` in the source, and if the
+key is available over https, set the `gpgkeys` entry to the URL for the key,
+like this:
+
+```toml
+check_gpg = true
+check_ssl = true
+id = "custom-local"
+name = "signed local packages"
+system = false
+type = "yum-baseurl"
+url = "https://local/repos/projectrepo/"
+check_repogpg = true
+gpgkeys=["https://local/keys/repokey.pub"]
+```
+
+Normally you would want to distribute the key via a separate channel from the
+rpms for better security, the above is just an example. You can also embed the
+whole key into the source `gpgkeys` entry. If the entry starts with `-----BEGIN
+PGP PUBLIC KEY BLOCK-----` it will import it directly instead of fetching it
+from the url. For example:
+
+```toml
+check_gpg = true
+check_ssl = true
+check_repogpg
+id = "custom-local"
+name = "signed local packages"
+system = false
+type = "yum-baseurl"
+url = "https://local/repos/projectrepo/"
+gpgkeys=["https://remote/keys/other-repokey.pub",
+'''-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+mQENBEt+xXMBCACkA1ZtcO4H7ZUG/0aL4RlZIozsorXzFrrTAsJEHvdy+rHCH3xR
+cFz6IMbfCOdV+oKxlDP7PS0vWKfqxwkenOUut5o9b32uDdFMW4IbFXEQ94AuSQpS
+jo8PlVMm/51pmmRxdJzyPnr0YD38mVK6qUEYLI/4zXSgFk493GT8Y4m3N18O/+ye
+PnOOItj7qbrCMASoBx1TG8Zdg8ufehMnfb85x4xxAebXkqJQpEVTjt4lj4p6BhrW
+R+pIW/nBUrz3OsV7WwPKjSLjJtTJFxYX+RFSCqOdfusuysoOxpIHOx1WxjGUOB5j
+fnhmq41nWXf8ozb58zSpjDrJ7jGQ9pdUpAtRABEBAAG0HkJyaWFuIEMuIExhbmUg
+PGJjbEByZWRoYXQuY29tPokBOAQTAQIAIgUCS37FcwIbAwYLCQgHAwIGFQgCCQoL
+BBYCAwECHgECF4AACgkQEX6MFo7+On9dgAf9Hi2K1MKcmLkDeSUIXkXIAw0nAzl2
+UDGLWEdDqAgFxP6UaCVtOIRCr7z4EDOQoxD7mkdekbH2W5GcTO4h8MQBHYD9EkY7
+H/lTKchlFfsmafOoA3Y/tDLPKu+OIfH9Mqn2Mf7wMYGrnWSRNKYgvC5zkMgkhoPU
+mSPPHyBabsdS/Kg5ZAf43ac/MXY9V8Mk6zqbBlj6QYqjJ0nBD6vwozrDQ5gJtDUL
+mQho13zPn4lBJl9YJVjcgRB2WbzgSZOln0DfV22Seai66vnr5NyaOIw5B9QLSNhN
+EaPFswEDLKCsns9dkDuGFX52/Mt/i7JySvwhMBqHElPzWmwCHeY45M8gBYhGBBAR
+AgAGBQJLfsbpAAoJECH7Y/6XEsLNuasAn0Q0jB4Ea/95EREUkCFTm9L6nOpAAJ9t
+QzwGXhrLFZzOdRWYiWcCQbX5/7kBDQRLfsVzAQgAvN5jr95pJthv2w9co9/7omhM
+5rAnr9WJfbMLLiUfPPUvpL24RGO6SKy03aiVTUjlaHc+cGqOciwnNKMCSt+noyG2
+kNnAESTDtCivpsjonaFP8jA3TqL0QK+yzBRKJnMnLEY1nWE1FtkMRccXvzi0Z/XQ
+VhiWQyTvDFoKtepBFrH9UqWbNHyki22aighumUsW01pcPH2ogSj+HR01r7SfI/y2
+EkE6loHQfCDycHmlqYV+X6GZEvf1qu2+EHEQChsHIAxWyshsxM/ZPmx/8e5S3Xmj
+l7h/6E9wcsIpvnf504sLX5j4Km9I5HgJSRxHxgRPpqJ2/XiClAJanO5gCw0RdQAR
+AQABiQEfBBgBAgAJBQJLfsVzAhsMAAoJEBF+jBaO/jp/SqEH/iArzrfVOhZQGuy1
+KmG0+/FdJGqAEHP5HWpsaeYJok1VmhTPZd4IVFBz/bGJYyvsrPU0pJ6QLkdGxNnb
+KulJocgkW5MKEL/CRc54ESKwYngigmbY4qLwhS+gB3BJg1TvoHD810MSj4wdxNNo
+6JQmFmuoDsLRwaRYbKQDz95XXoGQtmV1o57T05WkLuC5OmHqnWv3rggVC8madpUJ
+moUUvUWgU1qyXe3PrgMGFOibWIl7lPZ08nzKXBRvSK/xoTGxl+570AevfVHMu5Uk
+Yu2U6D6/DYohtTYp0s1ekS5KQkCJM7lfqecDsQhfVfOfR0w4aF8k8u3HmWdOfUz+
+9+2ZsBo=
+=myjM
+-----END PGP PUBLIC KEY BLOCK-----''']
+```
+
+Notice that gpgkeys can take as many key urls and keys as you need, not just one.
+If the signature cannot be found an error similar to this will be returned:
+
+```
+GPG verification is enabled, but GPG signature is not available.
+This may be an error or the repository does not support GPG verification:
+Status code: 404 for http://repo-server/fedora/repodata/repomd.xml.asc (IP: 192.168.1.3)
+```
+
+And if the signature is invalid:
+
+```
+repomd.xml GPG signature verification error: Bad GPG signature
+```
+
+You can test the signature of the repository manually by running `gpg --verify repomd.xml.asc`
+to help troubleshoot problems.
+
+
 ## Official repository overrides
 
 `osbuild-composer` does not inherit the system repositories located in `/etc/yum.repos.d/`. Instead, it has its own set of official repositories defined in `/usr/share/osbuild-composer/repositories`. To override the official repositories, define overrides in `/etc/osbuild-composer/repositories`. This directory is meant for user defined overrides and the files located here take precedence over those in `/usr`.
