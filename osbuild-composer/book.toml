@@ -7,6 +7,3 @@ title = "OSBuild guides"
 
 [output.html]
 site-url = "https://www.osbuild.org/guides/"
-
-[preprocessor.plantuml]
-plantuml-cmd="plantuml"
