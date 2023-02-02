@@ -232,11 +232,11 @@ url = &quot;http://local/repos/fedora32/projectrepo/&quot;
 packages and specifying fedora-32 will include this source, but listing
 packages for the host distro will not.</p>
 <h2 id="official-repository-overrides"><a class="header" href="#official-repository-overrides">Official repository overrides</a></h2>
-<p><code>osbuild-composer</code> does not inherit the system repositories located in <code>/etc/yum.repos.d/</code>. Instead, it has its own set of official repositories defined in <code>/usr/share/osbuild-composer/repositories</code>. To override the official repositories, define overrides in <code>/etc/osbuild-composer/repositories</code>. This directory is meant for user defined overrides and the files located here take precedence over those in <code>/usr</code>. </p>
+<p><code>osbuild-composer</code> does not inherit the system repositories located in <code>/etc/yum.repos.d/</code>. Instead, it has its own set of official repositories defined in <code>/usr/share/osbuild-composer/repositories</code>. To override the official repositories, define overrides in <code>/etc/osbuild-composer/repositories</code>. This directory is meant for user defined overrides and the files located here take precedence over those in <code>/usr</code>.</p>
 <p>The configuration files are not in the usual &quot;repo&quot; format. Instead, they are simple <code>JSON</code> files.</p>
 <h3 id="defining-official-repository-overrides"><a class="header" href="#defining-official-repository-overrides">Defining official repository overrides</a></h3>
 <p>To set your own repositories, create this directory if it does not exist already:</p>
-<pre><code>$ sudo mkdir -p /etc/osbuild-composer/repositories
+<pre><code class="language-bash">$ sudo mkdir -p /etc/osbuild-composer/repositories
 </code></pre>
 <p>Based on the system you want to build an image for, determine the name of a new JSON file:</p>
 <ul>
@@ -273,6 +273,7 @@ packages for the host distro will not.</p>
     ]
 }
 </code></pre>
+<p>After you have created repository overrides in <code>/etc/osbuild-composer/repositories</code>, you must restart the <code>osbuild-composer</code> service in order for the overrides to take effect.</p>
 <h2 id="using-repositories-that-require-subscription"><a class="header" href="#using-repositories-that-require-subscription">Using repositories that require subscription</a></h2>
 <p><code>osbuild-composer</code> can use subscriptions from the host system if they are configured in the appropriate file in <code>/etc/osbuild-composer/repositories</code>. To enable such repository, copy the <code>baseurl</code> from <code>/etc/yum.repos.d/redhat.repo</code> and paste it into the JSON repository definition. Then allow RHSM support using <code>&quot;rhsm&quot;: true</code> like this:</p>
 <pre><code class="language-json">{
