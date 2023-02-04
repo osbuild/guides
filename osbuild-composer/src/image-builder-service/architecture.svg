@@ -135,7 +135,7 @@
        id="tspan24">api.openshift.com</tspan></text>
   <a
      id="a403"
-     xlink:href="https://github.com/osbuild/osbuild-composer">
+     xlink:href="https://github.com/osbuild/osbuild-composer/tree/356f261bcd9f3e36b9109e9c82b8c3c9d3875ac3">
     <g
        id="g40">
       <g
@@ -353,10 +353,10 @@
        id="tspan130">console.redhat.com</tspan></text>
   <a
      id="a294"
-     xlink:href="https://github.com/RedHatInsights/image-builder-frontend">
+     xlink:href="https://github.com/RedHatInsights/image-builder-frontend/tree/1fa0466676a4c381ae8f2575187b7810fd71aec1">
     <g
        id="g146"
-       onclick="https://github.com/RedHatInsights/image-builder-frontend">
+       onclick="https://github.com/RedHatInsights/image-builder-frontend/tree/1fa0466676a4c381ae8f2575187b7810fd71aec1">
       <g
          id="g138">
         <rect
@@ -393,7 +393,7 @@
      id="polyline150" />
   <a
      id="a510"
-     xlink:href="https://github.com/osbuild/osbuild">
+     xlink:href="https://github.com/osbuild/osbuild/tree/ae563ff8962be0ae13e5becd0a3c2c646eeacc24">
     <g
        id="g502">
       <g
@@ -421,7 +421,7 @@
   </a>
   <a
      id="a303"
-     xlink:href="https://github.com/osbuild/image-builder">
+     xlink:href="https://github.com/osbuild/image-builder/tree/c5bbe9beaa06f5ac4008c640ef5825863dbe340a">
     <g
        id="g174">
       <g
