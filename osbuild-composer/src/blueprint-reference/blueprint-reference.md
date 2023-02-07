@@ -227,6 +227,72 @@ The service names are systemd service units. You may specify any systemd unit fi
 enabled = ["sshd", "cockpit.socket", "httpd"]
 disabled = ["postfix", "telnetd"]
 ```
+
+### Custom files and directories
+
+You can use blueprint customizations to create custom files and directories in the image. These customizations are currently restricted only to the `/etc` directory.
+
+When using the custom files and directories customization, the following rules apply:
+
+- The path must be an absolute path and must be under `/etc`.
+- There must be no duplicate paths of the same directory.
+- There must be no duplicate paths of the same file.
+
+These customizations are not supported for image types that deploy ostree commits (such as `edge-raw-image`, `edge-installer`, `edge-simplified-installer`).
+
+#### Custom directories
+
+You can create custom directories by specifying items in the `customizations.directories` list. The existence of a specified directory is handled gracefully only if no explicit `mode`, `user` or `group` is specified. If any of these customizations are specified and the directory already exists in the image, the image build will fail. The intention is to prevent changing the ownership or permissions of existing directories.
+
+The following example creates a directory `/etc/foobar` with all the default settings:
+
+```toml
+[[customizations.directories]]
+path = "/etc/foobar"
+mode = "0755"
+user = "root"
+group = "root"
+ensure_parents = false
+```
+
+- `path` is the path to the directory to create. It must be an absolute path under `/etc`. This is the only required field.
+- `mode` is the octal mode to set on the directory. If not specified, the default is `0755`. The leading zero is optional.
+- `user` is the user to set as the owner of the directory. If not specified, the default is `root`. Can be specified as user name (string) or as user id (integer).
+- `group` is the group to set as the owner of the directory. If not specified, the default is `root`. Can be specified as group name (string) or as group id (integer).
+- `ensure_parents` is a boolean that specifies whether to create parent directories as needed. If not specified, the default is `false`.
+
+#### Custom files
+
+You can create custom files by specifying items in the `customizations.files` list. You can use the customization to create new files or to replace existing ones, if not restricted by the policy specified below. If the target path is an existing symlink to another file, the symlink will be replaced by the custom file.
+
+Please note that the parent directory of a specified file must exist. If it does not exist, the image build will fail. One can ensure that the parent directory exists by specifying it in the `customizations.directories` list.
+
+In addition, the following files are not allowed to be created or replaced by policy:
+
+- `/etc/fstab`
+- `/etc/shadow`
+- `/etc/passwd`
+- `/etc/group`
+
+Using the `files` customization comes with a high chance of creating an image that doesn't boot. **Use this feature only if you know what you are doing**. Although the `files` customization can be used to configure parts of the OS which can also be configured by other blueprint customizations, this use is discouraged. If possible, users should always default to using the specialized blueprint customizations. Note that if you combine the files customizations with other customizations, the other customizations may not work as expected or may be overridden by the files customizations.
+
+The following example creates a file `/etc/foobar` with the contents `Hello world!`:
+
+```toml
+[[customizations.files]]
+path = "/etc/foobar"
+mode = "0644"
+user = "root"
+group = "root"
+data = "Hello world!"
+```
+
+- `path` is the path to the file to create. It must be an absolute under `/etc`. This is the only required field.
+- `mode` is the octal mode to set on the file. If not specified, the default is `0644`. The leading zero is optional.
+- `user` is the user to set as the owner of the file. If not specified, the default is `root`. Can be specified as user name (string) or as user id (integer).
+- `group` is the group to set as the owner of the file. If not specified, the default is `root`. Can be specified as group name (string) or as group id (integer).
+- `data` is the plain text contents of the file. If not specified, the default is an empty file.
+
 ## Distribution selection with blueprints
 
 The blueprint now supports a new `distro` field that will be used to select the
