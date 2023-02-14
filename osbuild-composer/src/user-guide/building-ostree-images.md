@@ -21,7 +21,7 @@ The result will look like this:
 ```
  _________________          ____________________________
 |                 |        |                            |
-|                 |------> | Fedora VM with mounted ISO |
+|                 |------->| Fedora VM with mounted ISO |
 |                 |        |  - Anaconda                |
 |  Fedora Host OS |        |____________________________|
 |                 |                |
