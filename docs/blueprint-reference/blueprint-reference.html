@@ -284,6 +284,58 @@ disabled = [&quot;telnet&quot;]
 enabled = [&quot;sshd&quot;, &quot;cockpit.socket&quot;, &quot;httpd&quot;]
 disabled = [&quot;postfix&quot;, &quot;telnetd&quot;]
 </code></pre>
+<h3 id="custom-files-and-directories"><a class="header" href="#custom-files-and-directories">Custom files and directories</a></h3>
+<p>You can use blueprint customizations to create custom files and directories in the image. These customizations are currently restricted only to the <code>/etc</code> directory.</p>
+<p>When using the custom files and directories customization, the following rules apply:</p>
+<ul>
+<li>The path must be an absolute path and must be under <code>/etc</code>.</li>
+<li>There must be no duplicate paths of the same directory.</li>
+<li>There must be no duplicate paths of the same file.</li>
+</ul>
+<p>These customizations are not supported for image types that deploy ostree commits (such as <code>edge-raw-image</code>, <code>edge-installer</code>, <code>edge-simplified-installer</code>).</p>
+<h4 id="custom-directories"><a class="header" href="#custom-directories">Custom directories</a></h4>
+<p>You can create custom directories by specifying items in the <code>customizations.directories</code> list. The existence of a specified directory is handled gracefully only if no explicit <code>mode</code>, <code>user</code> or <code>group</code> is specified. If any of these customizations are specified and the directory already exists in the image, the image build will fail. The intention is to prevent changing the ownership or permissions of existing directories.</p>
+<p>The following example creates a directory <code>/etc/foobar</code> with all the default settings:</p>
+<pre><code class="language-toml">[[customizations.directories]]
+path = &quot;/etc/foobar&quot;
+mode = &quot;0755&quot;
+user = &quot;root&quot;
+group = &quot;root&quot;
+ensure_parents = false
+</code></pre>
+<ul>
+<li><code>path</code> is the path to the directory to create. It must be an absolute path under <code>/etc</code>. This is the only required field.</li>
+<li><code>mode</code> is the octal mode to set on the directory. If not specified, the default is <code>0755</code>. The leading zero is optional.</li>
+<li><code>user</code> is the user to set as the owner of the directory. If not specified, the default is <code>root</code>. Can be specified as user name (string) or as user id (integer).</li>
+<li><code>group</code> is the group to set as the owner of the directory. If not specified, the default is <code>root</code>. Can be specified as group name (string) or as group id (integer).</li>
+<li><code>ensure_parents</code> is a boolean that specifies whether to create parent directories as needed. If not specified, the default is <code>false</code>.</li>
+</ul>
+<h4 id="custom-files"><a class="header" href="#custom-files">Custom files</a></h4>
+<p>You can create custom files by specifying items in the <code>customizations.files</code> list. You can use the customization to create new files or to replace existing ones, if not restricted by the policy specified below. If the target path is an existing symlink to another file, the symlink will be replaced by the custom file.</p>
+<p>Please note that the parent directory of a specified file must exist. If it does not exist, the image build will fail. One can ensure that the parent directory exists by specifying it in the <code>customizations.directories</code> list.</p>
+<p>In addition, the following files are not allowed to be created or replaced by policy:</p>
+<ul>
+<li><code>/etc/fstab</code></li>
+<li><code>/etc/shadow</code></li>
+<li><code>/etc/passwd</code></li>
+<li><code>/etc/group</code></li>
+</ul>
+<p>Using the <code>files</code> customization comes with a high chance of creating an image that doesn't boot. <strong>Use this feature only if you know what you are doing</strong>. Although the <code>files</code> customization can be used to configure parts of the OS which can also be configured by other blueprint customizations, this use is discouraged. If possible, users should always default to using the specialized blueprint customizations. Note that if you combine the files customizations with other customizations, the other customizations may not work as expected or may be overridden by the files customizations.</p>
+<p>The following example creates a file <code>/etc/foobar</code> with the contents <code>Hello world!</code>:</p>
+<pre><code class="language-toml">[[customizations.files]]
+path = &quot;/etc/foobar&quot;
+mode = &quot;0644&quot;
+user = &quot;root&quot;
+group = &quot;root&quot;
+data = &quot;Hello world!&quot;
+</code></pre>
+<ul>
+<li><code>path</code> is the path to the file to create. It must be an absolute under <code>/etc</code>. This is the only required field.</li>
+<li><code>mode</code> is the octal mode to set on the file. If not specified, the default is <code>0644</code>. The leading zero is optional.</li>
+<li><code>user</code> is the user to set as the owner of the file. If not specified, the default is <code>root</code>. Can be specified as user name (string) or as user id (integer).</li>
+<li><code>group</code> is the group to set as the owner of the file. If not specified, the default is <code>root</code>. Can be specified as group name (string) or as group id (integer).</li>
+<li><code>data</code> is the plain text contents of the file. If not specified, the default is an empty file.</li>
+</ul>
 <h2 id="distribution-selection-with-blueprints"><a class="header" href="#distribution-selection-with-blueprints">Distribution selection with blueprints</a></h2>
 <p>The blueprint now supports a new <code>distro</code> field that will be used to select the
 distribution to use when composing images, or depsolving the blueprint. If
