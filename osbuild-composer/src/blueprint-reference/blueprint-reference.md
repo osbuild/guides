@@ -293,6 +293,8 @@ data = "Hello world!"
 - `group` is the group to set as the owner of the file. If not specified, the default is `root`. Can be specified as group name (string) or as group id (integer).
 - `data` is the plain text contents of the file. If not specified, the default is an empty file.
 
+Note that the `data` property can be specified in any of the ways supported by TOML. Some of them require escaping certain characters and others don't. Please refer to the [TOML specification](https://toml.io/en/v1.0.0#string) for more details.
+
 ## Distribution selection with blueprints
 
 The blueprint now supports a new `distro` field that will be used to select the
