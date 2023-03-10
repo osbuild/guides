@@ -338,6 +338,7 @@ data = &quot;Hello world!&quot;
 <li><code>group</code> is the group to set as the owner of the file. If not specified, the default is <code>root</code>. Can be specified as group name (string) or as group id (integer).</li>
 <li><code>data</code> is the plain text contents of the file. If not specified, the default is an empty file.</li>
 </ul>
+<p>Note that the <code>data</code> property can be specified in any of the ways supported by TOML. Some of them require escaping certain characters and others don't. Please refer to the <a href="https://toml.io/en/v1.0.0#string">TOML specification</a> for more details.</p>
 <h2 id="distribution-selection-with-blueprints"><a class="header" href="#distribution-selection-with-blueprints">Distribution selection with blueprints</a></h2>
 <p>The blueprint now supports a new <code>distro</code> field that will be used to select the
 distribution to use when composing images, or depsolving the blueprint. If
