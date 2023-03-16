@@ -1,0 +1,6 @@
+[book]
+authors = ["Simon de Vlieger"]
+language = "en"
+multilingual = false
+src = "src"
+title = "osbuild guide"
