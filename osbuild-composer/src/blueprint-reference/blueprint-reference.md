@@ -343,11 +343,11 @@ In addition to the root mountpoint, `/`, the following `mountpoints` and their s
 
 ### OpenSCAP Support
 
-From `RHEL8.7` & `RHEL-9.1` support has been added for `OpenSCAP` build-time remediation. The blueprints accept two fields:
+From `RHEL 8.7` & `RHEL 9.1` support has been added for `OpenSCAP` build-time remediation. The blueprints accept two fields:
 - the `datastream` path to the remediation instructions
 - the `profile_id` of the desired security profile
 
-Please see [the OpenSCAP page]('../user-guide/oscap-remediation.md') for the list of available security profiles.
+Please see [the OpenSCAP page](../user-guide/oscap-remediation.md) for the list of available security profiles.
 
 ```toml
 [customizations.openscap]
