@@ -191,11 +191,11 @@ Multiple languages can be added. The first one becomes the primary, and the othe
 
 ### Firewall
 
-By default the firewall blocks all access, except for services that enable their ports explicitly, like sshd. The following command can be used to open other ports or services. Ports are configured using the `port:protocol` format:
+By default the firewall blocks all access, except for services that enable their ports explicitly, like sshd. The following command can be used to open other ports or services. Ports are configured using the `port:protocol` format; port ranges are configured using `portA-portB:protocol` format:
 
 ```toml
 [customizations.firewall]
-ports = ["22:tcp", "80:tcp", "imap:tcp", "53:tcp", "53:udp"]
+ports = ["22:tcp", "80:tcp", "imap:tcp", "53:tcp", "53:udp", "30000-32767:tcp", "30000-32767:udp"]
 ```
 
 Numeric ports, or their names from `/etc/services` can be used in the ports enabled/disabled lists.
