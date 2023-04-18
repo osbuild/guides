@@ -1132,9 +1132,9 @@ keyboard = &quot;us&quot;
 </code></pre>
 <p>Multiple languages can be added. The first one becomes the primary, and the others are added as secondary. You must include one or more languages or keyboards in the section.</p>
 <h3 id="firewall"><a class="header" href="#firewall">Firewall</a></h3>
-<p>By default the firewall blocks all access, except for services that enable their ports explicitly, like sshd. The following command can be used to open other ports or services. Ports are configured using the <code>port:protocol</code> format:</p>
+<p>By default the firewall blocks all access, except for services that enable their ports explicitly, like sshd. The following command can be used to open other ports or services. Ports are configured using the <code>port:protocol</code> format; port ranges are configured using <code>portA-portB:protocol</code> format:</p>
 <pre><code class="language-toml">[customizations.firewall]
-ports = [&quot;22:tcp&quot;, &quot;80:tcp&quot;, &quot;imap:tcp&quot;, &quot;53:tcp&quot;, &quot;53:udp&quot;]
+ports = [&quot;22:tcp&quot;, &quot;80:tcp&quot;, &quot;imap:tcp&quot;, &quot;53:tcp&quot;, &quot;53:udp&quot;, &quot;30000-32767:tcp&quot;, &quot;30000-32767:udp&quot;]
 </code></pre>
 <p>Numeric ports, or their names from <code>/etc/services</code> can be used in the ports enabled/disabled lists.</p>
 <p>The blueprint settings extend any existing settings in the image templates. Thus, if sshd is already enabled, it will extend the list of ports with those already listed by the blueprint.</p>
