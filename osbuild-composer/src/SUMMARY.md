@@ -1,5 +1,6 @@
 # Summary
 
+- [Introduction](./introduction.md)
 - [User guide](./user-guide/user-guide.md)
   - [osbuild-composer description](./user-guide/osbuild-composer-description.md)
   - [Installation and configuration](./user-guide/installation.md)
