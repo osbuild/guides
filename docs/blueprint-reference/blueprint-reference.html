@@ -378,12 +378,12 @@ size = 2147483648
 <li><code>/tmp</code></li>
 </ul>
 <h3 id="openscap-support"><a class="header" href="#openscap-support">OpenSCAP Support</a></h3>
-<p>From <code>RHEL8.7</code> &amp; <code>RHEL-9.1</code> support has been added for <code>OpenSCAP</code> build-time remediation. The blueprints accept two fields:</p>
+<p>From <code>RHEL 8.7</code> &amp; <code>RHEL 9.1</code> support has been added for <code>OpenSCAP</code> build-time remediation. The blueprints accept two fields:</p>
 <ul>
 <li>the <code>datastream</code> path to the remediation instructions</li>
 <li>the <code>profile_id</code> of the desired security profile</li>
 </ul>
-<p>Please see <a href="&#x27;../user-guide/oscap-remediation.html">the OpenSCAP page</a> for the list of available security profiles.</p>
+<p>Please see <a href="../user-guide/oscap-remediation.html">the OpenSCAP page</a> for the list of available security profiles.</p>
 <pre><code class="language-toml">[customizations.openscap]
 datastream = &quot;/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml&quot;
 profile_id = &quot;xccdf_org.ssgproject.content_profile_cis&quot;
