@@ -295,6 +295,48 @@ data = "Hello world!"
 
 Note that the `data` property can be specified in any of the ways supported by TOML. Some of them require escaping certain characters and others don't. Please refer to the [TOML specification](https://toml.io/en/v1.0.0#string) for more details.
 
+## Custom Repositories
+
+Third-party repositories are supported by the blueprint customizations. A repository can be defined and enabled in the blueprints which will then be saved to the `/etc/yum.repos.d` directory in an image.
+An optional `filename` argument can be set, otherwise the repository will be saved using the the repository ID, i.e. `/etc/yum.repos.d/<repo-id>.repo`. 
+
+Please note custom repositories **cannot be used at build time to install third-party packages**. These customizations are used to save and enable third-party repositories on the image. For more information, or if you 
+wish to install a package from a third-party repository, please continue reading [here](../user-guide/repository-customizations.md).
+
+The following example can be used to create a third-party repository:
+
+```toml
+[[customizations.repositories]]
+id = "example"
+name="Example repo"
+baseurls=[ "https://example.com/yum/download" ]
+gpgcheck=true
+gpgkeys = [ "https://example.com/public-key.asc" ]
+enabled=true
+```
+
+Since no filename is specified, the repo will be saved to `/etc/yum.repos.d/example.repo`.
+
+The blueprint accepts the following options:
+
+- `id` (required)
+- `name`
+- `filename`
+- `baseurls` (array)
+- `mirrorlist`
+- `metalink`
+- `gpgkeys` keys (array)
+- `gpgcheck`
+- `repo_gpgcheck`
+- `priority`
+- `ssl_verify`
+
+*Note: the `baseurls` and `gpgkeys` fields both accept arrays as input. One of `baseurls`, `metalink` & `mirrorlist` must be provided*
+
+#### Repository GPG Keys
+The blueprint accepts both inline GPG keys and GPG key urls. If an inline GPG key is provided it will be saved to the `/etc/pki/rpm-gpg` directory and will be referenced accordingly
+in the repository configuration. **GPG keys are not imported to the RPM database** and will only be imported when first installing a package from the third-party repository.
+
 ## Distribution selection with blueprints
 
 The blueprint now supports a new `distro` field that will be used to select the
