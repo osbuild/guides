@@ -19,7 +19,7 @@
   - [Uploading container images](./user-guide/uploading-to-registry.md)
   - [OpenSCAP image remediation](./user-guide/oscap-remediation.md)
   - [Repository customizations](./user-guide/repository-customizations.md)
-- [Blueprint reference](./blueprint-reference/blueprint-reference.md)
+- [Blueprint Reference](./blueprint-reference/blueprint-reference.md)
 - [Image Builder service architecture](./image-builder-service/architecture.md)
   - [Backend](./image-builder-service/image-builder-crc.md)
   - [Composer](./image-builder-service/image-builder-composer.md)
