@@ -1,29 +1,64 @@
-# Blueprint reference
+# Blueprint Reference
 
-Blueprints are simple text files in [TOML format](https://toml.io/en/) that describe which packages to install into the image, allowing to specify the packages version. They can also define a limited set of customizations to make to the final image.
+Blueprints are text files in the [TOML format](https://toml.io/en/) that describe customizations for the image you are building.
 
-A basic blueprint looks like this:
+A very basic blueprint with just the required attributes at the root looks like:
 
 ```toml
-name = "base"
-description = "A base system with bash"
+name = "basic-example"
+description = "A basic blueprint"
 version = "0.0.1"
-
-[[packages]]
-name = "bash"
-version = "4.4.*"
 ```
 
 Where:
-- `name` field is the name of the blueprint. It can contain spaces, but they will be converted to `-` when it is written to disk. It should be short and descriptive.
-- `description` can be a longer description of the blueprint, it is only used for display purposes.
-- `version` is a semver compatible version number. If a new blueprint is uploaded with the same version the server will automatically bump the PATCH level of the version. If the version doesn't match it will be used as is, for example, uploading a blueprint with version set to 0.1.0 when the existing blueprint version is 0.0.1 will result in the new blueprint being stored as version 0.1.0.
+- The `name` attribute is a string that contains the name of the blueprint. It can contain spaces, but they will be converted to `-` when it is written to disk. It should be short and descriptive.
+- The `description` attribute is a string that can be a longer description of the blueprint, it is only used for display purposes.
+- The `version` attribute is a string that contains a semver compatible version number. If a new blueprint is uploaded with the same version the server will automatically bump the PATCH level of the version. If the version doesn't match it will be used as is, for example, uploading a blueprint with version set to 0.1.0 when the existing blueprint version is 0.0.1 will result in the new blueprint being stored as version 0.1.0.
 
-## Packages and modules
+You can upload a blueprint with the `osbuild-composer blueprints push $filename` command, the blueprint will then be usable in `osbuild-composer compose` as the `name` you gave it.
 
-`[[packages]]` and `[[modules]]` entries describe the package names and matching version glob to be installed into the image.
+Blueprints have two main sections, the [content](#content) and [customizations](#customizations) sections.
 
-The package names must match the names exactly, and the versions can be an exact match or a filesystem-like glob of the version using `*` wildcards and `?` character matching.
+### Distribution selection with blueprints
+
+The blueprint now supports a new `distro` field that will be used to select the
+distribution to use when composing images, or depsolving the blueprint. If
+`distro` is left blank it will use the host distribution. If you upgrade the
+host operating system the blueprints with no `distro` set will build using the
+new os.
+
+eg. A blueprint that will always build a fedora-32 image, no matter what
+version is running on the host:
+
+```toml
+name = "tmux"
+description = "tmux image with openssh"
+version = "1.2.16"
+distro = "fedora-32"
+
+[[packages]]
+name = "tmux"
+version = "*"
+
+[[packages]]
+name = "openssh-server"
+version = "*"
+```
+
+## Content
+
+The content section determines what goes into the image from other sources such as packages, package groups, or containers. Content is defined at the root of the blueprint.
+
+- [Packages](#packages).
+- [Groups](#groups).
+- [Containers](#containers).
+
+### Packages
+
+The `packages` and `modules` lists contain objects with a `name` and optional `version` attribute.
+
+- The `name` attribute is a **required** string and must match the name of a package in the repositories exactly.
+- The `version` attribute is an *optional* string can be an exact match or a filesystem-like glob of the version using `*` for wildcards and `?` for character matching. If not provided the latest version in the repositories is used.
 
 *Currently there are no differences between packages and modules in `osbuild-composer`. Both are treated like an rpm package dependency.*
 
@@ -39,44 +74,89 @@ name = "openssh-server"
 version = "8.*"
 ```
 
-## Containers
+Or in alternative syntax:
 
-`[[containers]]` entries describe the container images to be embedded into the image.
-The `source` field is required and is a reference to a container image at a registry.
-A tag or digest can be specified. If none is given the `latest` tag is used. The name
-to be used locally can be selected via the `name` field. Transport layer security can
-be controlled via the optional `tls-verify` boolean field. The default is `true`.
-The container is pulled during the image build and stored in the image at the default
-local container storage location that is appropriate for the image type, so that all
-support container-tools like `podman` and `cri-o` will be able to work with it.
-The embedded containers are not started.
-
-To embed the latest fedora container from http://quay.io, add this to your blueprint:
 ```toml
-[[containers]]
-source = "quay.io/fedora/fedora:latest"
+packages = [
+    { name = "tmux", version = "2.9a" },
+    { name = "openssh-server", version = "8.*" }
+]
 ```
 
-To access protected container resources a `containers-auth.json(5)` file can be used,
-see [Container registry credentials](../user-guide/container-auth.md).
+### Groups
 
+The `groups` list describes contains objects with a `name`-attribute.
+- The `name` attribute is a **required** string and must match the id of a package group in the repositories exactly.
 
-## Groups
-
-The `[[groups]]` entries describe a group of packages to be installed into the image. Package groups are defined in the repository metadata. Each group has a descriptive name used primarily for display in user interfaces and an ID more commonly used in kickstart files. Here, the ID is the expected way of listing a group.
-
-Groups have three different ways of categorizing their packages: mandatory, default, and optional. For purposes of blueprints, just mandatory and default packages will be installed. There is no mechanism for selecting optional packages.
+`groups` describes groups of packages to be installed into the image. Package groups are defined in the repository metadata. Each group has a descriptive name used primarily for display in user interfaces and an ID more commonly used in kickstart files. Here, the ID is the expected way of listing a group. Groups have three different ways of categorizing their packages: mandatory, default, and optional. For the purposes of blueprints, only mandatory and default packages will be installed. There is no mechanism for selecting optional packages.
 
 For example, if you want to install the `anaconda-tools` group, add the following to your blueprint:
 
 ```toml
 [[groups]]
-name="anaconda-tools"
+name = "anaconda-tools"
 ```
 
-groups is a TOML list, so each group needs to be listed separately, like packages but with no version number.
+Or in alternative syntax:
+
+```toml
+groups = [
+    { name = "anaconda-tools" }
+]
+```
+
+### Containers
+
+The `containers` list contains objects with a `source` and optional `tls-verify` attribute.
+
+These list entries describe the container images to be embedded into the image.
+
+- The `source` attribute is a **required** string and is a reference to a container image at a registry.
+- The `name` attribute is an *optional* string to set the name under which the container image will be saved in the image.
+- The `tls-verify` attribute is an *optional* boolean to disable TLS verification of the source download, by default this is set to `true`.
+
+The container is pulled during the image build and stored in the image at the default local container storage location that is appropriate for the image type, so that all support container-tools like `podman` and `cri-o` will be able to work with it.
+
+The embedded containers are not started, to do so you can create systemd unit files or quadlets with the files customization.
+
+To embed the latest fedora container from http://quay.io, add this to your blueprint:
+
+```toml
+[[containers]]
+source = "quay.io/fedora/fedora:latest"
+```
+
+Or in alternative syntax:
+
+```toml
+containers = [
+    { source = "quay.io/fedora/fedora:latest" },
+    { source = "quay.io/fedora/fedora-minimal:latest", tls-verify = false, name = "fedora-m" },
+]
+```
+
+To access protected container resources a `containers-auth.json(5)` file can be used, see [Container registry credentials](../user-guide/container-auth.md).
+
 
 ## Customizations
+
+In the customizations we determine what goes into the image that's not in the default packages defined under [Content](#content).
+
+- [Hostname](#hostname)
+- [Kernel Command Line Arguments](#kernel-command-line-arguments)
+- [SSH Keys](#ssh-keys)
+- [Additional Users](#additional-users)
+- [Additional Groups](#additional-groups)
+- [Timezone](#timezone)
+- [Locale](#locale)
+- [Firewall](#locale)
+- [Systemd Services](#systemd-services)
+- [Files and Directories](#files-and-directories)
+- [Repositories](#repositories)
+- [Filesystems](#filesystems)
+- [OpenSCAP](#openscap)
+
+### Hostname
 
 The `[customizations]` section can be used to configure the **hostname** of the final image. for example:
 
@@ -111,7 +191,7 @@ The key will be added to the user's `authorized_keys` file.
 
 *Warning: `key` expects the entire content of the public key file, traditionally `~/.ssh/id_rsa.pub` but any algorithm supported by the OS is valid*
 
-### Additional user
+### Additional users
 
 Add a user to the image, and/or set their ssh key. All fields for this section are optional except for the name. The following is a complete example:
 
@@ -132,7 +212,7 @@ If the password starts with $6$, $5$, or $2b$ it will be stored as an encrypted 
 
 *Warning: `key` expects the entire content of `~/.ssh/id_rsa.pub`*
 
-### Additional group
+### Additional groups
 
 Add a group to the image. Name is required and GID is optional:
 
@@ -228,7 +308,7 @@ enabled = ["sshd", "cockpit.socket", "httpd"]
 disabled = ["postfix", "telnetd"]
 ```
 
-### Custom files and directories
+### Files and directories
 
 You can use blueprint customizations to create custom files and directories in the image. These customizations are currently restricted only to the `/etc` directory.
 
@@ -240,7 +320,7 @@ When using the custom files and directories customization, the following rules a
 
 These customizations are not supported for image types that deploy ostree commits (such as `edge-raw-image`, `edge-installer`, `edge-simplified-installer`).
 
-#### Custom directories
+#### Directories
 
 You can create custom directories by specifying items in the `customizations.directories` list. The existence of a specified directory is handled gracefully only if no explicit `mode`, `user` or `group` is specified. If any of these customizations are specified and the directory already exists in the image, the image build will fail. The intention is to prevent changing the ownership or permissions of existing directories.
 
@@ -261,7 +341,7 @@ ensure_parents = false
 - `group` is the group to set as the owner of the directory. If not specified, the default is `root`. Can be specified as group name (string) or as group id (integer).
 - `ensure_parents` is a boolean that specifies whether to create parent directories as needed. If not specified, the default is `false`.
 
-#### Custom files
+#### Files
 
 You can create custom files by specifying items in the `customizations.files` list. You can use the customization to create new files or to replace existing ones, if not restricted by the policy specified below. If the target path is an existing symlink to another file, the symlink will be replaced by the custom file.
 
@@ -295,7 +375,7 @@ data = "Hello world!"
 
 Note that the `data` property can be specified in any of the ways supported by TOML. Some of them require escaping certain characters and others don't. Please refer to the [TOML specification](https://toml.io/en/v1.0.0#string) for more details.
 
-## Custom Repositories
+### Repositories
 
 Third-party repositories are supported by the blueprint customizations. A repository can be defined and enabled in the blueprints which will then be saved to the `/etc/yum.repos.d` directory in an image.
 An optional `filename` argument can be set, otherwise the repository will be saved using the the repository ID, i.e. `/etc/yum.repos.d/<repo-id>.repo`. 
@@ -337,33 +417,7 @@ The blueprint accepts the following options:
 The blueprint accepts both inline GPG keys and GPG key urls. If an inline GPG key is provided it will be saved to the `/etc/pki/rpm-gpg` directory and will be referenced accordingly
 in the repository configuration. **GPG keys are not imported to the RPM database** and will only be imported when first installing a package from the third-party repository.
 
-## Distribution selection with blueprints
-
-The blueprint now supports a new `distro` field that will be used to select the
-distribution to use when composing images, or depsolving the blueprint. If
-`distro` is left blank it will use the host distribution. If you upgrade the
-host operating system the blueprints with no `distro` set will build using the
-new os.
-
-eg. A blueprint that will always build a fedora-32 image, no matter what
-version is running on the host:
-
-```toml
-name = "tmux"
-description = "tmux image with openssh"
-version = "1.2.16"
-distro = "fedora-32"
-
-[[packages]]
-name = "tmux"
-version = "*"
-
-[[packages]]
-name = "openssh-server"
-version = "*"
-```
-
-### Filesystem Support
+### Filesystems
 
 The blueprints can be extended to provide filesytem support. Currently the `mountpoint` and minimum partition `size` can be set. Custom mountpoints are currently only supported for `RHEL 8.5` & `RHEL 9.0`. For other distributions, only the `root` partition is supported, the size argument being an alias for the image size. 
 
@@ -383,7 +437,7 @@ In addition to the root mountpoint, `/`, the following `mountpoints` and their s
 - `/data`
 - `/tmp`
 
-### OpenSCAP Support
+### OpenSCAP
 
 From `RHEL 8.7` & `RHEL 9.1` support has been added for `OpenSCAP` build-time remediation. The blueprints accept two fields:
 - the `datastream` path to the remediation instructions
@@ -397,7 +451,7 @@ datastream = "/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml"
 profile_id = "xccdf_org.ssgproject.content_profile_cis"
 ```
 
-## Example Blueprint
+## Example Blueprints
 
 The following blueprint example will:
 - install the `tmux`, `git`, and `vim-enhanced` packages
