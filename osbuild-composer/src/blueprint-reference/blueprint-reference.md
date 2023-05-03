@@ -11,9 +11,9 @@ version = "0.0.1"
 ```
 
 Where:
-- The `name` attribute is a string that contains the name of the blueprint. It can contain spaces, but they will be converted to `-` when it is written to disk. It should be short and descriptive.
-- The `description` attribute is a string that can be a longer description of the blueprint, it is only used for display purposes.
-- The `version` attribute is a string that contains a semver compatible version number. If a new blueprint is uploaded with the same version the server will automatically bump the PATCH level of the version. If the version doesn't match it will be used as is, for example, uploading a blueprint with version set to 0.1.0 when the existing blueprint version is 0.0.1 will result in the new blueprint being stored as version 0.1.0.
+- The `name` attribute is a string that contains the name of the blueprint. It can contain spaces, but they will be converted to `-` when it is import into `osbuild-composer`. It should be short and descriptive.
+- The `description` attribute is a string that can be a longer description of the blueprint and is only used for display purposes.
+- The `version` attribute is a string that contains a semver compatible version number. If a new blueprint is uploaded with the same version the server will automatically bump the PATCH level of the version. If the version doesn't match it will be used as is. For example, uploading a blueprint with version set to 0.1.0 when the existing blueprint version is 0.0.1 will result in the new blueprint being stored as version 0.1.0.
 
 You can upload a blueprint with the `osbuild-composer blueprints push $filename` command, the blueprint will then be usable in `osbuild-composer compose` as the `name` you gave it.
 
@@ -27,14 +27,14 @@ distribution to use when composing images, or depsolving the blueprint. If
 host operating system the blueprints with no `distro` set will build using the
 new os.
 
-eg. A blueprint that will always build a fedora-32 image, no matter what
+eg. A blueprint that will always build a Fedora 38 image, no matter what
 version is running on the host:
 
 ```toml
 name = "tmux"
 description = "tmux image with openssh"
 version = "1.2.16"
-distro = "fedora-32"
+distro = "fedora-38"
 
 [[packages]]
 name = "tmux"
@@ -112,10 +112,10 @@ The `containers` list contains objects with a `source` and optional `tls-verify`
 These list entries describe the container images to be embedded into the image.
 
 - The `source` attribute is a **required** string and is a reference to a container image at a registry.
-- The `name` attribute is an *optional* string to set the name under which the container image will be saved in the image.
-- The `tls-verify` attribute is an *optional* boolean to disable TLS verification of the source download, by default this is set to `true`.
+- The `name` attribute is an *optional* string to set the name under which the container image will be saved in the image. If not specified `name` falls back to the same value as `source`.
+- The `tls-verify` attribute is an *optional* boolean to disable TLS verification of the source download. By default this is set to `true`.
 
-The container is pulled during the image build and stored in the image at the default local container storage location that is appropriate for the image type, so that all support container-tools like `podman` and `cri-o` will be able to work with it.
+The container is pulled during the image build and stored in the image at the default local container storage location that is appropriate for the image type, so that all supported container tools like `podman` and `cri-o` will be able to work with it.
 
 The embedded containers are not started, to do so you can create systemd unit files or quadlets with the files customization.
 
