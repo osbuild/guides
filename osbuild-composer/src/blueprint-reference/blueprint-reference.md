@@ -149,29 +149,31 @@ In the customizations we determine what goes into the image that's not in the de
 - [Additional Groups](#additional-groups)
 - [Timezone](#timezone)
 - [Locale](#locale)
-- [Firewall](#locale)
+- [Firewall](#firewall)
 - [Systemd Services](#systemd-services)
 - [Files and Directories](#files-and-directories)
+  - [Directories](#directories)
+  - [Files](#files)
 - [Repositories](#repositories)
 - [Filesystems](#filesystems)
 - [OpenSCAP](#openscap)
 
 ### Hostname
 
-The `[customizations]` section can be used to configure the **hostname** of the final image. for example:
+`customizations.hostname` is an *optional* string that can be used to configure the hostname of the final image:
 
 ```toml
 [customizations]
 hostname = "baseimage"
 ```
 
-This is optional and can be left out to use the defaults.
+This is optional and can be left out to use the default hostname.
 
-### Kernel command-line arguments
+### Kernel
 
-This allows you to append arguments to the bootloader's kernel command line.
+#### Kernel Command-Line Arguments
 
-For example:
+An *optional* string that allows to append arguments to the bootloader kernel command line:
 
 ```toml
 [customizations.kernel]
@@ -180,18 +182,41 @@ append = "nosmt=force"
 
 ### SSH Keys
 
-Set an existing user's ssh key in the final image:
+An *optional* list of objects containing:
+
+- The `user` attribute is a **required** string and must match the name of a user in the image exactly.
+- The `key` attribute is a **required** string that contains the public key to be set for that user.
+
+*Warning: `key` expects the entire content of the public key file, traditionally `~/.ssh/id_rsa.pub` but any algorithm supported by the operating system in the image is valid*
+
+*Note: If you are adding a user you can add their SSH key in the [additional users](#additional-users) customization instead.*
+
+Set an existing user's SSH key in the final image:
 
 ```toml
 [[customizations.sshkey]]
 user = "root"
 key = "PUBLIC SSH KEY"
 ```
-The key will be added to the user's `authorized_keys` file.
+The key will be added to the user's `authorized_keys` file in their home directory.
 
-*Warning: `key` expects the entire content of the public key file, traditionally `~/.ssh/id_rsa.pub` but any algorithm supported by the OS is valid*
+### Additional Users
 
-### Additional users
+An *optional* list of objects that contain the following attributes:
+
+- `name` a **required** string that sets the username.
+- `description` an *optional* string.
+- `password` an *optional* string.
+- `key` an *optional* string.
+- `home` an *optional* string.
+- `shell` an *optional* string.
+- `groups` an *optional* list of strings.
+- `uid` an *optional* integer.
+- `gid` an *optional* integer.
+
+*Warning: `key` expects the entire content of the public key file, traditionally `~/.ssh/id_rsa.pub` but any algorithm supported by the operating system in the image is valid*
+
+*Note: If the password starts with $6$, $5$, or $2b$ it will be stored as an encrypted password. Otherwise it will be treated as a plain text password.*
 
 Add a user to the image, and/or set their ssh key. All fields for this section are optional except for the name. The following is a complete example:
 
@@ -208,13 +233,12 @@ uid = 1200
 gid = 1200
 ```
 
-If the password starts with $6$, $5$, or $2b$ it will be stored as an encrypted password. Otherwise it will be treated as a plain text password.
-
-*Warning: `key` expects the entire content of `~/.ssh/id_rsa.pub`*
-
 ### Additional groups
 
-Add a group to the image. Name is required and GID is optional:
+An *optional* list of objects that contain the following attributes:
+
+- `name` a **required** string that sets the name of the group.
+- `gid` a **required** integer that sets the id of the group.
 
 ```toml
 [[customizations.group]]
@@ -222,10 +246,12 @@ name = "widget"
 gid = 1130
 ```
 
-
 ### Timezone
 
-Customizing the timezone and the NTP servers to use for the system:
+An *optional* object that contains the following attributes:
+
+- `timezone` an *optional* string. If not provided the UTC timezone is used..
+- `ntpservers` an *optional* list of strings containing NTP servers to use. If not provided the distribution defaults are used.
 
 ```toml
 [customizations.timezone]
@@ -239,13 +265,16 @@ The values supported by timezone can be listed by running the command:
 $ timedatectl list-timezones
 ```
 
-If no timezone is setup, the system will default to using UTC. The NTP servers are also optional and will default to using the distribution defaults, which are suitable for most uses.
-
-Some image types have already NTP servers setup, for example, Google cloud image, and they cannot be overridden, because they are required to boot in the selected environment. But the timezone will be updated to the one selected in the blueprint.
+Some image types have already NTP servers setup such as Google Cloud images. These cannot be overridden because they are required to boot in the selected environment. However, the timezone will be updated to the one selected in the blueprint.
 
 ### Locale
 
-Customize the locale settings for the system:
+An *optional* object that contains the following attributes to customize the locale settings for the system:
+
+- `languages` an *optional* list of strings containing locales to be installed.
+- `keyboard` an *optional* string to set the keyboard layout.
+
+Multiple languages can be added. The first one becomes the primary, and the others are added as secondary. You must include one or more languages or keyboards in the section.
 
 ```toml
 [customizations.locale]
@@ -257,21 +286,26 @@ The values supported by languages can be listed by running can be listed by runn
 
 ```
 $ localectl list-locales 
-
- ```
+```
 
 The values supported by keyboard can be listed by running the command:
 
 ```
- $ localectl list-keymaps`
- ```
-
-
-Multiple languages can be added. The first one becomes the primary, and the others are added as secondary. You must include one or more languages or keyboards in the section.
+$ localectl list-keymaps`
+```
 
 ### Firewall
 
-By default the firewall blocks all access, except for services that enable their ports explicitly, like sshd. The following command can be used to open other ports or services. Ports are configured using the `port:protocol` format; port ranges are configured using `portA-portB:protocol` format:
+An *optional* object containing the following attributes:
+
+- `ports` an *optional* list of strings containing ports (or port ranges) and protocols to open.
+- `services` an *optional* object with the following attributes containing services to enable or disable for `firewalld`.
+  - `enabled` *optional* list of strings for services to enable.
+  - `disabled` *optional* list of strings for services to disable.
+
+By default the firewall blocks all access, except for services that enable their ports explicitly such as the sshd. The following blueprint can be used to open other ports or services.
+
+*Note: Ports are configured using the `port:protocol` format; port ranges are configured using `portA-portB:protocol` format:*
 
 ```toml
 [customizations.firewall]
@@ -282,7 +316,7 @@ Numeric ports, or their names from `/etc/services` can be used in the ports enab
 
 The blueprint settings extend any existing settings in the image templates. Thus, if sshd is already enabled, it will extend the list of ports with those already listed by the blueprint.
 
-If the distribution uses firewalld, you can specify services listed by `firewall-cmd --get-services` in a customizations.firewall.services section:
+If the distribution uses `firewalld` you can specify services listed by `firewall-cmd --get-services` in a `customizations.firewall.services` section:
 
 ```toml
 [customizations.firewall.services]
@@ -290,23 +324,27 @@ enabled = ["ftp", "ntp", "dhcp"]
 disabled = ["telnet"]
 ```
 
-Remember that the firewall.services are different from the names in /etc/services.
+Remember that the `firewall.services` are different from the names in `/etc/services`.
 
 Both are optional, if they are not used leave them out or set them to an empty list `[]`. If you only want the default firewall setup this section can be omitted from the blueprint.
 
-*NOTE: The Google and OpenStack templates explicitly disable the firewall for their environment. This cannot be overridden by the blueprint.*
+*Note: The Google and OpenStack templates explicitly disable the firewall for their environment. This cannot be overridden by the blueprint.*
 
-### Systemd services
+### Systemd Services
 
-This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. For example, `ami` image type requires `sshd`, `chronyd`, and `cloud-init` services. Without them, the image will not boot. Blueprint services do not replace this services, but add them to the list of services already present in the templates, if any. 
-
-The service names are systemd service units. You may specify any systemd unit file accepted by systemctl enable, for example, cockpit.socket:
+An *optional* object containing the following attributes:
+- `enabled` an *optional* list of strings containing services to be enabled.
+- `disabled` an *optional* list of strings containing services to be disabled.
 
 ```toml
 [customizations.services]
 enabled = ["sshd", "cockpit.socket", "httpd"]
 disabled = ["postfix", "telnetd"]
 ```
+
+This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. For example, `ami` image type requires `sshd`, `chronyd`, and `cloud-init` services. Without them, the image will not boot. Blueprint services do not replace this services, but add them to the list of services already present in the templates, if any. 
+
+The service names are systemd service units. You may specify any systemd unit file accepted by systemctl enable, for example, cockpit.socket:
 
 ### Files and directories
 
