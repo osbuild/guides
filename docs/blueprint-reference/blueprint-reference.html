@@ -255,34 +255,59 @@ source = &quot;quay.io/fedora/fedora:latest&quot;
 <li><a href="#additional-groups">Additional Groups</a></li>
 <li><a href="#timezone">Timezone</a></li>
 <li><a href="#locale">Locale</a></li>
-<li><a href="#locale">Firewall</a></li>
+<li><a href="#firewall">Firewall</a></li>
 <li><a href="#systemd-services">Systemd Services</a></li>
-<li><a href="#files-and-directories">Files and Directories</a></li>
+<li><a href="#files-and-directories">Files and Directories</a>
+<ul>
+<li><a href="#directories">Directories</a></li>
+<li><a href="#files">Files</a></li>
+</ul>
+</li>
 <li><a href="#repositories">Repositories</a></li>
 <li><a href="#filesystems">Filesystems</a></li>
 <li><a href="#openscap">OpenSCAP</a></li>
 </ul>
 <h3 id="hostname"><a class="header" href="#hostname">Hostname</a></h3>
-<p>The <code>[customizations]</code> section can be used to configure the <strong>hostname</strong> of the final image. for example:</p>
+<p><code>customizations.hostname</code> is an <em>optional</em> string that can be used to configure the hostname of the final image:</p>
 <pre><code class="language-toml">[customizations]
 hostname = &quot;baseimage&quot;
 </code></pre>
-<p>This is optional and can be left out to use the defaults.</p>
-<h3 id="kernel-command-line-arguments"><a class="header" href="#kernel-command-line-arguments">Kernel command-line arguments</a></h3>
-<p>This allows you to append arguments to the bootloader's kernel command line.</p>
-<p>For example:</p>
+<p>This is optional and can be left out to use the default hostname.</p>
+<h3 id="kernel"><a class="header" href="#kernel">Kernel</a></h3>
+<h4 id="kernel-command-line-arguments"><a class="header" href="#kernel-command-line-arguments">Kernel Command-Line Arguments</a></h4>
+<p>An <em>optional</em> string that allows to append arguments to the bootloader kernel command line:</p>
 <pre><code class="language-toml">[customizations.kernel]
 append = &quot;nosmt=force&quot;
 </code></pre>
 <h3 id="ssh-keys"><a class="header" href="#ssh-keys">SSH Keys</a></h3>
-<p>Set an existing user's ssh key in the final image:</p>
+<p>An <em>optional</em> list of objects containing:</p>
+<ul>
+<li>The <code>user</code> attribute is a <strong>required</strong> string and must match the name of a user in the image exactly.</li>
+<li>The <code>key</code> attribute is a <strong>required</strong> string that contains the public key to be set for that user.</li>
+</ul>
+<p><em>Warning: <code>key</code> expects the entire content of the public key file, traditionally <code>~/.ssh/id_rsa.pub</code> but any algorithm supported by the operating system in the image is valid</em></p>
+<p><em>Note: If you are adding a user you can add their SSH key in the <a href="#additional-users">additional users</a> customization instead.</em></p>
+<p>Set an existing user's SSH key in the final image:</p>
 <pre><code class="language-toml">[[customizations.sshkey]]
 user = &quot;root&quot;
 key = &quot;PUBLIC SSH KEY&quot;
 </code></pre>
-<p>The key will be added to the user's <code>authorized_keys</code> file.</p>
-<p><em>Warning: <code>key</code> expects the entire content of the public key file, traditionally <code>~/.ssh/id_rsa.pub</code> but any algorithm supported by the OS is valid</em></p>
-<h3 id="additional-users"><a class="header" href="#additional-users">Additional users</a></h3>
+<p>The key will be added to the user's <code>authorized_keys</code> file in their home directory.</p>
+<h3 id="additional-users"><a class="header" href="#additional-users">Additional Users</a></h3>
+<p>An <em>optional</em> list of objects that contain the following attributes:</p>
+<ul>
+<li><code>name</code> a <strong>required</strong> string that sets the username.</li>
+<li><code>description</code> an <em>optional</em> string.</li>
+<li><code>password</code> an <em>optional</em> string.</li>
+<li><code>key</code> an <em>optional</em> string.</li>
+<li><code>home</code> an <em>optional</em> string.</li>
+<li><code>shell</code> an <em>optional</em> string.</li>
+<li><code>groups</code> an <em>optional</em> list of strings.</li>
+<li><code>uid</code> an <em>optional</em> integer.</li>
+<li><code>gid</code> an <em>optional</em> integer.</li>
+</ul>
+<p><em>Warning: <code>key</code> expects the entire content of the public key file, traditionally <code>~/.ssh/id_rsa.pub</code> but any algorithm supported by the operating system in the image is valid</em></p>
+<p><em>Note: If the password starts with $6$, $5$, or $2b$ it will be stored as an encrypted password. Otherwise it will be treated as a plain text password.</em></p>
 <p>Add a user to the image, and/or set their ssh key. All fields for this section are optional except for the name. The following is a complete example:</p>
 <pre><code class="language-toml">[[customizations.user]]
 name = &quot;admin&quot;
@@ -295,16 +320,22 @@ groups = [&quot;widget&quot;, &quot;users&quot;, &quot;wheel&quot;]
 uid = 1200
 gid = 1200
 </code></pre>
-<p>If the password starts with $6$, $5$, or $2b$ it will be stored as an encrypted password. Otherwise it will be treated as a plain text password.</p>
-<p><em>Warning: <code>key</code> expects the entire content of <code>~/.ssh/id_rsa.pub</code></em></p>
 <h3 id="additional-groups"><a class="header" href="#additional-groups">Additional groups</a></h3>
-<p>Add a group to the image. Name is required and GID is optional:</p>
+<p>An <em>optional</em> list of objects that contain the following attributes:</p>
+<ul>
+<li><code>name</code> a <strong>required</strong> string that sets the name of the group.</li>
+<li><code>gid</code> a <strong>required</strong> integer that sets the id of the group.</li>
+</ul>
 <pre><code class="language-toml">[[customizations.group]]
 name = &quot;widget&quot;
 gid = 1130
 </code></pre>
 <h3 id="timezone"><a class="header" href="#timezone">Timezone</a></h3>
-<p>Customizing the timezone and the NTP servers to use for the system:</p>
+<p>An <em>optional</em> object that contains the following attributes:</p>
+<ul>
+<li><code>timezone</code> an <em>optional</em> string. If not provided the UTC timezone is used..</li>
+<li><code>ntpservers</code> an <em>optional</em> list of strings containing NTP servers to use. If not provided the distribution defaults are used.</li>
+</ul>
 <pre><code class="language-toml">[customizations.timezone]
 timezone = &quot;US/Eastern&quot;
 ntpservers = [&quot;0.north-america.pool.ntp.org&quot;, &quot;1.north-america.pool.ntp.org&quot;]
@@ -312,44 +343,62 @@ ntpservers = [&quot;0.north-america.pool.ntp.org&quot;, &quot;1.north-america.po
 <p>The values supported by timezone can be listed by running the command:</p>
 <pre><code>$ timedatectl list-timezones
 </code></pre>
-<p>If no timezone is setup, the system will default to using UTC. The NTP servers are also optional and will default to using the distribution defaults, which are suitable for most uses.</p>
-<p>Some image types have already NTP servers setup, for example, Google cloud image, and they cannot be overridden, because they are required to boot in the selected environment. But the timezone will be updated to the one selected in the blueprint.</p>
+<p>Some image types have already NTP servers setup such as Google Cloud images. These cannot be overridden because they are required to boot in the selected environment. However, the timezone will be updated to the one selected in the blueprint.</p>
 <h3 id="locale"><a class="header" href="#locale">Locale</a></h3>
-<p>Customize the locale settings for the system:</p>
+<p>An <em>optional</em> object that contains the following attributes to customize the locale settings for the system:</p>
+<ul>
+<li><code>languages</code> an <em>optional</em> list of strings containing locales to be installed.</li>
+<li><code>keyboard</code> an <em>optional</em> string to set the keyboard layout.</li>
+</ul>
+<p>Multiple languages can be added. The first one becomes the primary, and the others are added as secondary. You must include one or more languages or keyboards in the section.</p>
 <pre><code class="language-toml">[customizations.locale]
 languages = [&quot;en_US.UTF-8&quot;]
 keyboard = &quot;us&quot;
 </code></pre>
 <p>The values supported by languages can be listed by running can be listed by running the command:</p>
 <pre><code>$ localectl list-locales 
-
 </code></pre>
 <p>The values supported by keyboard can be listed by running the command:</p>
-<pre><code> $ localectl list-keymaps`
+<pre><code>$ localectl list-keymaps`
 </code></pre>
-<p>Multiple languages can be added. The first one becomes the primary, and the others are added as secondary. You must include one or more languages or keyboards in the section.</p>
 <h3 id="firewall"><a class="header" href="#firewall">Firewall</a></h3>
-<p>By default the firewall blocks all access, except for services that enable their ports explicitly, like sshd. The following command can be used to open other ports or services. Ports are configured using the <code>port:protocol</code> format; port ranges are configured using <code>portA-portB:protocol</code> format:</p>
+<p>An <em>optional</em> object containing the following attributes:</p>
+<ul>
+<li><code>ports</code> an <em>optional</em> list of strings containing ports (or port ranges) and protocols to open.</li>
+<li><code>services</code> an <em>optional</em> object with the following attributes containing services to enable or disable for <code>firewalld</code>.
+<ul>
+<li><code>enabled</code> <em>optional</em> list of strings for services to enable.</li>
+<li><code>disabled</code> <em>optional</em> list of strings for services to disable.</li>
+</ul>
+</li>
+</ul>
+<p>By default the firewall blocks all access, except for services that enable their ports explicitly such as the sshd. The following blueprint can be used to open other ports or services.</p>
+<p><em>Note: Ports are configured using the <code>port:protocol</code> format; port ranges are configured using <code>portA-portB:protocol</code> format:</em></p>
 <pre><code class="language-toml">[customizations.firewall]
 ports = [&quot;22:tcp&quot;, &quot;80:tcp&quot;, &quot;imap:tcp&quot;, &quot;53:tcp&quot;, &quot;53:udp&quot;, &quot;30000-32767:tcp&quot;, &quot;30000-32767:udp&quot;]
 </code></pre>
 <p>Numeric ports, or their names from <code>/etc/services</code> can be used in the ports enabled/disabled lists.</p>
 <p>The blueprint settings extend any existing settings in the image templates. Thus, if sshd is already enabled, it will extend the list of ports with those already listed by the blueprint.</p>
-<p>If the distribution uses firewalld, you can specify services listed by <code>firewall-cmd --get-services</code> in a customizations.firewall.services section:</p>
+<p>If the distribution uses <code>firewalld</code> you can specify services listed by <code>firewall-cmd --get-services</code> in a <code>customizations.firewall.services</code> section:</p>
 <pre><code class="language-toml">[customizations.firewall.services]
 enabled = [&quot;ftp&quot;, &quot;ntp&quot;, &quot;dhcp&quot;]
 disabled = [&quot;telnet&quot;]
 </code></pre>
-<p>Remember that the firewall.services are different from the names in /etc/services.</p>
+<p>Remember that the <code>firewall.services</code> are different from the names in <code>/etc/services</code>.</p>
 <p>Both are optional, if they are not used leave them out or set them to an empty list <code>[]</code>. If you only want the default firewall setup this section can be omitted from the blueprint.</p>
-<p><em>NOTE: The Google and OpenStack templates explicitly disable the firewall for their environment. This cannot be overridden by the blueprint.</em></p>
-<h3 id="systemd-services"><a class="header" href="#systemd-services">Systemd services</a></h3>
-<p>This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. For example, <code>ami</code> image type requires <code>sshd</code>, <code>chronyd</code>, and <code>cloud-init</code> services. Without them, the image will not boot. Blueprint services do not replace this services, but add them to the list of services already present in the templates, if any. </p>
-<p>The service names are systemd service units. You may specify any systemd unit file accepted by systemctl enable, for example, cockpit.socket:</p>
+<p><em>Note: The Google and OpenStack templates explicitly disable the firewall for their environment. This cannot be overridden by the blueprint.</em></p>
+<h3 id="systemd-services"><a class="header" href="#systemd-services">Systemd Services</a></h3>
+<p>An <em>optional</em> object containing the following attributes:</p>
+<ul>
+<li><code>enabled</code> an <em>optional</em> list of strings containing services to be enabled.</li>
+<li><code>disabled</code> an <em>optional</em> list of strings containing services to be disabled.</li>
+</ul>
 <pre><code class="language-toml">[customizations.services]
 enabled = [&quot;sshd&quot;, &quot;cockpit.socket&quot;, &quot;httpd&quot;]
 disabled = [&quot;postfix&quot;, &quot;telnetd&quot;]
 </code></pre>
+<p>This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. For example, <code>ami</code> image type requires <code>sshd</code>, <code>chronyd</code>, and <code>cloud-init</code> services. Without them, the image will not boot. Blueprint services do not replace this services, but add them to the list of services already present in the templates, if any. </p>
+<p>The service names are systemd service units. You may specify any systemd unit file accepted by systemctl enable, for example, cockpit.socket:</p>
 <h3 id="files-and-directories"><a class="header" href="#files-and-directories">Files and directories</a></h3>
 <p>You can use blueprint customizations to create custom files and directories in the image. These customizations are currently restricted only to the <code>/etc</code> directory.</p>
 <p>When using the custom files and directories customization, the following rules apply:</p>
