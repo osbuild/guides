@@ -57,7 +57,7 @@ The content section determines what goes into the image from other sources such 
 
 The `packages` and `modules` lists contain objects with a `name` and optional `version` attribute.
 
-- The `name` attribute is a **required** string and must match the name of a package in the repositories exactly.
+- The `name` attribute is a **required** string and can be an exact match, or a filesystem-like glob using `*` for wildcards and `?` for character matching.
 - The `version` attribute is an *optional* string can be an exact match or a filesystem-like glob of the version using `*` for wildcards and `?` for character matching. If not provided the latest version in the repositories is used.
 
 *Currently there are no differences between packages and modules in `osbuild-composer`. Both are treated like an rpm package dependency.*
