@@ -190,7 +190,7 @@ version = &quot;*&quot;
 <h3 id="packages"><a class="header" href="#packages">Packages</a></h3>
 <p>The <code>packages</code> and <code>modules</code> lists contain objects with a <code>name</code> and optional <code>version</code> attribute.</p>
 <ul>
-<li>The <code>name</code> attribute is a <strong>required</strong> string and must match the name of a package in the repositories exactly.</li>
+<li>The <code>name</code> attribute is a <strong>required</strong> string and can be an exact match, or a filesystem-like glob using <code>*</code> for wildcards and <code>?</code> for character matching.</li>
 <li>The <code>version</code> attribute is an <em>optional</em> string can be an exact match or a filesystem-like glob of the version using <code>*</code> for wildcards and <code>?</code> for character matching. If not provided the latest version in the repositories is used.</li>
 </ul>
 <p><em>Currently there are no differences between packages and modules in <code>osbuild-composer</code>. Both are treated like an rpm package dependency.</em></p>
