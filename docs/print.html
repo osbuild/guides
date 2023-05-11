@@ -1154,6 +1154,7 @@ source = &quot;quay.io/fedora/fedora:latest&quot;
 <li><a href="blueprint-reference/blueprint-reference.html#files">Files</a></li>
 </ul>
 </li>
+<li><a href="blueprint-reference/blueprint-reference.html#ignition">Ignition</a></li>
 <li><a href="blueprint-reference/blueprint-reference.html#repositories">Repositories</a></li>
 <li><a href="blueprint-reference/blueprint-reference.html#filesystems">Filesystems</a></li>
 <li><a href="blueprint-reference/blueprint-reference.html#openscap">OpenSCAP</a></li>
@@ -1343,6 +1344,19 @@ data = &quot;Hello world!&quot;
 <li><code>data</code> is the plain text contents of the file. If not specified, the default is an empty file.</li>
 </ul>
 <p>Note that the <code>data</code> property can be specified in any of the ways supported by TOML. Some of them require escaping certain characters and others don't. Please refer to the <a href="https://toml.io/en/v1.0.0#string">TOML specification</a> for more details.</p>
+<h3 id="ignition"><a class="header" href="#ignition">Ignition</a></h3>
+<p>The <code>customizations.ignition</code> section allows users to provide <a href="https://coreos.github.io/ignition/">Ignition</a> configuration files to be used in <code>edge-raw-image</code> and <code>edge-simplified-installer</code> images. Check the RHEL for Edge (<code>r4e</code>) <a href="https://coreos.github.io/butane/specs/">butane</a> specification for a description of the supported configuration options.</p>
+<p>The blueprint configuration can be done <em>either</em> by embedding an Ignition configuration file into the image (only available for <code>edge-simplified-installer</code>), or providing a provisioning URL that will be fetched at first boot.</p>
+<h4 id="ignitionembedded-configuration"><a class="header" href="#ignitionembedded-configuration"><code>ignition.embedded</code> configuration</a></h4>
+<pre><code class="language-toml">[customizations.ignition.embedded]
+config = &quot;eyJpZ25pdGlvbiI6eyJ2ZXJzaW9uIjoiMy4zLjAifSwicGFzc3dkIjp7InVzZXJzIjpbeyJncm91cHMiOlsid2hlZWwiXSwibmFtZSI6ImNvcmUiLCJwYXNzd29yZEhhc2giOiIkNiRqZnVObk85dDFCdjdOLjdrJEhxUnhxMmJsdFIzek15QUhqc1N6YmU3dUJIWEVyTzFZdnFwaTZsamNJMDZkUUJrZldYWFpDdUUubUpja2xQVHdhQTlyL3hwSmlFZFdEcXR4bGU3aDgxIn1dfX0=&quot;
+</code></pre>
+<p>Add a <code>base64</code> encoded Ignition configuration in the <code>config</code> field. This Ignition configuration will be included in the <code>edge-simplified-installer</code> image.</p>
+<h4 id="ignitionfirstboot-configuration"><a class="header" href="#ignitionfirstboot-configuration"><code>ignition.firstboot</code> configuration</a></h4>
+<pre><code class="language-toml">[customizations.ignition.firstboot]
+url = &quot;http://some-server/configuration.ig&quot;
+</code></pre>
+<p>Add a URL pointing to the Ignition configuration that will be fetched during the first boot in the <code>url</code> field. Available for both <code>edge-simplified-installer</code> and <code>edge-raw-image</code>.</p>
 <h3 id="repositories"><a class="header" href="#repositories">Repositories</a></h3>
 <p>Third-party repositories are supported by the blueprint customizations. A repository can be defined and enabled in the blueprints which will then be saved to the <code>/etc/yum.repos.d</code> directory in an image.
 An optional <code>filename</code> argument can be set, otherwise the repository will be saved using the the repository ID, i.e. <code>/etc/yum.repos.d/&lt;repo-id&gt;.repo</code>. </p>
