@@ -2,6 +2,8 @@
 
 Blueprints are text files in the [TOML format](https://toml.io/en/) that describe customizations for the image you are building.
 
+> An important thing to note is that these customizations are not applicable to all image types. `osbuild-composer` currently has no good validation or warning system in place to tell you if a customization in your blueprint is not supported for the image type you're building. The customization may be silently dropped.
+
 A very basic blueprint with just the required attributes at the root looks like:
 
 ```toml
