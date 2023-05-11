@@ -286,13 +286,13 @@ keyboard = "us"
 The values supported by languages can be listed by running can be listed by running the command:
 
 ```
-$ localectl list-locales 
+$ localectl list-locales
 ```
 
 The values supported by keyboard can be listed by running the command:
 
 ```
-$ localectl list-keymaps`
+$ localectl list-keymaps
 ```
 
 ### Firewall
@@ -343,7 +343,7 @@ enabled = ["sshd", "cockpit.socket", "httpd"]
 disabled = ["postfix", "telnetd"]
 ```
 
-This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. For example, `ami` image type requires `sshd`, `chronyd`, and `cloud-init` services. Without them, the image will not boot. Blueprint services do not replace this services, but add them to the list of services already present in the templates, if any. 
+This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. For example, `ami` image type requires `sshd`, `chronyd`, and `cloud-init` services. Without them, the image will not boot. Blueprint services do not replace this services, but add them to the list of services already present in the templates, if any.
 
 The service names are systemd service units. You may specify any systemd unit file accepted by systemctl enable, for example, cockpit.socket:
 
@@ -441,9 +441,9 @@ Add a URL pointing to the Ignition configuration that will be fetched during the
 ### Repositories
 
 Third-party repositories are supported by the blueprint customizations. A repository can be defined and enabled in the blueprints which will then be saved to the `/etc/yum.repos.d` directory in an image.
-An optional `filename` argument can be set, otherwise the repository will be saved using the the repository ID, i.e. `/etc/yum.repos.d/<repo-id>.repo`. 
+An optional `filename` argument can be set, otherwise the repository will be saved using the the repository ID, i.e. `/etc/yum.repos.d/<repo-id>.repo`.
 
-Please note custom repositories **cannot be used at build time to install third-party packages**. These customizations are used to save and enable third-party repositories on the image. For more information, or if you 
+Please note custom repositories **cannot be used at build time to install third-party packages**. These customizations are used to save and enable third-party repositories on the image. For more information, or if you
 wish to install a package from a third-party repository, please continue reading [here](../user-guide/repository-customizations.md).
 
 The following example can be used to create a third-party repository:
@@ -482,7 +482,7 @@ in the repository configuration. **GPG keys are not imported to the RPM database
 
 ### Filesystems
 
-The blueprints can be extended to provide filesytem support. Currently the `mountpoint` and minimum partition `size` can be set. Custom mountpoints are currently only supported for `RHEL 8.5` & `RHEL 9.0`. For other distributions, only the `root` partition is supported, the size argument being an alias for the image size. 
+The blueprints can be extended to provide filesytem support. Currently the `mountpoint` and minimum partition `size` can be set. Custom mountpoints are currently only supported for `RHEL 8.5` & `RHEL 9.0`. For other distributions, only the `root` partition is supported, the size argument being an alias for the image size.
 
 ```toml
 [[customizations.filesystem]]
