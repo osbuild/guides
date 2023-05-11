@@ -500,6 +500,17 @@ In addition to the root mountpoint, `/`, the following `mountpoints` and their s
 - `/data`
 - `/tmp`
 
+Filesystem customizations are currently **not** supported for the following image types:
+- `image-installer`
+- `edge-installer` (RHEL and CentOS) and `iot-installer` (Fedora)
+- `edge-simplified-installer` (RHEL and CentOS)
+
+In addition, the following image types do not create partitioned OS images and therefore filesystem customizations for these types are meaningless:
+- `edge-commit` (RHEL and CentOS) and `iot-commit` (Fedora)
+- `edge-container` (RHEL and CentOS) and `iot-container` (Fedora)
+- `tar`
+- `container`
+
 ### OpenSCAP
 
 From `RHEL 8.7` & `RHEL 9.1` support has been added for `OpenSCAP` build-time remediation. The blueprints accept two fields:
