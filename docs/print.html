@@ -1248,10 +1248,10 @@ languages = [&quot;en_US.UTF-8&quot;]
 keyboard = &quot;us&quot;
 </code></pre>
 <p>The values supported by languages can be listed by running can be listed by running the command:</p>
-<pre><code>$ localectl list-locales 
+<pre><code>$ localectl list-locales
 </code></pre>
 <p>The values supported by keyboard can be listed by running the command:</p>
-<pre><code>$ localectl list-keymaps`
+<pre><code>$ localectl list-keymaps
 </code></pre>
 <h3 id="firewall"><a class="header" href="#firewall">Firewall</a></h3>
 <p>An <em>optional</em> object containing the following attributes:</p>
@@ -1289,7 +1289,7 @@ disabled = [&quot;telnet&quot;]
 enabled = [&quot;sshd&quot;, &quot;cockpit.socket&quot;, &quot;httpd&quot;]
 disabled = [&quot;postfix&quot;, &quot;telnetd&quot;]
 </code></pre>
-<p>This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. For example, <code>ami</code> image type requires <code>sshd</code>, <code>chronyd</code>, and <code>cloud-init</code> services. Without them, the image will not boot. Blueprint services do not replace this services, but add them to the list of services already present in the templates, if any. </p>
+<p>This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. For example, <code>ami</code> image type requires <code>sshd</code>, <code>chronyd</code>, and <code>cloud-init</code> services. Without them, the image will not boot. Blueprint services do not replace this services, but add them to the list of services already present in the templates, if any.</p>
 <p>The service names are systemd service units. You may specify any systemd unit file accepted by systemctl enable, for example, cockpit.socket:</p>
 <h3 id="files-and-directories"><a class="header" href="#files-and-directories">Files and directories</a></h3>
 <p>You can use blueprint customizations to create custom files and directories in the image. These customizations are currently restricted only to the <code>/etc</code> directory.</p>
@@ -1359,8 +1359,8 @@ url = &quot;http://some-server/configuration.ig&quot;
 <p>Add a URL pointing to the Ignition configuration that will be fetched during the first boot in the <code>url</code> field. Available for both <code>edge-simplified-installer</code> and <code>edge-raw-image</code>.</p>
 <h3 id="repositories"><a class="header" href="#repositories">Repositories</a></h3>
 <p>Third-party repositories are supported by the blueprint customizations. A repository can be defined and enabled in the blueprints which will then be saved to the <code>/etc/yum.repos.d</code> directory in an image.
-An optional <code>filename</code> argument can be set, otherwise the repository will be saved using the the repository ID, i.e. <code>/etc/yum.repos.d/&lt;repo-id&gt;.repo</code>. </p>
-<p>Please note custom repositories <strong>cannot be used at build time to install third-party packages</strong>. These customizations are used to save and enable third-party repositories on the image. For more information, or if you 
+An optional <code>filename</code> argument can be set, otherwise the repository will be saved using the the repository ID, i.e. <code>/etc/yum.repos.d/&lt;repo-id&gt;.repo</code>.</p>
+<p>Please note custom repositories <strong>cannot be used at build time to install third-party packages</strong>. These customizations are used to save and enable third-party repositories on the image. For more information, or if you
 wish to install a package from a third-party repository, please continue reading <a href="blueprint-reference/../user-guide/repository-customizations.html">here</a>.</p>
 <p>The following example can be used to create a third-party repository:</p>
 <pre><code class="language-toml">[[customizations.repositories]]
@@ -1391,7 +1391,7 @@ enabled=true
 <p>The blueprint accepts both inline GPG keys and GPG key urls. If an inline GPG key is provided it will be saved to the <code>/etc/pki/rpm-gpg</code> directory and will be referenced accordingly
 in the repository configuration. <strong>GPG keys are not imported to the RPM database</strong> and will only be imported when first installing a package from the third-party repository.</p>
 <h3 id="filesystems"><a class="header" href="#filesystems">Filesystems</a></h3>
-<p>The blueprints can be extended to provide filesytem support. Currently the <code>mountpoint</code> and minimum partition <code>size</code> can be set. Custom mountpoints are currently only supported for <code>RHEL 8.5</code> &amp; <code>RHEL 9.0</code>. For other distributions, only the <code>root</code> partition is supported, the size argument being an alias for the image size. </p>
+<p>The blueprints can be extended to provide filesytem support. Currently the <code>mountpoint</code> and minimum partition <code>size</code> can be set. Custom mountpoints are currently only supported for <code>RHEL 8.5</code> &amp; <code>RHEL 9.0</code>. For other distributions, only the <code>root</code> partition is supported, the size argument being an alias for the image size.</p>
 <pre><code class="language-toml">[[customizations.filesystem]]
 mountpoint = &quot;/var&quot;
 size = 2147483648
@@ -1406,6 +1406,19 @@ size = 2147483648
 <li><code>/app</code></li>
 <li><code>/data</code></li>
 <li><code>/tmp</code></li>
+</ul>
+<p>Filesystem customizations are currently <strong>not</strong> supported for the following image types:</p>
+<ul>
+<li><code>image-installer</code></li>
+<li><code>edge-installer</code> (RHEL and CentOS) and <code>iot-installer</code> (Fedora)</li>
+<li><code>edge-simplified-installer</code> (RHEL and CentOS)</li>
+</ul>
+<p>In addition, the following image types do not create partitioned OS images and therefore filesystem customizations for these types are meaningless:</p>
+<ul>
+<li><code>edge-commit</code> (RHEL and CentOS) and <code>iot-commit</code> (Fedora)</li>
+<li><code>edge-container</code> (RHEL and CentOS) and <code>iot-container</code> (Fedora)</li>
+<li><code>tar</code></li>
+<li><code>container</code></li>
 </ul>
 <h3 id="openscap-1"><a class="header" href="#openscap-1">OpenSCAP</a></h3>
 <p>From <code>RHEL 8.7</code> &amp; <code>RHEL 9.1</code> support has been added for <code>OpenSCAP</code> build-time remediation. The blueprints accept two fields:</p>
