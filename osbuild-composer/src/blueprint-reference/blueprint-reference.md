@@ -64,6 +64,8 @@ The `packages` and `modules` lists contain objects with a `name` and optional `v
 
 *Currently there are no differences between packages and modules in `osbuild-composer`. Both are treated like an rpm package dependency.*
 
+> When using virtual provides as the package name the version glob should be `*`. And be aware that you will be unable to `freeze` the blueprint. This is because the provide will expand into multiple packages with their own names and versions.
+
 For example, to install `tmux-2.9a` and `openssh-server-8.*` packages, add this to your blueprint:
 
 ```toml
