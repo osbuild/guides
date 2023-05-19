@@ -197,6 +197,9 @@ version = &quot;*&quot;
 <li>The <code>version</code> attribute is an <em>optional</em> string can be an exact match or a filesystem-like glob of the version using <code>*</code> for wildcards and <code>?</code> for character matching. If not provided the latest version in the repositories is used.</li>
 </ul>
 <p><em>Currently there are no differences between packages and modules in <code>osbuild-composer</code>. Both are treated like an rpm package dependency.</em></p>
+<blockquote>
+<p>When using virtual provides as the package name the version glob should be <code>*</code>. And be aware that you will be unable to <code>freeze</code> the blueprint. This is because the provide will expand into multiple packages with their own names and versions.</p>
+</blockquote>
 <p>For example, to install <code>tmux-2.9a</code> and <code>openssh-server-8.*</code> packages, add this to your blueprint:</p>
 <pre><code class="language-toml">[[packages]]
 name = &quot;tmux&quot;
