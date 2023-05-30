@@ -361,7 +361,7 @@ When using the custom files and directories customization, the following rules a
 - There must be no duplicate paths of the same directory.
 - There must be no duplicate paths of the same file.
 
-These customizations are not supported for image types that deploy ostree commits (such as `edge-raw-image`, `edge-installer`, `edge-simplified-installer`).
+These customizations are not supported for image types that deploy ostree commits (such as `edge-raw-image`, `edge-installer`, `edge-simplified-installer`). The only exception is the Fedora `iot-raw-image` image type, which supports these customizations.
 
 #### Directories
 
