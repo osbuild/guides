@@ -1305,7 +1305,7 @@ disabled = [&quot;postfix&quot;, &quot;telnetd&quot;]
 <li>There must be no duplicate paths of the same directory.</li>
 <li>There must be no duplicate paths of the same file.</li>
 </ul>
-<p>These customizations are not supported for image types that deploy ostree commits (such as <code>edge-raw-image</code>, <code>edge-installer</code>, <code>edge-simplified-installer</code>).</p>
+<p>These customizations are not supported for image types that deploy ostree commits (such as <code>edge-raw-image</code>, <code>edge-installer</code>, <code>edge-simplified-installer</code>). The only exception is the Fedora <code>iot-raw-image</code> image type, which supports these customizations.</p>
 <h4 id="directories"><a class="header" href="#directories">Directories</a></h4>
 <p>You can create custom directories by specifying items in the <code>customizations.directories</code> list. The existence of a specified directory is handled gracefully only if no explicit <code>mode</code>, <code>user</code> or <code>group</code> is specified. If any of these customizations are specified and the directory already exists in the image, the image build will fail. The intention is to prevent changing the ownership or permissions of existing directories.</p>
 <p>The following example creates a directory <code>/etc/foobar</code> with all the default settings:</p>
