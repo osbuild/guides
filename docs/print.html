@@ -1506,9 +1506,7 @@ size = 2147483648
 datastream = &quot;/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml&quot;
 profile_id = &quot;xccdf_org.ssgproject.content_profile_cis&quot;
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="current-architecture"><a class="header" href="#current-architecture">Current architecture</a></h2>
-<p>This diagram shows the overall architecture, and each sub-section goes into details about the three main
-components, which are run as independent services.</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="service-architecture"><a class="header" href="#service-architecture">Service architecture</a></h2>
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <p><svg
    id="artwork"
@@ -1962,9 +1960,25 @@ font-weight: 700;
 </g>
 </a>
 </svg></p>
+<blockquote>
+<p>Click each component in this diagram to get to the <strong>hash</strong> of the source code <strong>currently running in production</strong>.</p>
+</blockquote>
 <p>The metadata defining the service for App-Interface is kept upstream and open as templates for both the <a href="https://github.com/osbuild/osbuild-composer/blob/main/templates/composer.yml">osbuild-composer</a> and <a href="https://github.com/osbuild/image-builder/blob/main/templates/image-builder.yml">image-builder components</a>.
 The tooling to operate the service is to large parts open source and publicly accessible, e.g. qontract in the form of <a href="https://github.com/app-sre/qontract-server">qontract-server</a>, <a href="https://github.com/app-sre/qontract-reconcile">qontract-reconcile</a>.
 The architecture documents in this section comply with the AppSRE contract.</p>
+<h2 id="how-to-contribute"><a class="header" href="#how-to-contribute">How to contribute</a></h2>
+<p>Our <a href="https://www.osbuild.org/guides/developer-guide/developer-guide.html">developer guide</a> is a great starting point to learn about our workflow, code style and more!</p>
+<p>If you want to contribute to our frontend or backend, here are guides on how to get the respective stack set up for development:</p>
+<ul>
+<li><a href="https://github.com/RedHatInsights/image-builder-frontend#frontend-development">image-builder-frontend</a></li>
+<li><a href="https://github.com/RedHatInsights/image-builder-frontend/blob/main/devel/README.md">image-builder-backend</a></li>
+</ul>
+<h3 id="how-to-reach-out-to-us"><a class="header" href="#how-to-reach-out-to-us">How to reach out to us</a></h3>
+<ul>
+<li>Matrix: <code>#image-builder</code> on fedoraproject.org</li>
+<li>Mailing List: <a href="mailto:image-builder@redhat.com">image-builder@redhat.com</a></li>
+<li>Issues and pull requests: <a href="https://github.com/osbuild">github.com/osbuild</a></li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="image-builder-crc-api-architecture-document"><a class="header" href="#image-builder-crc-api-architecture-document">Image Builder CRC API Architecture Document</a></h1>
 <h2 id="service-description"><a class="header" href="#service-description">Service Description</a></h2>
 <p>The <code>image-builder</code> API in CRC serves as the public API used either directly by customers or through the
