@@ -1,5 +1,7 @@
 ## Service architecture
 
+This service is open source, so all of its code is inspectable and can be contributed to.
+
 {{#include architecture.svg}}
 
 > Click each component in this diagram to get to the **hash** of the source code **currently running in production**.
