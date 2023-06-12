@@ -8,8 +8,6 @@ Let me start with a quote:
 
 TODO: what do we test in each repo
 
-TODO: rpmci, rpmrepo
-
 ## osbuild-composer
 
 This section provides a basic summary of the various types of testing done for `osbuild-composer`. Detailed information about testing can be found in [the upstream repository][tests_readme].
@@ -108,3 +106,7 @@ The cloud-cleaner binary was created to clean up all artifacts (like images, but
    * Image uploaded to EC2
    
    * VM running in EC2
+
+### RPM Repository Snapshots
+
+In order to provide a stable base for the tests, the maintainer team created [the RPMRepo project](./rpmrepo.html) that periodically snapshots repositories of selected distributions.
