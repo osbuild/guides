@@ -1,4 +1,4 @@
-# Guides for projects related to OSBuild
+# Guides for projects related to Image Builder
 
 Notes on the format:
  * The guides use simple markdown files, which are rendered using mdBook: https://github.com/rust-lang/mdBook/.
