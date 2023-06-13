@@ -1,6 +1,12 @@
 # osbuild
+[**osbuild MAN pages**](https://www.osbuild.org/man/osbuild.1)
 
-A CLI tool for building OS images. It takes manifest as an input and produces an image as an output. The manifest consists of:
+The osbuild project is the heart of Image Builder. It is a command-line tool for building OS images. It takes manifest as an input and produces an image as an output. osbuild defines a pipeline description to build arbitrary operating system artifacts out of many small and self-contained stages. Furthermore, it provides an execution engine that will consume a pipeline description, execute the pipeline, and provide the resulting image back to the user. The osbuild interfaces are meant to be used by machines, not humans. Therefore, access to osbuild resources should only be required if you plan to develop new osbuild frontends, debug osbuild failures on your own, or contribute to the osbuild development.
+
+## Manifests
+[**osbuild-manifest MAN pages**](https://www.osbuild.org/man/osbuild-manifest.5)
+
+The manifest consists of:
 
 - sources section
 - pipeline
