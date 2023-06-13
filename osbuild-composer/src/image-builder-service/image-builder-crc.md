@@ -23,7 +23,7 @@ only their history and metadata can no longer be queried through the service.
 
 ## Routes
 The public route is `/api/v1/image-builder`, a detailed list can be found at
-[https://cloud.redhat.com/beta/docs/api/image-builder](https://cloud.redhat.com/beta/docs/api/image-builder).
+[https://console.redhat.com/docs/api/image-builder](https://console.redhat.com/docs/api/image-builder).
 
 ## Dependencies
 Image builder has the following internal and external dependencies.

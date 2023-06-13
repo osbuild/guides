@@ -1,6 +1,6 @@
 # Introduction
 
-OSBuild is comprised of many individual projects which work together to provide a wide range of features to build and assemble operating system artifacts. The graphical user interfaces can be found under the term [Image Builder](./introduction.md#image-builder) and provide access to the osbuild machinery. They integrate into existing operating system interfaces, including the **Cockpit** management console, the **cloud.redhat.com** customer services, as well as the classic linux **command-line**.
+Image Builder is comprised of many individual projects which work together to provide a wide range of features to build and assemble operating system artifacts. The graphical user interfaces can be found under the term [Image Builder](./introduction.md#image-builder) and provide access to the osbuild machinery. They integrate into existing operating system interfaces, including the **Cockpit** management console, the **console.redhat.com** customer services, as well as the classic linux **command-line**.
 
 The [Composer](./introduction.md#composer) project is the underlying system service that provides the APIs required by the multitude of user interfaces. It serves as arbiter between the specific requirements of the user interfaces and the general purpose functionality provided by [osbuild](./introduction.md#osbuild), the engine that drives the builds and assemblies of the individual artifacts.
 
@@ -12,7 +12,7 @@ The Image Builder user interfaces integrate into existing operating system user 
 
 - **Cockpit Composer**: The web-based management console Cockpit comes bundled with a UI extension to build operating system artifacts. See the documentation of Cockpit Composer for information, or consult the Cockpit Guide for help on general Cockpit questions.
 
-- **CloudDot**: The Red Hat Customer Service Portal on cloud.redhat.com has built-in interfaces to the OSBuild functionality, allowing customers to build images and other artifacts on-demand. Consult the Red Hat Support Pages for help, or dive into the Image Builder Documentation to get more details on the underlying software.
+- **ConsoleDot**: The Red Hat Customer Service Portal on console.redhat.com has built-in interfaces to the OSBuild functionality, allowing customers to build images and other artifacts on-demand. Consult the Red Hat Support Pages for help, or dive into the Image Builder Documentation to get more details on the underlying software.
 
 - **Command-line Interface**: With composer-cli there exists a linux command-line interface (CLI) to some of the functionality provided by OSBuild. The CLI is part of the Weldr project, a precursor of OSBuild.
 
