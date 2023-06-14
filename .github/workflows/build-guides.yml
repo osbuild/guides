@@ -29,8 +29,8 @@ jobs:
         path: rendered
         ref: gh-pages
     - run: ls -la; ls -la sources; ls -la rendered
-    - name: Render osbuild-composer guide
-      working-directory: sources/osbuild-composer
+    - name: Render Image Builder guide
+      working-directory: sources
       run: |
         mdbook build -d ../../rendered/docs/
     - name: Publish the rendered guide
