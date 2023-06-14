@@ -24,7 +24,7 @@
   - [Uploading container images](./image-builder-on-premises/uploading-to-registry.md)
   - [OpenSCAP image remediation](./image-builder-on-premises/oscap-remediation.md)
   - [Repository customizations](./image-builder-on-premises/repository-customizations.md)
-  - [Blueprint Reference](./blueprint-reference/blueprint-reference.md)
+  - [Blueprint Reference](./image-builder-on-premises/blueprint-reference.md)
 - [Developer guide](./developer-guide/developer-guide.md)
   - [Workflow](./developer-guide/workflow.md)
   - [Code style](./developer-guide/code-style.md)
