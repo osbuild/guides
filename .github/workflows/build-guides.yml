@@ -32,7 +32,7 @@ jobs:
     - name: Render Image Builder guide
       working-directory: sources
       run: |
-        mdbook build -d ../../rendered/docs/
+        mdbook build -d ../rendered/docs/
     - name: Publish the rendered guide
       if: ${{ github.ref == 'refs/heads/main' }}
       working-directory: rendered
