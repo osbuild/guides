@@ -1,0 +1,669 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Blueprint Reference - Image Builder</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../image-builder-service/architecture.html"><strong aria-hidden="true">2.</strong> Image Builder on console.redhat.com</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-crc.html"><strong aria-hidden="true">2.1.</strong> Backend</a></li><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-composer.html"><strong aria-hidden="true">2.2.</strong> Composer</a></li><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-workers.html"><strong aria-hidden="true">2.3.</strong> Workers</a></li><li class="chapter-item expanded "><a href="../image-builder-service/image-builder-koji.html"><strong aria-hidden="true">2.4.</strong> Koji integration</a></li></ol></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/image-builder-on-premises.html"><strong aria-hidden="true">3.</strong> Image Builder on premises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../image-builder-on-premises/basic-concepts.html"><strong aria-hidden="true">3.1.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/installation.html"><strong aria-hidden="true">3.2.</strong> Installation and configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../image-builder-on-premises/managing-repositories.html"><strong aria-hidden="true">3.2.1.</strong> Managing repositories</a></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/container-auth.html"><strong aria-hidden="true">3.2.2.</strong> Container registry credentials</a></li></ol></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/building-an-image-from-cli.html"><strong aria-hidden="true">3.3.</strong> Creating images with the CLI interface</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../image-builder-on-premises/building-ostree-images.html"><strong aria-hidden="true">3.3.1.</strong> Building OSTree image</a></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/edge-container+installer.html"><strong aria-hidden="true">3.3.2.</strong> Building OSTree container and installer</a></li></ol></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/uploading-to-cloud.html"><strong aria-hidden="true">3.4.</strong> Uploading cloud images</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../image-builder-on-premises/uploading-to-aws.html"><strong aria-hidden="true">3.4.1.</strong> Uploading an image to AWS</a></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/uploading-to-aws-s3.html"><strong aria-hidden="true">3.4.2.</strong> Uploading an image to AWS S3</a></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/uploading-to-gcp.html"><strong aria-hidden="true">3.4.3.</strong> Uploading an image to GCP</a></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/uploading-to-generic-s3.html"><strong aria-hidden="true">3.4.4.</strong> uploading an image to Generic S3</a></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/uploading-to-azure.html"><strong aria-hidden="true">3.4.5.</strong> Uploading an image to Microsoft Azure</a></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/uploading-to-oci.html"><strong aria-hidden="true">3.4.6.</strong> Uploading an image to OCI</a></li></ol></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/uploading-to-registry.html"><strong aria-hidden="true">3.5.</strong> Uploading container images</a></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/oscap-remediation.html"><strong aria-hidden="true">3.6.</strong> OpenSCAP image remediation</a></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/repository-customizations.html"><strong aria-hidden="true">3.7.</strong> Repository customizations</a></li><li class="chapter-item expanded "><a href="../image-builder-on-premises/blueprint-reference.html" class="active"><strong aria-hidden="true">3.8.</strong> Blueprint Reference</a></li></ol></li><li class="chapter-item expanded "><a href="../developer-guide/developer-guide.html"><strong aria-hidden="true">4.</strong> Developer guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/workflow.html"><strong aria-hidden="true">4.1.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="../developer-guide/code-style.html"><strong aria-hidden="true">4.2.</strong> Code style</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild.html"><strong aria-hidden="true">4.3.</strong> osbuild</a></li><li class="chapter-item expanded "><a href="../developer-guide/osbuild-composer.html"><strong aria-hidden="true">4.4.</strong> osbuild-composer</a></li><li class="chapter-item expanded "><a href="../developer-guide/latest-rpm-builds.html"><strong aria-hidden="true">4.5.</strong> Latest RPM builds</a></li><li class="chapter-item expanded "><a href="../developer-guide/testing-strategy/testing-strategy.html"><strong aria-hidden="true">4.6.</strong> Testing strategy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../developer-guide/testing-strategy/rpmrepo.html"><strong aria-hidden="true">4.6.1.</strong> RPMRepo</a></li></ol></li><li class="chapter-item expanded "><a href="../developer-guide/releasing.html"><strong aria-hidden="true">4.7.</strong> Releasing</a></li><li class="chapter-item expanded "><a href="../developer-guide/glossary.html"><strong aria-hidden="true">4.8.</strong> Glossary</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Image Builder</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="blueprint-reference"><a class="header" href="#blueprint-reference">Blueprint Reference</a></h1>
+<p>Blueprints are text files in the <a href="https://toml.io/en/">TOML format</a> that describe customizations for the image you are building.</p>
+<blockquote>
+<p>An important thing to note is that these customizations are not applicable to all image types. <code>osbuild-composer</code> currently has no good validation or warning system in place to tell you if a customization in your blueprint is not supported for the image type you're building. The customization may be silently dropped.</p>
+</blockquote>
+<p>A very basic blueprint with just the required attributes at the root looks like:</p>
+<pre><code class="language-toml">name = &quot;basic-example&quot;
+description = &quot;A basic blueprint&quot;
+version = &quot;0.0.1&quot;
+</code></pre>
+<p>Where:</p>
+<ul>
+<li>The <code>name</code> attribute is a string that contains the name of the blueprint. It can contain spaces, but they will be converted to <code>-</code> when it is import into <code>osbuild-composer</code>. It should be short and descriptive.</li>
+<li>The <code>description</code> attribute is a string that can be a longer description of the blueprint and is only used for display purposes.</li>
+<li>The <code>version</code> attribute is a string that contains a semver compatible version number. If a new blueprint is uploaded with the same version the server will automatically bump the PATCH level of the version. If the version doesn't match it will be used as is. For example, uploading a blueprint with version set to 0.1.0 when the existing blueprint version is 0.0.1 will result in the new blueprint being stored as version 0.1.0.</li>
+</ul>
+<p>You can upload a blueprint with the <code>osbuild-composer blueprints push $filename</code> command, the blueprint will then be usable in <code>osbuild-composer compose</code> as the <code>name</code> you gave it.</p>
+<p>Blueprints have two main sections, the <a href="#content">content</a> and <a href="#customizations">customizations</a> sections.</p>
+<h3 id="distribution-selection-with-blueprints"><a class="header" href="#distribution-selection-with-blueprints">Distribution selection with blueprints</a></h3>
+<p>The blueprint now supports a new <code>distro</code> field that will be used to select the
+distribution to use when composing images, or depsolving the blueprint. If
+<code>distro</code> is left blank it will use the host distribution. If you upgrade the
+host operating system the blueprints with no <code>distro</code> set will build using the
+new os.</p>
+<p>eg. A blueprint that will always build a Fedora 38 image, no matter what
+version is running on the host:</p>
+<pre><code class="language-toml">name = &quot;tmux&quot;
+description = &quot;tmux image with openssh&quot;
+version = &quot;1.2.16&quot;
+distro = &quot;fedora-38&quot;
+
+[[packages]]
+name = &quot;tmux&quot;
+version = &quot;*&quot;
+
+[[packages]]
+name = &quot;openssh-server&quot;
+version = &quot;*&quot;
+</code></pre>
+<h2 id="content"><a class="header" href="#content">Content</a></h2>
+<p>The content section determines what goes into the image from other sources such as packages, package groups, or containers. Content is defined at the root of the blueprint.</p>
+<ul>
+<li><a href="#packages">Packages</a>.</li>
+<li><a href="#groups">Groups</a>.</li>
+<li><a href="#containers">Containers</a>.</li>
+</ul>
+<h3 id="packages"><a class="header" href="#packages">Packages</a></h3>
+<p>The <code>packages</code> and <code>modules</code> lists contain objects with a <code>name</code> and optional <code>version</code> attribute.</p>
+<ul>
+<li>The <code>name</code> attribute is a <strong>required</strong> string and can be an exact match, or a filesystem-like glob using <code>*</code> for wildcards and <code>?</code> for character matching.</li>
+<li>The <code>version</code> attribute is an <em>optional</em> string can be an exact match or a filesystem-like glob of the version using <code>*</code> for wildcards and <code>?</code> for character matching. If not provided the latest version in the repositories is used.</li>
+</ul>
+<p><em>Currently there are no differences between packages and modules in <code>osbuild-composer</code>. Both are treated like an rpm package dependency.</em></p>
+<blockquote>
+<p>When using virtual provides as the package name the version glob should be <code>*</code>. And be aware that you will be unable to <code>freeze</code> the blueprint. This is because the provide will expand into multiple packages with their own names and versions.</p>
+</blockquote>
+<p>For example, to install <code>tmux-2.9a</code> and <code>openssh-server-8.*</code> packages, add this to your blueprint:</p>
+<pre><code class="language-toml">[[packages]]
+name = &quot;tmux&quot;
+version = &quot;2.9a&quot;
+
+[[packages]]
+name = &quot;openssh-server&quot;
+version = &quot;8.*&quot;
+</code></pre>
+<p>Or in alternative syntax:</p>
+<pre><code class="language-toml">packages = [
+    { name = &quot;tmux&quot;, version = &quot;2.9a&quot; },
+    { name = &quot;openssh-server&quot;, version = &quot;8.*&quot; }
+]
+</code></pre>
+<h3 id="groups"><a class="header" href="#groups">Groups</a></h3>
+<p>The <code>groups</code> list describes contains objects with a <code>name</code>-attribute.</p>
+<ul>
+<li>The <code>name</code> attribute is a <strong>required</strong> string and must match the id of a package group in the repositories exactly.</li>
+</ul>
+<p><code>groups</code> describes groups of packages to be installed into the image. Package groups are defined in the repository metadata. Each group has a descriptive name used primarily for display in user interfaces and an ID more commonly used in kickstart files. Here, the ID is the expected way of listing a group. Groups have three different ways of categorizing their packages: mandatory, default, and optional. For the purposes of blueprints, only mandatory and default packages will be installed. There is no mechanism for selecting optional packages.</p>
+<p>For example, if you want to install the <code>anaconda-tools</code> group, add the following to your blueprint:</p>
+<pre><code class="language-toml">[[groups]]
+name = &quot;anaconda-tools&quot;
+</code></pre>
+<p>Or in alternative syntax:</p>
+<pre><code class="language-toml">groups = [
+    { name = &quot;anaconda-tools&quot; }
+]
+</code></pre>
+<h3 id="containers"><a class="header" href="#containers">Containers</a></h3>
+<p>The <code>containers</code> list contains objects with a <code>source</code> and optional <code>tls-verify</code> attribute.</p>
+<p>These list entries describe the container images to be embedded into the image.</p>
+<ul>
+<li>The <code>source</code> attribute is a <strong>required</strong> string and is a reference to a container image at a registry.</li>
+<li>The <code>name</code> attribute is an <em>optional</em> string to set the name under which the container image will be saved in the image. If not specified <code>name</code> falls back to the same value as <code>source</code>.</li>
+<li>The <code>tls-verify</code> attribute is an <em>optional</em> boolean to disable TLS verification of the source download. By default this is set to <code>true</code>.</li>
+</ul>
+<p>The container is pulled during the image build and stored in the image at the default local container storage location that is appropriate for the image type, so that all supported container tools like <code>podman</code> and <code>cri-o</code> will be able to work with it.</p>
+<p>The embedded containers are not started, to do so you can create systemd unit files or quadlets with the files customization.</p>
+<p>To embed the latest fedora container from http://quay.io, add this to your blueprint:</p>
+<pre><code class="language-toml">[[containers]]
+source = &quot;quay.io/fedora/fedora:latest&quot;
+</code></pre>
+<p>Or in alternative syntax:</p>
+<pre><code class="language-toml">containers = [
+    { source = &quot;quay.io/fedora/fedora:latest&quot; },
+    { source = &quot;quay.io/fedora/fedora-minimal:latest&quot;, tls-verify = false, name = &quot;fedora-m&quot; },
+]
+</code></pre>
+<p>To access protected container resources a <code>containers-auth.json(5)</code> file can be used, see <a href="../user-guide/container-auth.html">Container registry credentials</a>.</p>
+<h2 id="customizations"><a class="header" href="#customizations">Customizations</a></h2>
+<p>In the customizations we determine what goes into the image that's not in the default packages defined under <a href="#content">Content</a>.</p>
+<ul>
+<li><a href="#hostname">Hostname</a></li>
+<li><a href="#kernel-command-line-arguments">Kernel Command Line Arguments</a></li>
+<li><a href="#ssh-keys">SSH Keys</a></li>
+<li><a href="#additional-users">Additional Users</a></li>
+<li><a href="#additional-groups">Additional Groups</a></li>
+<li><a href="#timezone">Timezone</a></li>
+<li><a href="#locale">Locale</a></li>
+<li><a href="#firewall">Firewall</a></li>
+<li><a href="#systemd-services">Systemd Services</a></li>
+<li><a href="#files-and-directories">Files and Directories</a>
+<ul>
+<li><a href="#directories">Directories</a></li>
+<li><a href="#files">Files</a></li>
+</ul>
+</li>
+<li><a href="#ignition">Ignition</a></li>
+<li><a href="#repositories">Repositories</a></li>
+<li><a href="#filesystems">Filesystems</a></li>
+<li><a href="#openscap">OpenSCAP</a></li>
+</ul>
+<h3 id="hostname"><a class="header" href="#hostname">Hostname</a></h3>
+<p><code>customizations.hostname</code> is an <em>optional</em> string that can be used to configure the hostname of the final image:</p>
+<pre><code class="language-toml">[customizations]
+hostname = &quot;baseimage&quot;
+</code></pre>
+<p>This is optional and can be left out to use the default hostname.</p>
+<h3 id="kernel"><a class="header" href="#kernel">Kernel</a></h3>
+<h4 id="kernel-command-line-arguments"><a class="header" href="#kernel-command-line-arguments">Kernel Command-Line Arguments</a></h4>
+<p>An <em>optional</em> string that allows to append arguments to the bootloader kernel command line:</p>
+<pre><code class="language-toml">[customizations.kernel]
+append = &quot;nosmt=force&quot;
+</code></pre>
+<h3 id="ssh-keys"><a class="header" href="#ssh-keys">SSH Keys</a></h3>
+<p>An <em>optional</em> list of objects containing:</p>
+<ul>
+<li>The <code>user</code> attribute is a <strong>required</strong> string and must match the name of a user in the image exactly.</li>
+<li>The <code>key</code> attribute is a <strong>required</strong> string that contains the public key to be set for that user.</li>
+</ul>
+<p><em>Warning: <code>key</code> expects the entire content of the public key file, traditionally <code>~/.ssh/id_rsa.pub</code> but any algorithm supported by the operating system in the image is valid</em></p>
+<p><em>Note: If you are adding a user you can add their SSH key in the <a href="#additional-users">additional users</a> customization instead.</em></p>
+<p>Set an existing user's SSH key in the final image:</p>
+<pre><code class="language-toml">[[customizations.sshkey]]
+user = &quot;root&quot;
+key = &quot;PUBLIC SSH KEY&quot;
+</code></pre>
+<p>The key will be added to the user's <code>authorized_keys</code> file in their home directory.</p>
+<h3 id="additional-users"><a class="header" href="#additional-users">Additional Users</a></h3>
+<p>An <em>optional</em> list of objects that contain the following attributes:</p>
+<ul>
+<li><code>name</code> a <strong>required</strong> string that sets the username.</li>
+<li><code>description</code> an <em>optional</em> string.</li>
+<li><code>password</code> an <em>optional</em> string.</li>
+<li><code>key</code> an <em>optional</em> string.</li>
+<li><code>home</code> an <em>optional</em> string.</li>
+<li><code>shell</code> an <em>optional</em> string.</li>
+<li><code>groups</code> an <em>optional</em> list of strings.</li>
+<li><code>uid</code> an <em>optional</em> integer.</li>
+<li><code>gid</code> an <em>optional</em> integer.</li>
+</ul>
+<p><em>Warning: <code>key</code> expects the entire content of the public key file, traditionally <code>~/.ssh/id_rsa.pub</code> but any algorithm supported by the operating system in the image is valid</em></p>
+<p><em>Note: If the password starts with $6$, $5$, or $2b$ it will be stored as an encrypted password. Otherwise it will be treated as a plain text password.</em></p>
+<p>Add a user to the image, and/or set their ssh key. All fields for this section are optional except for the name. The following is a complete example:</p>
+<pre><code class="language-toml">[[customizations.user]]
+name = &quot;admin&quot;
+description = &quot;Administrator account&quot;
+password = &quot;$6$CHO2$3rN8eviE2t50lmVyBYihTgVRHcaecmeCk31L...&quot;
+key = &quot;PUBLIC SSH KEY&quot;
+home = &quot;/srv/widget/&quot;
+shell = &quot;/usr/bin/bash&quot;
+groups = [&quot;widget&quot;, &quot;users&quot;, &quot;wheel&quot;]
+uid = 1200
+gid = 1200
+</code></pre>
+<h3 id="additional-groups"><a class="header" href="#additional-groups">Additional groups</a></h3>
+<p>An <em>optional</em> list of objects that contain the following attributes:</p>
+<ul>
+<li><code>name</code> a <strong>required</strong> string that sets the name of the group.</li>
+<li><code>gid</code> a <strong>required</strong> integer that sets the id of the group.</li>
+</ul>
+<pre><code class="language-toml">[[customizations.group]]
+name = &quot;widget&quot;
+gid = 1130
+</code></pre>
+<h3 id="timezone"><a class="header" href="#timezone">Timezone</a></h3>
+<p>An <em>optional</em> object that contains the following attributes:</p>
+<ul>
+<li><code>timezone</code> an <em>optional</em> string. If not provided the UTC timezone is used..</li>
+<li><code>ntpservers</code> an <em>optional</em> list of strings containing NTP servers to use. If not provided the distribution defaults are used.</li>
+</ul>
+<pre><code class="language-toml">[customizations.timezone]
+timezone = &quot;US/Eastern&quot;
+ntpservers = [&quot;0.north-america.pool.ntp.org&quot;, &quot;1.north-america.pool.ntp.org&quot;]
+</code></pre>
+<p>The values supported by timezone can be listed by running the command:</p>
+<pre><code>$ timedatectl list-timezones
+</code></pre>
+<p>Some image types have already NTP servers setup such as Google Cloud images. These cannot be overridden because they are required to boot in the selected environment. However, the timezone will be updated to the one selected in the blueprint.</p>
+<h3 id="locale"><a class="header" href="#locale">Locale</a></h3>
+<p>An <em>optional</em> object that contains the following attributes to customize the locale settings for the system:</p>
+<ul>
+<li><code>languages</code> an <em>optional</em> list of strings containing locales to be installed.</li>
+<li><code>keyboard</code> an <em>optional</em> string to set the keyboard layout.</li>
+</ul>
+<p>Multiple languages can be added. The first one becomes the primary, and the others are added as secondary. You must include one or more languages or keyboards in the section.</p>
+<pre><code class="language-toml">[customizations.locale]
+languages = [&quot;en_US.UTF-8&quot;]
+keyboard = &quot;us&quot;
+</code></pre>
+<p>The values supported by languages can be listed by running can be listed by running the command:</p>
+<pre><code>$ localectl list-locales
+</code></pre>
+<p>The values supported by keyboard can be listed by running the command:</p>
+<pre><code>$ localectl list-keymaps
+</code></pre>
+<h3 id="firewall"><a class="header" href="#firewall">Firewall</a></h3>
+<p>An <em>optional</em> object containing the following attributes:</p>
+<ul>
+<li><code>ports</code> an <em>optional</em> list of strings containing ports (or port ranges) and protocols to open.</li>
+<li><code>services</code> an <em>optional</em> object with the following attributes containing services to enable or disable for <code>firewalld</code>.
+<ul>
+<li><code>enabled</code> <em>optional</em> list of strings for services to enable.</li>
+<li><code>disabled</code> <em>optional</em> list of strings for services to disable.</li>
+</ul>
+</li>
+</ul>
+<p>By default the firewall blocks all access, except for services that enable their ports explicitly such as the sshd. The following blueprint can be used to open other ports or services.</p>
+<p><em>Note: Ports are configured using the <code>port:protocol</code> format; port ranges are configured using <code>portA-portB:protocol</code> format:</em></p>
+<pre><code class="language-toml">[customizations.firewall]
+ports = [&quot;22:tcp&quot;, &quot;80:tcp&quot;, &quot;imap:tcp&quot;, &quot;53:tcp&quot;, &quot;53:udp&quot;, &quot;30000-32767:tcp&quot;, &quot;30000-32767:udp&quot;]
+</code></pre>
+<p>Numeric ports, or their names from <code>/etc/services</code> can be used in the ports enabled/disabled lists.</p>
+<p>The blueprint settings extend any existing settings in the image templates. Thus, if sshd is already enabled, it will extend the list of ports with those already listed by the blueprint.</p>
+<p>If the distribution uses <code>firewalld</code> you can specify services listed by <code>firewall-cmd --get-services</code> in a <code>customizations.firewall.services</code> section:</p>
+<pre><code class="language-toml">[customizations.firewall.services]
+enabled = [&quot;ftp&quot;, &quot;ntp&quot;, &quot;dhcp&quot;]
+disabled = [&quot;telnet&quot;]
+</code></pre>
+<p>Remember that the <code>firewall.services</code> are different from the names in <code>/etc/services</code>.</p>
+<p>Both are optional, if they are not used leave them out or set them to an empty list <code>[]</code>. If you only want the default firewall setup this section can be omitted from the blueprint.</p>
+<p><em>Note: The Google and OpenStack templates explicitly disable the firewall for their environment. This cannot be overridden by the blueprint.</em></p>
+<h3 id="systemd-services"><a class="header" href="#systemd-services">Systemd Services</a></h3>
+<p>An <em>optional</em> object containing the following attributes:</p>
+<ul>
+<li><code>enabled</code> an <em>optional</em> list of strings containing services to be enabled.</li>
+<li><code>disabled</code> an <em>optional</em> list of strings containing services to be disabled.</li>
+</ul>
+<pre><code class="language-toml">[customizations.services]
+enabled = [&quot;sshd&quot;, &quot;cockpit.socket&quot;, &quot;httpd&quot;]
+disabled = [&quot;postfix&quot;, &quot;telnetd&quot;]
+</code></pre>
+<p>This section can be used to control which services are enabled at boot time. Some image types already have services enabled or disabled in order for the image to work correctly, and cannot be overridden. For example, <code>ami</code> image type requires <code>sshd</code>, <code>chronyd</code>, and <code>cloud-init</code> services. Without them, the image will not boot. Blueprint services do not replace this services, but add them to the list of services already present in the templates, if any.</p>
+<p>The service names are systemd service units. You may specify any systemd unit file accepted by systemctl enable, for example, cockpit.socket:</p>
+<h3 id="files-and-directories"><a class="header" href="#files-and-directories">Files and directories</a></h3>
+<p>You can use blueprint customizations to create custom files and directories in the image. These customizations are currently restricted only to the <code>/etc</code> directory.</p>
+<p>When using the custom files and directories customization, the following rules apply:</p>
+<ul>
+<li>The path must be an absolute path and must be under <code>/etc</code>.</li>
+<li>There must be no duplicate paths of the same directory.</li>
+<li>There must be no duplicate paths of the same file.</li>
+</ul>
+<p>These customizations are not supported for image types that deploy ostree commits (such as <code>edge-raw-image</code>, <code>edge-installer</code>, <code>edge-simplified-installer</code>). The only exception is the Fedora <code>iot-raw-image</code> image type, which supports these customizations.</p>
+<h4 id="directories"><a class="header" href="#directories">Directories</a></h4>
+<p>You can create custom directories by specifying items in the <code>customizations.directories</code> list. The existence of a specified directory is handled gracefully only if no explicit <code>mode</code>, <code>user</code> or <code>group</code> is specified. If any of these customizations are specified and the directory already exists in the image, the image build will fail. The intention is to prevent changing the ownership or permissions of existing directories.</p>
+<p>The following example creates a directory <code>/etc/foobar</code> with all the default settings:</p>
+<pre><code class="language-toml">[[customizations.directories]]
+path = &quot;/etc/foobar&quot;
+mode = &quot;0755&quot;
+user = &quot;root&quot;
+group = &quot;root&quot;
+ensure_parents = false
+</code></pre>
+<ul>
+<li><code>path</code> is the path to the directory to create. It must be an absolute path under <code>/etc</code>. This is the only required field.</li>
+<li><code>mode</code> is the octal mode to set on the directory. If not specified, the default is <code>0755</code>. The leading zero is optional.</li>
+<li><code>user</code> is the user to set as the owner of the directory. If not specified, the default is <code>root</code>. Can be specified as user name (string) or as user id (integer).</li>
+<li><code>group</code> is the group to set as the owner of the directory. If not specified, the default is <code>root</code>. Can be specified as group name (string) or as group id (integer).</li>
+<li><code>ensure_parents</code> is a boolean that specifies whether to create parent directories as needed. If not specified, the default is <code>false</code>.</li>
+</ul>
+<h4 id="files"><a class="header" href="#files">Files</a></h4>
+<p>You can create custom files by specifying items in the <code>customizations.files</code> list. You can use the customization to create new files or to replace existing ones, if not restricted by the policy specified below. If the target path is an existing symlink to another file, the symlink will be replaced by the custom file.</p>
+<p>Please note that the parent directory of a specified file must exist. If it does not exist, the image build will fail. One can ensure that the parent directory exists by specifying it in the <code>customizations.directories</code> list.</p>
+<p>In addition, the following files are not allowed to be created or replaced by policy:</p>
+<ul>
+<li><code>/etc/fstab</code></li>
+<li><code>/etc/shadow</code></li>
+<li><code>/etc/passwd</code></li>
+<li><code>/etc/group</code></li>
+</ul>
+<p>Using the <code>files</code> customization comes with a high chance of creating an image that doesn't boot. <strong>Use this feature only if you know what you are doing</strong>. Although the <code>files</code> customization can be used to configure parts of the OS which can also be configured by other blueprint customizations, this use is discouraged. If possible, users should always default to using the specialized blueprint customizations. Note that if you combine the files customizations with other customizations, the other customizations may not work as expected or may be overridden by the files customizations.</p>
+<p>The following example creates a file <code>/etc/foobar</code> with the contents <code>Hello world!</code>:</p>
+<pre><code class="language-toml">[[customizations.files]]
+path = &quot;/etc/foobar&quot;
+mode = &quot;0644&quot;
+user = &quot;root&quot;
+group = &quot;root&quot;
+data = &quot;Hello world!&quot;
+</code></pre>
+<ul>
+<li><code>path</code> is the path to the file to create. It must be an absolute under <code>/etc</code>. This is the only required field.</li>
+<li><code>mode</code> is the octal mode to set on the file. If not specified, the default is <code>0644</code>. The leading zero is optional.</li>
+<li><code>user</code> is the user to set as the owner of the file. If not specified, the default is <code>root</code>. Can be specified as user name (string) or as user id (integer).</li>
+<li><code>group</code> is the group to set as the owner of the file. If not specified, the default is <code>root</code>. Can be specified as group name (string) or as group id (integer).</li>
+<li><code>data</code> is the plain text contents of the file. If not specified, the default is an empty file.</li>
+</ul>
+<p>Note that the <code>data</code> property can be specified in any of the ways supported by TOML. Some of them require escaping certain characters and others don't. Please refer to the <a href="https://toml.io/en/v1.0.0#string">TOML specification</a> for more details.</p>
+<h3 id="ignition"><a class="header" href="#ignition">Ignition</a></h3>
+<p>The <code>customizations.ignition</code> section allows users to provide <a href="https://coreos.github.io/ignition/">Ignition</a> configuration files to be used in <code>edge-raw-image</code> and <code>edge-simplified-installer</code> images. Check the RHEL for Edge (<code>r4e</code>) <a href="https://coreos.github.io/butane/specs/">butane</a> specification for a description of the supported configuration options.</p>
+<p>The blueprint configuration can be done <em>either</em> by embedding an Ignition configuration file into the image (only available for <code>edge-simplified-installer</code>), or providing a provisioning URL that will be fetched at first boot.</p>
+<h4 id="ignitionembedded-configuration"><a class="header" href="#ignitionembedded-configuration"><code>ignition.embedded</code> configuration</a></h4>
+<pre><code class="language-toml">[customizations.ignition.embedded]
+config = &quot;eyJpZ25pdGlvbiI6eyJ2ZXJzaW9uIjoiMy4zLjAifSwicGFzc3dkIjp7InVzZXJzIjpbeyJncm91cHMiOlsid2hlZWwiXSwibmFtZSI6ImNvcmUiLCJwYXNzd29yZEhhc2giOiIkNiRqZnVObk85dDFCdjdOLjdrJEhxUnhxMmJsdFIzek15QUhqc1N6YmU3dUJIWEVyTzFZdnFwaTZsamNJMDZkUUJrZldYWFpDdUUubUpja2xQVHdhQTlyL3hwSmlFZFdEcXR4bGU3aDgxIn1dfX0=&quot;
+</code></pre>
+<p>Add a <code>base64</code> encoded Ignition configuration in the <code>config</code> field. This Ignition configuration will be included in the <code>edge-simplified-installer</code> image.</p>
+<h4 id="ignitionfirstboot-configuration"><a class="header" href="#ignitionfirstboot-configuration"><code>ignition.firstboot</code> configuration</a></h4>
+<pre><code class="language-toml">[customizations.ignition.firstboot]
+url = &quot;http://some-server/configuration.ig&quot;
+</code></pre>
+<p>Add a URL pointing to the Ignition configuration that will be fetched during the first boot in the <code>url</code> field. Available for both <code>edge-simplified-installer</code> and <code>edge-raw-image</code>.</p>
+<h3 id="repositories"><a class="header" href="#repositories">Repositories</a></h3>
+<p>Third-party repositories are supported by the blueprint customizations. A repository can be defined and enabled in the blueprints which will then be saved to the <code>/etc/yum.repos.d</code> directory in an image.
+An optional <code>filename</code> argument can be set, otherwise the repository will be saved using the the repository ID, i.e. <code>/etc/yum.repos.d/&lt;repo-id&gt;.repo</code>.</p>
+<p>Please note custom repositories <strong>cannot be used at build time to install third-party packages</strong>. These customizations are used to save and enable third-party repositories on the image. For more information, or if you
+wish to install a package from a third-party repository, please continue reading <a href="../user-guide/repository-customizations.html">here</a>.</p>
+<p>The following example can be used to create a third-party repository:</p>
+<pre><code class="language-toml">[[customizations.repositories]]
+id = &quot;example&quot;
+name=&quot;Example repo&quot;
+baseurls=[ &quot;https://example.com/yum/download&quot; ]
+gpgcheck=true
+gpgkeys = [ &quot;https://example.com/public-key.asc&quot; ]
+enabled=true
+</code></pre>
+<p>Since no filename is specified, the repo will be saved to <code>/etc/yum.repos.d/example.repo</code>.</p>
+<p>The blueprint accepts the following options:</p>
+<ul>
+<li><code>id</code> (required)</li>
+<li><code>name</code></li>
+<li><code>filename</code></li>
+<li><code>baseurls</code> (array)</li>
+<li><code>mirrorlist</code></li>
+<li><code>metalink</code></li>
+<li><code>gpgkeys</code> keys (array)</li>
+<li><code>gpgcheck</code></li>
+<li><code>repo_gpgcheck</code></li>
+<li><code>priority</code></li>
+<li><code>ssl_verify</code></li>
+</ul>
+<p><em>Note: the <code>baseurls</code> and <code>gpgkeys</code> fields both accept arrays as input. One of <code>baseurls</code>, <code>metalink</code> &amp; <code>mirrorlist</code> must be provided</em></p>
+<h4 id="repository-gpg-keys"><a class="header" href="#repository-gpg-keys">Repository GPG Keys</a></h4>
+<p>The blueprint accepts both inline GPG keys and GPG key urls. If an inline GPG key is provided it will be saved to the <code>/etc/pki/rpm-gpg</code> directory and will be referenced accordingly
+in the repository configuration. <strong>GPG keys are not imported to the RPM database</strong> and will only be imported when first installing a package from the third-party repository.</p>
+<h3 id="filesystems"><a class="header" href="#filesystems">Filesystems</a></h3>
+<p>The blueprints can be extended to provide filesytem support. Currently the <code>mountpoint</code> and minimum partition <code>size</code> can be set. Custom mountpoints are currently only supported for <code>RHEL 8.5</code> &amp; <code>RHEL 9.0</code>. For other distributions, only the <code>root</code> partition is supported, the size argument being an alias for the image size.</p>
+<pre><code class="language-toml">[[customizations.filesystem]]
+mountpoint = &quot;/var&quot;
+size = 2147483648
+</code></pre>
+<p>In addition to the root mountpoint, <code>/</code>, the following <code>mountpoints</code> and their sub-directories are supported:</p>
+<ul>
+<li><code>/var</code></li>
+<li><code>/home</code></li>
+<li><code>/opt</code></li>
+<li><code>/srv</code></li>
+<li><code>/usr</code></li>
+<li><code>/app</code></li>
+<li><code>/data</code></li>
+<li><code>/tmp</code></li>
+</ul>
+<p>Filesystem customizations are currently <strong>not</strong> supported for the following image types:</p>
+<ul>
+<li><code>image-installer</code></li>
+<li><code>edge-installer</code> (RHEL and CentOS) and <code>iot-installer</code> (Fedora)</li>
+<li><code>edge-simplified-installer</code> (RHEL and CentOS)</li>
+</ul>
+<p>In addition, the following image types do not create partitioned OS images and therefore filesystem customizations for these types are meaningless:</p>
+<ul>
+<li><code>edge-commit</code> (RHEL and CentOS) and <code>iot-commit</code> (Fedora)</li>
+<li><code>edge-container</code> (RHEL and CentOS) and <code>iot-container</code> (Fedora)</li>
+<li><code>tar</code></li>
+<li><code>container</code></li>
+</ul>
+<h3 id="openscap"><a class="header" href="#openscap">OpenSCAP</a></h3>
+<p>From <code>RHEL 8.7</code> &amp; <code>RHEL 9.1</code> support has been added for <code>OpenSCAP</code> build-time remediation. The blueprints accept two fields:</p>
+<ul>
+<li>the <code>datastream</code> path to the remediation instructions</li>
+<li>the <code>profile_id</code> of the desired security profile</li>
+</ul>
+<p>Please see <a href="../user-guide/oscap-remediation.html">the OpenSCAP page</a> for the list of available security profiles.</p>
+<pre><code class="language-toml">[customizations.openscap]
+datastream = &quot;/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml&quot;
+profile_id = &quot;xccdf_org.ssgproject.content_profile_cis&quot;
+</code></pre>
+<h2 id="example-blueprints"><a class="header" href="#example-blueprints">Example Blueprints</a></h2>
+<p>The following blueprint example will:</p>
+<ul>
+<li>install the <code>tmux</code>, <code>git</code>, and <code>vim-enhanced</code> packages</li>
+<li>set the root ssh key</li>
+<li>add the groups: widget, admin users and students</li>
+</ul>
+<pre><code class="language-toml">name = &quot;example-custom-base&quot;
+description = &quot;A base system with customizations&quot;
+version = &quot;0.0.1&quot;
+
+[[packages]]
+name = &quot;tmux&quot;
+version = &quot;*&quot;
+
+[[packages]]
+name = &quot;git&quot;
+version = &quot;*&quot;
+
+[[packages]]
+name = &quot;vim-enhanced&quot;
+version = &quot;*&quot;
+
+[customizations]
+hostname = &quot;custombase&quot;
+
+[[customizations.sshkey]]
+user = &quot;root&quot;
+key = &quot;A SSH KEY FOR ROOT&quot;
+
+[[customizations.user]]
+name = &quot;widget&quot;
+description = &quot;Widget process user account&quot;
+home = &quot;/srv/widget/&quot;
+shell = &quot;/usr/bin/false&quot;
+groups = [&quot;dialout&quot;, &quot;users&quot;]
+
+[[customizations.user]]
+name = &quot;admin&quot;
+description = &quot;Widget admin account&quot;
+password = &quot;$6$CHO2$3rN8eviE2t50lmVyBYihTgVRHcaecmeCk31LeOUleVK/R/aeWVHVZDi26zAH.o0ywBKH9Tc0/wm7sW/q39uyd1&quot;
+home = &quot;/srv/widget/&quot;
+shell = &quot;/usr/bin/bash&quot;
+groups = [&quot;widget&quot;, &quot;users&quot;, &quot;students&quot;]
+uid = 1200
+
+[[customizations.user]]
+name = &quot;plain&quot;
+password = &quot;simple plain password&quot;
+
+[[customizations.user]]
+name = &quot;bart&quot;
+key = &quot;SSH KEY FOR BART&quot;
+groups = [&quot;students&quot;]
+
+[[customizations.group]]
+name = &quot;widget&quot;
+
+[[customizations.group]]
+name = &quot;students&quot;
+
+[[customizations.filesystem]]
+mountpoint = &quot;/&quot;
+size = 2147483648
+
+[customizations.openscap]
+datastream = &quot;/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml&quot;
+profile_id = &quot;xccdf_org.ssgproject.content_profile_cis&quot;
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../image-builder-on-premises/repository-customizations.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../developer-guide/developer-guide.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../image-builder-on-premises/repository-customizations.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../developer-guide/developer-guide.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
