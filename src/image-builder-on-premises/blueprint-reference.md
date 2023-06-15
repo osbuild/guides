@@ -521,7 +521,7 @@ From `RHEL 8.7` & `RHEL 9.1` support has been added for `OpenSCAP` build-time re
 - the `datastream` path to the remediation instructions
 - the `profile_id` of the desired security profile
 
-Please see [the OpenSCAP page](../user-guide/oscap-remediation.md) for the list of available security profiles.
+Please see [the OpenSCAP page](oscap-remediation.md) for the list of available security profiles.
 
 ```toml
 [customizations.openscap]
