@@ -10,6 +10,8 @@ The metadata defining the service for App-Interface is kept upstream and open as
 The tooling to operate the service is to large parts open source and publicly accessible, e.g. qontract in the form of [qontract-server](https://github.com/app-sre/qontract-server), [qontract-reconcile](https://github.com/app-sre/qontract-reconcile).
 The architecture documents in this section comply with the AppSRE contract.
 
+* [Service API documentation](https://developers.redhat.com/api-catalog/api/image-builder)
+
 ## How to contribute
 
 Our [developer guide](https://www.osbuild.org/guides/developer-guide/developer-guide.html) is a great starting point to learn about our workflow, code style and more!
