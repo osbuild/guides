@@ -19,13 +19,26 @@ hardened image compared to running the remediation on a live system.
 
 [osbuild stage]: 'https://github.com/osbuild/osbuild/blob/main/stages/org.osbuild.oscap.remediation'
 
-## Configurations
+## Openscap Example
+```
+[customizations.openscap]
+profile_id = "xccdf_org.ssgproject.content_profile_standard"
+datastream = "/usr/share/xml/scap/ssg/content/ssg-fedora-ds.xml"
+```
 
-`osbuild-composer` exposes to fields for the user to customize in the image blueprints:
-    - the path to the `datastream` instructions (most likely in the `/usr/share/xml/scap/ssg/content/` directory)
-    - the `profile_id` for the desired security standard
+`osbuild-composer` exposes to fields for the user to customize in the image blueprints: 
 
-The `profile_id` field accepts both the long and short forms, i.e. `cis` or `xccdf_org.ssgproject.content_profile_cis`.
+  1) The path to the `datastream` instructions (most likely in the `/usr/share/xml/scap/ssg/content/` directory)
+  2) The `profile_id` for the desired security standard
+  3) Install openscap via this command: `dnf install scap-security-guide`
+  4) Use the command `oscap info /usr/share/xml/scap/ssg/content/<security_profile>.xml` to obtain more information such as the profile id to use
+  5) The `profile_id` field accepts both the long and short forms, i.e. `cis` or `xccdf_org.ssgproject.content_profile_cis`.
+
+
+
+
+
+
 See the below table for supported profiles.
 
 `osbuild-composer` will then generate the necessary configurations for the `osbuild` stage based on the the

@@ -17,13 +17,17 @@ key = "OBJECT_KEY"
 
 There are several considerations when filling values in this file:
 - `AWS_BUCKET` must be in the `AWS_REGION`
-- The `vmimport` role must have read access to the `AWS_BUCKET`
+- `AWS_BUCKET` must be created in AWS prior to running the script
+- The `vmimport` role must have read access to the `AWS_BUCKET` please see this guide on how to do so:  [How to create vmimport role](https://www.msp360.com/resources/blog/how-to-configure-vmimport-role/) 
 - `OBJECT_KEY` is the name of an intermediate S3 object. It must not exist before the upload, and it will be deleted when the process is done.
 
 > If your authentication method requires you to also specify a session token, you can put it in the `settings` section of the configuration file in a field named `sessionToken`.
 
 Once everything is configured, you can trigger a compose as usual with additional image name and cloud provider profile:
+
+## General Syntax 
+
 ```
-$ sudo composer-cli compose start base-image-with-tmux ami IMAGE_KEY aws-config.toml
+$ sudo composer-cli compose start <image_name> ami IMAGE_KEY aws-config.toml
 ```
 where IMAGE_KEY will be the name of your new AMI, once it is uploaded to EC2.

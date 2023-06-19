@@ -27,7 +27,7 @@ The blueprint now supports a new `distro` field that will be used to select the
 distribution to use when composing images, or depsolving the blueprint. If
 `distro` is left blank it will use the host distribution. If you upgrade the
 host operating system the blueprints with no `distro` set will build using the
-new os.
+new os. You can't build an OS image that differs from the host OS that Image Builder lives on.
 
 eg. A blueprint that will always build a Fedora 38 image, no matter what
 version is running on the host:
