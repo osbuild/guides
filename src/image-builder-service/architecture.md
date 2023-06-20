@@ -24,7 +24,8 @@ If you want to contribute to our frontend or backend, here are guides on how to 
 
 * Matrix: `#image-builder` on fedoraproject.org
 * Mailing List: [image-builder@redhat.com](mailto:image-builder@redhat.com)
-* Issues and pull requests: [github.com/osbuild](https://github.com/osbuild)
+* Issues: [Service](https://issues.redhat.com/issues/?jql=project%20%3D%20HMS%20and%20component%20in%20(%22Image%20Builder%22)), [On premises](https://issues.redhat.com/issues/?jql=project%20%3D%20COMPOSER), [github.com/osbuild](https://github.com/osbuild)
+* Pull requests: [github.com/osbuild](https://github.com/osbuild)
 
 ## How open is this service?
 
