@@ -189,7 +189,7 @@ version = &quot;0.0.1&quot;
 distribution to use when composing images, or depsolving the blueprint. If
 <code>distro</code> is left blank it will use the host distribution. If you upgrade the
 host operating system the blueprints with no <code>distro</code> set will build using the
-new os.</p>
+new os. You can't build an OS image that differs from the host OS that Image Builder lives on.</p>
 <p>eg. A blueprint that will always build a Fedora 38 image, no matter what
 version is running on the host:</p>
 <pre><code class="language-toml">name = &quot;tmux&quot;

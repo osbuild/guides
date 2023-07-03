@@ -2521,14 +2521,16 @@ key = &quot;OBJECT_KEY&quot;
 <p>There are several considerations when filling values in this file:</p>
 <ul>
 <li><code>AWS_BUCKET</code> must be in the <code>AWS_REGION</code></li>
-<li>The <code>vmimport</code> role must have read access to the <code>AWS_BUCKET</code></li>
+<li><code>AWS_BUCKET</code> must be created in AWS prior to running the script</li>
+<li>The <code>vmimport</code> role must have read access to the <code>AWS_BUCKET</code> please see this guide on how to do so:  <a href="https://www.msp360.com/resources/blog/how-to-configure-vmimport-role/">How to create vmimport role</a> </li>
 <li><code>OBJECT_KEY</code> is the name of an intermediate S3 object. It must not exist before the upload, and it will be deleted when the process is done.</li>
 </ul>
 <blockquote>
 <p>If your authentication method requires you to also specify a session token, you can put it in the <code>settings</code> section of the configuration file in a field named <code>sessionToken</code>.</p>
 </blockquote>
 <p>Once everything is configured, you can trigger a compose as usual with additional image name and cloud provider profile:</p>
-<pre><code>$ sudo composer-cli compose start base-image-with-tmux ami IMAGE_KEY aws-config.toml
+<h2 id="general-syntax"><a class="header" href="#general-syntax">General Syntax</a></h2>
+<pre><code>$ sudo composer-cli compose start &lt;image_name&gt; ami IMAGE_KEY aws-config.toml
 </code></pre>
 <p>where IMAGE_KEY will be the name of your new AMI, once it is uploaded to EC2.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uploading-an-image-to-an-aws-s3-bucket"><a class="header" href="#uploading-an-image-to-an-aws-s3-bucket">Uploading an image to an AWS S3 Bucket</a></h1>
@@ -2737,12 +2739,20 @@ boot of the image.</p>
 <p>To solve this issue, an <a href="image-builder-on-premises/&#x27;https://github.com/osbuild/osbuild/blob/main/stages/org.osbuild.oscap.remediation&#x27;">osbuild stage</a> runs the <code>OpenSCAP</code> tool on the filesystem tree while the image is being built. The <code>OpenSCAP</code> tool runs 
 the standard evaluation for the given profile and applies the remediations to the image. This process enables the user to build a more completely
 hardened image compared to running the remediation on a live system.</p>
-<h2 id="configurations"><a class="header" href="#configurations">Configurations</a></h2>
-<p><code>osbuild-composer</code> exposes to fields for the user to customize in the image blueprints:
-- the path to the <code>datastream</code> instructions (most likely in the <code>/usr/share/xml/scap/ssg/content/</code> directory)
-- the <code>profile_id</code> for the desired security standard</p>
-<p>The <code>profile_id</code> field accepts both the long and short forms, i.e. <code>cis</code> or <code>xccdf_org.ssgproject.content_profile_cis</code>.
-See the below table for supported profiles.</p>
+<h2 id="openscap-example"><a class="header" href="#openscap-example">Openscap Example</a></h2>
+<pre><code>[customizations.openscap]
+profile_id = &quot;xccdf_org.ssgproject.content_profile_standard&quot;
+datastream = &quot;/usr/share/xml/scap/ssg/content/ssg-fedora-ds.xml&quot;
+</code></pre>
+<p><code>osbuild-composer</code> exposes to fields for the user to customize in the image blueprints: </p>
+<ol>
+<li>The path to the <code>datastream</code> instructions (most likely in the <code>/usr/share/xml/scap/ssg/content/</code> directory)</li>
+<li>The <code>profile_id</code> for the desired security standard</li>
+<li>Install openscap via this command: <code>dnf install scap-security-guide</code></li>
+<li>Use the command <code>oscap info /usr/share/xml/scap/ssg/content/&lt;security_profile&gt;.xml</code> to obtain more information such as the profile id to use</li>
+<li>The <code>profile_id</code> field accepts both the long and short forms, i.e. <code>cis</code> or <code>xccdf_org.ssgproject.content_profile_cis</code>.</li>
+</ol>
+<p>See the below table for supported profiles.</p>
 <p><code>osbuild-composer</code> will then generate the necessary configurations for the <code>osbuild</code> stage based on the the
 user customizations. Additionally, two packages will be added to the image, <code>openscap-scanner</code> (the <code>OpenSCAP</code> tool)
 &amp; <code>scap-security-guide</code> (this package contains the remediation instructions).</p>
@@ -2819,7 +2829,7 @@ version = &quot;0.0.1&quot;
 distribution to use when composing images, or depsolving the blueprint. If
 <code>distro</code> is left blank it will use the host distribution. If you upgrade the
 host operating system the blueprints with no <code>distro</code> set will build using the
-new os.</p>
+new os. You can't build an OS image that differs from the host OS that Image Builder lives on.</p>
 <p>eg. A blueprint that will always build a Fedora 38 image, no matter what
 version is running on the host:</p>
 <pre><code class="language-toml">name = &quot;tmux&quot;
