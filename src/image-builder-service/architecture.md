@@ -35,15 +35,15 @@ If you want to contribute to our frontend or backend, here are guides on how to 
 * 🟢 Performance tests are open.
 * 🟢 Functional tests are open.
 * 🟢 The dependencies are open source.
-* 🟢 Deployment metadata is open. [1](https://github.com/osbuild/osbuild-composer/blob/main/templates/composer.yml) [2](https://github.com/osbuild/image-builder/blob/main/templates/image-builder.yml)
+* 🟢 Deployment metadata is open. [[1]](https://github.com/osbuild/osbuild-composer/blob/main/templates/composer.yml) [[2]](https://github.com/osbuild/image-builder/blob/main/templates/image-builder.yml)
 #### 🟢 Contribution workflow
 * 🟢 External contributors can follow the same workflow as team members.
 * 🟢 [The workflow is publicly documented.](https://www.osbuild.org/guides/developer-guide/workflow.html)
 * 🟢 Regular contributors can trigger CI.
 * 🟢 External contributions are eagerly reviewed.
 #### 🟠 Issue tracking and planning
-* 🟢 The issue tracker is public. [1](https://github.com/osbuild) [2](https://issues.redhat.com/issues/?jql=project%20%3D%20COMPOSER%20or%20(project%20%3D%20HMS%20AND%20component%20in%20(%22Image%20Builder%22)))
-* 🔴 The roadmap is public.
+* 🟢 The issue tracker is public. [[1]](https://github.com/osbuild) [[2]](https://issues.redhat.com/issues/?jql=project%20%3D%20COMPOSER%20or%20(project%20%3D%20HMS%20AND%20component%20in%20(%22Image%20Builder%22)))
+* 🟠 The roadmap is public. [[1]](https://github.com/orgs/osbuild/projects)
 #### 🟢 Documentation
 * 🟢 [User documentation is public.](https://www.osbuild.org/guides/introduction.html)
 * 🟢 [Developer documentation is public.](https://www.osbuild.org/guides/developer-guide/developer-guide.html)
