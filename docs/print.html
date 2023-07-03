@@ -89,11 +89,33 @@
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
@@ -1355,37 +1377,38 @@ The architecture documents in this section comply with the AppSRE contract.</p>
 <h2 id="how-open-is-this-service"><a class="header" href="#how-open-is-this-service">How open is this service?</a></h2>
 <h4 id="-open-assets"><a class="header" href="#-open-assets">🟢 Open assets</a></h4>
 <ul>
-<li>🟢 The source code is open.</li>
+<li>🟢 <a href="https://github.com/osbuild">The source code is open.</a></li>
 <li>🟢 Unit tests are open.</li>
 <li>🟢 Performance tests are open.</li>
 <li>🟢 Functional tests are open.</li>
 <li>🟢 The dependencies are open source.</li>
-<li>🟢 Deployment metadata is open.</li>
+<li>🟢 Deployment metadata is open. <a href="https://github.com/osbuild/osbuild-composer/blob/main/templates/composer.yml">1</a> <a href="https://github.com/osbuild/image-builder/blob/main/templates/image-builder.yml">2</a></li>
 </ul>
 <h4 id="-contribution-workflow"><a class="header" href="#-contribution-workflow">🟢 Contribution workflow</a></h4>
 <ul>
 <li>🟢 External contributors can follow the same workflow as team members.</li>
-<li>🟢 The workflow is publicly documented.</li>
+<li>🟢 <a href="https://www.osbuild.org/guides/developer-guide/workflow.html">The workflow is publicly documented.</a></li>
 <li>🟢 Regular contributors can trigger CI.</li>
 <li>🟢 External contributions are eagerly reviewed.</li>
 </ul>
-<h4 id="-issue-tracking-and-planning"><a class="header" href="#-issue-tracking-and-planning">🟢 Issue tracking and planning</a></h4>
+<h4 id="-issue-tracking-and-planning"><a class="header" href="#-issue-tracking-and-planning">🟠 Issue tracking and planning</a></h4>
 <ul>
-<li>🟢 The issue tracker is public.</li>
+<li>🟢 The issue tracker is public. <a href="https://github.com/osbuild">1</a> <a href="https://issues.redhat.com/issues/?jql=project%20%3D%20COMPOSER%20or%20(project%20%3D%20HMS%20AND%20component%20in%20(%22Image%20Builder%22))">2</a></li>
+<li>🔴 The roadmap is public.</li>
 </ul>
 <h4 id="-documentation"><a class="header" href="#-documentation">🟢 Documentation</a></h4>
 <ul>
-<li>🟢 User documentation is public.</li>
-<li>🟢 Developer documentation is public.</li>
+<li>🟢 <a href="https://www.osbuild.org/guides/introduction.html">User documentation is public.</a></li>
+<li>🟢 <a href="https://www.osbuild.org/guides/developer-guide/developer-guide.html">Developer documentation is public.</a></li>
 </ul>
 <h4 id="-communication"><a class="header" href="#-communication">🟠 Communication</a></h4>
 <ul>
-<li>🟢 There is a public mailinglist.</li>
+<li>🟢 <a href="mailto:image-builder@redhat.com">There is a public mailinglist.</a></li>
 <li>🔴 There are public meetings.</li>
 </ul>
 <h4 id="-open-site-reliability-engineering"><a class="header" href="#-open-site-reliability-engineering">🟠 Open Site Reliability Engineering</a></h4>
 <ul>
-<li>🟢 There is an open status page.</li>
+<li>🟢 <a href="https://status.redhat.com">There is an open status page.</a></li>
 <li>🔴 Logging, monitoring, and alerting is open.</li>
 <li>🔴 Incident management is open.</li>
 </ul>
