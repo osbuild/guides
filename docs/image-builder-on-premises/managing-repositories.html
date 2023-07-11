@@ -180,7 +180,6 @@ type = &quot;yum-baseurl&quot;
 url = &quot;https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64&quot;
 check_gpg = false
 check_ssl = false
-system = false
 </code></pre>
 <p>and add it using <code>composer-cli sources add &lt;file-name.toml&gt;</code>. Verify its presence using <code>composer-cli sources list</code> and its content using <code>composer-cli sources info &lt;id&gt;</code>.</p>
 <h3 id="using-sources-with-specific-distributions"><a class="header" href="#using-sources-with-specific-distributions">Using sources with specific distributions</a></h3>
@@ -196,7 +195,6 @@ check_ssl = true
 distros = [&quot;fedora-32&quot;]
 id = &quot;f32-local&quot;
 name = &quot;local packages for fedora32&quot;
-system = false
 type = &quot;yum-baseurl&quot;
 url = &quot;http://local/repos/fedora32/projectrepo/&quot;
 </code></pre>
@@ -221,7 +219,6 @@ like this:</p>
 check_ssl = true
 id = &quot;custom-local&quot;
 name = &quot;signed local packages&quot;
-system = false
 type = &quot;yum-baseurl&quot;
 url = &quot;https://local/repos/projectrepo/&quot;
 check_repogpg = true
@@ -236,7 +233,6 @@ check_ssl = true
 check_repogpg
 id = &quot;custom-local&quot;
 name = &quot;signed local packages&quot;
-system = false
 type = &quot;yum-baseurl&quot;
 url = &quot;https://local/repos/projectrepo/&quot;
 gpgkeys=[&quot;https://remote/keys/other-repokey.pub&quot;,
