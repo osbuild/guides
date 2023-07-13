@@ -34,4 +34,5 @@
   - [Testing strategy](./developer-guide/testing-strategy/testing-strategy.md)
     - [RPMRepo](./developer-guide/testing-strategy/rpmrepo.md)
   - [Releasing](./developer-guide/releasing.md)
+  - [Backporting](./developer-guide/backporting.md)
   - [Glossary](./developer-guide/glossary.md)
