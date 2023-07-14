@@ -7,6 +7,7 @@
   - [Workers](./image-builder-service/image-builder-workers.md)
   - [Koji integration](./image-builder-service/image-builder-koji.md)
 - [Image Builder on premises](./image-builder-on-premises/image-builder-on-premises.md)
+  - [Releases](./image-builder-on-premises/release-overview.md)
   - [Basic concepts](./image-builder-on-premises/basic-concepts.md)
   - [Installation and configuration](./image-builder-on-premises/installation.md)
     - [Managing repositories](./image-builder-on-premises/managing-repositories.md)
