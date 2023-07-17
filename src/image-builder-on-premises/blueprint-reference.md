@@ -162,6 +162,7 @@ In the customizations we determine what goes into the image that's not in the de
 - [Repositories](#repositories)
 - [Filesystems](#filesystems)
 - [OpenSCAP](#openscap)
+- [Sysconfig](#sysconfig)
 
 ### Hostname
 
@@ -527,6 +528,21 @@ Please see [the OpenSCAP page](oscap-remediation.md) for the list of available s
 [customizations.openscap]
 datastream = "/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml"
 profile_id = "xccdf_org.ssgproject.content_profile_cis"
+```
+
+### Sysconfig
+
+Some `sysconfig`-related files can be written and adjusted through the blueprint. Currently supported are the `desktop` and `livesys` files.
+
+```toml
+[customizations.sysconfig.desktop]
+preferred = "/usr/bin/sway"
+displaymanager = "/bin/ssdm"
+```
+
+```toml
+[customizations.sysconfig.livesys]
+session = "sway"
 ```
 
 ## Example Blueprints
