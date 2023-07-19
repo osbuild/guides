@@ -7,3 +7,6 @@ title = "Image Builder"
 
 [output.html]
 site-url = "https://www.osbuild.org/guides/"
+
+[output.html.fold]
+enable = true
