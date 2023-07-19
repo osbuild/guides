@@ -1,4 +1,4 @@
-# Developer guide
+# Developer Guide
 
 In this section, you will find a description of the source code in `osbuild` organization.
 

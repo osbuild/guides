@@ -26,7 +26,7 @@
   - [OpenSCAP image remediation](./image-builder-on-premises/oscap-remediation.md)
   - [Repository customizations](./image-builder-on-premises/repository-customizations.md)
   - [Blueprint Reference](./image-builder-on-premises/blueprint-reference.md)
-- [Developer guide](./developer-guide/index.md)
+- [Developer Guide](./developer-guide/index.md)
   - [General](./developer-guide/general/index.md)
     - [Glossary](./developer-guide/general/glossary.md)
     - [Workflow](./developer-guide/general/workflow.md)
