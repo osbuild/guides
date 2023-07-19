@@ -1,6 +1,6 @@
 # Manifests
 
-`osbuild`'s main input is manifests. Manifests are JSON documents that represent all the actions to be performed to build an [Operating System artifact](../terminology.md). On this page we will take an example manifest and go through what's in it.
+`osbuild`'s main input is manifests. Manifests are JSON documents that represent all the actions to be performed to build an Operating System artifact. On this page we will take an example manifest and go through what's in it.
 
 The manifest used on this page is `samples/fedora-container.json`. This is a version 2 manifest (more on that later).
 

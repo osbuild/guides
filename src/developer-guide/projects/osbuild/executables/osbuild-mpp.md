@@ -14,9 +14,9 @@
 
 ### Dependency Solving
 
-One of the core things to do with `osbuild-mpp` is to solve dependencies. Manifests must contain the list of all RPMs to be installed with their content hashes and URLs to get them from. This is an especially cumbersome list to write by hand. `osbuild-mpp` can generate the relevant [sources](../manifests/sources.md) list for you and the RPM stage to install these.
+One of the core things to do with `osbuild-mpp` is to solve dependencies. Manifests must contain the list of all RPMs to be installed with their content hashes and URLs to get them from. This is an especially cumbersome list to write by hand. `osbuild-mpp` can generate the relevant [sources](../modules/sources.md) list for you and the RPM stage to install these.
 
-See for example the following for the RPM stage in a [pipeline](../manifests/pipelines.md):
+See for example the following for the RPM stage in a [pipeline](../modules/pipelines.md):
 
 ```json
 {
