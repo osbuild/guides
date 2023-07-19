@@ -109,4 +109,4 @@ The cloud-cleaner binary was created to clean up all artifacts (like images, but
 
 ### RPM Repository Snapshots
 
-In order to provide a stable base for the tests, the maintainer team created [the RPMRepo project](./rpmrepo.html) that periodically snapshots repositories of selected distributions.
+In order to provide a stable base for the tests, the maintainer team created [the RPMRepo project](../../projects/rpmrepo/index.md) that periodically snapshots repositories of selected distributions.
