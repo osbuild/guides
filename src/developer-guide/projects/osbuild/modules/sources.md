@@ -1,10 +1,10 @@
 # Sources
 
-[Manifests](./manifests.md) contain a sources section which tells `osbuild` to get prerequisites for [pipelines](./pipelines.md). These sources are written down in such a way that the sources are unable to change. This is an important bit for having reproducible manifests.
+[Manifests](../manifests/index.md) contain a sources section which tells `osbuild` to get prerequisites for [pipelines](./pipelines.md). These sources are written down in such a way that the sources are unable to change. This is an important bit for having reproducible manifests.
 
-Sources are stored in the `sources` property of the root manifest object. See the [manifest](./manifests.md) description for a full example.
+Sources are stored in the `sources` property of the root manifest object. See the [manifest](../manifests/index.md) description for a full example.
 
-Sources are refered to by their content hash, this can be cumbersome to do by hand. [osbuild-mpp](../developer-guide/tools/osbuild-mpp.md) offers depsolving and other utilities to expand these content hashes for you.
+Sources are refered to by their content hash, this can be cumbersome to do by hand. [osbuild-mpp](../executables/osbuild-mpp.md) offers depsolving and other utilities to expand these content hashes for you.
 
 ## Available Sources
 

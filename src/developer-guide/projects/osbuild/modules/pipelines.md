@@ -2,7 +2,7 @@
 
 Each pipeline is a collection of [stages](./stages.md) that together form a logical grouping. A commonly seen pipeline is for the one that builds the operating system root. Each pipeline can be exported on their own and depend on other pipelines.
 
-Pipelines are stored in the `pipelines` property of the root manifest object. See the [manifest](./manifests.md) description for a full example.
+Pipelines are stored in the `pipelines` property of the root manifest object. See the [manifest](../manifests/index.md) description for a full example.
 
 ## Properties
 
@@ -10,8 +10,8 @@ Pipelines are stored in the `pipelines` property of the root manifest object. Se
 |-----------|-------|
 | `name` | Pipeline name. |
 | `stages` | A list of [stages](./stages.md) to be ran in succession. |
-| `build` | Optional: the `name:name` or `sha256:hash` of the pipeline to use as a buildroot for this pipeline. See [identifiers](../terminology.md) for more information about this format. |
-| `runner` | Optional: the [runner](./runners.md) to use as a buildroot for this pipeline. |
+| `build` | Optional: the `name:name` or `sha256:hash` of the pipeline to use as a buildroot for this pipeline. |
+| `runner` | Optional: the runner to use as a buildroot for this pipeline. |
 | `source-epoch` | Optional: set all files in the resulting tree to this UNIX timestamp. |
 
 
