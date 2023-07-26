@@ -8,10 +8,10 @@ This feature is available for `RHEL 8.7` (& above) and `RHEL 9.1` (& above).
 ## OpenSCAP
 
 The `OpenSCAP` tool enables users to scan images for vulnerabilities and then remediate the non-compliances according to
-pre-defined security standards. A limitation of this is that it is not always trivial to fix all issues after the first
+predefined security standards. A limitation of this is that it is not always trivial to fix all issues after the first
 boot of the image.
 
-## Build-time Remedation
+## Build-time Remediation
 
 To solve this issue, an [osbuild stage] runs the `OpenSCAP` tool on the filesystem tree while the image is being built. The `OpenSCAP` tool runs 
 the standard evaluation for the given profile and applies the remediations to the image. This process enables the user to build a more completely
@@ -41,13 +41,13 @@ datastream = "/usr/share/xml/scap/ssg/content/ssg-fedora-ds.xml"
 
 See the below table for supported profiles.
 
-`osbuild-composer` will then generate the necessary configurations for the `osbuild` stage based on the the
-user customizations. Additionally, two packages will be added to the image, `openscap-scanner` (the `OpenSCAP` tool)
+`osbuild-composer` will then generate the necessary configurations for the `osbuild` stage based on the user
+customizations. Additionally, two packages will be added to the image, `openscap-scanner` (the `OpenSCAP` tool)
 & `scap-security-guide` (this package contains the remediation instructions).
 
 > :warning: **Note**
-The the remediation stage assumes that the
-`scap-security-guide` will be used for the datastream. This pacakge is installed on the image by default. If another datastream is desired, add the necessary package to the blueprint and specify the path to the datastream in the oscap config.
+The remediation stage assumes that the
+`scap-security-guide` will be used for the datastream. This package is installed on the image by default. If another datastream is desired, add the necessary package to the blueprint and specify the path to the datastream in the oscap config.
 
 ## Supported profiles
 
