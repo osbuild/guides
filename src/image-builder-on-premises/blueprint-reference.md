@@ -357,7 +357,7 @@ You can use blueprint customizations to create custom files and directories in t
 
 When using the custom files and directories customization, the following rules apply:
 
-- The path must be an absolute path and must be under `/etc`.
+- The path must be an absolute path and must be under `/etc` or `/root`.
 - There must be no duplicate paths of the same directory.
 - There must be no duplicate paths of the same file.
 
