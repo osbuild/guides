@@ -2741,9 +2741,9 @@ password = &quot;PASSWORD&quot;  # optional, password to use
 This feature is available for <code>RHEL 8.7</code> (&amp; above) and <code>RHEL 9.1</code> (&amp; above).</p>
 <h2 id="openscap"><a class="header" href="#openscap">OpenSCAP</a></h2>
 <p>The <code>OpenSCAP</code> tool enables users to scan images for vulnerabilities and then remediate the non-compliances according to
-pre-defined security standards. A limitation of this is that it is not always trivial to fix all issues after the first
+predefined security standards. A limitation of this is that it is not always trivial to fix all issues after the first
 boot of the image.</p>
-<h2 id="build-time-remedation"><a class="header" href="#build-time-remedation">Build-time Remedation</a></h2>
+<h2 id="build-time-remediation"><a class="header" href="#build-time-remediation">Build-time Remediation</a></h2>
 <p>To solve this issue, an <a href="image-builder-on-premises/&#x27;https://github.com/osbuild/osbuild/blob/main/stages/org.osbuild.oscap.remediation&#x27;">osbuild stage</a> runs the <code>OpenSCAP</code> tool on the filesystem tree while the image is being built. The <code>OpenSCAP</code> tool runs 
 the standard evaluation for the given profile and applies the remediations to the image. This process enables the user to build a more completely
 hardened image compared to running the remediation on a live system.</p>
@@ -2761,13 +2761,13 @@ datastream = &quot;/usr/share/xml/scap/ssg/content/ssg-fedora-ds.xml&quot;
 <li>The <code>profile_id</code> field accepts both the long and short forms, i.e. <code>cis</code> or <code>xccdf_org.ssgproject.content_profile_cis</code>.</li>
 </ol>
 <p>See the below table for supported profiles.</p>
-<p><code>osbuild-composer</code> will then generate the necessary configurations for the <code>osbuild</code> stage based on the the
-user customizations. Additionally, two packages will be added to the image, <code>openscap-scanner</code> (the <code>OpenSCAP</code> tool)
+<p><code>osbuild-composer</code> will then generate the necessary configurations for the <code>osbuild</code> stage based on the user
+customizations. Additionally, two packages will be added to the image, <code>openscap-scanner</code> (the <code>OpenSCAP</code> tool)
 &amp; <code>scap-security-guide</code> (this package contains the remediation instructions).</p>
 <blockquote>
 <p>:warning: <strong>Note</strong>
-The the remediation stage assumes that the
-<code>scap-security-guide</code> will be used for the datastream. This pacakge is installed on the image by default. If another datastream is desired, add the necessary package to the blueprint and specify the path to the datastream in the oscap config.</p>
+The remediation stage assumes that the
+<code>scap-security-guide</code> will be used for the datastream. This package is installed on the image by default. If another datastream is desired, add the necessary package to the blueprint and specify the path to the datastream in the oscap config.</p>
 </blockquote>
 <h2 id="supported-profiles"><a class="header" href="#supported-profiles">Supported profiles</a></h2>
 <p>The supported profiles are distro specific, see below:</p>
