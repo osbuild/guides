@@ -38,4 +38,5 @@
   - [Projects](./developer-guide/projects/index.md)
     - [osbuild](./developer-guide/projects/osbuild/index.md)
     - [osbuild-composer](./developer-guide/projects/osbuild-composer/index.md)
+      - [Local Cloud API Development](./developer-guide/projects/osbuild-composer/localcloud.md)
     - [rpmrepo](./developer-guide/projects/rpmrepo/index.md)
