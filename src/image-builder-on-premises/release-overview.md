@@ -1,12 +1,14 @@
 |       | cockpit-composer    | osbuild    | osbuild-composer    |
 |-------|---------------------|------------|---------------------|
-*8.8* | 45-1 | 81-1 | 75-1
-*9.2* | 45-1 | 81-1 | 76-2
-*CentOS Stream 8* | 45-1 | 89-1 | 84-1
-*CentOS Stream 9* | 45-1 | 89-1 | 84-1
-*Fedora 36* | 45-1 | 83-1 | 80-1
-*Fedora 37* | 45-1 | 89-1 | 84-1
-*Fedora 38* | 45-1 | 89-1 | 84-1
-*Git* | 45 | 89 | 84
-*Service* | n/a | n/a | [v84-104-gd7ed3ca](https://github.com/osbuild/osbuild-composer/compare/v84-104-gd7ed3ca...main)
-*Workers* | n/a | [v85](https://github.com/osbuild/osbuild/compare/v85...main) | [v84-104-gd7ed3ca](https://github.com/osbuild/osbuild-composer/compare/v84-104-gd7ed3ca...main)
+*8.10* | 47-1 | 93-1 | 88-1
+*8.9* | 47-1 | 93-1 | 88-1
+*9.3* | 47-1 | 93-1 | 88-1
+*9.4* | 47-1 | 94-1 | 88-1
+*CentOS Stream 8* | 47-1 | 93-1 | 88-1
+*CentOS Stream 9* | 47-1 | 94-1 | 88-1
+*Fedora 37* | 47-1 | 94-1 | 88-1
+*Fedora 38* | 47-1 | 94-1 | 88-1
+*Fedora 39* | 47-1 | 95-1 | 89-1
+*Git* | 47 | 95 | 89
+*Service* | n/a | n/a | [v88-7-ge5c4640](https://github.com/osbuild/osbuild-composer/compare/v88-7-ge5c4640...main)
+*Workers* | n/a | [v93](https://github.com/osbuild/osbuild/compare/v93...main) | [v88-7-ge5c4640](https://github.com/osbuild/osbuild-composer/compare/v88-7-ge5c4640...main)
