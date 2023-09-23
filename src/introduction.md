@@ -24,7 +24,7 @@ Image Builder can also be deployed and self-hosted. In its most basic setup, it 
 
 All of our code is open source and [on GitHub](https://github.com/osbuild).
 
-Our [developer guide](https://www.osbuild.org/guides/developer-guide/developer-guide.html) is a great starting point to learn about our workflow, code style and more!
+Our [developer guide](https://www.osbuild.org/guides/developer-guide/index.html) is a great starting point to learn about our workflow, code style and more!
 
 ### How to reach out to us
 
