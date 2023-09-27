@@ -73,6 +73,8 @@ All the necessary data to locate the image in the cloud is attached by the `koji
 }
 ```
 
+**Note:** Starting with `osbuild-composer` version 91, the cloud upload target results are also attached to the image output metadata as well as to the build metadata. See the [Image outout metadata](#image-output-metadata) section for more details.
+
 #### Cloud upload via `koji-cli`
 
 In order to upload images to the cloud when using `koji-cli`, one must first create a JSON file with the appropriate *upload_options*.
@@ -94,3 +96,157 @@ Then add the `--upload-options=gcp_upload_options.json` argument to the command 
 In order to upload images to the cloud, when using `Pungi` to trigger image builds, one must specify the `upload_options` option in the configuration dictionary as described in the [project documentation](https://docs.pagure.org/pungi/configuration.html#osbuild-composer-for-building-images).
 
 Please note that the support for cloud upload has been merged to the `Pungi` project after the **4.3.6** release. Therefore, if you want to take advantage of this feature, make sure to use version higher than **4.3.6**.
+
+## Type-specific metadata
+
+`osbuild-composer` attaches extra metadata to a Koji build as well as to each of the outputs attached to a Koji build.
+
+### Output metadata
+
+`osbuild-composer` attaches the following outputs for each of the built images to the build:
+
+* built image
+* osbuild manifest
+* osbuild logs
+
+All outputs have the (build) type set to `image`, except for the log, which don't have any (build) type set and also have no metadata attached. The metadata attached to the image and manifest outputs is described below.
+
+`osbuild-composer` uses the `image` type for all image builds via Koji, and so type-specific information is placed into the `extra.image` map of each output. Note that this is a legacy type in Koji and may be changed to use `extra.typeinfo.image` in the future. Clients fetching such data should first look for it within `extra.typeinfo.image` and fall back to `extra.image` when the former is not available.
+
+#### Image output metadata
+
+Data attached to the image output as metadata under `extra.image`:
+
+* `arch` - architecture of the image
+* `boot_mode` - boot mode of the image. Can be one of:
+  * `legacy`
+  * `uefi`
+  * `hybrid`
+  * `none`
+* `osbuild_artifact` - information about the osbuild configuration used to produce the image
+  * `export_filename` - filename of the image artifact as produced by osbuild
+  * `export_name` - name of the manifest pipeline that was exported to produce the image
+* `osbuild_version` - version of osbuild used to produce the image
+* `upload_target_results` - **optional** list of cloud upload target results, if the image build request contained request to upload the image also to a specific cloud environment, in addition to Koji. Each entry in the list contains:
+  * `name` - name of the upload target
+  * `options` - upload-target specific options with information to locate the image in the cloud environment
+  * `osbuild_artifact` - information about the osbuild configuration used to produce the image for this specific upload target. Technically, osbuild can export multiple different artifacts from the same manifest, but in reality, this is not used at this point.
+    * `export_filename` - filename of the image artifact as produced by osbuild
+    * `export_name` - name of the manifest pipeline that was exported to produce the image
+
+##### Example of image output metadata
+
+The following example shows the metadata attached to an image output under the `extra.image` key:
+
+```json
+{
+  "arch": "x86_64",
+  "boot_mode": "hybrid",
+  "osbuild_artifact": {
+    "export_filename": "image.raw.xz",
+    "export_name": "xz"
+  },
+  "osbuild_version": "93",
+  "upload_target_results": [
+    {
+      "name": "org.osbuild.aws",
+      "options": {
+        "ami": "ami-0d06fff61b0395df0",
+        "region": "us-east-1"
+      },
+      "osbuild_artifact": {
+        "export_filename": "image.raw.xz",
+        "export_name": "xz"
+      }
+    }
+  ]
+}
+```
+
+#### Manifest output metadata
+
+Data attached to the manifest output as metadata under `extra.image`:
+
+* `arch` - architecture of the image produced by the manifest
+* `info` - additional information about the manifest
+  * `osbuild_composer_version` - version of `osbuild-composer` used to produce the manifest
+  * `osbuild_composer_deps` - list of `osbuild-composer` dependencies, which could affect the content of the manifest. Each entry in the list contains:
+    * `path` - Go module path of the dependency
+    * `version` - version of the dependency
+    * `replace` - **optional** Go module path of the replacement module, if the dependency was replaced
+      * `path` - Go module path of the replacement module
+      * `version` - version of the replacement module
+
+##### Example of manifest output metadata
+
+The following example shows the metadata attached to a manifest output under the `extra.image` key:
+
+```json
+{
+  "arch": "x86_64",
+  "info": {
+    "osbuild_composer_version": "git-rev:f6e0e993919cb114e4437299020e80032d0e40a7",
+    "osbuild_composer_deps": [
+      {
+        "path": "github.com/osbuild/images",
+        "version": "v0.7.0"
+      }
+    ]
+  }
+}
+```
+
+### Build metadata
+
+The metadata attached by `osbuild-composer` to the Koji build itself is a compilation of the metadata attached to the individual outputs. The individual output metadata are always nested under the output's filename.
+
+Image output metadata are nested under the `extra.typeinfo.image` key, manifest output metadata are nested under the `extra.osbuild_manifest` key.
+
+#### Example of build metadata
+
+The following example shows the metadata attached to a Koji build under the `extra` key:
+
+```json
+{
+  "typeinfo": {
+    "image": {
+      "name-version-release.x86_64.raw.xz": {
+        "arch": "x86_64",
+        "boot_mode": "hybrid",
+        "osbuild_artifact": {
+          "export_filename": "image.raw.xz",
+          "export_name": "xz"
+        },
+        "osbuild_version": "93",
+        "upload_target_results": [
+          {
+            "name": "org.osbuild.aws",
+            "options": {
+              "ami": "ami-0d06fff61b0395df0",
+              "region": "us-east-1"
+            },
+            "osbuild_artifact": {
+              "export_filename": "image.raw.xz",
+              "export_name": "xz"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "osbuild_manifest": {
+    "name-version-release.x86_64.raw.xz.manifest.json": {
+      "arch": "x86_64",
+      "info": {
+        "osbuild_composer_version": "git-rev:f6e0e993919cb114e4437299020e80032d0e40a7",
+        "osbuild_composer_deps": [
+          {
+            "path": "github.com/osbuild/images",
+            "version": "v0.7.0"
+          }
+        ]
+      }
+    }
+  }
+}
+```
