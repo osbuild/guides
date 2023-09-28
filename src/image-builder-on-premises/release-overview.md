@@ -9,6 +9,6 @@
 *Fedora 37* | 47-1 | 95-1 | 89-1
 *Fedora 38* | 47-1 | 95-1 | 89-1
 *Fedora 39* | 47-1 | 95-1 | 90-1
-*Git* | 47 | 95 | 90
+*Git* | 47 | 96 | 90
 *Service* | n/a | n/a | [v88-7-ge5c4640](https://github.com/osbuild/osbuild-composer/compare/v88-7-ge5c4640...main)
 *Workers* | n/a | [v93](https://github.com/osbuild/osbuild/compare/v93...main) | [v88-7-ge5c4640](https://github.com/osbuild/osbuild-composer/compare/v88-7-ge5c4640...main)
