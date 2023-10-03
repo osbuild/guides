@@ -1684,6 +1684,7 @@ concurrently be imported (20). The latter might pose a problem in future.</p>
     &quot;status&quot;: &quot;success&quot;
 }
 </code></pre>
+<p><strong>Note:</strong> Starting with <code>osbuild-composer</code> version 91, the cloud upload target results are also attached to the image output metadata as well as to the build metadata. See the <a href="image-builder-service/image-builder-koji.html#image-output-metadata">Image outout metadata</a> section for more details.</p>
 <h4 id="cloud-upload-via-koji-cli"><a class="header" href="#cloud-upload-via-koji-cli">Cloud upload via <code>koji-cli</code></a></h4>
 <p>In order to upload images to the cloud when using <code>koji-cli</code>, one must first create a JSON file with the appropriate <em>upload_options</em>.</p>
 <p>Example <code>gcp_upload_options.json</code>:</p>
@@ -1697,6 +1698,159 @@ concurrently be imported (20). The latter might pose a problem in future.</p>
 <h4 id="cloud-upload-via-pungi"><a class="header" href="#cloud-upload-via-pungi">Cloud upload via <code>Pungi</code></a></h4>
 <p>In order to upload images to the cloud, when using <code>Pungi</code> to trigger image builds, one must specify the <code>upload_options</code> option in the configuration dictionary as described in the <a href="https://docs.pagure.org/pungi/configuration.html#osbuild-composer-for-building-images">project documentation</a>.</p>
 <p>Please note that the support for cloud upload has been merged to the <code>Pungi</code> project after the <strong>4.3.6</strong> release. Therefore, if you want to take advantage of this feature, make sure to use version higher than <strong>4.3.6</strong>.</p>
+<h2 id="type-specific-metadata"><a class="header" href="#type-specific-metadata">Type-specific metadata</a></h2>
+<p><code>osbuild-composer</code> attaches extra metadata to a Koji build as well as to each of the outputs attached to a Koji build.</p>
+<h3 id="output-metadata"><a class="header" href="#output-metadata">Output metadata</a></h3>
+<p><code>osbuild-composer</code> attaches the following outputs for each of the built images to the build:</p>
+<ul>
+<li>built image</li>
+<li>osbuild manifest</li>
+<li>osbuild logs</li>
+</ul>
+<p>All outputs have the (build) type set to <code>image</code>, except for the log, which don't have any (build) type set and also have no metadata attached. The metadata attached to the image and manifest outputs is described below.</p>
+<p><code>osbuild-composer</code> uses the <code>image</code> type for all image builds via Koji, and so type-specific information is placed into the <code>extra.image</code> map of each output. Note that this is a legacy type in Koji and may be changed to use <code>extra.typeinfo.image</code> in the future. Clients fetching such data should first look for it within <code>extra.typeinfo.image</code> and fall back to <code>extra.image</code> when the former is not available.</p>
+<h4 id="image-output-metadata"><a class="header" href="#image-output-metadata">Image output metadata</a></h4>
+<p>Data attached to the image output as metadata under <code>extra.image</code>:</p>
+<ul>
+<li><code>arch</code> - architecture of the image</li>
+<li><code>boot_mode</code> - boot mode of the image. Can be one of:
+<ul>
+<li><code>legacy</code></li>
+<li><code>uefi</code></li>
+<li><code>hybrid</code></li>
+<li><code>none</code></li>
+</ul>
+</li>
+<li><code>osbuild_artifact</code> - information about the osbuild configuration used to produce the image
+<ul>
+<li><code>export_filename</code> - filename of the image artifact as produced by osbuild</li>
+<li><code>export_name</code> - name of the manifest pipeline that was exported to produce the image</li>
+</ul>
+</li>
+<li><code>osbuild_version</code> - version of osbuild used to produce the image</li>
+<li><code>upload_target_results</code> - <strong>optional</strong> list of cloud upload target results, if the image build request contained request to upload the image also to a specific cloud environment, in addition to Koji. Each entry in the list contains:
+<ul>
+<li><code>name</code> - name of the upload target</li>
+<li><code>options</code> - upload-target specific options with information to locate the image in the cloud environment</li>
+<li><code>osbuild_artifact</code> - information about the osbuild configuration used to produce the image for this specific upload target. Technically, osbuild can export multiple different artifacts from the same manifest, but in reality, this is not used at this point.
+<ul>
+<li><code>export_filename</code> - filename of the image artifact as produced by osbuild</li>
+<li><code>export_name</code> - name of the manifest pipeline that was exported to produce the image</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="example-of-image-output-metadata"><a class="header" href="#example-of-image-output-metadata">Example of image output metadata</a></h5>
+<p>The following example shows the metadata attached to an image output under the <code>extra.image</code> key:</p>
+<pre><code class="language-json">{
+  &quot;arch&quot;: &quot;x86_64&quot;,
+  &quot;boot_mode&quot;: &quot;hybrid&quot;,
+  &quot;osbuild_artifact&quot;: {
+    &quot;export_filename&quot;: &quot;image.raw.xz&quot;,
+    &quot;export_name&quot;: &quot;xz&quot;
+  },
+  &quot;osbuild_version&quot;: &quot;93&quot;,
+  &quot;upload_target_results&quot;: [
+    {
+      &quot;name&quot;: &quot;org.osbuild.aws&quot;,
+      &quot;options&quot;: {
+        &quot;ami&quot;: &quot;ami-0d06fff61b0395df0&quot;,
+        &quot;region&quot;: &quot;us-east-1&quot;
+      },
+      &quot;osbuild_artifact&quot;: {
+        &quot;export_filename&quot;: &quot;image.raw.xz&quot;,
+        &quot;export_name&quot;: &quot;xz&quot;
+      }
+    }
+  ]
+}
+</code></pre>
+<h4 id="manifest-output-metadata"><a class="header" href="#manifest-output-metadata">Manifest output metadata</a></h4>
+<p>Data attached to the manifest output as metadata under <code>extra.image</code>:</p>
+<ul>
+<li><code>arch</code> - architecture of the image produced by the manifest</li>
+<li><code>info</code> - additional information about the manifest
+<ul>
+<li><code>osbuild_composer_version</code> - version of <code>osbuild-composer</code> used to produce the manifest</li>
+<li><code>osbuild_composer_deps</code> - list of <code>osbuild-composer</code> dependencies, which could affect the content of the manifest. Each entry in the list contains:
+<ul>
+<li><code>path</code> - Go module path of the dependency</li>
+<li><code>version</code> - version of the dependency</li>
+<li><code>replace</code> - <strong>optional</strong> Go module path of the replacement module, if the dependency was replaced
+<ul>
+<li><code>path</code> - Go module path of the replacement module</li>
+<li><code>version</code> - version of the replacement module</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="example-of-manifest-output-metadata"><a class="header" href="#example-of-manifest-output-metadata">Example of manifest output metadata</a></h5>
+<p>The following example shows the metadata attached to a manifest output under the <code>extra.image</code> key:</p>
+<pre><code class="language-json">{
+  &quot;arch&quot;: &quot;x86_64&quot;,
+  &quot;info&quot;: {
+    &quot;osbuild_composer_version&quot;: &quot;git-rev:f6e0e993919cb114e4437299020e80032d0e40a7&quot;,
+    &quot;osbuild_composer_deps&quot;: [
+      {
+        &quot;path&quot;: &quot;github.com/osbuild/images&quot;,
+        &quot;version&quot;: &quot;v0.7.0&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+<h3 id="build-metadata"><a class="header" href="#build-metadata">Build metadata</a></h3>
+<p>The metadata attached by <code>osbuild-composer</code> to the Koji build itself is a compilation of the metadata attached to the individual outputs. The individual output metadata are always nested under the output's filename.</p>
+<p>Image output metadata are nested under the <code>extra.typeinfo.image</code> key, manifest output metadata are nested under the <code>extra.osbuild_manifest</code> key.</p>
+<h4 id="example-of-build-metadata"><a class="header" href="#example-of-build-metadata">Example of build metadata</a></h4>
+<p>The following example shows the metadata attached to a Koji build under the <code>extra</code> key:</p>
+<pre><code class="language-json">{
+  &quot;typeinfo&quot;: {
+    &quot;image&quot;: {
+      &quot;name-version-release.x86_64.raw.xz&quot;: {
+        &quot;arch&quot;: &quot;x86_64&quot;,
+        &quot;boot_mode&quot;: &quot;hybrid&quot;,
+        &quot;osbuild_artifact&quot;: {
+          &quot;export_filename&quot;: &quot;image.raw.xz&quot;,
+          &quot;export_name&quot;: &quot;xz&quot;
+        },
+        &quot;osbuild_version&quot;: &quot;93&quot;,
+        &quot;upload_target_results&quot;: [
+          {
+            &quot;name&quot;: &quot;org.osbuild.aws&quot;,
+            &quot;options&quot;: {
+              &quot;ami&quot;: &quot;ami-0d06fff61b0395df0&quot;,
+              &quot;region&quot;: &quot;us-east-1&quot;
+            },
+            &quot;osbuild_artifact&quot;: {
+              &quot;export_filename&quot;: &quot;image.raw.xz&quot;,
+              &quot;export_name&quot;: &quot;xz&quot;
+            }
+          }
+        ]
+      }
+    }
+  },
+  &quot;osbuild_manifest&quot;: {
+    &quot;name-version-release.x86_64.raw.xz.manifest.json&quot;: {
+      &quot;arch&quot;: &quot;x86_64&quot;,
+      &quot;info&quot;: {
+        &quot;osbuild_composer_version&quot;: &quot;git-rev:f6e0e993919cb114e4437299020e80032d0e40a7&quot;,
+        &quot;osbuild_composer_deps&quot;: [
+          {
+            &quot;path&quot;: &quot;github.com/osbuild/images&quot;,
+            &quot;version&quot;: &quot;v0.7.0&quot;
+          }
+        ]
+      }
+    }
+  }
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="image-builder-on-premises-1"><a class="header" href="#image-builder-on-premises-1">Image Builder on premises</a></h1>
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <p><svg
