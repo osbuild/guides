@@ -531,6 +531,27 @@ datastream = "/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml"
 profile_id = "xccdf_org.ssgproject.content_profile_cis"
 ```
 
+#### OpenSCAP Tailoring
+
+It may be desirable to add or exclude OpenSCAP rules from the remediation scan, this can be achieved by specifying tailoring options
+for the OpenSCAP customizations. A tailoring file with a new tailoring profile ID is created and saved to the image. The new tailoring
+profile ID is created by appending the `_osbuild_tailoring` suffix to the base profile. For example, given tailoring options for the `cis`
+profile, tailoring profile `xccdf_org.ssgproject.content_profile_cis_osbuild_tailoring` will be created. The default namespace of the rules
+is `org.ssgproject.content`, so the prefix may be omitted for rules under this namespace, i.e. `org.ssgproject.content_grub2_password` and `grub2_password`
+are functionally equivalent.
+
+Note: the generated tailoring file is saved to the image as `/usr/share/xml/osbuild-oscap-tailoring/tailoring.xml`
+
+```toml
+[customizations.openscap]
+datastream = "/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml"
+profile_id = "xccdf_org.ssgproject.content_profile_cis"
+
+[customizations.openscap.tailoring]
+selected = [ "xccdf_org.ssgproject.content_bind_crypto_policy" ]
+unselected = [ "grub2_password" ]
+```
+
 ## Example Blueprints
 
 The following blueprint example will:
@@ -600,4 +621,8 @@ size = 2147483648
 [customizations.openscap]
 datastream = "/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml"
 profile_id = "xccdf_org.ssgproject.content_profile_cis"
+
+[customizations.openscap.tailoring]
+selected = [ "xccdf_org.ssgproject.content_bind_crypto_policy" ]
+unselected = [ "grub2_password" ]
 ```
