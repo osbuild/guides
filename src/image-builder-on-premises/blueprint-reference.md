@@ -518,8 +518,10 @@ In addition, the following image types do not create partitioned OS images and t
 ### OpenSCAP
 
 From `RHEL 8.7` & `RHEL 9.1` support has been added for `OpenSCAP` build-time remediation. The blueprints accept two fields:
-- the `datastream` path to the remediation instructions
+- the `datastream` path to the remediation instructions (optional)
 - the `profile_id` of the desired security profile
+
+If the datastream parameter is not provided, `osbuild-composer` will now provide a sensible default based on the selected distro.
 
 Please see [the OpenSCAP page](oscap-remediation.md) for the list of available security profiles.
 
