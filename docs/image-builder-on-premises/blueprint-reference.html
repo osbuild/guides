@@ -565,13 +565,30 @@ size = 2147483648
 <h3 id="openscap"><a class="header" href="#openscap">OpenSCAP</a></h3>
 <p>From <code>RHEL 8.7</code> &amp; <code>RHEL 9.1</code> support has been added for <code>OpenSCAP</code> build-time remediation. The blueprints accept two fields:</p>
 <ul>
-<li>the <code>datastream</code> path to the remediation instructions</li>
+<li>the <code>datastream</code> path to the remediation instructions (optional)</li>
 <li>the <code>profile_id</code> of the desired security profile</li>
 </ul>
+<p>If the datastream parameter is not provided, <code>osbuild-composer</code> will now provide a sensible default based on the selected distro.</p>
 <p>Please see <a href="oscap-remediation.html">the OpenSCAP page</a> for the list of available security profiles.</p>
 <pre><code class="language-toml">[customizations.openscap]
 datastream = &quot;/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml&quot;
 profile_id = &quot;xccdf_org.ssgproject.content_profile_cis&quot;
+</code></pre>
+<h4 id="openscap-tailoring"><a class="header" href="#openscap-tailoring">OpenSCAP Tailoring</a></h4>
+<p>It may be desirable to add or exclude OpenSCAP rules from the remediation scan, this can be achieved by specifying tailoring options
+for the OpenSCAP customizations. A tailoring file with a new tailoring profile ID is created and saved to the image. The new tailoring
+profile ID is created by appending the <code>_osbuild_tailoring</code> suffix to the base profile. For example, given tailoring options for the <code>cis</code>
+profile, tailoring profile <code>xccdf_org.ssgproject.content_profile_cis_osbuild_tailoring</code> will be created. The default namespace of the rules
+is <code>org.ssgproject.content</code>, so the prefix may be omitted for rules under this namespace, i.e. <code>org.ssgproject.content_grub2_password</code> and <code>grub2_password</code>
+are functionally equivalent.</p>
+<p>Note: the generated tailoring file is saved to the image as <code>/usr/share/xml/osbuild-oscap-tailoring/tailoring.xml</code></p>
+<pre><code class="language-toml">[customizations.openscap]
+datastream = &quot;/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml&quot;
+profile_id = &quot;xccdf_org.ssgproject.content_profile_cis&quot;
+
+[customizations.openscap.tailoring]
+selected = [ &quot;xccdf_org.ssgproject.content_bind_crypto_policy&quot; ]
+unselected = [ &quot;grub2_password&quot; ]
 </code></pre>
 <h2 id="example-blueprints"><a class="header" href="#example-blueprints">Example Blueprints</a></h2>
 <p>The following blueprint example will:</p>
@@ -641,6 +658,10 @@ size = 2147483648
 [customizations.openscap]
 datastream = &quot;/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml&quot;
 profile_id = &quot;xccdf_org.ssgproject.content_profile_cis&quot;
+
+[customizations.openscap.tailoring]
+selected = [ &quot;xccdf_org.ssgproject.content_bind_crypto_policy&quot; ]
+unselected = [ &quot;grub2_password&quot; ]
 </code></pre>
 
                     </main>
