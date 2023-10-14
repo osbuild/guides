@@ -6,9 +6,9 @@
 *9.4* | 47-1 | 97-1 | 88-1
 *CentOS Stream 8* | 47-1 | 96-1 | 88-1
 *CentOS Stream 9* | 47-1 | 96-1 | 88-1
-*Fedora 37* | 47-1 | 96-1 | 90-1
-*Fedora 38* | 47-1 | 96-1 | 90-1
+*Fedora 37* | 47-1 | 96-1 | 91-1
+*Fedora 38* | 47-1 | 96-1 | 91-1
 *Fedora 39* | 47-1 | 95-1 | 90-1
 *Git* | 47 | 97 | 91
-*Service* | n/a | n/a | [v91-8-gb228886](https://github.com/osbuild/osbuild-composer/compare/v91-8-gb228886...main)
-*Workers* | n/a | [v93](https://github.com/osbuild/osbuild/compare/v93...main) | [v91-8-gb228886](https://github.com/osbuild/osbuild-composer/compare/v91-8-gb228886...main)
+*Service* | n/a | n/a | [v91-11-gd4af58c](https://github.com/osbuild/osbuild-composer/compare/v91-11-gd4af58c...main)
+*Workers* | n/a | [v93](https://github.com/osbuild/osbuild/compare/v93...main) | [v91-11-gd4af58c](https://github.com/osbuild/osbuild-composer/compare/v91-11-gd4af58c...main)
