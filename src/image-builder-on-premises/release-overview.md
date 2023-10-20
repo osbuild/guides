@@ -10,5 +10,5 @@
 *Fedora 38* | 47-1 | 96-1 | 91-1
 *Fedora 39* | 47-1 | 95-1 | 90-1
 *Git* | 47 | 97 | 92
-*Service* | n/a | n/a | [v91-11-gd4af58c](https://github.com/osbuild/osbuild-composer/compare/v91-11-gd4af58c...main)
-*Workers* | n/a | [v93](https://github.com/osbuild/osbuild/compare/v93...main) | [v91-11-gd4af58c](https://github.com/osbuild/osbuild-composer/compare/v91-11-gd4af58c...main)
+*Service* | n/a | n/a | [v92-20-g3d7b01b](https://github.com/osbuild/osbuild-composer/compare/v92-20-g3d7b01b...main)
+*Workers* | n/a | [v93](https://github.com/osbuild/osbuild/compare/v93...main) | [v92-20-g3d7b01b](https://github.com/osbuild/osbuild-composer/compare/v92-20-g3d7b01b...main)
