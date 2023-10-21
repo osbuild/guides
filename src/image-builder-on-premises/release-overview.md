@@ -6,8 +6,8 @@
 *9.4* | 47-1 | 97-1 | 88-1
 *CentOS Stream 8* | 47-1 | 96-1 | 88-1
 *CentOS Stream 9* | 47-1 | 97-1 | 88-1
-*Fedora 37* | 47-1 | 96-1 | 91-1
-*Fedora 38* | 47-1 | 96-1 | 91-1
+*Fedora 37* | 47-1 | 97-1 | 91-1
+*Fedora 38* | 47-1 | 97-1 | 91-1
 *Fedora 39* | 47-1 | 95-1 | 90-1
 *Git* | 47 | 97 | 92
 *Service* | n/a | n/a | [v92-20-g3d7b01b](https://github.com/osbuild/osbuild-composer/compare/v92-20-g3d7b01b...main)
