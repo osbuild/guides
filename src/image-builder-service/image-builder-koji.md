@@ -250,3 +250,22 @@ The following example shows the metadata attached to a Koji build under the `ext
   }
 }
 ```
+
+## Locally reproducing Koji image builds
+
+With the osbuild manifest and additional metadata attached to each Koji build, it is now possible to locally reproduce the Koji image builds. Note that the `osbuild` tool supports building images only for the same architecture as the host system.
+
+To rebuild the image locally, one must first download the osbuild manifest from the Koji build. The osbuild manifest is attached to the Koji build as a separate output with the `.manifest.json` suffix. It is also desirable to ensure that the same `osbuild` version is used to build the image locally as was used to build the image in Koji. The `osbuild` version used to build the image is attached to the Koji build as the `osbuild_version` key in the metadata.
+
+To build the image locally using the downloaded osbuild manifest, run the following command:
+
+```bash
+# Set OUTPUT_DIR to a directory path for the image build artifacts
+# Set STORE_DIR to a directory path for the osbuild cache
+# Set MANIFEST_PATH to the path to the downloaded osbuild manifest
+# Set EXPORT_NAME to the name of the manifest pipeline that was exported to produce the image (`export_name` key in the image output metadata).
+
+sudo osbuild --output-directory ${OUTPUT_DIR} --store ${STORE_DIR} --export ${EXPORT_NAME} ${MANIFEST_PATH}
+```
+
+Once the image build finishes, the image artifact will be available in the `${OUTPUT_DIR}/<export_name>/<export_filename>` path. The `export_name` and `export_filename` keys are attached to the image build metadata and described in the [Image output metadata](#image-output-metadata) section.
