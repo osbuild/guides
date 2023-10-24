@@ -1851,6 +1851,18 @@ concurrently be imported (20). The latter might pose a problem in future.</p>
   }
 }
 </code></pre>
+<h2 id="locally-reproducing-koji-image-builds"><a class="header" href="#locally-reproducing-koji-image-builds">Locally reproducing Koji image builds</a></h2>
+<p>With the osbuild manifest and additional metadata attached to each Koji build, it is now possible to locally reproduce the Koji image builds. Note that the <code>osbuild</code> tool supports building images only for the same architecture as the host system.</p>
+<p>To rebuild the image locally, one must first download the osbuild manifest from the Koji build. The osbuild manifest is attached to the Koji build as a separate output with the <code>.manifest.json</code> suffix. It is also desirable to ensure that the same <code>osbuild</code> version is used to build the image locally as was used to build the image in Koji. The <code>osbuild</code> version used to build the image is attached to the Koji build as the <code>osbuild_version</code> key in the metadata.</p>
+<p>To build the image locally using the downloaded osbuild manifest, run the following command:</p>
+<pre><code class="language-bash"># Set OUTPUT_DIR to a directory path for the image build artifacts
+# Set STORE_DIR to a directory path for the osbuild cache
+# Set MANIFEST_PATH to the path to the downloaded osbuild manifest
+# Set EXPORT_NAME to the name of the manifest pipeline that was exported to produce the image (`export_name` key in the image output metadata).
+
+sudo osbuild --output-directory ${OUTPUT_DIR} --store ${STORE_DIR} --export ${EXPORT_NAME} ${MANIFEST_PATH}
+</code></pre>
+<p>Once the image build finishes, the image artifact will be available in the <code>${OUTPUT_DIR}/&lt;export_name&gt;/&lt;export_filename&gt;</code> path. The <code>export_name</code> and <code>export_filename</code> keys are attached to the image build metadata and described in the <a href="image-builder-service/image-builder-koji.html#image-output-metadata">Image output metadata</a> section.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="image-builder-on-premises-1"><a class="header" href="#image-builder-on-premises-1">Image Builder on premises</a></h1>
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <p><svg
