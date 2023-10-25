@@ -2212,6 +2212,7 @@ check_gpg = false
 check_ssl = false
 </code></pre>
 <p>and add it using <code>composer-cli sources add &lt;file-name.toml&gt;</code>. Verify its presence using <code>composer-cli sources list</code> and its content using <code>composer-cli sources info &lt;id&gt;</code>.</p>
+<p>Valid values for the <code>type</code> field are: <code>yum-baseurl</code>, <code>yum-mirrorlist</code>, and <code>yum-metalink</code>.</p>
 <h3 id="using-sources-with-specific-distributions"><a class="header" href="#using-sources-with-specific-distributions">Using sources with specific distributions</a></h3>
 <p>A new optional field has been added to the repository source format. It is a
 list of distribution strings that the source will be used with when depsolving
