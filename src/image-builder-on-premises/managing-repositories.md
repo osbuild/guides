@@ -20,6 +20,8 @@ check_ssl = false
 
 and add it using `composer-cli sources add <file-name.toml>`. Verify its presence using `composer-cli sources list` and its content using `composer-cli sources info <id>`.
 
+Valid values for the `type` field are: `yum-baseurl`, `yum-mirrorlist`, and `yum-metalink`.
+
 ### Using sources with specific distributions
 
 A new optional field has been added to the repository source format. It is a
