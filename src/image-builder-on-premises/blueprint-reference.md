@@ -486,12 +486,12 @@ in the repository configuration. **GPG keys are not imported to the RPM database
 
 ### Filesystems
 
-The blueprints can be extended to provide filesytem support. Currently the `mountpoint` and minimum partition `size` can be set. Custom mountpoints are currently only supported for `RHEL 8.5` & `RHEL 9.0`. For other distributions, only the `root` partition is supported, the size argument being an alias for the image size.
+The blueprints can be extended to provide filesytem support. Currently the `mountpoint` and minimum partition `minsize` can be set. Custom mountpoints are currently only supported for `RHEL 8.5` & `RHEL 9.0`. For other distributions, only the `root` partition is supported, the size argument being an alias for the image size.
 
 ```toml
 [[customizations.filesystem]]
 mountpoint = "/var"
-size = 2147483648
+minsize = 2147483648
 ```
 In addition to the root mountpoint, `/`, the following `mountpoints` and their sub-directories are supported:
 
@@ -616,7 +616,7 @@ name = "students"
 
 [[customizations.filesystem]]
 mountpoint = "/"
-size = 2147483648
+minsize = 2147483648
 
 [customizations.openscap]
 datastream = "/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml"
