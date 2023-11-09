@@ -533,10 +533,10 @@ enabled=true
 <p>The blueprint accepts both inline GPG keys and GPG key urls. If an inline GPG key is provided it will be saved to the <code>/etc/pki/rpm-gpg</code> directory and will be referenced accordingly
 in the repository configuration. <strong>GPG keys are not imported to the RPM database</strong> and will only be imported when first installing a package from the third-party repository.</p>
 <h3 id="filesystems"><a class="header" href="#filesystems">Filesystems</a></h3>
-<p>The blueprints can be extended to provide filesytem support. Currently the <code>mountpoint</code> and minimum partition <code>size</code> can be set. Custom mountpoints are currently only supported for <code>RHEL 8.5</code> &amp; <code>RHEL 9.0</code>. For other distributions, only the <code>root</code> partition is supported, the size argument being an alias for the image size.</p>
+<p>The blueprints can be extended to provide filesytem support. Currently the <code>mountpoint</code> and minimum partition <code>minsize</code> can be set. Custom mountpoints are currently only supported for <code>RHEL 8.5</code> &amp; <code>RHEL 9.0</code>. For other distributions, only the <code>root</code> partition is supported, the size argument being an alias for the image size.</p>
 <pre><code class="language-toml">[[customizations.filesystem]]
 mountpoint = &quot;/var&quot;
-size = 2147483648
+minsize = 2147483648
 </code></pre>
 <p>In addition to the root mountpoint, <code>/</code>, the following <code>mountpoints</code> and their sub-directories are supported:</p>
 <ul>
@@ -653,7 +653,7 @@ name = &quot;students&quot;
 
 [[customizations.filesystem]]
 mountpoint = &quot;/&quot;
-size = 2147483648
+minsize = 2147483648
 
 [customizations.openscap]
 datastream = &quot;/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml&quot;
