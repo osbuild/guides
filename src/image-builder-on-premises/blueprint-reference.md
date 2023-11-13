@@ -486,14 +486,30 @@ in the repository configuration. **GPG keys are not imported to the RPM database
 
 ### Filesystems
 
-The blueprints can be extended to provide filesytem support. Currently the `mountpoint` and minimum partition `minsize` can be set. Custom mountpoints are currently only supported for `RHEL 8.5` & `RHEL 9.0`. For other distributions, only the `root` partition is supported, the size argument being an alias for the image size.
+The blueprints can be extended to provide filesytem support. Currently the `mountpoint` and minimum partition `minsize` can be set. On `RHEL-8`, custom mountpoints are supported only since version `8.5`. For older `RHEL` versions, only the root mountpoint, `/`, is supported, the size argument being an alias for the image size.
 
 ```toml
 [[customizations.filesystem]]
 mountpoint = "/var"
 minsize = 2147483648
 ```
-In addition to the root mountpoint, `/`, the following `mountpoints` and their sub-directories are supported:
+
+Filesystem customizations are currently **not** supported for the following image types:
+
+- `image-installer`
+- `edge-installer` (RHEL and CentOS) and `iot-installer` (Fedora)
+- `edge-simplified-installer` (RHEL and CentOS)
+
+In addition, the following image types do not create partitioned OS images and therefore filesystem customizations for these types are meaningless:
+
+- `edge-commit` (RHEL and CentOS) and `iot-commit` (Fedora)
+- `edge-container` (RHEL and CentOS) and `iot-container` (Fedora)
+- `tar`
+- `container`
+
+#### Allowed mountpoints (osbuild-composer version < 94)
+
+In addition to the root mountpoint, `/`, the following `mountpoints` and their sub-directories are allowed:
 
 - `/var`
 - `/home`
@@ -504,16 +520,30 @@ In addition to the root mountpoint, `/`, the following `mountpoints` and their s
 - `/data`
 - `/tmp`
 
-Filesystem customizations are currently **not** supported for the following image types:
-- `image-installer`
-- `edge-installer` (RHEL and CentOS) and `iot-installer` (Fedora)
-- `edge-simplified-installer` (RHEL and CentOS)
+#### Allowed mountpoints (osbuild-composer version >= 94)
 
-In addition, the following image types do not create partitioned OS images and therefore filesystem customizations for these types are meaningless:
-- `edge-commit` (RHEL and CentOS) and `iot-commit` (Fedora)
-- `edge-container` (RHEL and CentOS) and `iot-container` (Fedora)
-- `tar`
-- `container`
+Arbitrary custom mountpoints are allowed, except for specific paths that are reserved for the OS.
+
+The following mountpoints are **not** allowed (including their sub-directories):
+
+- `/bin`
+- `/boot/efi`
+- `/dev`
+- `/etc`
+- `/lib`
+- `/lib64`
+- `/lost+found`
+- `/proc`
+- `/run`
+- `/sbin`
+- `/sys`
+- `/sysroot`
+- `/var/lock`
+- `/var/run`
+
+The following mountpoints are allowed, but their sub-directories are **not** allowed:
+
+- `/usr`
 
 ### OpenSCAP
 
