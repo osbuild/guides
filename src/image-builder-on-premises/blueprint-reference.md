@@ -162,6 +162,7 @@ In the customizations we determine what goes into the image that's not in the de
 - [Repositories](#repositories)
 - [Filesystems](#filesystems)
 - [OpenSCAP](#openscap)
+- [FIPS](#fips)
 
 ### Hostname
 
@@ -552,7 +553,20 @@ selected = [ "xccdf_org.ssgproject.content_bind_crypto_policy" ]
 unselected = [ "grub2_password" ]
 ```
 
+#### FIPS
+
+Enables/disables the system FIPS mode (disabled by default).
+Currently only `edge-raw-image`, `edge-installer`, `edge-simplified-installer`,
+`edge-ami` and `edge-vsphere` images support this customization.
+
+```toml
+[customizations]
+fips = true
+```
+
 ## Example Blueprints
+
+### Multiple customizations
 
 The following blueprint example will:
 - install the `tmux`, `git`, and `vim-enhanced` packages
@@ -625,4 +639,28 @@ profile_id = "xccdf_org.ssgproject.content_profile_cis"
 [customizations.openscap.tailoring]
 selected = [ "xccdf_org.ssgproject.content_bind_crypto_policy" ]
 unselected = [ "grub2_password" ]
+```
+
+### Enable system FIPS mode in Edge Simpliflied installer
+
+The following blueprint example will enable system FIPS mode in
+a `edge-simplified-installer` image:
+
+```toml
+name = "example-system-fips-mode"
+description = "A FIPS enabled base system"
+version = "0.0.1"
+
+[ostree] 
+
+ref= "test/edge"
+url= "http://example.com/repo"
+
+[customizations]
+installation_device = "/dev/vda"
+fips = true
+
+[customizations.fdo]
+manufacturing_server_url = "https://fdo.example.com"
+diun_pub_key_insecure = true
 ```
