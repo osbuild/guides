@@ -533,22 +533,11 @@ enabled=true
 <p>The blueprint accepts both inline GPG keys and GPG key urls. If an inline GPG key is provided it will be saved to the <code>/etc/pki/rpm-gpg</code> directory and will be referenced accordingly
 in the repository configuration. <strong>GPG keys are not imported to the RPM database</strong> and will only be imported when first installing a package from the third-party repository.</p>
 <h3 id="filesystems"><a class="header" href="#filesystems">Filesystems</a></h3>
-<p>The blueprints can be extended to provide filesytem support. Currently the <code>mountpoint</code> and minimum partition <code>minsize</code> can be set. Custom mountpoints are currently only supported for <code>RHEL 8.5</code> &amp; <code>RHEL 9.0</code>. For other distributions, only the <code>root</code> partition is supported, the size argument being an alias for the image size.</p>
+<p>The blueprints can be extended to provide filesytem support. Currently the <code>mountpoint</code> and minimum partition <code>minsize</code> can be set. On <code>RHEL-8</code>, custom mountpoints are supported only since version <code>8.5</code>. For older <code>RHEL</code> versions, only the root mountpoint, <code>/</code>, is supported, the size argument being an alias for the image size.</p>
 <pre><code class="language-toml">[[customizations.filesystem]]
 mountpoint = &quot;/var&quot;
 minsize = 2147483648
 </code></pre>
-<p>In addition to the root mountpoint, <code>/</code>, the following <code>mountpoints</code> and their sub-directories are supported:</p>
-<ul>
-<li><code>/var</code></li>
-<li><code>/home</code></li>
-<li><code>/opt</code></li>
-<li><code>/srv</code></li>
-<li><code>/usr</code></li>
-<li><code>/app</code></li>
-<li><code>/data</code></li>
-<li><code>/tmp</code></li>
-</ul>
 <p>Filesystem customizations are currently <strong>not</strong> supported for the following image types:</p>
 <ul>
 <li><code>image-installer</code></li>
@@ -561,6 +550,41 @@ minsize = 2147483648
 <li><code>edge-container</code> (RHEL and CentOS) and <code>iot-container</code> (Fedora)</li>
 <li><code>tar</code></li>
 <li><code>container</code></li>
+</ul>
+<h4 id="allowed-mountpoints-osbuild-composer-version--94"><a class="header" href="#allowed-mountpoints-osbuild-composer-version--94">Allowed mountpoints (osbuild-composer version &lt; 94)</a></h4>
+<p>In addition to the root mountpoint, <code>/</code>, the following <code>mountpoints</code> and their sub-directories are allowed:</p>
+<ul>
+<li><code>/var</code></li>
+<li><code>/home</code></li>
+<li><code>/opt</code></li>
+<li><code>/srv</code></li>
+<li><code>/usr</code></li>
+<li><code>/app</code></li>
+<li><code>/data</code></li>
+<li><code>/tmp</code></li>
+</ul>
+<h4 id="allowed-mountpoints-osbuild-composer-version--94-1"><a class="header" href="#allowed-mountpoints-osbuild-composer-version--94-1">Allowed mountpoints (osbuild-composer version &gt;= 94)</a></h4>
+<p>Arbitrary custom mountpoints are allowed, except for specific paths that are reserved for the OS.</p>
+<p>The following mountpoints are <strong>not</strong> allowed (including their sub-directories):</p>
+<ul>
+<li><code>/bin</code></li>
+<li><code>/boot/efi</code></li>
+<li><code>/dev</code></li>
+<li><code>/etc</code></li>
+<li><code>/lib</code></li>
+<li><code>/lib64</code></li>
+<li><code>/lost+found</code></li>
+<li><code>/proc</code></li>
+<li><code>/run</code></li>
+<li><code>/sbin</code></li>
+<li><code>/sys</code></li>
+<li><code>/sysroot</code></li>
+<li><code>/var/lock</code></li>
+<li><code>/var/run</code></li>
+</ul>
+<p>The following mountpoints are allowed, but their sub-directories are <strong>not</strong> allowed:</p>
+<ul>
+<li><code>/usr</code></li>
 </ul>
 <h3 id="openscap"><a class="header" href="#openscap">OpenSCAP</a></h3>
 <p>From <code>RHEL 8.7</code> &amp; <code>RHEL 9.1</code> support has been added for <code>OpenSCAP</code> build-time remediation. The blueprints accept two fields:</p>
