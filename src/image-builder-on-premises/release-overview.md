@@ -10,8 +10,8 @@
 *Fedora 38* | 47-1 | 98-1 | 93-1
 *Fedora 39* | 47-1 | 98-1 | 93-1
 *Git* | 47 | 99 | 93
-*Service* | n/a | n/a | [v92-35-g81240f5](https://github.com/osbuild/osbuild-composer/compare/v92-35-g81240f5...main)
-*Workers* | n/a | [v93](https://github.com/osbuild/osbuild/compare/v93...main) | [v92-35-g81240f5](https://github.com/osbuild/osbuild-composer/compare/v92-35-g81240f5...main)
+*Service* | n/a | n/a | [v93](https://github.com/osbuild/osbuild-composer/compare/v93...main)
+*Workers* | n/a | [v93](https://github.com/osbuild/osbuild/compare/v93...main) | [v93](https://github.com/osbuild/osbuild-composer/compare/v93...main)
 
 ---
 
