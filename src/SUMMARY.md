@@ -37,6 +37,7 @@
     - [Testing Strategy](./developer-guide/general/testing-strategy/index.md)
   - [Projects](./developer-guide/projects/index.md)
     - [osbuild](./developer-guide/projects/osbuild/index.md)
+      - [Contributing](./developer-guide/projects/osbuild/contributing.md)
     - [osbuild-composer](./developer-guide/projects/osbuild-composer/index.md)
       - [Local Cloud API Development](./developer-guide/projects/osbuild-composer/localcloud.md)
     - [rpmrepo](./developer-guide/projects/rpmrepo/index.md)
