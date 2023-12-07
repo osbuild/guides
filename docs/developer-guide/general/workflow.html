@@ -173,34 +173,42 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="workflow"><a class="header" href="#workflow">Workflow</a></h1>
-<h2 id="git-workflow"><a class="header" href="#git-workflow">Git Workflow</a></h2>
-<h3 id="commits"><a class="header" href="#commits">Commits</a></h3>
-<p>Commits should be easy to read.</p>
-<p>The commit message should explain clearly what it's trying to do and why. The following format is
-common but not required:</p>
+                        <h1 id="development-workflow-"><a class="header" href="#development-workflow-">Development workflow 🏗️</a></h1>
+<h2 id="commits-"><a class="header" href="#commits-">Commits 💎</a></h2>
+<ol>
+<li>Commits should be easy to read.</li>
+<li>The commit message should explain clearly what it's trying to do and why. Refer to the format we prefer below.</li>
+<li>A Jira issue or - where applicable - a GitHub issue reference should be added to automatically link and potentially close a related issue if it exists.</li>
+</ol>
+<h3 id="preferred-commit-message-format"><a class="header" href="#preferred-commit-message-format">Preferred commit message format</a></h3>
 <pre><code>&lt;module&gt;: Topic of the commit
 
 Body of the commit, describing the changes in more detail.
 </code></pre>
-<p>The <code>&lt;module&gt;</code> should point to the area of the codebase (for instance <code>tests</code> or <code>tools</code>). The topic
-should summarize what the commit is doing.</p>
-<p>GitHub truncates the first line if it's longer than 65 characters, which is something to keep in
-mind as well.</p>
-<p>A <code>Fixes #issue-number</code> can be added to automatically link and close a related issue if it exists.</p>
-<h3 id="pull-requests"><a class="header" href="#pull-requests">Pull requests</a></h3>
-<p>A pull request should be one or more commits which form a coherent unit, it can be
-rebased/rewritten/force-pushed until it's fit for merging.</p>
-<p>How the PR developed, and the iterations it went through, should not be visible in the git
-history. The end result counts: a certain amount of commits, each one forming a logical unit of
-changes. Avoid 'fix-up' commits which tweak previous commits in the PR.</p>
-<p>Pull requests should be opened from a developer's own fork to avoid random branches on the origin.</p>
-<p>Each pull request should be reviewed, and the CI should pass.</p>
-<p>Once a pull request is ready to be merged, it should be merged via the <code>Rebase and merge</code> or <code>Squash and merge</code> option. This avoids merge commits on the main branch.</p>
-<h3 id="branches"><a class="header" href="#branches">Branches</a></h3>
-<p>Force-pushing to, or rebasing the main branch (or other release branches) is not allowed. Avoid
-directly pushing (fast-forward) to those branches as well. Commits can always be reverted by opening
-a new pull request.</p>
+<ul>
+<li>The <code>&lt;module&gt;</code> should point to the area of the codebase (for instance <code>tests</code> or <code>tools</code>). The topic
+should summarize what the commit is doing.</li>
+<li>GitHub truncates the first line if it's longer than 65 characters, which is something to keep in mind as well.</li>
+</ul>
+<h2 id="pull-requests-"><a class="header" href="#pull-requests-">Pull requests 🌟</a></h2>
+<p>We try to follow some best practices around pull requests.</p>
+<ol>
+<li>A pull request should be one or more commits which form a coherent unit, it can be
+rebased/rewritten/force-pushed until it's fit for merging.</li>
+<li>All changes shall be tested. If new tests are necessary to cover new functionality, it should be part of the pull request.</li>
+<li>Pull requests shall always be as small as possible, to make them easy and quick to review.</li>
+<li>The pull request title shall contain the relevant Jira ticket. Each commit shall contain a reference to the Jira ticket, too.</li>
+<li>Every pull request shall have a clear summary.</li>
+<li>Every pull request shall be eagerly reviewed, ideally within a day after being marked as ready for review.</li>
+</ol>
+<p>This is how the workflow works:</p>
+<ol>
+<li>Pull requests should be opened from a developer's own fork to avoid random branches on the origin.</li>
+<li>Once a pull request is ready to be merged, it should be merged via the <code>Rebase and merge</code> or <code>Squash and merge</code> option. This avoids merge commits on the main branch.</li>
+</ol>
+<p>How a pull request developed, and the iterations it went through, should not be visible in the git history. The end result counts: a certain amount of commits, each one forming a logical unit of changes. Avoid 'fix-up' commits which tweak previous commits in the pull request.</p>
+<h2 id="branches-"><a class="header" href="#branches-">Branches 🌳</a></h2>
+<p>Force-pushing to, or rebasing the main branch (or other release branches) is not allowed. Avoid directly pushing (fast-forward) to those branches as well. Commits can always be reverted by opening a new pull request.</p>
 
                     </main>
 
