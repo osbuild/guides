@@ -298,6 +298,7 @@ source = &quot;quay.io/fedora/fedora:latest&quot;
 <li><a href="#files">Files</a></li>
 </ul>
 </li>
+<li><a href="#installation-device">Installation device</a></li>
 <li><a href="#ignition">Ignition</a></li>
 <li><a href="#repositories">Repositories</a></li>
 <li><a href="#filesystems">Filesystems</a></li>
@@ -488,6 +489,13 @@ data = &quot;Hello world!&quot;
 <li><code>data</code> is the plain text contents of the file. If not specified, the default is an empty file.</li>
 </ul>
 <p>Note that the <code>data</code> property can be specified in any of the ways supported by TOML. Some of them require escaping certain characters and others don't. Please refer to the <a href="https://toml.io/en/v1.0.0#string">TOML specification</a> for more details.</p>
+<h3 id="installation-device"><a class="header" href="#installation-device">Installation device</a></h3>
+<p>The <code>customizations.installation_device</code> variable is required by
+the <code>edge-simplified-installer</code> image. It allows the user to define
+the destination device for the installation.</p>
+<pre><code class="language-toml">[customizations]
+installation_device = &quot;/dev/sda&quot;
+</code></pre>
 <h3 id="ignition"><a class="header" href="#ignition">Ignition</a></h3>
 <p>The <code>customizations.ignition</code> section allows users to provide <a href="https://coreos.github.io/ignition/">Ignition</a> configuration files to be used in <code>edge-raw-image</code> and <code>edge-simplified-installer</code> images. Check the RHEL for Edge (<code>r4e</code>) <a href="https://coreos.github.io/butane/specs/">butane</a> specification for a description of the supported configuration options.</p>
 <p>The blueprint configuration can be done <em>either</em> by embedding an Ignition configuration file into the image (only available for <code>edge-simplified-installer</code>), or providing a provisioning URL that will be fetched at first boot.</p>
