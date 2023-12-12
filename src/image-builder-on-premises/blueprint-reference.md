@@ -158,6 +158,7 @@ In the customizations we determine what goes into the image that's not in the de
 - [Files and Directories](#files-and-directories)
   - [Directories](#directories)
   - [Files](#files)
+- [Installation device](#installation-device)
 - [Ignition](#ignition)
 - [Repositories](#repositories)
 - [Filesystems](#filesystems)
@@ -417,7 +418,16 @@ data = "Hello world!"
 - `data` is the plain text contents of the file. If not specified, the default is an empty file.
 
 Note that the `data` property can be specified in any of the ways supported by TOML. Some of them require escaping certain characters and others don't. Please refer to the [TOML specification](https://toml.io/en/v1.0.0#string) for more details.
+### Installation device
 
+The `customizations.installation_device` variable is required by
+the `edge-simplified-installer` image. It allows the user to define
+the destination device for the installation.
+
+```toml
+[customizations]
+installation_device = "/dev/sda"
+```
 ### Ignition
 
 The `customizations.ignition` section allows users to provide [Ignition](https://coreos.github.io/ignition/) configuration files to be used in `edge-raw-image` and `edge-simplified-installer` images. Check the RHEL for Edge (`r4e`) [butane](https://coreos.github.io/butane/specs/) specification for a description of the supported configuration options.
