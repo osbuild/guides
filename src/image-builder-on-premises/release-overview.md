@@ -9,7 +9,7 @@
 *Fedora 37* | 47-1 | 99-1 | 94-1
 *Fedora 38* | 47-1 | 100-1 | 95-1
 *Fedora 39* | 47-1 | 100-1 | 95-1
-*Git* | 47 | 101 | 95
+*Git* | 47 | 101 | 96
 *Service* | n/a | n/a | [v94-33-g6b6af41](https://github.com/osbuild/osbuild-composer/compare/v94-33-g6b6af41...main)
 *Workers* | n/a | [v93](https://github.com/osbuild/osbuild/compare/v93...main) | [v94-33-g6b6af41](https://github.com/osbuild/osbuild-composer/compare/v94-33-g6b6af41...main)
 
