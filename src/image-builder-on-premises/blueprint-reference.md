@@ -610,8 +610,14 @@ fips = true
 
 The following blueprint example will:
 - install the `tmux`, `git`, and `vim-enhanced` packages
+- set the hostname
 - set the root ssh key
 - add the groups: widget, admin users and students
+- set the minimal size of root filesystem.
+- set the `CIS Red Hat Enterprise Linux 8 Benchmark for Level 2` OpenSCAP
+profile.
+- customize the OpenSCAP profile above by enabling the `bind_crypto_policy`
+and disabling the `grub2_password` content rules
 
 ```toml
 name = "example-custom-base"
