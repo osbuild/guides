@@ -303,6 +303,7 @@ source = &quot;quay.io/fedora/fedora:latest&quot;
 <li><a href="#repositories">Repositories</a></li>
 <li><a href="#filesystems">Filesystems</a></li>
 <li><a href="#openscap">OpenSCAP</a></li>
+<li><a href="#fips">FIPS</a></li>
 </ul>
 <h3 id="hostname"><a class="header" href="#hostname">Hostname</a></h3>
 <p><code>customizations.hostname</code> is an <em>optional</em> string that can be used to configure the hostname of the final image:</p>
@@ -624,7 +625,15 @@ profile_id = &quot;xccdf_org.ssgproject.content_profile_cis&quot;
 selected = [ &quot;xccdf_org.ssgproject.content_bind_crypto_policy&quot; ]
 unselected = [ &quot;grub2_password&quot; ]
 </code></pre>
+<h4 id="fips"><a class="header" href="#fips">FIPS</a></h4>
+<p>Enables/disables the system FIPS mode (disabled by default).
+Currently only <code>edge-raw-image</code>, <code>edge-installer</code>, <code>edge-simplified-installer</code>,
+<code>edge-ami</code> and <code>edge-vsphere</code> images support this customization.</p>
+<pre><code class="language-toml">[customizations]
+fips = true
+</code></pre>
 <h2 id="example-blueprints"><a class="header" href="#example-blueprints">Example Blueprints</a></h2>
+<h3 id="multiple-customizations"><a class="header" href="#multiple-customizations">Multiple customizations</a></h3>
 <p>The following blueprint example will:</p>
 <ul>
 <li>install the <code>tmux</code>, <code>git</code>, and <code>vim-enhanced</code> packages</li>
@@ -696,6 +705,26 @@ profile_id = &quot;xccdf_org.ssgproject.content_profile_cis&quot;
 [customizations.openscap.tailoring]
 selected = [ &quot;xccdf_org.ssgproject.content_bind_crypto_policy&quot; ]
 unselected = [ &quot;grub2_password&quot; ]
+</code></pre>
+<h3 id="enable-system-fips-mode-in-edge-simpliflied-installer"><a class="header" href="#enable-system-fips-mode-in-edge-simpliflied-installer">Enable system FIPS mode in Edge Simpliflied installer</a></h3>
+<p>The following blueprint example will enable system FIPS mode in
+a <code>edge-simplified-installer</code> image:</p>
+<pre><code class="language-toml">name = &quot;example-system-fips-mode&quot;
+description = &quot;A FIPS enabled base system&quot;
+version = &quot;0.0.1&quot;
+
+[ostree] 
+
+ref= &quot;test/edge&quot;
+url= &quot;http://example.com/repo&quot;
+
+[customizations]
+installation_device = &quot;/dev/vda&quot;
+fips = true
+
+[customizations.fdo]
+manufacturing_server_url = &quot;https://fdo.example.com&quot;
+diun_pub_key_insecure = true
 </code></pre>
 
                     </main>
