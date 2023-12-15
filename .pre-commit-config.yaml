@@ -1,0 +1,41 @@
+---
+default_language_version:
+  python: python3
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        args:
+          - --markdown-linebreak-ext=md
+      - id: check-docstring-first
+      - id: check-merge-conflict
+      - id: no-commit-to-branch
+        args:
+          - "--branch"
+          - "main"
+      - id: check-symlinks
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: v0.13.0
+    hooks:
+      - id: markdownlint
+  - repo: https://github.com/maxbrunet/pre-commit-renovate
+    rev: 37.3.2
+    hooks:
+      - id: renovate-config-validator
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.32.0
+    hooks:
+      - id: yamllint
+        args: [--strict]
+  - repo: https://github.com/tcort/markdown-link-check
+    rev: v3.11.2
+    hooks:
+      - id: markdown-link-check
+        args: [-q]
+  - repo: https://github.com/lorenzwalthert/precommit
+    rev: v0.3.2.9027
+    hooks:
+      - id: spell-check
