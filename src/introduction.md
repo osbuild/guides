@@ -2,7 +2,7 @@
 
 Use Image Builder to create images of your Linux operating system in a reliable fashion, isolating the image creation from your host operating system, and producing a reliable, well-defined image ready to be deployed.
 
-Image Builder provides both the tools to build custom operating system images, as well as applications to deploy hosted image building services. At its core, the [`osbuild`](./developer-guide/osbuild.html) project takes the responsibility of assembling custom images of operating systems according to the precise needs of the user. The [`osbuild-composer`](./developer-guide/osbuild-composer.html) project builds on top of osbuild and implements an image creation service that can be deployed as a hosted service.
+Image Builder provides both the tools to build custom operating system images, as well as applications to deploy hosted image building services. At its core, the [`osbuild`](./developer-guide/projects/osbuild/index.md) project takes the responsibility of assembling custom images of operating systems according to the precise needs of the user. The [`osbuild-composer`](./developer-guide/projects/osbuild-composer/index.md) project builds on top of osbuild and implements an image creation service that can be deployed as a hosted service.
 
 ## Image Builder on console.redhat.com
 
