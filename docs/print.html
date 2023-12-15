@@ -3457,8 +3457,14 @@ fips = true
 <p>The following blueprint example will:</p>
 <ul>
 <li>install the <code>tmux</code>, <code>git</code>, and <code>vim-enhanced</code> packages</li>
+<li>set the hostname</li>
 <li>set the root ssh key</li>
 <li>add the groups: widget, admin users and students</li>
+<li>set the minimal size of root filesystem.</li>
+<li>set the <code>CIS Red Hat Enterprise Linux 8 Benchmark for Level 2</code> OpenSCAP
+profile.</li>
+<li>customize the OpenSCAP profile above by enabling the <code>bind_crypto_policy</code>
+and disabling the <code>grub2_password</code> content rules</li>
 </ul>
 <pre><code class="language-toml">name = &quot;example-custom-base&quot;
 description = &quot;A base system with customizations&quot;
