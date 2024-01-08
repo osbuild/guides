@@ -212,6 +212,7 @@ default packages defined under [Content](#content).
   - [Files](#files)
 - [Installation device](#installation-device)
 - [Ignition](#ignition)
+- [FDO](#fdo)
 - [Repositories](#repositories)
 - [Filesystems](#filesystems)
 - [OpenSCAP](#openscap)
@@ -606,6 +607,23 @@ url = "http://some-server/configuration.ig"
 Add a URL pointing to the Ignition configuration that will be fetched during the
 first boot in the `url` field. Available for both `edge-simplified-installer`
 and `edge-raw-image`.
+
+### FDO
+
+The `customizations.fdo` section allows users to configure [FIDO Device Onboard (FDO)](https://github.com/fdo-rs/fido-device-onboard-rs) device initialization parameters. It is only available with the `edge-simplified-installer` or `iot-simplified-installer` image types.
+
+The `manufacturing_server_url` is a required field.
+
+The user must choose one of the device initalization methods providing `diun_pub_key_insecure`, `diun_pub_key_hash` or `diun_pub_key_root_certs`.
+
+The user may provide an IFACE name at `di_mfg_string_type_mac_iface`.
+
+```toml
+[customizations.fdo]
+manufacturing_server_url = "http://192.168.122.199:8080"
+diun_pub_key_insecure = "true"
+di_mfg_string_type_mac_iface = "enp2s0"
+```
 
 ### Repositories
 
