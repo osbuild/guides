@@ -351,6 +351,7 @@ default packages defined under <a href="#content">Content</a>.</p>
 </li>
 <li><a href="#installation-device">Installation device</a></li>
 <li><a href="#ignition">Ignition</a></li>
+<li><a href="#fdo">FDO</a></li>
 <li><a href="#repositories">Repositories</a></li>
 <li><a href="#filesystems">Filesystems</a></li>
 <li><a href="#openscap">OpenSCAP</a></li>
@@ -659,6 +660,16 @@ url = &quot;http://some-server/configuration.ig&quot;
 <p>Add a URL pointing to the Ignition configuration that will be fetched during the
 first boot in the <code>url</code> field. Available for both <code>edge-simplified-installer</code>
 and <code>edge-raw-image</code>.</p>
+<h3 id="fdo"><a class="header" href="#fdo">FDO</a></h3>
+<p>The <code>customizations.fdo</code> section allows users to configure <a href="https://github.com/fdo-rs/fido-device-onboard-rs">FIDO Device Onboard (FDO)</a> device initialization parameters. It is only available with the <code>edge-simplified-installer</code> or <code>iot-simplified-installer</code> image types.</p>
+<p>The <code>manufacturing_server_url</code> is a required field.</p>
+<p>The user must choose one of the device initalization methods providing <code>diun_pub_key_insecure</code>, <code>diun_pub_key_hash</code> or <code>diun_pub_key_root_certs</code>.</p>
+<p>The user may provide an IFACE name at <code>di_mfg_string_type_mac_iface</code>.</p>
+<pre><code class="language-toml">[customizations.fdo]
+manufacturing_server_url = &quot;http://192.168.122.199:8080&quot;
+diun_pub_key_insecure = &quot;true&quot;
+di_mfg_string_type_mac_iface = &quot;enp2s0&quot;
+</code></pre>
 <h3 id="repositories"><a class="header" href="#repositories">Repositories</a></h3>
 <p>Third-party repositories are supported by the blueprint customizations.
 A repository can be defined and enabled in the blueprints which will then be
