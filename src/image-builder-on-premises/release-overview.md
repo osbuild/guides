@@ -10,8 +10,8 @@
 *Fedora 38* | 47-1 | 103-1 | 98-1
 *Fedora 39* | 47-1 | 103-1 | 98-1
 *Git* | 47 | 104 | 98
-*Service* | n/a | n/a | [v96-27-g7bcf8e59](https://github.com/osbuild/osbuild-composer/compare/v96-27-g7bcf8e59...main)
-*Workers* | n/a | [v99-41-gf3d740a](https://github.com/osbuild/osbuild/compare/v99-41-gf3d740a...main) | [v96-27-g7bcf8e59](https://github.com/osbuild/osbuild-composer/compare/v96-27-g7bcf8e59...main)
+*Service* | n/a | n/a | [v98-13-ge287138e](https://github.com/osbuild/osbuild-composer/compare/v98-13-ge287138e...main)
+*Workers* | n/a | [v102](https://github.com/osbuild/osbuild/compare/v102...main) | [v98-13-ge287138e](https://github.com/osbuild/osbuild-composer/compare/v98-13-ge287138e...main)
 
 ---
 
