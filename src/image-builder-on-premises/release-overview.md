@@ -7,7 +7,7 @@
 *CentOS Stream 8* | 47-1 | 101-2 | 98-1
 *CentOS Stream 9* | 47-1 | 104-2 | 98-1
 *Fedora 37* | 47-1 | 99-1 | 94-1
-*Fedora 38* | 47-1 | 103-1 | 98-1
+*Fedora 38* | 47-1 | 104-1 | 98-1
 *Fedora 39* | 47-1 | 104-1 | 98-1
 *Git* | 47 | 104 | 99
 *Service* | n/a | n/a | [v98-13-ge287138e](https://github.com/osbuild/osbuild-composer/compare/v98-13-ge287138e...main)
